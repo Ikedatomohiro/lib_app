@@ -7,5 +7,6 @@ root 'users#index'
 
 get  'user'               => 'users#show'
 get  'notice'             => 'users#notice'
-
+get  'shelf'              => 'users#shelf'
+get  'setting'            => 'users#setting'
 end

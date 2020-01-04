@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+/* ホームはじめ */
+
 .home_header {
     display: flex;
     justify-content: space-around;
@@ -34,3 +36,38 @@
   -ms-transform: translate(-50%, -50%);
   height:100%;
 }
+
+.attention {
+    width: 30px;
+}
+/* ホーム終わり */
+
+
+/* 本棚はじめ */
+.book_img_box {
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    border: 1px solid gray;
+}
+
+.book_img {
+    width: 40px;
+}
+
+.book_title {
+    padding-left: 20px;
+    line-height: 40px;
+}
+/* 本棚終わり */
+
+/* セッティングはじめ */
+
+/* セッティング終わり */
+
+/* お知らせはじめ */
+
+/* お知らせ終わり */
+
+

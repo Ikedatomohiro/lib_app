@@ -1,15 +1,18 @@
 <div class="home">
     <div class="home_header">
         <div class="user_icon">
-            lfd;kaslkj
+            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'),user_path) %>
         </div>
-        <div>
-            <p class="user_name"></p>
+        <div class="user_name">
+            <p>user_name</p>
+        </div>
+        <div class="attention">
+            <%= link_to(image_tag('bell.svg', alt:'お知らせ'),notice_path) %>
         </div>
     </div>
 
 
-
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 
     <h1 class="comment">ユーザーホーム1</h1>
     <h1 class="comment">ユーザーホーム2</h1>

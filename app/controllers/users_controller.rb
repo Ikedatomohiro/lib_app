@@ -10,4 +10,12 @@ class UsersController < ApplicationController
     def notice
         
     end
+
+    def shelf
+        
+    end
+
+    def setting
+        
+    end
 end

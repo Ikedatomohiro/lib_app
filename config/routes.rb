@@ -11,6 +11,7 @@ get  'shelf'              => 'users#shelf'
 get  'setting'            => 'users#setting'
 get  'edit'               => 'users#edit'
 get  'update'             => 'users#update'
+get  'impression'         => 'users#impression'
 get  'bookinfo'           => 'users#bookInfo'
 get  'readinghistory'     => 'users#readingHistory'
 

@@ -1,7 +1,11 @@
 <div class="page_wrapper">
-    <p class="page_title">本棚</p>
+    <div>
+        <p class="page_title">本棚</p>
+        <%= link_to '本を探す', bookinfo_path, class: 'button' %>
+    </div>
+
     <div class="book_img_box">
-        <%= link_to image_tag('book_img.svg', class:'book_img'), bookinfo_path %>
+        <%= link_to image_tag('book_img.svg', class:'book_img'), impression_path %>
         <div class="book_title">本のタイトル</div>
     </div>
 

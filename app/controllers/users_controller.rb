@@ -28,6 +28,10 @@ class UsersController < ApplicationController
         
     end
 
+    def impression
+        
+    end
+
     def bookInfo
         
     end

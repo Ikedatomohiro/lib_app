@@ -12,4 +12,6 @@ get  'setting'            => 'users#setting'
 get  'edit'               => 'users#edit'
 get  'update'             => 'users#update'
 get  'bookinfo'           => 'users#bookInfo'
+get  'readinghistory'     => 'users#readingHistory'
+
 end

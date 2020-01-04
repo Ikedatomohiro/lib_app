@@ -18,4 +18,17 @@ class UsersController < ApplicationController
     def setting
         
     end
+
+    def edit
+        
+    end
+
+    def update
+        redirect_to user_path
+        
+    end
+
+    def bookInfo
+        
+    end
 end

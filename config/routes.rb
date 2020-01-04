@@ -9,4 +9,7 @@ get  'user'               => 'users#show'
 get  'notice'             => 'users#notice'
 get  'shelf'              => 'users#shelf'
 get  'setting'            => 'users#setting'
+get  'edit'               => 'users#edit'
+get  'update'             => 'users#update'
+get  'bookinfo'           => 'users#bookInfo'
 end

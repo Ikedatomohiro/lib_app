@@ -38,22 +38,20 @@
 }
 
 .attention {
-    width: 30px;
+    width: 20px;
 }
 /* ホーム終わり */
 
 
 /* 本棚はじめ */
 .book_img_box {
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto;
     display: flex;
-    border: 1px solid gray;
+    padding: 20px;
+    margin: 10px 0;
 }
 
 .book_img {
-    width: 40px;
+    width: 50px;
 }
 
 .book_title {
@@ -62,9 +60,24 @@
 }
 /* 本棚終わり */
 
+/* 本の情報はじめ */
+.book_info_inner {
+    display: flex;
+}
+
+.book_img_area {
+    padding: 10px 30px 10px 10px;
+}
+/* 本の情報終わり */
+
 /* セッティングはじめ */
 
 /* セッティング終わり */
+
+/* ユーザー情報はじめ */
+
+/* ユーザー情報終わり */
+
 
 /* お知らせはじめ */
 

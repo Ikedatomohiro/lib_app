@@ -15,7 +15,9 @@
     <div class="main_container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <%= yield %>
+      <div class="sub_container">
+          <%= yield %>
+      </div>
     </div>
     <%= render "shared/footer" %>
   </body>

@@ -2,8 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-/* ホームはじめ */
+/* ログインページはじめ */
+.logo-top {
+    background-image: url(ReadingCircle.png);
+    width: 80vw;
+    height: 80vw;
+    background-size: cover;
+}
 
+
+
+
+
+
+
+/* ログインページ終わり */
+
+/* ホームはじめ */
 .home_header {
     display: flex;
     justify-content: space-around;

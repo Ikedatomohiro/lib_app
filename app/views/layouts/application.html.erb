@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LibApp</title>
+    <title>Reading Circle</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -26,6 +26,8 @@
           <%= yield %>
       </div>
     </div>
-    <%= render "shared/footer" %>
+    <% if signed_in? %>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>

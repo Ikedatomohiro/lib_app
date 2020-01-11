@@ -1,20 +1,21 @@
+<%= form_with(url:"/users/update_self_introduction") do |form| %>
 <div class="page_wrapper">
     <p class="page_title">プロフィール編集</p>
     <div class="home_header">
         <div class="user_icon">
-            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'),user_path) %>
+            <%#= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'),user_path) %>
         </div>
         <div class="user_name">
-            <p>user_name</p>
+            <%= form.text_field :account_name ,value: @user.account_name %>
             <p>twitter_account</p>
         </div>
         <button>
-            <%= link_to '編集完了', update_path, class:'button' %>
+            編集完了
         </button>
     </div>
     <div>
-        <p>
-            自己紹介ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
-        </p>
+        <%= form.text_area :self_introduction ,value: @user.self_introduction %>
+        <%=  %>
     </div>
 </div>
+<% end %>

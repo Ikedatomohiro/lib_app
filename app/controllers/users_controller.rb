@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     def index
-      @users = User.all
+        @user = current_user
     end
 
     def show
@@ -30,8 +30,8 @@ class UsersController < ApplicationController
     end
 
     def update_self_introduction
-        @user = current_user
-        @user.update (
+        @user = User.find(current_user.id)
+        @user.update(
             account_name:      params[:account_name],
             self_introduction: params[:self_introduction]
             )
@@ -46,4 +46,9 @@ class UsersController < ApplicationController
     def bookInfo
         
     end
+
+    private
+        def self_introduction_params
+            params.require(:user).permit(:account_name, :self_introduction)
+        end
 end

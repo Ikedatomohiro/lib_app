@@ -1,10 +1,12 @@
 <div class="home">
     <div class="home_header">
         <div class="user_icon">
-            <%#= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{user.id}") %>
+            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{current_user.id}") %>
         </div>
         <div class="user_name">
-            <p>user_name</p>
+            <p>
+                <%= @user.account_name %>
+            </p>
         </div>
         <div class="attention">
             <%= link_to(image_tag('bell.svg', alt:'お知らせ'),notice_path) %>

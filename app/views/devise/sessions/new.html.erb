@@ -3,11 +3,15 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <table class="input_table">
         <tr>
-          <td class="label_name" align="right"><%= f.label :メールアドレス： %></td>
+          <td class="label_name" align="left"><%= f.label :メールアドレス %></td>
+        </tr>
+        <tr>
           <td class="input_field"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
         </tr>
         <tr>
-          <td class="label_name" align="right"><%= f.label :パスワード： %></td>
+          <td class="label_name" align="left"><%= f.label :パスワード %></td>
+        </tr>
+        <tr>
           <td class="input_field"><%= f.password_field :password, autocomplete: "current-password" %></td>
         </tr>
       </table>

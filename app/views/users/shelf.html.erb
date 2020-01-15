@@ -1,16 +1,17 @@
-<div class="page_wrapper">
-    <div>
-        <p class="page_title">本棚</p>
-        <%= link_to '本を探す', bookinfo_path, class: 'button' %>
+<%= form_with(url:"/users/update_self_introduction") do |form| %>
+    <div class="page_wrapper">
+        <div>
+            <p class="page_title">本棚</p>
+            <%= form.text_field :book_keyword %>
+        </div>
+    <button>本を探す
+    </button>
+<% end %>        <div class="book_img_box">
+            <%= link_to image_tag('book_img.svg', class:'book_img'), impression_path %>
+            <div class="book_title">本のタイトル</div>
+        </div>
+        <div class="book_img_box">
+            <%= image_tag('book_img.svg', class:'book_img') %>
+            <div class="book_title">本のタイトル</div>
+        </div>
     </div>
-
-    <div class="book_img_box">
-        <%= link_to image_tag('book_img.svg', class:'book_img'), impression_path %>
-        <div class="book_title">本のタイトル</div>
-    </div>
-
-    <div class="book_img_box">
-        <%= image_tag('book_img.svg', class:'book_img') %>
-        <div class="book_title">本のタイトル</div>
-    </div>
-</div>

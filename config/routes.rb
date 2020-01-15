@@ -14,4 +14,6 @@ get  'bookinfo'           => 'users#bookInfo'
 get  'readinghistory'     => 'users#readingHistory'
 post 'users/update_self_introduction' => 'users#update_self_introduction' 
 
+get  'search'             => 'books#search'
+
 end

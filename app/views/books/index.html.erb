@@ -1,0 +1,6 @@
+<h1>Bookモデル一覧</h1>
+<table class="table" id="books">
+  <%= render @books %>
+</table>
+<%= link_to "データを追加する", new_book_path, remote: true %>
+<div id="book_form"></div>

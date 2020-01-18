@@ -13,7 +13,11 @@ get  'impression'         => 'users#impression'
 get  'bookinfo'           => 'users#bookInfo'
 get  'readinghistory'     => 'users#readingHistory'
 post 'users/update_self_introduction' => 'users#update_self_introduction' 
+get  'request'            => 'users#request_page'
 
 get  'search'             => 'books#search'
 
+
+resources :books
+get  'book/search'        => 'books#search_books'
 end

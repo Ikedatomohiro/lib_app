@@ -6,6 +6,7 @@
 </div>
 <div class="item_block">
     <p class="sub_title">公開情報設定</p>
+    <%= form_with(model:User.new, ) %>
     <table class="sub_item">
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -35,7 +36,9 @@
     <p class="sub_title">読書履歴</p>
 </div>
 <div class="item_block">
-    <p class="sub_title">ユーザー設定</p>
+    <p class="sub_title">
+        <%= link_to('ご意見・ご要望', request_path) %>
+    </p>
 </div>
 <div class="item_block">
 </div>

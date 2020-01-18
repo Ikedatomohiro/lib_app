@@ -24,17 +24,14 @@ class UsersController < ApplicationController
         @user = current_user
     end
 
-    def update
+    def update_setting
         redirect_to user_path
         
     end
 
     def update_self_introduction
         @user = User.find(current_user.id)
-        @user.update(
-            account_name:      params[:account_name],
-            self_introduction: params[:self_introduction]
-            )
+        @user.update(self_introduction_params)
         redirect_to "/users/#{current_user.id}"
         
     end
@@ -45,6 +42,10 @@ class UsersController < ApplicationController
 
     def bookInfo
         
+    end
+
+    def request_page
+
     end
 
     private

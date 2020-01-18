@@ -1,10 +1,11 @@
+<%= link_to "本を探す", book_search_path, remote: true %>
+<div id="book_form"></div>
 <%= form_with(url:"/users/update_self_introduction") do |form| %>
     <div class="page_wrapper">
         <div>
-            <p class="page_title">本棚</p>
             <%= form.text_field :book_keyword %>
         </div>
-    <button>本を探す
+
     </button>
 <% end %>        <div class="book_img_box">
             <%= link_to image_tag('book_img.svg', class:'book_img'), impression_path %>

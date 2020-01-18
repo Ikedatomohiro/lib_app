@@ -15,9 +15,8 @@ get  'readinghistory'     => 'users#readingHistory'
 post 'users/update_self_introduction' => 'users#update_self_introduction' 
 get  'request'            => 'users#request_page'
 
-get  'search'             => 'books#search'
-
 
 resources :books
-get  'book/search'        => 'books#search_books'
+post 'book/search'        => 'books#search_books'
+get  'book/show_form'     => 'books#show_search_form'
 end

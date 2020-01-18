@@ -25,7 +25,7 @@ class BooksController < ApplicationController
         end
     end
 
-    def search_books
+    def show_search_form
         @books = Book.new
         respond_to do |format|
             format.html
@@ -33,10 +33,17 @@ class BooksController < ApplicationController
         end
     end
 
-    private
-    def book_params
-        params.require(:book).permit(:user_id, :isbn)
+    def search_books
+        puts params[:isbn]
+
+
+
     end
+
+    private
+        def book_params
+            params.require(:book).permit(:user_id, :isbn)
+        end
 
 
 end

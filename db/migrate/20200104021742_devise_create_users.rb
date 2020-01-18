@@ -10,7 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :twitter_account
       t.string :self_introduction
       t.string :user_icon
-      t.boolean :del_flg,           null: false, default: true
+      t.boolean :del_flg,           null: false, default: false
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

@@ -1,3 +1,3 @@
 class Book < ApplicationRecord
-
+    
 end

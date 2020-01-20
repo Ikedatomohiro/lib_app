@@ -1,25 +1,31 @@
 <div class="item_block">
-    <p class="sub_title">ユーザー設定</p>
+    <p class="sub_title" id="sub_title" value="aaaaaaa">ユーザー設定</p>
 </div>
 <div class="item_block">
     <%= link_to('プロフィールの編集') %>
 </div>
 <div class="item_block">
     <p class="sub_title">公開情報設定</p>
-    <%= form_with(model:User.new, ) %>
     <table class="sub_item">
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <th>
                 感想
+                    <%= form_with(model:Setting, url: user_publish_impression_path) do |f|%>
             </th>
             <td>
                 <div class="app_checkbox">
-                    <input id="impression" value="1" name="impression" type="checkbox"><label for="impression"></label>
+                    <%= f.check_box :publish_impression, checked: @user_setting.publish_impression, id:'impression',name: 'publish_impression' %>
+                    <%#= f.label value:'impression' %>
+                    <label for="impression" id="publish_impression"></label>
+                    <%= f.hidden_field :publish_impression, id:'publish_impression_value', value: @user_setting.publish_impression %>
+                    <% end %>
                 </div>
             </td>
         </tr>
     </table>
+
+
 </div>
 <div class="item_block">
     <p class="sub_title">読書履歴</p>

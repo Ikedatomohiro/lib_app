@@ -9,3 +9,5 @@
 user = User.create(account_name: 'ドラえもん', self_introduction: '僕ドラえもんだよ。', email: 'to.tomo.tomohiro@gmail.com', password: 'Tomohir0')
 
 Setting.create(user_id: 1)
+
+Book.create(user_id: 1, isbn:418273098724139870)

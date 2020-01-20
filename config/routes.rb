@@ -6,14 +6,15 @@ root 'users#index'
 
 resources :users
 
-get  'notice'             => 'users#notice'
-get  'shelf'              => 'users#shelf'
-get  'setting'            => 'users#setting'
-get  'impression'         => 'users#impression'
-get  'bookinfo'           => 'users#bookInfo'
-get  'readinghistory'     => 'users#readingHistory'
+get  'notice'                         => 'users#notice'
+get  'shelf'                          => 'users#shelf'
+get  'setting'                        => 'users#setting'
+get  'impression'                     => 'users#impression'
+get  'bookinfo'                       => 'users#bookInfo'
+get  'readinghistory'                 => 'users#readingHistory'
 post 'users/update_self_introduction' => 'users#update_self_introduction' 
-get  'request'            => 'users#request_page'
+get  'request'                        => 'users#request_page'
+post 'user/publish_impression'        => 'users#update_publish_impression'
 
 
 resources :books

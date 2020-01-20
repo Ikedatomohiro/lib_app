@@ -15,6 +15,11 @@ ActiveRecord::Schema.define(version: 2020_01_16_112732) do
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "isbn", null: false
+    t.date "reading_start_date"
+    t.date "reading_end_date"
+    t.integer "evaluation", default: 0, null: false
+    t.string "impression"
+    t.string "impression_img"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -22,7 +27,6 @@ ActiveRecord::Schema.define(version: 2020_01_16_112732) do
   create_table "settings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "publish_impression", default: true, null: false
-    t.boolean "publish_impression_img", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

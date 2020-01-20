@@ -13,11 +13,19 @@ class UsersController < ApplicationController
     end
 
     def shelf
-        
+        @shelf = Book.where(user_id: current_user.id)
     end
 
     def setting
-        
+        puts params[:publish_impression]
+        @user = current_user
+        @user_setting = Setting.find_by(user_id: current_user.id)
+
+        if params[:publish_impression]
+            @user_setting.update(publish_impression: '0')
+        else
+            @user_setting.update(publish_impression: '1')
+        end
     end
 
     def edit
@@ -36,8 +44,8 @@ class UsersController < ApplicationController
         
     end
 
-    def impression
-        
+    def update_publish_impression
+        puts 'fasfasfa'
     end
 
     def bookInfo

@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_112732) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "isbn", null: false
+    t.string "isbn", null: false
     t.date "reading_start_date"
     t.date "reading_end_date"
     t.integer "evaluation", default: 0, null: false

@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 root 'users#index'
 
 resources :users
-
 get  'notice'                         => 'users#notice'
 get  'shelf'                          => 'users#shelf'
 get  'setting'                        => 'users#setting'
@@ -20,4 +19,5 @@ post 'user/publish_impression'        => 'users#update_publish_impression'
 resources :books
 post 'book/search'        => 'books#search_books'
 get  'book/show_form'     => 'books#show_search_form'
+post 'book/:isbn'        => 'books#show_book_info'
 end

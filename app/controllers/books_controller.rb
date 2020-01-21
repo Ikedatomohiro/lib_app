@@ -11,6 +11,14 @@ class BooksController < ApplicationController
         end
     end
 
+    def show
+    end
+
+    def show_book_info
+        puts params[:isbn]
+        render :template => "books/show"
+    end
+
     def create
         puts params[:isbn]
         @books = Book.where(user_id: current_user.id)
@@ -35,9 +43,6 @@ class BooksController < ApplicationController
 
     def search_books
         puts params[:isbn]
-
-
-
     end
 
     private

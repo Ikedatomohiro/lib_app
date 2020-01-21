@@ -10,4 +10,4 @@ user = User.create(account_name: 'ドラえもん', self_introduction: '僕ド�
 
 Setting.create(user_id: 1)
 
-Book.create(user_id: 1, isbn:418273098724139870)
+Book.create(user_id: 1, isbn:'978-4991022173')

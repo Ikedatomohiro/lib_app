@@ -15,7 +15,6 @@ class BooksController < ApplicationController
     end
 
     def show_book_info
-        puts params[:isbn]
     end
 
     def create

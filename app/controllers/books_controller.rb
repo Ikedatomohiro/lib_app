@@ -16,7 +16,6 @@ class BooksController < ApplicationController
 
     def show_book_info
         puts params[:isbn]
-        render :template => "books/show"
     end
 
     def create

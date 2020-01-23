@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
     $('#publish_impression').click(function() {
         $.get({
             url: "#{user_publish_impression_path}",
@@ -7,7 +7,7 @@ $(function() {
     });
 });
 
-$(function() {
+$(document).on('turbolinks:load', function() {
     $('#getBookInfo').click(function(e) {
         e.preventDefault();
         const isbn = $("#isbn").val();

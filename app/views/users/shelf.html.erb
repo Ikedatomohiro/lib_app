@@ -4,7 +4,7 @@
     <div class="book_img_box">
         <% if @books.present? %>
             <% @books.each do |shelf| %>
-                <%= form_with(model: @book, url: "book/#{shelf.isbn}") do |f| %>
+                <%= form_with(model: @book, url: "/book/#{shelf.isbn}") do |f| %>
                     <%= f.hidden_field shelf.isbn %>
                     <button>
                         <%= image_tag('book_img.svg', class:'book_img') %>

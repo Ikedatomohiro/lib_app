@@ -10,9 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+      resource.setting
+      n = User.last.id
+      user = User.find_by(id: n)
+      puts user.id
+      puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+      Setting.create(user_id: user.id)
+    end
 
   # GET /resource/edit
   # def edit

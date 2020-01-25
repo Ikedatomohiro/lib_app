@@ -57,19 +57,21 @@
     margin: 10px;
 }
 
-.recomend a {
+.book_link {
     text-decoration: none;
     display: flex;
 }
 
 .thumbnail_top img {
-    height: 100px;
+    height: 20vw;
+    max-height: 150px;
     border:solid 1px #1D4E56;
     margin: 0 20px;
 }
 
 .title_top {
-    line-height: 100px;
+    margin-top: 5vw;
+    max-height: 150px;
 }
 
 

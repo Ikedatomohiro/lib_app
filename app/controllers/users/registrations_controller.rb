@@ -15,8 +15,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.setting
       n = User.last.id
       user = User.find_by(id: n)
-      puts user.id
-      puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
       Setting.create(user_id: user.id)
     end
 

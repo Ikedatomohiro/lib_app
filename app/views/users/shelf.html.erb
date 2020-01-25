@@ -1,42 +1,37 @@
 <%= link_to "本を探す", book_show_form_path, remote: true %>
 <div class="page_wrapper">
+    <%= @err %>
     <div id="search_book_form"></div>
-    <div class="book_img_box">
-        <% if @books.present? %>
-            <% @books.each do |shelf| %>
-                <a href="/books/info/<%= shelf.isbn %>" >
-                    <%= image_tag('book_img.svg', class:'book_img') %>
+    <% if @books.present? %>
+        <% @books.each do |shelf| %>
+            <div class="book_img_box">
+                <a href="/user/impression/<%= shelf.isbn %>" >
+                    <p id="thumbnail_<%= shelf.id %>" class="thumbnail_top"></p>
                 </a>
-                <div class="book_title">本のタイトル</div>
-            <% end %>
-        <% else %>
-            <p>本が登録されていません。</p>
+                <div id="title_<%= shelf.id %>"></div>
+                <input id="isbn_<%= shelf.id %>" type="hidden" name="isbn" value="<%= shelf.isbn %>" />
+                <script>
+                $(document).on('turbolinks:load', function() {
+                    const isbn = $("#isbn_<%= shelf.id %>").val();
+                    const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
+                    $.getJSON(url, function(data) {
+                        if (data[0] == null) {
+                        } else {
+                            if (data[0].summary.cover == "") {
+                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"/assets/book_img\" />');
+                            } else {
+                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data[0].summary.cover + '\" style=\"height: 100px;\" />');
+                            }
+                            $("#title_<%= shelf.id %>").text(data[0].summary.title);
+                        }
+                    });
+                });
+                </script>
+            </div>
         <% end %>
-    </div>
+    <% else %>
+        <p>本が登録されていません。</p>
+    <% end %>
 </div>
 
 
-<script>
-$(document).on('turbolinks:load', function() {
-    const isbn = $("#isbn").val();
-    const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
-    $.getJSON(url, function(data) {
-        if (data[0] == null) {
-        } else {
-            if (data[0].summary.cover == "") {
-                $("#thumbnail").html('<img src=\"\" />');
-            } else {
-                $("#thumbnail").html('<img src=\"' + data[0].summary.cover + '\" style=\"border:solid 1px #000000\" />');
-            }
-            $("#title").text(data[0].summary.title);
-            $("#publisher").text(data[0].summary.publisher);
-            $("#volume").text(data[0].summary.volume);
-            $("#series").text(data[0].summary.series);
-            $("#author").text(data[0].summary.author);
-            $("#pubdate").text(data[0].summary.pubdate);
-            $("#cover").val(data[0].summary.cover);
-            $("#description").text(data[0].onix.CollateralDetail.TextContent[0].Text);
-        }
-    });
-});
-</script>

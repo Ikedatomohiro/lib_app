@@ -1,6 +1,7 @@
-<%#= form_with 'この本を本棚に入れる' %>
-    <input id="isbn" type="hidden" disabled="disabled" name="isbn" value="<%= params[:isbn] %>" autofocus>
-<%# end %>
+<a href="../../user/add_book/<%= params[:isbn] %>" class="form_button"> 
+    本棚に入れる
+</a>
+    <input id="isbn" type="hidden" name="isbn" value="<%= params[:isbn] %>" autofocus>
 <table class=book_detail>
     <tr>
         <th width="20%"></th>

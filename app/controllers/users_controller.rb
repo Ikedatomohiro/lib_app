@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
+before_action :set_current_user, only:[
+                                        :index,
+                                        :setting,
+                                        :edit,
+                                        :update_self_introduction,
+                                        :add_book]
 
     def index
-        @user = current_user
     end
 
     def show
         @user = User.find_by(id: params[:id])
+    end
+
+    def edit
     end
 
     def notice
@@ -18,7 +26,6 @@ class UsersController < ApplicationController
 
     def setting
         puts params[:publish_impression]
-        @user = current_user
         @user_setting = Setting.find_by(user_id: current_user.id)
 
         if params[:publish_impression]
@@ -28,9 +35,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def edit
-        @user = current_user
-    end
 
     def update_setting
         redirect_to user_path
@@ -38,7 +42,6 @@ class UsersController < ApplicationController
     end
 
     def update_self_introduction
-        @user = User.find(current_user.id)
         @user.update(self_introduction_params)
         redirect_to "/users/#{current_user.id}"
         
@@ -46,9 +49,21 @@ class UsersController < ApplicationController
 
     def update_publish_impression
         puts 'fasfasfa'
+
     end
 
-    def bookInfo
+    def impression
+        book = Book.find_by(isbn: params[:isbn],
+                    user_id: current_user.id)
+
+        
+    end
+
+    def book_info
+        
+    end
+
+    def reading_history
         
     end
 
@@ -56,8 +71,28 @@ class UsersController < ApplicationController
 
     end
 
+    def add_book
+        book = Book.find_by(isbn: params[:isbn],
+                            user_id: current_user.id)
+        if book
+            @err = 'すでに本棚に入っています。'
+        else
+            @book = Book.new(user_id: current_user.id,
+                             isbn: params[:isbn])
+            @book.save!
+        end
+        @books = Book.where(user_id: current_user.id)
+        render :template => "users/shelf"
+    end
+
     private
+        def set_current_user
+            @user = current_user
+        end
+
         def self_introduction_params
             params.require(:user).permit(:account_name, :self_introduction)
         end
+
+
 end

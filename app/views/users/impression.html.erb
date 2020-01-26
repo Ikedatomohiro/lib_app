@@ -1,31 +1,44 @@
 <div class="book_info">
     <div class="book_info_inner">
         <div class="book_img_area">
-            <%= link_to image_tag('book_img.svg', alt:'本の画像', class:'book_img'), bookinfo_path, class: 'button' %>
+            <a href="" id="thumbnail"></a>
+            <%#= link_to image_tag('book_img.svg', alt:'本の画像', class:'book_img'), bookinfo_path, class: 'button' %>
         </div>
+        <input type="hidden" id="isbn" value="<%= @book.isbn %>">
         <table>
             <tr>
+                <th>タイトル</th>
+                <td id="title"></td>
+            </tr>
+            <tr>
                 <th>登録日</th>
-                <td>2019/12/1</td>
+                <td><%= @book.created_at.strftime('%Y年 %m月 %d日') %></td>
             </tr>
             <tr>
-                <th>読み始めた日</th>
-                <td>2019/12/2</td>
+                <th>読み始め</th>
+                <td><% if @book.reading_start_date %>
+                        <%= @book.reading_start_date.strftime('%Y年 %m月 %d日') %>
+                    <% end %>
+                    </td>
             </tr>
             <tr>
-                <th>読み終えた日</th>
-                <td>2019/12/25</td>
+                <th>読了日</th>
+                <td>
+                    <% if @book.reading_start_date %>
+                        <%= @book.reading_start_date.strftime('%Y年 %m月 %d日') %>
+                    <% end %>
+                </td>
             </tr>
             <tr>
                 <th>評価</th>
-                <td>星で評価</td>
+                <td id="star">
+                    <% if !@book.evaluation %>
+                        まだ評価していません。
+                    <% end %>
+                </td>
 
             </tr>
         </table>
-    </div>
-    <div>
-        <p>本の情報</p>
-        タイトル、ISBN番号、出版社、アマゾンリンク？
     </div>
     <div>
         <p>ツイッターでつぶやく</p>
@@ -35,7 +48,40 @@
     <p>感想</p>
     <p>画像</p>
 </div>
-<div>
-    <p>行動目標</p>
-    <p>結果</p>
-</div>感想など
+
+<script>
+$(document).on('turbolinks:load', function() {
+    const isbn = $("#isbn").val();
+    const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
+    $.getJSON(url, function(data) {
+        if (data[0] == null) {
+        } else {
+            if (data[0].summary.cover == "") {
+                $("#thumbnail").html('<img src=\"/assets/images/book_img.svg\" />');
+            } else {
+                $("#thumbnail").html('<img src=\"' + data[0].summary.cover + '\" style=\"border:solid 1px #000000\" />');
+            }
+            $("#title").text(data[0].summary.title);
+        }
+    });
+});
+$(function(){
+    $('#star').raty({
+        size    : 36,
+        starOff : '<%= asset_path('star-off.png') %>',
+        starOn  : '<%= asset_path('star-on.png') %>',
+        score   : '3'
+    });
+    $('input[name="evaluation"]').each( function( index, elem ) {
+        console.log( $(this).parent().attr('id'));
+        var id = $(this).parent().attr('id');
+        string = 'present[present_products_attributes]['+id+'][evaluation]';
+        $(this).attr('name',string);
+    });
+});
+</script>
+
+
+
+
+

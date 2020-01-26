@@ -53,7 +53,7 @@ before_action :set_current_user, only:[
     end
 
     def impression
-        book = Book.find_by(isbn: params[:isbn],
+        @book = Book.find_by(isbn: params[:isbn],
                     user_id: current_user.id)
 
         
@@ -72,17 +72,20 @@ before_action :set_current_user, only:[
     end
 
     def add_book
+        # すでに登録済かどうか確認する
         book = Book.find_by(isbn: params[:isbn],
-                            user_id: current_user.id)
+                     user_id: current_user.id)
         if book
             @err = 'すでに本棚に入っています。'
         else
             @book = Book.new(user_id: current_user.id,
-                             isbn: params[:isbn])
+                             isbn: params[:isbn],
+                             book_title: params[:book_title])
             @book.save!
         end
         @books = Book.where(user_id: current_user.id)
-        render :template => "users/shelf"
+        redirect_to shelf_path
+        # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
     private

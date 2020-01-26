@@ -17,7 +17,7 @@ get  'user/impression/:isbn'          => 'users#impression'
 get  'bookinfo'                       => 'users#book_info'
 get  'readinghistory'                 => 'users#reading_history'
 get  'request'                        => 'users#request_page'
-get  'user/add_book/:isbn'            => 'users#add_book'
+post 'user/add_book'                  => 'users#add_book'
 
 resources :books
 post 'book/search'                    => 'books#search_books'

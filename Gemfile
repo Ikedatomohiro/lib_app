@@ -34,6 +34,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'simple_form'
 
+# 環境変数管理
+gem 'dotenv-rails'
+
+# Amazon APIを使用
+gem 'amazon-ecs'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

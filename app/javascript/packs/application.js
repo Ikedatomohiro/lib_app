@@ -15,3 +15,6 @@ require("jquery")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+//= require html2canvas/dist/html2canvas.js
+//= require html2canvas/dist/html2canvas.min.js

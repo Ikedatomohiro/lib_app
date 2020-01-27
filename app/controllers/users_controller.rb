@@ -21,7 +21,7 @@ before_action :set_current_user, only:[
     end
 
     def shelf
-        @books = Book.where(user_id: current_user.id)
+        @books = Book.where(user_id: current_user.id).order(created_at: "DESC")
     end
 
     def setting

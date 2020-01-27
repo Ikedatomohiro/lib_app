@@ -1,1 +1,82 @@
 お知らせ
+
+<input id="search" type="text" name="isbn" value="しょぼい" >
+
+<p id="title" type="text" disabled="disabled" name="title"></p>
+
+
+<script>
+$(document).on('turbolinks:load', function() {
+    const word = $("#search").val();
+    const url = "https://www.googleapis.com/books/v1/volumes?q=" + word;
+    $.getJSON(url, function(data) {
+            $("#title").text(data.items[0].volumeInfo.title);
+            // $("#book_title").val(data[0].summary.title);
+            // $("#isbn").val(data[0].summary.isbn);
+            // $("#publisher").text(data[0].summary.publisher);
+            // $("#volume").text(data[0].summary.volume);
+            // $("#series").text(data[0].summary.series);
+            // $("#author").text(data[0].summary.author);
+            // // 日付のフォーマットを調整
+            // var date = moment(data[0].summary.pubdate, "YYYY-MM-DD");
+            // var formatedDate = date.format('YYYY年MM月DD日');
+            // console.log(date);
+            // $("#pubdate").text(formatedDate);
+            // $("#cover").val(data[0].summary.cover);
+            // $("#description").text(data[0].onix.CollateralDetail.TextContent[0].Text);
+            // データ登録用のデータをセット
+    });
+});
+
+
+
+//     $("#isbn").change(function() {
+//       const isbn = $("#isbn").val();
+//       const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+
+//       $.getJSON(url, function(data) {
+//         if(!data.totalItems) {
+//           $("#isbn").val("");
+//           $("#BookTitle").text("");
+//           $("#BookAuthor").text("");
+//           $("#isbn10").text("");
+//           $("#isbn13").text("");
+//           $("#PublishedDate").text("");
+//           $("#BookThumbnail").text("");
+//           $("#BookDescription").text("");
+//           $("#BookMemo").val("");
+
+//           $("#message").html('<p class="bg-warning" id="warning">該当する書籍がありません。</p>');
+//           $('#message > p').fadeOut(3000);
+
+//         } else {
+
+// // 該当書籍が存在した場合、JSONから値を取得して入力項目のデータを取得する
+
+//           $("#BookTitle").text(data.items[0].volumeInfo.title);
+//           $("#isbn13").text(data.items[0].volumeInfo.industryIdentifiers[0].identifier);
+//           $("#isbn10").text(data.items[0].volumeInfo.industryIdentifiers[1].identifier);
+//           $("#BookAuthor").text(data.items[0].volumeInfo.authors[0]);
+//           $("#PublishedDate").text(data.items[0].volumeInfo.publishedDate);
+//           $("#BookDescription").text(data.items[0].volumeInfo.description);
+//           $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
+
+//         }
+
+//       });
+//     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

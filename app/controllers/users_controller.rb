@@ -73,13 +73,14 @@ before_action :set_current_user, only:[
 
     def add_book
         # すでに登録済かどうか確認する
-        book = Book.find_by(isbn: params[:isbn],
+        isbn = params[:isbn].delete("^0-9")
+        book = Book.find_by(isbn: isbn,
                      user_id: current_user.id)
         if book
             @err = 'すでに本棚に入っています。'
         else
             @book = Book.new(user_id: current_user.id,
-                             isbn: params[:isbn],
+                             isbn: isbn,
                              book_title: params[:book_title])
             @book.save!
         end

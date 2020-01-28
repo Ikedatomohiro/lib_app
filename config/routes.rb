@@ -21,6 +21,7 @@ post 'user/add_book'                  => 'users#add_book'
 
 resources :books
 post 'book/search'                    => 'books#search_books'
+get  'book/search'                    => 'books#search_books'
 get  'book/search_result'             => 'books#search_books_result'
 get  'book/show_form'                 => 'books#show_search_form'
 get  'books/info/:isbn'               => 'books#show_book_info'

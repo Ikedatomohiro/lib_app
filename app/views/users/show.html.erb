@@ -10,7 +10,9 @@
         <button>
             <%= link_to '編集', edit_user_path, class:'button' %>
         </button>
+        <% if current_user %>
             <%= link_to '読書履歴', readinghistory_path %>
+        <% end %>
     </div>
     <div>
         <p>
@@ -28,7 +30,7 @@
             </div>
         </div>
         <p class="impression">
-            <%= link_to('感想の一部いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい', impression_path) %>
+            <%= link_to('感想の一部いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい') %>
         </p>
     </div>
 </div>

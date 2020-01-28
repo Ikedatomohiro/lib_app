@@ -15,7 +15,6 @@ class BooksController < ApplicationController
     end
 
     def show_book_info
-        puts params[:isbn]
     end
 
     def create
@@ -42,16 +41,12 @@ class BooksController < ApplicationController
     def search_books
         keyword = params[:keyword]
         uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=3")
-        puts uri
-        # json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
-        # @result = JSON.parse(json) #返り値をRubyの配列に変換
-        # render template: "books/search_books"
-        render :template => "books/search_books"
-        # redirect_to book_search_path
-        # puts @result.volumeInfo.title
-        # puts @result.publishDate
-
+        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+        @results = JSON.parse(json) #返り値をRubyの配列に変換
+puts @results
+        redirect_to book_search_result_path
     end
+
 
     private
         def book_params

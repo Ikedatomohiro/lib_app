@@ -1,11 +1,23 @@
 <p>検索条件</p>
-<% @results.each do |result| %>
+<% @results["items"].each do |result| %>
+            <p><%= result["volumeInfo"]["title"] %></p>
+            <p><%= result["volumeInfo"]['authors'] %></p>
+            <p><%= result["volumeInfo"]["industryIdentifiers"][0]["type"] %></p>
+            <p><%= result["volumeInfo"]["industryIdentifiers"][0]["identifier"] %></p>
+            <% if result["volumeInfo"]["industryIdentifiers"][1] %>
+                <p><%= result["volumeInfo"]["industryIdentifiers"][1]["type"] %></p>
+                <p><%= result["volumeInfo"]["industryIdentifiers"][1]['identifier'] %></p>
+            <% end %>
+            <p></p>
+            <p><%= result["volumeInfo"]['description'] %></p>
     <div class="book_img_box">
+
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">
-                <img src="https://cover.openbd.jp/9784822289607.jpg">
+                <% if result["volumeInfo"]['imageLinks']['thumbnail'].nil? %>
+                    <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
+                <% end %>
             </p>
         </a>
-        <div id="title_">FACTFULNESS（ファクトフルネス）</div>
     </div>
 <% end %>

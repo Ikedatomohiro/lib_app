@@ -8,6 +8,7 @@ root 'users#index'
 
 resources :users
 get  'notice'                         => 'users#notice'
+post  'notice'                         => 'users#notice'
 get  'shelf'                          => 'users#shelf'
 get  'setting'                        => 'users#setting'
 get  'user/update_setting'            => 'users#update_setting'
@@ -19,10 +20,10 @@ get  'readinghistory'                 => 'users#reading_history'
 get  'request'                        => 'users#request_page'
 post 'user/add_book'                  => 'users#add_book'
 
-resources :books
 post 'book/search'                    => 'books#search_books'
 get  'book/search'                    => 'books#search_books'
-get  'book/search_result'             => 'books#search_books_result'
+get  'books/search_books_result'             => 'books#search_books_result'
 get  'book/show_form'                 => 'books#show_search_form'
 get  'books/info/:isbn'               => 'books#show_book_info'
+resources :books
 end

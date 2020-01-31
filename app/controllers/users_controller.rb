@@ -17,11 +17,7 @@ before_action :set_current_user, only:[
     end
 
     def notice
-        keyword = 'しょぼい喫茶店'
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=3")
-        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
-        @results = JSON.parse(json) #返り値をRubyの配列に変換
-render template: "/books/search_books_result"
+
     end
 
     def shelf

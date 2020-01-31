@@ -39,25 +39,15 @@ class BooksController < ApplicationController
     end
 
     def search_books
-        puts 'ここ来てる？'
-        # keyword = params[:keyword]
-        keyword = 'しょぼい喫茶店'
-
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=3")
-        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
-        @results = JSON.parse(json) #返り値をRubyの配列に変換
-# puts @results
-        # render template: "/users/notice"
-        # render template: "/books/search_books_result"
-        render :search_books_result
-
-        # redirect_to book_search_result_path リダイレクトだと値がリセットされるのでダメ。
+        redirect_to books_search_books_result_path(keyword: params[:keyword]) #リダイレクトだと値がリセットされるのでダメ。
     end
 
-    # def search_books_result
-        
-    # end
-
+    def search_books_result
+        keyword = params[:keyword]
+        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=5")
+        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+        @results = JSON.parse(json) #返り値をRubyの配列に変換
+    end
 
     private
         def book_params

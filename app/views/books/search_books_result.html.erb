@@ -1,23 +1,22 @@
 <p>検索条件</p>
 <% @results["items"].each do |result| %>
-            <p><%= result["volumeInfo"]["title"] %></p>
-            <p><%= result["volumeInfo"]['authors'] %></p>
-            <p><%= result["volumeInfo"]["industryIdentifiers"][0]["type"] %></p>
-            <p><%= result["volumeInfo"]["industryIdentifiers"][0]["identifier"] %></p>
-            <% if result["volumeInfo"]["industryIdentifiers"][1] %>
-                <p><%= result["volumeInfo"]["industryIdentifiers"][1]["type"] %></p>
-                <p><%= result["volumeInfo"]["industryIdentifiers"][1]['identifier'] %></p>
-            <% end %>
-            <p></p>
-            <p><%= result["volumeInfo"]['description'] %></p>
+    <p><%= result["volumeInfo"]["title"] %></p>
+    <p><%= result["volumeInfo"]['authors'] %></p>
+    <p><%= result["volumeInfo"]["industryIdentifiers"][0]["type"] %></p>
+    <p><%= result["volumeInfo"]["industryIdentifiers"][0]["identifier"] %></p>
+    <% if result["volumeInfo"]["industryIdentifiers"][1] %>
+        <p><%= result["volumeInfo"]["industryIdentifiers"][1]["type"] %></p>
+        <p><%= result["volumeInfo"]["industryIdentifiers"][1]['identifier'] %></p>
+    <% end %>
     <div class="book_img_box">
-
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">
-                <% if result["volumeInfo"]['imageLinks']['thumbnail'].nil? %>
+                <% if result["volumeInfo"]['imageLinks']['thumbnail'].present? %>
                     <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
                 <% end %>
             </p>
         </a>
+        <p class="submit_btn_small">
+            <a href="">本棚に入れる</a></p>
     </div>
 <% end %>

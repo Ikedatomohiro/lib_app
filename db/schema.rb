@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
     t.integer "evaluation"
     t.string "impression"
     t.string "impression_img"
+    t.date "written_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

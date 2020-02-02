@@ -54,7 +54,7 @@ before_action :set_current_user, only:[
 
     def impression
         @book = Book.find_by(impression_link: params[:impression_link])
-
+        @impressions = Impression.where(book_id: @book.id)
         
     end
 
@@ -82,7 +82,8 @@ before_action :set_current_user, only:[
             unique_id = create_id()
             @book = Book.new(user_id: current_user.id,
                              isbn: isbn,
-                             book_title: params[:book_title],
+                             title: params[:h_title],
+                             thumbnail: params[:h_thumbnail],
                              impression_link: unique_id)
             @book.save!
         end

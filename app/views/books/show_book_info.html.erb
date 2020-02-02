@@ -1,7 +1,7 @@
 <%= form_with(model: @user, url:"/user/add_book") do |f| %>
     <%= f.hidden_field :isbn %>
-    <%= f.hidden_field :book_title %>
-    <%= f.hidden_field :book_img %>
+    <%= f.hidden_field :h_title %>
+    <%= f.hidden_field :h_thumbnail %>
     <button>本棚に入れる</button>
 <% end %>
 <%# 本の情報を取得するisbnをセット %>
@@ -70,9 +70,9 @@ $(document).on('turbolinks:load', function() {
             $("#cover").val(data[0].summary.cover);
             $("#description").text(data[0].onix.CollateralDetail.TextContent[0].Text);
             // データ登録用のデータをセット
-            $("#book_title").val(data[0].summary.title);
             $("#isbn").val(data[0].summary.isbn);
-            $("#book_img").val(data[0].summary.thumbnail);
+            $("#h_title").val(data[0].summary.title);
+            $("#h_thumbnail").val(data[0].summary.thumbnail);
         }
     });
 });

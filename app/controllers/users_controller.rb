@@ -53,8 +53,7 @@ before_action :set_current_user, only:[
     end
 
     def impression
-        @book = Book.find_by(isbn: params[:isbn],
-                    user_id: current_user.id)
+        @book = Book.find_by(impression_link: params[:impression_link])
 
         
     end
@@ -75,13 +74,16 @@ before_action :set_current_user, only:[
         # すでに登録済かどうか確認する
         isbn = params[:isbn].delete("^0-9")
         book = Book.find_by(isbn: isbn,
-                     user_id: current_user.id)
+                            user_id: current_user.id)
         if book
             @err = 'すでに本棚に入っています。'
         else
+            # 感想表示用のリンク名を作成
+            unique_id = create_id()
             @book = Book.new(user_id: current_user.id,
                              isbn: isbn,
-                             book_title: params[:book_title])
+                             book_title: params[:book_title],
+                             impression_link: unique_id)
             @book.save!
         end
         @books = Book.where(user_id: current_user.id)
@@ -98,5 +100,21 @@ before_action :set_current_user, only:[
             params.require(:user).permit(:account_name, :self_introduction)
         end
 
+        def create_id
+            # ランダムな文字列を生成
+            random_char = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+            random_id = (0...24).map { random_char[rand(random_char.length)] }.join
+            unique_id = check_id(random_id)
+            return unique_id
+        end
+
+        def check_id(id)
+            book = Book.find_by(impression_link: id)
+            if book
+                create_id()
+            else
+                return id
+            end
+        end
 
 end

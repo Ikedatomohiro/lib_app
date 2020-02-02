@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_112732) do
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "isbn", null: false
+    t.string "impression_link", null: false
     t.string "book_title", null: false
     t.string "book_img", default: "/assets/images/book_img.svg", null: false
     t.date "reading_start_date"

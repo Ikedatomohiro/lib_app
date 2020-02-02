@@ -5,7 +5,7 @@
     <% if @books.present? %>
         <% @books.each do |shelf| %>
             <div class="book_img_box">
-                <a href="/user/impression/<%= shelf.isbn %>" >
+                <a href="/impression/<%= shelf.impression_link %>" >
                     <p id="thumbnail_<%= shelf.id %>" class="thumbnail_top"></p>
                 </a>
                 <div id="title_<%= shelf.id %>"></div>

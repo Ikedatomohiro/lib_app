@@ -40,9 +40,15 @@
             </tr>
         </table>
     </div>
-    <div>
-        <p>ツイッターでつぶやく</p>
-    </div>
+    <% if @book.user_id == current_user.id %>
+        <div>
+            <p>感想を編集する</p>
+        </div>
+        <div>
+            <p>ツイッターでつぶやく</p>
+        </div>
+    <% end %>
+
 </div>
 <div>
     <p>感想</p>

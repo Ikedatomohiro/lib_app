@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
     t.string "twitter_account"
     t.string "self_introduction"
     t.string "user_icon"
+    t.boolean "admin_flg", default: false, null: false
     t.boolean "del_flg", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

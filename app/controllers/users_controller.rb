@@ -58,6 +58,7 @@ before_action :set_current_user, only:[
         
     end
 
+
     def book_info
         
     end

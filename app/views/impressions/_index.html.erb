@@ -1,3 +1,7 @@
 <%= form_with(model:@impression, url:impressions_path) do |f|%>
-    <input type="text" value="lkjd;laj;lfj">
+    <%= f.text_area :impression, class: 'input_area' %>
+    
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :book_id, value: @book.id%>
+    <%= f.submit '編集完了' %>
 <% end %>

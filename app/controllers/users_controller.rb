@@ -55,7 +55,6 @@ before_action :set_current_user, only:[
     def impression
         @book = Book.find_by(impression_link: params[:impression_link])
         @impressions = Impression.where(book_id: @book.id)
-        
     end
 
 

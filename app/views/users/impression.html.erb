@@ -43,6 +43,7 @@
     <% if @book.user_id == current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
+            <%= f.hidden_field :book_id, value: @book.id %>
             <%= f.submit '感想を書く' %>
             <% end %>
         </div>
@@ -51,6 +52,9 @@
         <div>
             <p>ツイッターでつぶやく</p>
         </div>
+        <% @impressions.each do |impression| %>
+            <p><%= impression.impression %></p>
+        <% end %>
     <% end %>
 
 </div>

@@ -1,8 +1,7 @@
 .footer {
     display: flex;
     justify-content: space-between;
-    max-width: 600px;
-    height: 50px;
+    height: 100px;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -12,8 +11,8 @@
 }
 
 .home_icon, .bookshelf_icon, .setting_icon {
-    width: 40px;
-    margin-top: 5px;
+    width: 70px;
+    padding-top: 15px;
 }
 
 .home_icon {

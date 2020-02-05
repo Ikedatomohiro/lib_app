@@ -14,7 +14,6 @@ get  'setting'                          => 'users#setting'
 get  'user/update_setting'              => 'users#update_setting'
 post 'users/update_self_introduction'   => 'users#update_self_introduction' 
 post 'user/publish_impression'          => 'users#update_publish_impression'
-get  'impression/:impression_link'      => 'users#impression'
 get  'bookinfo'                         => 'users#book_info'
 get  'readinghistory'                   => 'users#reading_history'
 get  'request'                          => 'users#request_page'
@@ -29,4 +28,5 @@ get  'books/info/:isbn'                 => 'books#show_book_info'
 
 resources :impressions
 post 'impression/add_impression_field'  => 'impressions#add_impression_field'
+get  'impression/:impression_link'      => 'impressions#impression'
 end

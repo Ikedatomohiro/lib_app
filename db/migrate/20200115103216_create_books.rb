@@ -8,6 +8,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
         t.string  :thumbnail,           null: false, default: '/assets/images/book_img.svg'
         t.date    :reading_start_date,  null: true
         t.date    :reading_end_date,    null: true
+        t.integer :evaluation,          null: true
         t.timestamps
     end
   end

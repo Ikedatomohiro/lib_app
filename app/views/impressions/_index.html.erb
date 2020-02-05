@@ -1,4 +1,4 @@
-<%= form_with(model:@impression, url:impressions_path) do |f|%>
+<%= form_with(model: Impression.new, url:impressions_path) do |f|%>
     <%= f.text_area :impression, class: 'input_area' %>
     
     <%= f.hidden_field :user_id, value: current_user.id %>

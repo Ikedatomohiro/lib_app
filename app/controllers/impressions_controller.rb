@@ -15,7 +15,7 @@ class ImpressionsController < ApplicationController
     def create
         @impression = Impression.new(impression_params)
         @impression.save!
-        book = Book.find_by(book_id: params[:book_id])
+        book = Book.find_by(id: params[:book_id])
         redirect_to 'impression/#{book.impression_link}'
     end
 
@@ -29,7 +29,7 @@ class ImpressionsController < ApplicationController
 
     def impression
         @book = Book.find_by(impression_link: params[:impression_link])
-        @impressions = Impression.where(book_id: @book.id)
+        @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
     end
 
     def add_impression_field
@@ -44,7 +44,6 @@ class ImpressionsController < ApplicationController
     private
     def impression_params
         params.require(:impression).permit(:user_id, :book_id, :impression)
-
     end
 
 end

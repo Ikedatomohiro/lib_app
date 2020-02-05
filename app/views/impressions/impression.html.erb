@@ -44,16 +44,18 @@
         <div>
             <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
             <%= f.hidden_field :book_id, value: @book.id %>
-            <%= f.submit '感想を書く' %>
+            <%= f.submit '感想を書く', id: 'submit_btn' %>
             <% end %>
         </div>
         <div id="impression">
         </div>
         <div>
-            <p>ツイッターでつぶやく</p>
+            <p>つぶやく</p>
         </div>
         <% @impressions.each do |impression| %>
-            <p><%= impression.impression %></p>
+            <p id="impression_<%= impression.id %>">
+                <%= impression.impression %>
+            </p>
         <% end %>
     <% end %>
 

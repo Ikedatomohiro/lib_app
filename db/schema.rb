@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
     t.string "thumbnail", default: "/assets/images/book_img.svg", null: false
     t.date "reading_start_date"
     t.date "reading_end_date"
+    t.integer "evaluation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -27,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
   create_table "impressions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
-    t.integer "evaluation"
     t.string "impression"
     t.string "impression_img"
     t.date "written_date"

@@ -43,8 +43,8 @@
     <% if @book.user_id == current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
-            <%= f.hidden_field :book_id, value: @book.id %>
-            <%= f.submit '感想を書く', id: 'submit_btn' %>
+                <%= f.hidden_field :book_id, value: @book.id %>
+                <%= f.submit '感想を書く', id: 'submit_btn' %>
             <% end %>
         </div>
         <div id="impression">
@@ -56,14 +56,18 @@
             <p id="impression_<%= impression.id %>">
                 <%= impression.impression %>
             </p>
+            <p><%= impression.updated_at.strftime('%Y年 %m月 %d日') %></p>
         <% end %>
-    <% end %>
 
 </div>
 <div>
     <p>感想</p>
     <p>画像</p>
 </div>
+    <% end %>
+
+<%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
 
 <script>
 $(document).on('turbolinks:load', function() {
@@ -80,21 +84,15 @@ $(document).on('turbolinks:load', function() {
             $("#title").text(data[0].summary.title);
         }
     });
+ $(function(){
+     $('#star').raty({
+         size    : 36,
+         starOff : '<%= asset_path('star-off.png') %>',
+         starOn  : '<%= asset_path('star-on.png') %>',
+         score   : '0'
+     });
+ });
 });
-// $(function(){
-    // $('#star').raty({
-        // size    : 36,
-        // starOff : '<%= asset_path('star-off.png') %>',
-        // starOn  : '<%= asset_path('star-on.png') %>',
-        // score   : '3'
-    // });
-    // $('input[name="evaluation"]').each( function( index, elem ) {
-        // console.log( $(this).parent().attr('id'));
-        // var id = $(this).parent().attr('id');
-        // string = 'present[present_products_attributes]['+id+'][evaluation]';
-        // $(this).attr('name',string);
-    // });
-// });
 </script>
 
 

@@ -25,14 +25,8 @@ before_action :set_current_user, only:[
     end
 
     def setting
-        puts params[:publish_impression]
         @user_setting = Setting.find_by(user_id: current_user.id)
 
-        if params[:publish_impression]
-            @user_setting.update(publish_impression: '0')
-        else
-            @user_setting.update(publish_impression: '1')
-        end
     end
 
 
@@ -48,7 +42,12 @@ before_action :set_current_user, only:[
     end
 
     def update_publish_impression
-        puts 'fasfasfa'
+        @user_setting = Setting.find_by(user_id: current_user.id)
+        if params[:publish_impression] == "true"
+            @user_setting.update(publish_impression: true)
+        else
+            @user_setting.update(publish_impression: false)
+        end
 
     end
 

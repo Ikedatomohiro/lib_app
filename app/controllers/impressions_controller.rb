@@ -13,10 +13,12 @@ class ImpressionsController < ApplicationController
     end
 
     def create
-        @impression = Impression.new(impression_params)
-        @impression.save!
         book = Book.find_by(id: params[:impression][:book_id])
         book.update(evaluation: params[:score])
+        if !params[:impression][:impression]
+            @impression = Impression.new(impression_params)
+            @impression.save!
+        end
         redirect_to "/impression/#{book.impression_link}"
     end
 

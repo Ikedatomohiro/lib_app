@@ -64,7 +64,7 @@ $(document).on('turbolinks:load', function() {
             $("#author").text(data[0].summary.author);
             // 日付のフォーマットを調整
             var date = moment(data[0].summary.pubdate, "YYYY-MM-DD");
-            var formatedDate = date.format('YYYY年MM月DD日');
+            var formatedDate = date.format('YYYY年M月D日');
             console.log(date);
             $("#pubdate").text(formatedDate);
             $("#cover").val(data[0].summary.cover);

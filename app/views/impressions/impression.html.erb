@@ -31,12 +31,11 @@
             </tr>
             <tr>
                 <th>評価</th>
-                <td id="star">
-                    <% if !@impression %>
+                <td id="evaluation">
+                    <% if @book.evaluation == nil%>
                         まだ評価していません。
                     <% end %>
                 </td>
-
             </tr>
         </table>
     </div>
@@ -84,15 +83,18 @@ $(document).on('turbolinks:load', function() {
             $("#title").text(data[0].summary.title);
         }
     });
- $(function(){
-     $('#star').raty({
-         size    : 36,
-         starOff : '<%= asset_path('star-off.png') %>',
-         starOn  : '<%= asset_path('star-on.png') %>',
-         score   : '0'
-     });
- });
 });
+<% if @book.evaluation %> // 評価されていないときは星を表示しない
+    $('#evaluation').raty({
+        size    : 36,
+        starOff : '<%= asset_path('star-off.png') %>',
+        starOn  : '<%= asset_path('star-on.png') %>',
+        // starHalf: '<%#= asset_path('star-half.png') %>',
+        score   : '<%= @book.evaluation %>',
+        readOnly: true
+    });
+<% end %>
+
 </script>
 
 

@@ -29,4 +29,6 @@ get  'books/info/:isbn'                 => 'books#show_book_info'
 resources :impressions
 post 'impression/add_impression_field'  => 'impressions#add_impression_field'
 get  'impression/:impression_link'      => 'impressions#impression'
+post 'impression/show_reading_date'     => 'impressions#show_reading_date'
+post 'impression/set_reading_date'      => 'impressions#set_reading_date'
 end

@@ -1,3 +1,7 @@
+<%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="book_info">
     <div class="book_info_inner">
         <div class="book_img_area">
@@ -15,11 +19,18 @@
                 <td><%= @book.created_at.strftime('%Y年 %-m月 %-d日') %></td>
             </tr>
             <tr>
-                <th>読み始め</th>
-                <td><% if @book.reading_start_date %>
+                <th>
+                    <%= form_with(model: @impression, url:impression_show_reading_date_path) do |f| %>
+                        <%= f.hidden_field :calendar, value: 'reading_start_date' %>
+                        <%= f.hidden_field :book_id, value: @book.id %>
+                        <%= f.submit '読始め' %>
+                    <% end %>
+                </th>
+                <td id="reading_start_date">
+                    <% if @book.reading_start_date %>
                         <%= @book.reading_start_date.strftime('%Y年 %-m月 %-d日') %>
                     <% end %>
-                    </td>
+                </td>
             </tr>
             <tr>
                 <th>読了日</th>
@@ -65,9 +76,6 @@
 </div>
     <% end %>
 
-<%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
-
 <script>
 $(document).on('turbolinks:load', function() {
     const isbn = $("#isbn").val();
@@ -94,10 +102,7 @@ $(document).on('turbolinks:load', function() {
         readOnly: true
     });
 <% end %>
-
 </script>
 
-
-
-
+ 
 

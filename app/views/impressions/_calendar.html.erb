@@ -1,0 +1,23 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<%= form_with model:Impression.new, url: impression_set_reading_date_path do |f|%>
+    <input id="datepicker" type="text" value="" name="<%= params[:calendar] %>" />
+    <%= f.hidden_field :book_id, value: @book.id%>
+    <%= f.submit "更新する" %>
+<% end %>
+
+<script>
+$(function(){
+    $('#datepicker').datepicker({
+        //オプション
+        dateFormat: 'yy-mm-dd',
+        todayHighlight : false,
+        autoclose : true,
+        keyboardNavigation : false,
+        changeMonth: true,
+        duration: 300,
+        showAnim: 'show'
+    });
+});
+</script>

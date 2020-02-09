@@ -44,9 +44,24 @@ class ImpressionsController < ApplicationController
         end
     end
 
+    def show_reading_date
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end
+
+    def set_reading_date
+        book = Book.find_by(id: params[:impression][:book_id])
+        book.update(reading_start_date: params[:reading_start_date])
+    end
+
     private
     def impression_params
         params.require(:impression).permit(:user_id, :book_id, :impression)
     end
 
+    def reading_date_params
+        params.permit(:reading_start_date, :reading_end_date)
+    end
 end

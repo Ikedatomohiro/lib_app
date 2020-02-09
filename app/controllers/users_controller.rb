@@ -72,12 +72,12 @@ before_action :set_current_user, only:[ :index,
         else
             # 感想表示用のリンク名を作成
             unique_id = create_id()
-            # @book = Book.new(user_id: current_user.id,
-            #                  isbn: isbn,
-            #                  title: params[:h_title],
-            #                  thumbnail: params[:h_thumbnail],
-            #                  impression_link: unique_id)
-            # @book.save!
+            @book = Book.new(user_id: current_user.id,
+                             isbn: isbn,
+                             title: params[:h_title],
+                             thumbnail: params[:h_thumbnail],
+                             impression_link: unique_id)
+            @book.save!
         end
         @books = Book.where(user_id: current_user.id)
         redirect_to shelf_path
@@ -97,9 +97,7 @@ before_action :set_current_user, only:[ :index,
             # ランダムな文字列を生成
             random_char = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
             random_id = (0...24).map { random_char[rand(random_char.length)] }.join
-            random_id = 'XjBf0BXrOVEFFHGLhhW58Fc3'
             unique_id = check_id(random_id)
-
             return unique_id
         end
 
@@ -109,7 +107,7 @@ before_action :set_current_user, only:[ :index,
                 puts 'found same id'
                 create_id()
             else
-                puts 'got unique id'
+                puts 'confirmed unique id in check_id function'
                 return id
             end
         end

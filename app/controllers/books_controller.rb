@@ -49,6 +49,26 @@ class BooksController < ApplicationController
         @results = JSON.parse(json) #返り値をRubyの配列に変換
     end
 
+    def show_reading_date
+    puts params
+        @book = Book.find_by(id: params[:book_id])
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end
+
+    def set_reading_date
+        book = Book.find_by(id: params[:book][:id])
+        if params[:reading_start_date]
+            book.update(reading_start_date: params[:reading_start_date])
+        elsif params[:reading_end_date]
+            book.update(reading_end_date: params[:reading_end_date])
+        end
+        redirect_to "/impression/#{book.impression_link}"
+    end
+
+
     private
         def book_params
             params.require(:book).permit(:user_id, :isbn)

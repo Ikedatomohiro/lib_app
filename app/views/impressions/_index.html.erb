@@ -1,19 +1,23 @@
 <%= form_with(model: Impression.new, url:impressions_path) do |f|%>
-    <%= f.submit '編集完了' %>
+    <%= f.submit '保存' %>
     <%= f.text_area :impression, class: 'input_area' %>
-    
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
     <p id="star"></p>
 <% end %>
 
 <script>
+// 星で評価を表現する。
 $('#star').raty({
     size    : 36,
     starOff : '<%= asset_path('star-off.png') %>',
     starOn  : '<%= asset_path('star-on.png') %>',
     score   : '<%= @book.evaluation %>'
 });
+
+
+
+
 </script>
 
 

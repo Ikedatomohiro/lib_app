@@ -40,6 +40,7 @@ before_action :set_current_user, only:[ :index,
         
     end
 
+    # 感想を公開するかどうかのフラグを変更する。
     def update_publish_impression
         @user_setting = Setting.find_by(user_id: current_user.id)
         if params[:publish_impression] == "true"

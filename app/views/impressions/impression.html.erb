@@ -21,7 +21,7 @@
             <tr>
                 <th>
                     <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
-                        <%= f.hidden_field :calendar, value: 'reading_start_date' %>
+                        <input type="hidden" name="calendar" value="reading_start_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
                         <%= f.submit '読始め' %>
                     <% end %>
@@ -35,7 +35,7 @@
             <tr>
                 <th>
                     <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
-                        <%= f.hidden_field :calendar, value: 'reading_end_date' %>
+                        <input type="hidden" name="calendar" value="reading_end_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
                         <%= f.submit '読了日' %>
                     <% end %>
@@ -59,8 +59,8 @@
     <% if @book.user_id == current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
-                <%= f.hidden_field :id, value: @book.id %>
-                <%= f.submit '感想を書く', id: 'submit_btn' %>
+                <%= f.hidden_field :book_id, value: @book.id %>
+                <%= f.submit '感想を書く', id: 'submit_btn', class: 'submit_btn' %>
             <% end %>
         </div>
         <div id="impression">
@@ -70,7 +70,7 @@
         </div>
         <% @impressions.each do |impression| %>
             <p id="impression_<%= impression.id %>">
-                <%= impression.impression %>
+            <%= impression.impression %>
             </p>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
         <% end %>
@@ -108,6 +108,20 @@ $(document).on('turbolinks:load', function() {
         readOnly: true
     });
 <% end %>
+
+<% @impressions.each do |impression| %>
+    $('#impression_<%= impression.id %>').click(function(){
+    $.get({
+        url: "<%= impression_show_impression_field_path %>",
+        data: { impression_id: <%= impression.id %> }
+    });
+
+
+
+    });
+<% end %>
+
+
 </script>
 
  

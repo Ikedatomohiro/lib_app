@@ -50,7 +50,6 @@ class BooksController < ApplicationController
     end
 
     def show_reading_date
-    puts params
         @book = Book.find_by(id: params[:book_id])
         respond_to do |format|
             format.html
@@ -59,13 +58,13 @@ class BooksController < ApplicationController
     end
 
     def set_reading_date
-        book = Book.find_by(id: params[:book][:id])
-        if params[:reading_start_date]
-            book.update(reading_start_date: params[:reading_start_date])
-        elsif params[:reading_end_date]
-            book.update(reading_end_date: params[:reading_end_date])
-        end
-        redirect_to "/impression/#{book.impression_link}"
+        # book = Book.find_by(id: params[:id])
+        # if params[:reading_start_date]
+        #     book.update(reading_start_date: params[:reading_start_date])
+        # elsif params[:reading_end_date]
+        #     book.update(reading_end_date: params[:reading_end_date])
+        # end
+        # redirect_to "/impression/#{book.impression_link}"
     end
 
 

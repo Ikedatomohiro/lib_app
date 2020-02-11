@@ -2,22 +2,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
 <%= form_with model: @book, url: book_set_reading_date_path do |f| %>
-    <input id="datepicker" type="text" value="" name="<%= params[:book][:calendar] %>" />
+    <input id="datepicker_<%= @book.id %>" type="text" value="" name="<%= params[:calendar] %>" />
     <%= f.hidden_field :id, value: @book.id%>
     <%= f.submit "更新" %>
 <% end %>
 
 <script>
-$(function(){
-    $('#datepicker').datepicker({
-        //オプション
-        dateFormat: 'yy/mm/dd',
-        todayHighlight : false,
-        autoclose : true,
-        keyboardNavigation : false,
-        changeMonth: true,
-        duration: 300,
-        showAnim: 'show'
-    });
+// カレンダー表示設定
+$('#datepicker_<%= @book.id %>').datepicker({
+    //オプション
+    dateFormat: 'yy/mm/dd',
+    todayHighlight : false,
+    autoclose : true,
+    keyboardNavigation : false,
+    changeMonth: true,
+    duration: 300,
+    showAnim: 'show'
 });
+
+// 日にちを変更されたときに自動更新する。
+$('#datepicker_<%= @book.id %>').change(function() {
+    var val = $('#datepicker_<%= @book.id %>').val();
+    $.post({
+        url: "<%= book_set_reading_date_path %>",
+        data: { <%= params[:calendar] %>: val,
+                                      id: <%= @book.id %> }
+        });
+    });
 </script>

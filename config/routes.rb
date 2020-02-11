@@ -25,10 +25,11 @@ get  'book/search'                      => 'books#search_books'
 get  'books/search_books_result'        => 'books#search_books_result'
 get  'book/show_form'                   => 'books#show_search_form'
 get  'books/info/:isbn'                 => 'books#show_book_info'
-patch 'book/set_reading_date'            => 'books#set_reading_date'
+post 'book/set_reading_date'            => 'books#set_reading_date'
 patch 'book/show_reading_date'           => 'books#show_reading_date'
 
 resources :impressions
 post 'impression/add_impression_field'  => 'impressions#add_impression_field'
 get  'impression/:impression_link'      => 'impressions#impression'
+get  'impression/show_impression_field' => 'impressions#show_impression_field'
 end

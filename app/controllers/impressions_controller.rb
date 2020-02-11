@@ -15,7 +15,7 @@ class ImpressionsController < ApplicationController
     def create
         book = Book.find_by(id: params[:impression][:book_id])
         book.update(evaluation: params[:score])
-        if !params[:impression][:impression]
+        if params[:impression][:impression] != ""
             @impression = Impression.new(impression_params)
             @impression.save!
         end
@@ -44,6 +44,13 @@ class ImpressionsController < ApplicationController
         end
     end
 
+    def show_impression_field
+        @impression = Impression.find_by(id: params[:impression_id])
+        # respond_to do |format|
+        #     format.html
+        #     format.js
+        # end
+    end
 
     private
     def impression_params

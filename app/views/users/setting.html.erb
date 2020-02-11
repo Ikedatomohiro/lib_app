@@ -40,11 +40,11 @@
     </p>
 </div>
 <script>
-    $('#impression').change(function() {
-        var prop = $('#impression').prop('checked');
-        $.post({
-            url: "<%=user_publish_impression_path %>",
-            data: { publish_impression: prop }
-        });
+$('#impression').change(function() {
+    var prop = $('#impression').prop('checked');
+    $.post({
+        url: "<%= user_publish_impression_path %>",
+        data: { publish_impression: prop }
     });
+});
 </script>

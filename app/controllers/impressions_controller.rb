@@ -60,7 +60,7 @@ class ImpressionsController < ApplicationController
 
     private
     def impression_params
-        params.require(:impression).permit(:user_id, :book_id, :impression)
+        params.require(:impression).permit(:user_id, :book_id, :impression, :impression_img)
     end
 
     def reading_date_params

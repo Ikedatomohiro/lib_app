@@ -37,3 +37,7 @@ yarn-debug.log*
 
 # 環境変数ファイル
 .env
+
+# 画像ファイル
+public/uploads/
+

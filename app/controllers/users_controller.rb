@@ -91,7 +91,7 @@ before_action :set_current_user, only:[ :index,
         end
 
         def self_introduction_params
-            params.require(:user).permit(:account_name, :self_introduction)
+            params.require(:user).permit(:account_name, :self_introduction, :user_icon)
         end
 
         def create_id

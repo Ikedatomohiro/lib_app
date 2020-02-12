@@ -3,6 +3,8 @@
     <%= f.text_area :impression, class: 'input_area' %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
+    <%= f.file_field :impression_img %>
+
     <p id="star"></p>
 <% end %>
 

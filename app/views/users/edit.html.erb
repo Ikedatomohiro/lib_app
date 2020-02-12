@@ -4,6 +4,7 @@
         <div class="home_header">
             <div class="user_icon">
                 <%#= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'),user_path) %>
+                <%= form.file_field :user_icon %>
             </div>
             <div class="user_name">
                 <%= form.text_field :account_name ,value: @user.account_name %>
@@ -14,6 +15,7 @@
             </button>
         </div>
         <div>
+                <%= @user.user_icon %>
             <%= form.text_area :self_introduction ,value: @user.self_introduction, class: 'self_introduction', maxlenth: '160' %>
             <%=  %>
         </div>

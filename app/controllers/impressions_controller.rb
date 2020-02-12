@@ -23,6 +23,12 @@ class ImpressionsController < ApplicationController
     end
 
     def update
+        impression = Impression.find_by(id: params[:id])
+        impression.update(impression: params[:impression])
+        respond_to do |format|
+            format.html
+            format.js
+        end
         
     end
 
@@ -46,10 +52,10 @@ class ImpressionsController < ApplicationController
 
     def show_impression_field
         @impression = Impression.find_by(id: params[:impression_id])
-        # respond_to do |format|
-        #     format.html
-        #     format.js
-        # end
+        respond_to do |format|
+            format.html
+            format.js
+        end
     end
 
     private

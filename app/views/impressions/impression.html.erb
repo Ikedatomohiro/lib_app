@@ -72,6 +72,8 @@
             <p id="impression_<%= impression.id %>">
             <%= impression.impression %>
             </p>
+            <textarea id="impression_edit_<%= impression.id %>"><%= impression.impression %>
+            </textarea>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
         <% end %>
 
@@ -110,18 +112,24 @@ $(document).on('turbolinks:load', function() {
 <% end %>
 
 <% @impressions.each do |impression| %>
+    // $('#impression_edit_<%= impression.id %>').hide();
     $('#impression_<%= impression.id %>').click(function(){
-    $.get({
-        url: "<%= impression_show_impression_field_path %>",
-        data: { impression_id: <%= impression.id %> }
+        $.get({
+            url: "<%= impression_show_impression_field_path %>",
+            data: { impression_id: <%= impression.id %> }
+        });
     });
+    // 感想を編集したら自動的に保存する。
 
-
-
-    });
+    $('#impression_edit_<%= impression.id %>').change(function(){
+        var impression = $('#impression_edit_<%= impression.id %>').val();
+      $.ajax({
+        url:  "<%= impression_path(impression.id) %>",
+        type: 'patch',
+        data: { ipmression: impression }
+      });
+   });
 <% end %>
-
-
 </script>
 
  

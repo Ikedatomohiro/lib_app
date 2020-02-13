@@ -21,6 +21,7 @@
             <tr>
                 <th>
                     <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
+                        <input type="hidden" name="now_date" value= <%= @book.reading_start_date %> >
                         <input type="hidden" name="calendar" value="reading_start_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
                         <%= f.submit '読始め' %>
@@ -65,25 +66,22 @@
         </div>
         <div id="impression">
         </div>
-        <div>
-            <p>つぶやく</p>
-        </div>
         <% @impressions.each do |impression| %>
             <p id="impression_<%= impression.id %>">
             <%= impression.impression %>
             </p>
-            <p><%= (impression.impression_img_url) %></p>
+            <p>
+                <% if impression.impression_img_url%>
+                    <%= image_tag(impression.impression_img_url) %>
+                <% end %>
+            </p>
             <textarea id="impression_edit_<%= impression.id %>"><%= impression.impression %>
             </textarea>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
+            <p>つぶやく</p>
         <% end %>
-
-</div>
-<div>
-    <p>感想</p>
-    <p>画像</p>
-</div>
     <% end %>
+</div>
 
 <script>
 $(document).on('turbolinks:load', function() {

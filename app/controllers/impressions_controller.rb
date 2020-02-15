@@ -23,13 +23,8 @@ class ImpressionsController < ApplicationController
     end
 
     def update
-        impression = Impression.find_by(id: params[:id])
-        impression.update(impression: params[:impression])
-        respond_to do |format|
-            format.html
-            format.js
-        end
-        
+        @impression = Impression.find_by(id: params[:id])
+        @impression.update(impression: params[:impression])
     end
 
     def destroy
@@ -44,14 +39,6 @@ class ImpressionsController < ApplicationController
     def add_impression_field
         @book = Book.find_by(id: params[:book_id])
         @impressions = Impression.new
-        respond_to do |format|
-            format.html
-            format.js
-        end
-    end
-
-    def show_impression_field
-        @impression = Impression.find_by(id: params[:impression_id])
         respond_to do |format|
             format.html
             format.js

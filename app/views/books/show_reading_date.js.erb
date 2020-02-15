@@ -1,3 +1,6 @@
+$(document).on('turbolinks:load', function() {
+
+});
 $('#<%= params[:calendar] %>').html("<%= j (render 'calendar') %>");
 $('.datepicker').val("<%= @now_date %>");
 

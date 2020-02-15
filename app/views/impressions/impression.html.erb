@@ -36,6 +36,7 @@
             <tr>
                 <th>
                     <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
+                        <input type="hidden" name="now_date" value= <%= @book.reading_end_date %> >
                         <input type="hidden" name="calendar" value="reading_end_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
                         <%= f.submit '読了日' %>
@@ -67,18 +68,25 @@
         <div id="impression">
         </div>
         <% @impressions.each do |impression| %>
-            <p id="impression_<%= impression.id %>">
-            <%= impression.impression %>
-            </p>
+            <% if @book.user_id === current_user.id %>
+                <textarea id="impression_edit_<%= impression.id %>"><%= impression.impression %>
+                </textarea>
+            <% else %>
+                <p>
+                    <%= impression.impression %>
+                </p>
+            <% end %>
             <p>
                 <% if impression.impression_img_url%>
-                    <%= image_tag(impression.impression_img_url) %>
+                    <a href="<%= image_tag(impression.impression_img_url) %>" target="_blank">
+                        <%= image_tag(impression.impression_img_url, width: 200) %>
+                    </a>
                 <% end %>
             </p>
-            <textarea id="impression_edit_<%= impression.id %>"><%= impression.impression %>
-            </textarea>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
-            <p>つぶやく</p>
+            <% if @book.user_id === current_user.id %>
+                <p>つぶやく</p>
+            <% end %>
         <% end %>
     <% end %>
 </div>
@@ -111,21 +119,15 @@ $(document).on('turbolinks:load', function() {
 <% end %>
 
 <% @impressions.each do |impression| %>
-    // $('#impression_edit_<%= impression.id %>').hide();
-    $('#impression_<%= impression.id %>').click(function(){
-        $.get({
-            url: "<%= impression_show_impression_field_path %>",
-            data: { impression_id: <%= impression.id %> }
-        });
-    });
     // 感想を編集したら自動的に保存する。
-
     $('#impression_edit_<%= impression.id %>').change(function(){
         var impression = $('#impression_edit_<%= impression.id %>').val();
       $.ajax({
         url:  "<%= impression_path(impression.id) %>",
         type: 'patch',
-        data: { ipmression: impression }
+        data: { impression: impression,
+               authenticity_token: $("input[name='authenticity_token']").val()
+         }
       });
    });
 <% end %>

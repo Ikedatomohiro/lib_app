@@ -18,6 +18,7 @@ get  'bookinfo'                         => 'users#book_info'
 get  'readinghistory'                   => 'users#reading_history'
 get  'request'                          => 'users#request_page'
 post 'user/add_book'                    => 'users#add_book'
+post 'user/send_request'                => 'users#send_request'
 
 resources :books
 post 'book/search'                      => 'books#search_books'
@@ -31,4 +32,6 @@ patch 'book/show_reading_date'           => 'books#show_reading_date'
 resources :impressions
 post 'impression/add_impression_field'  => 'impressions#add_impression_field'
 get  'impression/:impression_link'      => 'impressions#impression'
+
+resources :contacts
 end

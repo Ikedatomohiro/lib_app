@@ -51,16 +51,7 @@ before_action :set_current_user, only:[ :index,
 
     end
 
-    def book_info
-        
-    end
-
     def reading_history
-        
-    end
-
-    def request_page
-
     end
 
     def add_book

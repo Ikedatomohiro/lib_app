@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_141020) do
+ActiveRecord::Schema.define(version: 2020_02_16_045349) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
     t.date "reading_start_date"
     t.date "reading_end_date"
     t.integer "evaluation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "contact_type", null: false
+    t.string "contact_title", null: false
+    t.string "inquiry", null: false
+    t.string "response"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_141020) do
     t.string "self_introduction"
     t.string "user_icon"
     t.boolean "admin_flg", default: false, null: false
+    t.integer "shelf_type", default: 1, null: false
+    t.integer "user_type", default: 1, null: false
     t.boolean "del_flg", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

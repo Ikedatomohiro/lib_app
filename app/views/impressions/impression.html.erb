@@ -78,9 +78,9 @@
             <% end %>
             <p>
                 <% if impression.impression_img_url%>
-                    <a href="<%= image_tag(impression.impression_img_url) %>" target="_blank">
-                        <%= image_tag(impression.impression_img_url, width: 200) %>
-                    </a>
+                    <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>
+                        <%= image_tag impression.impression_img_url , width: 200 %>
+                    <% end %>
                 <% end %>
             </p>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
@@ -106,31 +106,31 @@ $(document).on('turbolinks:load', function() {
             $("#title").text(data[0].summary.title);
         }
     });
-});
-<% if @book.evaluation %> // 評価されていないときは星を表示しない
-    $('#evaluation').raty({
-        size    : 36,
-        starOff : '<%= asset_path('star-off.png') %>',
-        starOn  : '<%= asset_path('star-on.png') %>',
-        // starHalf: '<%#= asset_path('star-half.png') %>',
-        score   : '<%= @book.evaluation %>',
-        readOnly: true
-    });
-<% end %>
+    <% if @book.evaluation %> // 評価されていないときは星を表示しない
+        $('#evaluation').raty({
+            size    : 36,
+            starOff : '<%= asset_path('star-off.png') %>',
+            starOn  : '<%= asset_path('star-on.png') %>',
+            // starHalf: '<%#= asset_path('star-half.png') %>',
+            score   : '<%= @book.evaluation %>',
+            readOnly: true
+        });
+    <% end %>
 
-<% @impressions.each do |impression| %>
-    // 感想を編集したら自動的に保存する。
-    $('#impression_edit_<%= impression.id %>').change(function(){
-        var impression = $('#impression_edit_<%= impression.id %>').val();
-      $.ajax({
-        url:  "<%= impression_path(impression.id) %>",
-        type: 'patch',
-        data: { impression: impression,
-               authenticity_token: $("input[name='authenticity_token']").val()
-         }
-      });
-   });
-<% end %>
+    <% @impressions.each do |impression| %>
+        // 感想を編集したら自動的に保存する。
+        $('#impression_edit_<%= impression.id %>').change(function(){
+            var impression = $('#impression_edit_<%= impression.id %>').val();
+          $.ajax({
+            url:  "<%= impression_path(impression.id) %>",
+            type: 'patch',
+            data: { impression: impression,
+                   authenticity_token: $("input[name='authenticity_token']").val()
+             }
+          });
+       });
+    <% end %>
+});
 </script>
 
  

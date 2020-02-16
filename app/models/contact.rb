@@ -1,7 +1,7 @@
 class Contact < ApplicationRecord
     enum contact_type:{
-        ご要望: 0,
-        機能: 1,
+        ご利用の感想: 0,
+        機能追加の要望: 1,
         ご指摘: 2,
         その他: 3
     }

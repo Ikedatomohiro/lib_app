@@ -1,6 +1,10 @@
 class ContactsController < ApplicationController
     def index
-        @contacts = Contact.where(user_id: current_user.id)
+        if current_user.admin_flg
+            @contacts = Contact.all
+        else
+            @contacts = Contact.where(user_id: current_user.id).order(created_at: "DESC")
+        end
     end
 
     def create
@@ -19,6 +23,8 @@ class ContactsController < ApplicationController
     end
 
     def update
+        contact = Contact.find_by(id: params[:id])
+        contact.update(response: params[:response])
     end
 
     def destroy

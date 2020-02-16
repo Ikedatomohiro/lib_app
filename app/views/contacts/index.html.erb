@@ -1,26 +1,26 @@
-リクエスト
-<%= form_with(model:Contact.new, url: contacts_path) do |f| %>
-    <%= f.select :contact_type, Contact.contact_types.keys %>
-    <%= f.label :タイトル %>
-    <%= f.text_field :contact_title %>
-    <%= f.label :問合わせ内容 %>
-    <%= f.text_area :inquiry %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.submit '送信する' %>
-<% end %>
+<p class="title">ご意見・ご要望</p>
+<div class="contact_area">
+    <%= form_with(model:Contact.new, url: contacts_path) do |f| %>
+        <p><%= f.label :お問合せ種別（必須） %></p>
+        <div class="cp_ipselect cp_sl01">
+            <%= f.select :contact_type, Contact.contact_types.keys %>
+        </div>
+        <p><%= f.label :タイトル（必須） %></p>
+        <p><%= f.text_field :contact_title, class: 'input_area' %></p>
+        <p><%= f.label :問合せ内容（必須） %></p>
+        <p><%= f.text_area :inquiry, class: 'input_area',  rows: 10 %></p>
+        <p><%= f.hidden_field :user_id, value: current_user.id %></p>
+        <p><%= f.submit '送信する', class: 'submit_btn_small' %></p>
+    <% end %>
+</div>
 
-
-<p>過去のお問い合わせ</p>
+<p class="title">過去のお問い合わせ</p>
 <% if @contacts %>
     <% @contacts.each do |contact| %>
-        <p>問合せ種別</p>
             <%= contact.contact_type %>
-        <p>タイトル</p>
             <%= contact.contact_title %>
-        <p>問合せ内容</p>
             <%= contact.inquiry %>
-        <p>問合せ日時</p>
-            <%= contact.created_at %>
+            <%= contact.created_at.strftime('%Y/%-m/%-d') %>
         <p>管理者からの回答</p>
         <% if contact.response %>
             <p><%= contact.response %></p>
@@ -29,8 +29,10 @@
             <%= contact.updated_at %>
         <% end %>
         <% if current_user.admin_flg === true %>
-            <button>回答する</button>
-
+            <%= form_with(model:contact, url: contact_path(contact.id)) do |f| %>
+            <%= f.text_area :response, class: 'input_area', rows: 5 %>
+            <%= f.submit '回答する', class: 'submit_btn_small' %>
+            <% end %>
         <% end %>
     <% end %>
 <% end %>

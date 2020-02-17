@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
     def index
         if current_user.admin_flg
-            @contacts = Contact.all
+            @contacts = Contact.all.order(created_at: "DESC")
         else
             @contacts = Contact.where(user_id: current_user.id).order(created_at: "DESC")
         end
@@ -25,6 +25,7 @@ class ContactsController < ApplicationController
     def update
         contact = Contact.find_by(id: params[:id])
         contact.update(response: params[:response])
+        render '/contacts/thanks'
     end
 
     def destroy

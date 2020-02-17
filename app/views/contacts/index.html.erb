@@ -24,9 +24,9 @@
         <p>管理者からの回答</p>
         <% if contact.response %>
             <p><%= contact.response %></p>
+            <%= contact.updated_at.strftime('%Y/%-m/%-d') %>
         <% else %>
             <p>お問い合わせありがとうございます。管理者から回答させていただきますので、今しばらくお待ちくださいませ。</p>
-            <%= contact.updated_at %>
         <% end %>
         <% if current_user.admin_flg === true %>
             <%= form_with(model:contact, url: contact_path(contact.id)) do |f| %>

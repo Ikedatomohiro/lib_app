@@ -1,7 +1,7 @@
 class ImpressionsController < ApplicationController
 
     def show
-        
+        @impression = Impression.find_by(id: params[:id])
     end
 
     def new

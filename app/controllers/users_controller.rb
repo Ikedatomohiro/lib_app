@@ -6,6 +6,7 @@ before_action :set_current_user, only:[ :index,
                                         :add_book]
 
     def index
+        @impressions = Impression.all
     end
 
     def show

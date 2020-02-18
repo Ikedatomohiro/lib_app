@@ -13,6 +13,12 @@
         </div>
     </div>
     <div>
+        <% @impressions.each do |impression| %>
+            <!-- <a href="/impressions/<%= impression.id %>"><%= impression.id %></a> -->
+            <p><%= impression.impression %></p>
+        <% end %>
+    </div>
+    <div>
         <p>最近のオススメ書籍</p>
     </div>
 

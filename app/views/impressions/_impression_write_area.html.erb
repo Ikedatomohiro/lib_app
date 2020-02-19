@@ -5,6 +5,8 @@
     <%= f.hidden_field :book_id, value: @book.id%>
     <%= f.file_field :impression_img %>
     <p id="star"></p>
+    <p id="counter">0文字</p>
+
 <% end %>
 
 <script>
@@ -16,6 +18,12 @@ $('#star').raty({
     score   : '<%= @book.evaluation %>'
 });
 
+$(function(){
+ $("#impression_impression").on("keyup", function() {
+   let countNum = String($(this).val().length);
+   $("#counter").text(countNum + "文字");
+ });
+});
 
 
 

@@ -69,8 +69,7 @@
         </div>
         <% @impressions.each do |impression| %>
             <% if @book.user_id === current_user.id %>
-                <textarea id="impression_edit_<%= impression.id %>" class= "input_area"><%= impression.impression %>
-                </textarea>
+                <textarea id="impression_edit_<%= impression.id %>" class= "input_area"><%= impression.impression %></textarea>
             <% else %>
                 <p class= "input_area">
                     <%= impression.impression %>

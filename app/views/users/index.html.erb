@@ -13,9 +13,8 @@
         </div>
     </div>
     <div>
-        <% @impressions.each do |impression| %>
-            <!-- <a href="/impressions/<%= impression.id %>"><%= impression.id %></a> -->
-            <p><%= impression.impression %></p>
+        <% @vals.each do |val| %>
+        <a href="/impression/<%= val.impression_link %>"><p><%= val.impression %></p></a>
         <% end %>
     </div>
     <div>

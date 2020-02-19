@@ -17,4 +17,7 @@ class User < ApplicationRecord
 
   # 画像アップロード
   mount_uploader :user_icon, ImageUploader
+
+  scope :impression_private, -> {joins(:setting).select("users.*, settings.*")}
+
 end

@@ -58,7 +58,7 @@
             </tr>
         </table>
     </div>
-    <% if @book.user_id == current_user.id %>
+    <% if @book.user_id === current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
@@ -68,13 +68,7 @@
         <div id="impression">
         </div>
         <% @impressions.each do |impression| %>
-            <% if @book.user_id === current_user.id %>
                 <textarea id="impression_edit_<%= impression.id %>" class= "input_area"><%= impression.impression %></textarea>
-            <% else %>
-                <p class= "input_area">
-                    <%= impression.impression %>
-                </p>
-            <% end %>
             <p>
                 <% if impression.impression_img_url%>
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>
@@ -83,9 +77,19 @@
                 <% end %>
             </p>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
-            <% if @book.user_id === current_user.id %>
                 <p>つぶやく</p>
-            <% end %>
+        <% end %>
+    <% else %>
+        <% @impressions.each do |impression| %>
+                <%= impression.impression %>
+            <p>
+                <% if impression.impression_img_url%>
+                    <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>
+                        <%= image_tag impression.impression_img_url , width: 200 %>
+                    <% end %>
+                <% end %>
+            </p>
+            <p><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
         <% end %>
     <% end %>
 </div>

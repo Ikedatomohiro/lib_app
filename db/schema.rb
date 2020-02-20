@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "impression_link", null: false
-    t.string "isbn", null: false
+    t.string "api_path", null: false
     t.string "title", null: false
     t.string "thumbnail", default: "/assets/images/book_img.svg", null: false
     t.date "reading_start_date"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.integer "book_id", null: false
     t.string "impression"
     t.string "impression_img"
-    t.date "written_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

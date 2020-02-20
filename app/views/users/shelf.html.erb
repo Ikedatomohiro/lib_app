@@ -9,21 +9,18 @@
                     <p id="thumbnail_<%= shelf.id %>" class="thumbnail_top"></p>
                 </a>
                 <div id="title_<%= shelf.id %>"></div>
-                <input id="isbn_<%= shelf.id %>" type="hidden" name="isbn" value="<%= shelf.isbn %>" />
+                <input id="api_path_<%= shelf.id %>" type="hidden" name="api_path" value="<%= shelf.api_path %>" />
                 <script>
                 $(document).on('turbolinks:load', function() {
-                    const isbn = $("#isbn_<%= shelf.id %>").val();
-                    const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
+                    const api_path = $("#api_path_<%= shelf.id %>").val();
+                    const url = "<%= shelf.api_path %>";
                     $.getJSON(url, function(data) {
-                        if (data[0] == null) {
-                        } else {
-                            if (data[0].summary.cover == "") {
+                            if (data.volumeInfo.imageLinks.thumbnail == "") {
                                 $("#thumbnail_<%= shelf.id %>").html('<img src=\"/assets/book_img\" />');
                             } else {
-                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data[0].summary.cover + '\" style=\"height: 100px;\" />');
+                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data.volumeInfo.imageLinks.thumbnail + '\" style=\"height: 100px;\" />');
                             }
-                            $("#title_<%= shelf.id %>").text(data[0].summary.title);
-                        }
+                            $("#title_<%= shelf.id %>").text(data.volumeInfo.title);
                     });
                 });
                 </script>

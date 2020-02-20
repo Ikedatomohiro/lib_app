@@ -7,7 +7,9 @@ before_action :set_current_user, only:[ :index,
 
     def index
         private_impression_users = User.impression_private
+puts private_impression_users
         @vals = Impression.all_impressions.where(user_id: private_impression_users.ids)
+
     end
 
     def show

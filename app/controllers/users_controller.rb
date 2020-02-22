@@ -7,7 +7,6 @@ before_action :set_current_user, only:[ :index,
 
     def index
         private_impression_users = User.impression_private
-puts private_impression_users
         @vals = Impression.all_impressions.where(user_id: private_impression_users.ids)
 
     end
@@ -28,6 +27,10 @@ puts private_impression_users
     end
 
     def setting
+        if !Setting.find_by(id: current_user.id)
+            @user_setting = Setting.new(user_id: current_user.id)
+            @user_setting.save!
+        end
         @user_setting = Setting.find_by(user_id: current_user.id)
 
     end

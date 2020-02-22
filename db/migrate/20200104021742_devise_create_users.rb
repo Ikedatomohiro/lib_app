@@ -7,7 +7,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string  :email,              null: true, default: ''
       t.string  :encrypted_password, null: true, default: ''
       t.string  :account_name,       null: true, default: ''
-      t.string  :twitter_account,    null: true
       t.string  :self_introduction,  null: true
       t.string  :user_icon,          null: true
       t.boolean :admin_flg,          null: false, default: false

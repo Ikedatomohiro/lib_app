@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.string "email", default: ""
     t.string "encrypted_password", default: ""
     t.string "account_name", default: ""
-    t.string "twitter_account"
     t.string "self_introduction"
     t.string "user_icon"
     t.boolean "admin_flg", default: false, null: false
@@ -68,8 +67,12 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.datetime "current_sign_in_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "provider"
     t.string "uid"
+    t.string "provider"
+    t.string "name"
+    t.string "nickname"
+    t.string "location"
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

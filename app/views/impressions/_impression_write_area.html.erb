@@ -1,11 +1,11 @@
-<%= form_with(model: Impression.new, url:impressions_path) do |f|%>
-    <%= f.submit '感想を保存する', class: "submit_btn_small" %>
+<%= form_with(model: Impression.new, url: impressions_path) do |f|%>
+    <%= f.submit '感想を保存する', class: 'submit_btn_small' %>
     <%= f.text_area :impression, class: 'input_area' %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
+    <p id="counter">0文字</p>
     <%= f.file_field :impression_img %>
     <p id="star"></p>
-    <p id="counter">0文字</p>
 
 <% end %>
 

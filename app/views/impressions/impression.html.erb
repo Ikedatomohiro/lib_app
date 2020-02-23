@@ -8,7 +8,7 @@
             <a href="" id="thumbnail"></a>
             <%#= link_to image_tag('book_img.svg', alt:'本の画像', class:'book_img'), bookinfo_path, class: 'button' %>
         </div>
-        <input type="hidden" id="isbn" value="<%= @book.isbn %>">
+        <input type="hidden" id="api_path" value="<%= @book.api_path %>">
         <table>
             <tr>
                 <th>タイトル</th>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <th>
-                    <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
+                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
                         <input type="hidden" name="now_date" value= <%= @book.reading_start_date %> >
                         <input type="hidden" name="calendar" value="reading_start_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <th>
-                    <%= form_with(model: @book, url:book_show_reading_date_path) do |f| %>
+                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
                         <input type="hidden" name="now_date" value= <%= @book.reading_end_date %> >
                         <input type="hidden" name="calendar" value="reading_end_date">
                         <input type="hidden" name="book_id" value="<%= @book.id %> "/>
@@ -60,7 +60,7 @@
     </div>
     <% if @book.user_id === current_user.id %>
         <div>
-            <%= form_with(model: @impression, url:impression_add_impression_field_path) do |f| %>
+            <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
                 <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
             <% end %>

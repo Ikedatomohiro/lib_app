@@ -90,8 +90,6 @@
   margin-bottom: 10px;
 }
 
-
-
 .contacta_area form{
   display: block;
 }
@@ -144,7 +142,32 @@
   border-top: 6px solid #666666;
   pointer-events: none;
 }
+
 .cp_ipselect.cp_sl01 select {
   padding: 8px 38px 8px 8px;
   color: #666666;
 }
+
+.twitter_button {
+  position: relative;
+  color : #ffffff;
+  font-size: 12px;
+  background-color: #1DA1F2;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 7px 10px 10px 30px;
+}
+
+.twitter_button:before {
+  content: '';
+  position: absolute;
+  background-image: url(Twitter_Social_Icon.svg);
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+}
+

@@ -1,7 +1,11 @@
 <div class="home">
     <div class="home_header">
         <div class="user_icon">
-            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{current_user.id}") %>
+            <% if @user.image %>
+            <%= link_to image_tag(@user.image, alt:'ユーザーアイコン'), "/users/#{@user.id}" %>
+            <% else %>
+            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{@user.id}") %>
+            <% end %>
         </div>
         <div class="user_name">
             <p>
@@ -22,8 +26,8 @@
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4822289607" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784822289607.jpg">
+        <a href="/books/info/4GqdwAEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=4GqdwAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">FACTFULNESS（ファクトフルネス）</p>
         </a>
@@ -31,17 +35,16 @@
 
 
     <div class="recomend">
-        <a href="/books/info/978-4863940246" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784863940246.jpg">
+        <a href="/books/info/7V8XswEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=7V8XswEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">完訳7つの習慣 人格主義の回復</p>
         </a>
     </div>
 
-
     <div class="recomend">
-        <a href="/books/info/978-4797399950" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784797399950.jpg">
+        <a href="/books/info/2PW9DwAAQBAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=2PW9DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api">
             </p>
             <p class="title_top">２０３０年の世界地図帳</p>
         </a>
@@ -49,8 +52,8 @@
 
 
     <div class="recomend">
-        <a href="/books/info/978-4478107249" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/978-4478107249.jpg">
+        <a href="/books/info/t369DwAAQBAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=t369DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api">
             </p>
             <p class="title_top">1兆ドルコーチ</p>
         </a>
@@ -58,8 +61,8 @@
 
 
     <div class="recomend">
-        <a href="/books/info/978-4335357923" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784335357923.jpg">
+        <a href="/books/info/KZesyAEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=KZesyAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">こども六法</p>
         </a>
@@ -74,50 +77,50 @@
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4422100982" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784422100982.jpg">
+        <a href="/books/info/8Y1yjwEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=8Y1yjwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">人を動かす　文庫版</p>
         </a>
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4488663018" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784488663018.jpg">
+        <a href="/books/info/2SdzBQAAQBAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=2SdzBQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api">
             </p>
             <p class="title_top">星を継ぐもの</p>
         </a>
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4860294878" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784860294878.jpg">
+        <a href="/books/info/_brNxwEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=_brNxwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">催眠ガール</p>
         </a>
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4167669072" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784167669072.jpg">
+        <a href="/books/info/JQbNDwAAQBAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=JQbNDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api">
             </p>
             <p class="title_top">その日のまえに</p>
         </a>
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4048661690" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784048661690.jpg">
+        <a href="/books/info/l7-1ngEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=l7-1ngEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top">三日間の幸福</p>
         </a>
     </div>
 
     <div class="recomend">
-        <a href="/books/info/978-4087034851" class="book_link">
-            <p class="thumbnail_top"><img src="https://cover.openbd.jp/9784087034851.jpg">
+        <a href="/books/info/13gDwgEACAAJ" class="book_link">
+            <p class="thumbnail_top"><img src="http://books.google.com/books/content?id=13gDwgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
-            <p class="title_top"></p>
+            <p class="title_top">鬼滅の刃</p>
         </a>
     </div>
 

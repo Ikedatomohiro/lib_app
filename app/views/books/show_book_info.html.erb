@@ -1,11 +1,11 @@
 <%= form_with(model: @user, url:"/user/add_book") do |f| %>
-    <%= f.hidden_field :isbn %>
+    <%= f.hidden_field :api_path %>
     <%= f.hidden_field :h_title %>
     <%= f.hidden_field :h_thumbnail %>
     <button class="submit_btn_small">本棚に入れる</button>
 <% end %>
-<%# 本の情報を取得するisbnをセット %>
-    <input class="isbn" type="hidden" name="isbn" value="<%= params[:isbn] %>" >
+<%# 本の情報を取得するapi_pathをセット %>
+    <input class="api_path" type="hidden" name="api_path" value="<%= params[:api_path] %>" >
 <table class=book_detail>
     <tr>
         <th width="20%"></th>
@@ -45,35 +45,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/ja.js"></script>
 <script>
 $(document).on('turbolinks:load', function() {
-    const isbn = $(".isbn").val();
-    const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
+    const url = $(".isbn").val();
+    const url = "<%= shelf.api_path %>";
     $.getJSON(url, function(data) {
-        if (data[0] == null) {
-        } else {
-            if (data[0].summary.cover == "") {
-                $("#thumbnail").html('<img src=\"\" />');
+            if (data.volumeInfo.imageLinks.thumbnail == "") {
+                $("#thumbnail_<%= shelf.id %>").html('<img src=\"/assets/book_img\" />');
             } else {
-                $("#thumbnail").html('<img src=\"' + data[0].summary.cover + '\" style=\"border:solid 1px #000000\" />');
+                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data.volumeInfo.imageLinks.thumbnail + '\" style=\"height: 100px;\" />');
             }
-            $("#title").text(data[0].summary.title);
-            $("#book_title").val(data[0].summary.title);
-            $("#isbn").val(data[0].summary.isbn);
-            $("#publisher").text(data[0].summary.publisher);
-            $("#volume").text(data[0].summary.volume);
-            $("#series").text(data[0].summary.series);
-            $("#author").text(data[0].summary.author);
-            // 日付のフォーマットを調整
-            var date = moment(data[0].summary.pubdate, "YYYY-MM-DD");
-            var formatedDate = date.format('YYYY年M月D日');
-            console.log(date);
-            $("#pubdate").text(formatedDate);
-            $("#cover").val(data[0].summary.cover);
-            $("#description").text(data[0].onix.CollateralDetail.TextContent[0].Text);
-            // データ登録用のデータをセット
-            $("#isbn").val(data[0].summary.isbn);
-            $("#h_title").val(data[0].summary.title);
-            $("#h_thumbnail").val(data[0].summary.thumbnail);
-        }
-    });
+            $("#title_<%= shelf.id %>").text(data.volumeInfo.title);
+                });
 });
 </script>

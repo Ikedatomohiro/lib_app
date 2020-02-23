@@ -11,7 +11,7 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <th>
                 感想
-                    <%= form_with(model:Setting, url: user_publish_impression_path) do |f|%>
+                    <%= form_with(model:Setting, url: users_publish_impression_path) do |f|%>
             </th>
             <td>
                 <div class="app_checkbox">
@@ -43,7 +43,7 @@
 $('#impression').change(function() {
     var prop = $('#impression').prop('checked');
     $.post({
-        url: "<%= user_publish_impression_path %>",
+        url: "<%= users_publish_impression_path %>",
         data: { publish_impression: prop }
     });
 });

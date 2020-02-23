@@ -1,6 +1,17 @@
 class ImpressionsController < ApplicationController
 
     def show
+        # 表示したい本のデータを検索し、Book_idから感想レコードを検索する。
+        @book = Book.find_by(impression_link: params[:id])
+        api_path = @book.api_path
+        uri = URI.encode("#{api_path}")
+        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+        res = JSON.parse(json) #返り値をRubyの配列に変換
+        @api_data = res
+        @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
+
+
+
     end
 
     def new
@@ -18,7 +29,7 @@ class ImpressionsController < ApplicationController
             @impression = Impression.new(impression_params)
             @impression.save!
         end
-        redirect_to "/impression/#{book.impression_link}"
+        redirect_to "/impressions/#{book.impression_link}"
     end
 
     def update

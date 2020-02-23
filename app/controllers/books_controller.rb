@@ -74,7 +74,7 @@ class BooksController < ApplicationController
         elsif params[:reading_end_date]
             book.update(reading_end_date: params[:reading_end_date])
         end
-        redirect_to "/impression/#{book.impression_link}"
+        redirect_to "/impressions/#{book.impression_link}"
     end
 
 

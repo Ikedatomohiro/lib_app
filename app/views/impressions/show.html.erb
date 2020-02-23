@@ -5,14 +5,14 @@
 <div class="book_info">
     <div class="book_info_inner">
         <div class="book_img_area">
-            <a href="" id="thumbnail"></a>
+            <a href="" id="thumbnail"><%= image_tag @api_data["volumeInfo"]['imageLinks']['thumbnail'] %></a>
             <%#= link_to image_tag('book_img.svg', alt:'本の画像', class:'book_img'), bookinfo_path, class: 'button' %>
         </div>
         <input type="hidden" id="api_path" value="<%= @book.api_path %>">
         <table>
             <tr>
                 <th>タイトル</th>
-                <td id="title"></td>
+                <td id="title"><%= @api_data["volumeInfo"]["title"] %></td>
             </tr>
             <tr>
                 <th>登録日</th>
@@ -96,20 +96,6 @@
 
 <script>
 $(document).on('turbolinks:load', function() {
-    const url = "<%= @book.api_path %>";
-    $.getJSON(url, function(data) {
-        if (data[0] == null) {
-        } else {
-            if (data[0].summary.cover == "") {
-                $("#thumbnail").html('<img src=\"/assets/images/book_img.svg\" />');
-            } else {
-                $("#thumbnail").html('<img src=\"' + data[0].summary.cover + '\" style=\"border:solid 1px #000000\" />');
-            }
-            $("#title").text(data[0].summary.title);
-        }
-    });
-
-
     <% if @book.evaluation %> // 評価されていないときは星を表示しない
         $('#evaluation').raty({
             size    : 36,

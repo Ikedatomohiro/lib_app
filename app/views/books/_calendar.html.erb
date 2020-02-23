@@ -1,7 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
-<%= form_with model: @book, url: book_set_reading_date_path do |f| %>
+<%= form_with model: @book, url: books_set_reading_date_path do |f| %>
     <%#= f.text_field :params[:calendar], id: "datepicker_#{@book.id}" %>
 
     <input class="datepicker" type="text" value="" name="<%= params[:calendar] %>" />
@@ -24,12 +24,12 @@ $('.datepicker').datepicker({
 $('.datepicker').change(function() {
     var val = $(this).val();
     $.post({
-        url: "<%= book_set_reading_date_path %>",
+        url: "<%= books_set_reading_date_path %>",
         data: {
          <%= params[:calendar] %>: val,
                                id: <%= @book.id %>,
                authenticity_token: $("input[name='authenticity_token']").val()
               }
-        });
     });
+});
 </script>

@@ -16,7 +16,6 @@ post 'users/publish_impression'         => 'users#update_publish_impression'
 get  'bookinfo'                         => 'users#book_info'
 get  'readinghistory'                   => 'users#reading_history'
 get  'request'                          => 'users#request_page'
-post 'users/add_book'                   => 'users#add_book'
 post 'users/send_request'               => 'users#send_request'
 resources :users
 

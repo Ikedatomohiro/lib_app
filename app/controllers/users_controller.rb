@@ -35,7 +35,6 @@ before_action :set_current_user, only:[ :index,
 
     end
 
-
     def update_setting
         redirect_to user_path
         
@@ -44,7 +43,6 @@ before_action :set_current_user, only:[ :index,
     def update_self_introduction
         @user.update(self_introduction_params)
         redirect_to "/users/#{current_user.id}"
-        
     end
 
     # 感想を公開するかどうかのフラグを変更する。
@@ -55,32 +53,9 @@ before_action :set_current_user, only:[ :index,
         else
             @user_setting.update(publish_impression: false)
         end
-
     end
 
     def reading_history
-    end
-
-    def add_book
-        # すでに登録済かどうか確認する
-        isbn = params[:isbn].delete("^0-9")
-        book = Book.find_by(isbn: isbn,
-                            user_id: current_user.id)
-        if book
-            @err = 'すでに本棚に入っています。'
-        else
-            # 感想表示用のリンク名を作成
-            unique_id = create_id()
-            @book = Book.new(user_id: current_user.id,
-                             isbn: isbn,
-                             title: params[:h_title],
-                             thumbnail: params[:h_thumbnail],
-                             impression_link: unique_id)
-            @book.save!
-        end
-        @books = Book.where(user_id: current_user.id)
-        redirect_to shelf_path
-        # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
     private

@@ -1,7 +1,7 @@
-<%= form_with(model: @user, url:"/user/add_book") do |f| %>
-    <%= f.hidden_field :api_path %>
-    <%= f.hidden_field :h_title %>
-    <%= f.hidden_field :h_thumbnail %>
+<%= form_with(model: Book.new, url: books_path) do |f| %>
+    <%= f.hidden_field :api_path, value: @book["selfLink"] %>
+    <%= f.hidden_field :api_id, value: @book["id"] %>
+    <%= f.hidden_field :title, value: @book["volumeInfo"]["title"] %>
     <button class="submit_btn_small">本棚に入れる</button>
 <% end %>
 <%# 本の情報を取得するapi_pathをセット %>
@@ -10,10 +10,10 @@
     <tr>
         <th width="20%"></th>
         <td id="thumbnail"></td>
-    </tr>
+    </tr>  
     <tr>
         <th>書籍名：</th>
-        <td><p id="title" type="text" disabled="disabled" name="title"></p></td>
+        <td><p id="title" type="text" disabled="disabled" name="title"><%= @book["volumeInfo"]["title"] %></p></td>
     </tr>
     <tr>
         <th>出版社：</th>
@@ -44,16 +44,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/ja.js"></script>
 <script>
-$(document).on('turbolinks:load', function() {
-    const url = $(".isbn").val();
-    const url = "<%= shelf.api_path %>";
-    $.getJSON(url, function(data) {
-            if (data.volumeInfo.imageLinks.thumbnail == "") {
-                $("#thumbnail_<%= shelf.id %>").html('<img src=\"/assets/book_img\" />');
-            } else {
-                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data.volumeInfo.imageLinks.thumbnail + '\" style=\"height: 100px;\" />');
-            }
-            $("#title_<%= shelf.id %>").text(data.volumeInfo.title);
-                });
-});
+
 </script>

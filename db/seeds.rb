@@ -10,4 +10,4 @@
 user = User.create(self_introduction: '僕ドラえもんだよ。', email: 'to.tomo.tomohiro@gmail.com', password: 'Tomohir0',  admin_flg: true, uid: '1213404570006646784', provider: 'twitter', name: '管理者', nickname: 'paoDokushonowa', location: '', image: 'http://pbs.twimg.com/profile_images/1216721744297222144/ChMA2H0-_normal.jpg')
 
 
-Book.create(user_id: 1, api_id: '4O_UDgAAQBAJ', api_path: 'https://www.googleapis.com/books/v1/volumes/4O_UDgAAQBAJ', title: '磯野家の謎', impression_link: '9vcIFUmDgWpt9bfIByQ4zIig')
+Book.create(user_id: 1, api_id: '4O_UDgAAQBAJ', api_path: 'https://www.googleapis.com/books/v1/volumes/4O_UDgAAQBAJ', impression_link: '9vcIFUmDgWpt9bfIByQ4zIig')

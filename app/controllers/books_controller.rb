@@ -11,23 +11,32 @@ class BooksController < ApplicationController
         end
     end
 
-    def show
-    end
-
     def show_book_info
+        keyword = params[:api_id]
+        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=1")
+        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+        res = JSON.parse(json) #返り値をRubyの配列に変換
+        @book = res['items'][0]
     end
 
     def create
-        @books = Book.where(user_id: current_user.id)
-        @book  = Book.new(book_params)
-        respond_to do |format|
-            if @book.save
-                format.html
-                format.js
-            else
-                format.js {render :new}
-            end
+        # すでに登録済かどうか確認する
+        book = Book.find_by(api_path: params[:book][:api_path],
+                            user_id: current_user.id)
+        if book
+            @err = 'すでに本棚に入っています。'
+        else
+            # 感想表示用のリンク名を作成
+            unique_id = create_id()
+            @book = Book.new(user_id: current_user.id,
+                             api_path: params[:book][:api_path],
+                             api_id: params[:book][:api_id],
+                             impression_link: unique_id)
+            @book.save!
         end
+        @books = Book.where(user_id: current_user.id)
+        redirect_to shelf_path
+        # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
     def show_search_form
@@ -70,9 +79,25 @@ class BooksController < ApplicationController
 
 
     private
-        def book_params
-            params.require(:book).permit(:user_id, :isbn)
+        def create_id
+            # ランダムな文字列を生成
+            random_char = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+            random_id = (0...24).map { random_char[rand(random_char.length)] }.join
+            unique_id = check_id(random_id)
+            return unique_id
         end
+
+        def check_id(id)
+            book = Book.find_by(impression_link: id)
+            if book
+                puts 'found same id'
+                create_id()
+            else
+                puts 'confirmed unique id in check_id function'
+                return id
+            end
+        end
+
 
 
 end

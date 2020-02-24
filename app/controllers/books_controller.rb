@@ -12,20 +12,23 @@ class BooksController < ApplicationController
     end
 
     def show_book_info
-        keyword = params[:api_id]
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=1")
+puts params[:api_path]
+        api_path = params[:api_path]
+        uri = URI.encode("#{api_path}")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         res = JSON.parse(json) #返り値をRubyの配列に変換
-        @book = res['items'][0]
+        @book = res
     end
 
     def create
+puts '...............................'
         # すでに登録済かどうか確認する
         book = Book.find_by(api_path: params[:book][:api_path],
                             user_id: current_user.id)
         if book
-            @err = 'すでに本棚に入っています。'
+            puts 'すでに本棚に入っています。'
         else
+            puts 'd;alkdashkjfhlakjdhflkjhlf'
             # 感想表示用のリンク名を作成
             unique_id = create_id()
             @book = Book.new(user_id: current_user.id,

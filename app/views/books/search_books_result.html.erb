@@ -16,8 +16,12 @@
                 <% end %>
             </p>
         </a>
-        <p class="submit_btn_small">
-            <%= form_with model: Book.new,  %>
-            <a href="">本棚に入れる</a></p>
+        <p>
+            <%= form_with model: Book.new, url: books_path do |f| %>
+            <%= f.hidden_field :api_path, value: result["volumeInfo"]['selfLink'] %>
+            <%= f.hidden_field :api_id, value: result["volumeInfo"]['id'] %>
+            <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
+            <% end %>
+        </p>
     </div>
 <% end %>

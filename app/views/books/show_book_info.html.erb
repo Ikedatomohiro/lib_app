@@ -9,23 +9,11 @@
 <table class=book_detail>
     <tr>
         <th width="20%"></th>
-        <td id="thumbnail"></td>
+        <td id="thumbnail"><%= @book["volumeInfo"]['imageLinks']['thumbnail'] %></td>
     </tr>  
     <tr>
         <th>書籍名：</th>
         <td><p id="title" type="text" disabled="disabled" name="title"><%= @book["volumeInfo"]["title"] %></p></td>
-    </tr>
-    <tr>
-        <th>出版社：</th>
-        <td><p id="publisher" type="text" name="publisher"></p></td>
-    </tr>
-    <tr>
-        <th>巻：</th>
-        <td><p id="volume" type="text" name="volume"></p></td>
-    </tr>
-    <tr>
-        <th>シリーズ：</th>
-        <td><p id="series" type="text" name="series"></p></td>
     </tr>
     <tr>
         <th>著者：</th>
@@ -40,9 +28,3 @@
         <td><p id="description" type="text" name="description"></p></td>
     </tr>
 </table>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/ja.js"></script>
-<script>
-
-</script>

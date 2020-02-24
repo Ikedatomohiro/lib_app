@@ -1,4 +1,5 @@
 class ImpressionsController < ApplicationController
+    before_action :twitter_client, only: [:tweet_impression]
 
     def show
         # 表示したい本のデータを検索し、Book_idから感想レコードを検索する。
@@ -9,8 +10,6 @@ class ImpressionsController < ApplicationController
         res = JSON.parse(json) #返り値をRubyの配列に変換
         @api_data = res
         @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
-
-
 
     end
 
@@ -55,6 +54,13 @@ class ImpressionsController < ApplicationController
         end
     end
 
+    def tweet_impression
+        # @article = Article.new(article_params)
+        #     @client.update("#{@article.title}\r")
+            @client.update("テスト1\nブログのためテストしています。(後で消します)")
+            redirect_to root_path
+    end
+
     private
     def impression_params
         params.require(:impression).permit(:user_id, :book_id, :impression, :impression_img)
@@ -63,4 +69,13 @@ class ImpressionsController < ApplicationController
     def reading_date_params
         params.permit(:reading_start_date, :reading_end_date)
     end
+
+    def twitter_client
+        @client = Twitter::REST::Client.new do |config|
+            config.consumer_key        = "ENV['TWITTER_API_KEY']"
+            config.consumer_secret     = "ENV['TWITTER_API_SECRET']"
+            config.access_token        = "ENV['TWITTER_ACCESS_TOKEN']"
+            config.access_token_secret = "ENV['TWITTER_ACCESS_SECRET']"
+    end
+  end
 end

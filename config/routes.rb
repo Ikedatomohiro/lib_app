@@ -29,6 +29,7 @@ patch 'books/show_reading_date'         => 'books#show_reading_date'
 resources :books
 
 post 'impressions/add_impression_field' => 'impressions#add_impression_field'
+post 'impressions/tweet_impression'     => 'impressions#tweet_impression'
 resources :impressions
 
 resources :contacts

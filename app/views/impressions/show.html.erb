@@ -77,7 +77,6 @@
                 <% end %>
             </p>
             <p><%= impression.updated_at.strftime('%Y/%-m/%-d') %></p>
-                <p>つぶやく</p>
         <% end %>
     <% else %>
         <% @impressions.each do |impression| %>
@@ -93,6 +92,10 @@
         <% end %>
     <% end %>
 </div>
+            <%= form_with(model: @impression, url: impressions_tweet_impression_path) do |form| %>
+                <button>つぶやく</button>
+                <%#= form.submit つぶやく %> 
+            <% end %>
 
 <script>
 $(document).on('turbolinks:load', function() {

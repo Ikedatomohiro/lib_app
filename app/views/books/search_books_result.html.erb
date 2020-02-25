@@ -2,12 +2,6 @@
 <% @results["items"].each do |result| %>
     <p><%= result["volumeInfo"]["title"] %></p>
     <p><%= result["volumeInfo"]['authors'] %></p>
-    <p><%= result["volumeInfo"]["industryIdentifiers"][0]["type"] %></p>
-    <p><%= result["volumeInfo"]["industryIdentifiers"][0]["identifier"] %></p>
-    <% if result["volumeInfo"]["industryIdentifiers"][1] %>
-        <p><%= result["volumeInfo"]["industryIdentifiers"][1]["type"] %></p>
-        <p><%= result["volumeInfo"]["industryIdentifiers"][1]['identifier'] %></p>
-    <% end %>
     <div class="book_img_box">
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">
@@ -18,8 +12,8 @@
         </a>
         <p>
             <%= form_with model: Book.new, url: books_path do |f| %>
-            <%= f.hidden_field :api_path, value: result["volumeInfo"]['selfLink'] %>
-            <%= f.hidden_field :api_id, value: result["volumeInfo"]['id'] %>
+            <%= f.hidden_field :api_path, value: result['selfLink'] %>
+            <%= f.hidden_field :api_id, value: result['id'] %>
             <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
             <% end %>
         </p>

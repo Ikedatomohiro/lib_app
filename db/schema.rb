@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.integer "book_id", null: false
     t.string "impression"
     t.string "impression_img"
+    t.boolean "tweeted_flg", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

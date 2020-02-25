@@ -1,5 +1,5 @@
 class ImpressionsController < ApplicationController
-    before_action :twitter_client, only: [:tweet_impression]
+    before_action :twitter_client, only: [:post_to_twitter]
 
     def show
         # 表示したい本のデータを検索し、Book_idから感想レコードを検索する。
@@ -54,11 +54,14 @@ class ImpressionsController < ApplicationController
         end
     end
 
-    def tweet_impression
-        # @article = Article.new(article_params)
-        #     @client.update("#{@article.title}\r")
-            @client.update("テスト1\nブログのためテストしています。(後で消します)")
-            redirect_to root_path
+    def post_to_twitter
+        @impression = Impression.find_by(id: params[:id])
+        @impression.update(tweeted_flg: true)
+        # ツイートする画像をセット
+        # images = []
+        # images << File.new(@impression.impression_img)
+        @client.update_with_media("#{@impression.impression}", open("#{@impression.impression_img}"))
+        redirect_to root_path
     end
 
     private

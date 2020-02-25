@@ -21,14 +21,13 @@ puts params[:api_path]
     end
 
     def create
-puts '...............................'
         # すでに登録済かどうか確認する
         book = Book.find_by(api_path: params[:book][:api_path],
                             user_id: current_user.id)
         if book
             puts 'すでに本棚に入っています。'
         else
-            puts 'd;alkdashkjfhlakjdhflkjhlf'
+            puts '新たに本棚に追加します。'
             # 感想表示用のリンク名を作成
             unique_id = create_id()
             @book = Book.new(user_id: current_user.id,

@@ -6,6 +6,6 @@ class Impression < ApplicationRecord
     # 画像アップロード
     mount_uploader :impression_img, ImageUploader
 
-    scope :all_impressions, -> {joins(:user ,:book).select("impressions.*, users.*, books.*")}
-
+    scope :all_impressions, -> {joins(:user ,:book).select("impressions.*, impressions.id AS impression_id, users.*, books.*")}
+    scope :created_desc, -> {order(created_at: "DESC")}
 end

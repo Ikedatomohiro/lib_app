@@ -2,6 +2,13 @@
 <%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="show_header">
+    <div class="user_icon">
+        <%= link_to image_tag(@user.image, alt:'ユーザーアイコン'), "/users/#{@user.id}" %>
+    </div>
+    <%= @user.name %>
+</div>
+
 <div class="book_info">
     <div class="book_info_inner">
         <div class="book_img_area">
@@ -21,7 +28,7 @@
                 <td id="title"><%= @api_data["volumeInfo"]["title"] %></td>
             </tr>
             <tr>
-                <th>登録日</th>
+                <th>登録日ああああああ</th>
                 <td><%= @book.created_at.strftime('%Y/%-m/%-d') %></td>
             </tr>
             <tr>
@@ -103,7 +110,7 @@
                     <% end %>
                 <% end %>
             </p>
-            <p><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
         <% end %>
     <% end %>
 
@@ -111,6 +118,8 @@
 
 <script>
 $(document).on('turbolinks:load', function() {
+    
+            console.log('aaaaaaaaaaaaaaaa');
     <% if @book.evaluation %> // 評価されていないときは星を表示しない
         $('#evaluation').raty({
             size    : 36,
@@ -125,6 +134,7 @@ $(document).on('turbolinks:load', function() {
     <% @impressions.each do |impression| %>
         // 感想を編集したら自動的に保存する。
         $('#impression_edit_<%= impression.id %>').change(function(){
+            console.log($("input[name='authenticity_token']").val());
             var impression = $('#impression_edit_<%= impression.id %>').val();
           $.ajax({
             url:  "<%= impression_path(impression.id) %>",

@@ -13,7 +13,7 @@
         </button>
         <% end %>
         <% if current_user %>
-            <%= link_to '読書履歴', readinghistory_path %>
+            <%#= link_to '読書履歴', readinghistory_path %>
         <% end %>
     </div>
     <div>
@@ -26,9 +26,9 @@
     <p>●最近読んだ本</p>
     <div class="recent_reading_book">
         <div class="book_img_box">
-            <%= link_to(image_tag('book_img.svg', class:'book_img'), bookinfo_path) %>
+            <%= link_to(image_tag('book_img.svg', class:'book_img'), book_path) %>
             <div class="book_title">
-                <%= link_to '本のタイトル', bookinfo_path %>
+                <%= link_to '本のタイトル', books_path %>
             </div>
         </div>
         <p class="impression">

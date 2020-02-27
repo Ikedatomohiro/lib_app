@@ -7,7 +7,8 @@ before_action :set_current_user, only:[ :index,
 
     def index
         private_impression_users = User.impression_private
-        @vals = Impression.all_impressions.where(user_id: private_impression_users.ids)
+        # Impression, User, BookをINNER JOIN
+        @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
 
     end
 

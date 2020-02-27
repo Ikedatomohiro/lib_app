@@ -15,7 +15,7 @@
                 <td id="title"></td>
             </tr>
             <tr>
-                <th>登録日</th>
+                <th>登録日っっっｓ</th>
                 <td><%= @book.created_at.strftime('%Y/%-m/%-d') %></td>
             </tr>
             <tr>
@@ -124,6 +124,8 @@ $(document).on('turbolinks:load', function() {
     <% @impressions.each do |impression| %>
         // 感想を編集したら自動的に保存する。
         $('#impression_edit_<%= impression.id %>').change(function(){
+            console.log($("input[name='authenticity_token']").val());
+            console.log('aaaaaaaaaaaaaaaa');
             var impression = $('#impression_edit_<%= impression.id %>').val();
           $.ajax({
             url:  "<%= impression_path(impression.id) %>",

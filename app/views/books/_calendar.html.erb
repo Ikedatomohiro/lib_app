@@ -2,8 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
 <%= form_with model: @book, url: books_set_reading_date_path do |f| %>
-    <%#= f.text_field :params[:calendar], id: "datepicker_#{@book.id}" %>
-
+    <input type="hidden" id="authenticity_token_datepicker" name="authenticity_token" value="<%= form_authenticity_token %>" >
     <input class="datepicker" type="text" value="" name="<%= params[:calendar] %>" />
     <%= f.hidden_field :id, value: @book.id%>
 <% end %>
@@ -28,7 +27,7 @@ $('.datepicker').change(function() {
         data: {
          <%= params[:calendar] %>: val,
                                id: <%= @book.id %>,
-               authenticity_token: $("input[name='authenticity_token']").val()
+               authenticity_token: $("#authenticity_token_datepicker").val()
               }
     });
 });

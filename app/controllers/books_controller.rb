@@ -12,8 +12,8 @@ class BooksController < ApplicationController
     end
 
     def show_book_info
-puts params[:api_path]
-        api_path = params[:api_path]
+        api_id = params[:api_id]
+        api_path = "https://www.googleapis.com/books/v1/volumes/#{api_id}"
         uri = URI.encode("#{api_path}")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         res = JSON.parse(json) #返り値をRubyの配列に変換
@@ -33,6 +33,9 @@ puts params[:api_path]
             @book = Book.new(user_id: current_user.id,
                              api_path: params[:book][:api_path],
                              api_id: params[:book][:api_id],
+                             title: params[:book][:title],
+                             author: params[:book][:author],
+                             thumbnail: params[:book][:thmumbnail],
                              impression_link: unique_id)
             @book.save!
         end

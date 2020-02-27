@@ -10,7 +10,7 @@ class ImpressionsController < ApplicationController
         res = JSON.parse(json) #返り値をRubyの配列に変換
         @api_data = res
         @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
-
+        @user = User.find_by(id: @book.user_id)
     end
 
     def new

@@ -1,0 +1,17 @@
+    <div class="home_header">
+        <div class="user_icon">
+            <% if @user.image %>
+            <%= link_to image_tag(@user.image, alt:'ユーザーアイコン'), "/users/#{@user.id}" %>
+            <% else %>
+            <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{@user.id}") %>
+            <% end %>
+        </div>
+        <div class="user_name">
+            <p>
+                <%= @user.name %>
+            </p>
+        </div>
+        <div class="attention">
+            <%#= link_to(image_tag('bell.svg', alt:'お知らせ'),notice_path) %>
+        </div>
+    </div>

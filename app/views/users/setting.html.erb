@@ -11,13 +11,15 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <th>
                 感想
-                    <%= form_with(model:Setting, url: users_publish_impression_path) do |f|%>
             </th>
             <td>
                 <div class="app_checkbox">
-                    <%= f.check_box :publish_impression, checked: @user_setting.publish_impression, id:'impression',name: 'publish_impression' %>
-                    <label for="impression" id="publish_impression"></label>
-                    <%= f.hidden_field :publish_impression, id:'publish_impression_value', value: @user_setting.publish_impression %>
+                    <%= form_with(model:Setting, url: users_publish_impression_path) do |f|%>
+                        <input type="hidden" id="authenticity_token_publish_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
+
+                        <%= f.check_box :publish_impression, checked: @user_setting.publish_impression, id:'impression',name: 'publish_impression' %>
+                        <label for="impression" id="publish_impression"></label>
+                        <%= f.hidden_field :publish_impression, id:'publish_impression_value', value: @user_setting.publish_impression %>
                     <% end %>
                 </div>
             </td>
@@ -44,7 +46,9 @@ $('#impression').change(function() {
     var prop = $('#impression').prop('checked');
     $.post({
         url: "<%= users_publish_impression_path %>",
-        data: { publish_impression: prop }
+        data: { publish_impression: prop,
+               authenticity_token: $("#authenticity_token_publish_impression").val()
+              }
     });
 });
 </script>

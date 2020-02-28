@@ -6,8 +6,17 @@
     <p id="counter">0文字</p>
     <%= f.file_field :impression_img %>
     <p id="star"></p>
+    <%#= 'おはようございます。
+今日も一日元気に頑張りましょう。
+aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
+コロナウイルスが怖いので、あまり人混みの多いところには行かないほうがいいですね。
+通勤される方はマスクを活用し、こまめに消毒することが大切です。
+どちらもarimasenn
+'.encode("EUC-JP").bytesize %>
 
 <% end %>
+
+<input type="text" id="letters_count" val="">
 
 <script>
 // 星で評価を表現する。
@@ -22,6 +31,8 @@ $(function(){
  $("#impression_impression").on("keyup", function() {
    let countNum = String($(this).val().length);
    $("#counter").text(countNum + "文字");
+   let impression = String($(this).val());
+   $('#letters_count').val(impression);
  });
 });
 

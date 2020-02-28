@@ -1,7 +1,13 @@
 <p>検索条件</p>
 <% @results["items"].each do |result| %>
-    <p><%= result["volumeInfo"]["title"] %></p>
-    <p><%= result["volumeInfo"]['authors'] %></p>
+    <p class="book_title"><%= result["volumeInfo"]["title"] %></p>
+    <p>
+        <%if result["volumeInfo"]['authors'] %>
+            <% result["volumeInfo"]['authors'].each do |author| %>
+                <%= author %>
+            <% end %>
+        <% end %>
+        </p>
     <div class="book_img_box">
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">

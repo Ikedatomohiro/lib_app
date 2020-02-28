@@ -3,7 +3,7 @@
 
 <%= form_with model: @book, url: books_set_reading_date_path do |f| %>
     <input type="hidden" id="authenticity_token_datepicker" name="authenticity_token" value="<%= form_authenticity_token %>" >
-    <input class="datepicker" type="text" value="" name="<%= params[:calendar] %>" />
+    <input class="datepicker input_area" type="text" value="" name="<%= params[:calendar] %>" />
     <%= f.hidden_field :id, value: @book.id%>
 <% end %>
 <script>

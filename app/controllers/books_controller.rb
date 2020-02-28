@@ -13,11 +13,15 @@ class BooksController < ApplicationController
 
     def show_book_info
         api_id = params[:api_id]
+        # GoogleAPIで本の情報を取得
         api_path = "https://www.googleapis.com/books/v1/volumes/#{api_id}"
         uri = URI.encode("#{api_path}")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         res = JSON.parse(json) #返り値をRubyの配列に変換
         @book = res
+
+        # 取得した本についての感想を取得
+        @impressions = Impression.all_impressions.where(api_id: params[:api_id])
     end
 
     def create

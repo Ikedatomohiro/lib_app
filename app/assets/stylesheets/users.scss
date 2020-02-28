@@ -25,8 +25,8 @@
 
 /* 感想ブロックはじめ */
 .user_icon {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background-color: #ffffff;
     position:relative;
@@ -55,7 +55,7 @@
     width: 10vw;
 }
 
-.top_impression_title {
+.book_title {
     color: #A9AC5F;
 }
 /* 感想ブロックおわり */
@@ -120,10 +120,6 @@
     width: 50px;
 }
 
-.book_title {
-    padding-left: 20px;
-    line-height: 40px;
-}
 /* 本棚終わり */
 
 /* 感想はじめ */
@@ -200,6 +196,10 @@
     height: 200px;
 }
 
+.twitter_account_link {
+    margin-top: 7px;
+    width: 115px;
+}
 
 /* ユーザー情報終わり */
 

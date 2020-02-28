@@ -6,24 +6,12 @@
         <% @books.each do |shelf| %>
             <div class="book_img_box">
                 <a href="/impressions/<%= shelf.impression_link %>" >
-                    <p id="thumbnail_<%= shelf.id %>" class="thumbnail_top"></p>
+                    <p class="thumbnail_top">
+                        <%= image_tag shelf.thumbnail %>
+                    </p>
                 </a>
-                <div id="title_<%= shelf.id %>"></div>
+                <div class="book_title" id="title_<%= shelf.id %>"><%= shelf.title %></div>
                 <input id="api_path_<%= shelf.id %>" type="hidden" name="api_path" value="<%= shelf.api_path %>" />
-                <script>
-                $(document).on('turbolinks:load', function() {
-                    const api_path = $("#api_path_<%= shelf.id %>").val();
-                    const url = "<%= shelf.api_path %>";
-                    $.getJSON(url, function(data) {
-                            if (data.volumeInfo.imageLinks.thumbnail == "") {
-                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"/assets/book_img\" />');
-                            } else {
-                                $("#thumbnail_<%= shelf.id %>").html('<img src=\"' + data.volumeInfo.imageLinks.thumbnail + '\" style=\"height: 100px;\" />');
-                            }
-                            $("#title_<%= shelf.id %>").text(data.volumeInfo.title);
-                    });
-                });
-                </script>
             </div>
         <% end %>
     <% else %>

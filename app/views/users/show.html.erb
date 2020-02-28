@@ -4,12 +4,14 @@
             <%= image_tag(@user.image, alt:'ユーザーアイコン') %>
         </div>
         <div class="user_name">
-            <p>ユーザー名：<%= @user.name %></p>
-            <p><%= link_to "@#{@user.nickname}","https://twitter.com/#{@user.nickname}", target: '_blank' %></p>
+            <p><%= @user.name %></p>
         </div>
+            <div class="twitter_account_link">
+                <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button impression_tweet_button">ツイッターへ</a>
+            </div>
         <% if @user.id === current_user.id %>
         <button>
-            <%= link_to '編集', edit_user_path, class:'button' %>
+            <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
         </button>
         <% end %>
         <% if current_user %>
@@ -25,14 +27,31 @@
     </div>
     <p>●最近読んだ本</p>
     <div class="recent_reading_book">
+        <% @books.each do |book| %>
         <div class="book_img_box">
-            <%= link_to(image_tag('book_img.svg', class:'book_img'), book_path) %>
+            <% if image_tag book.thumbnail %>
+                <%= image_tag book.thumbnail , class:'book_img'%>
+            <% else %>
+                <%= link_to(image_tag('book_img.svg', class:'book_img'), book_path) %>
+            <% end %>
             <div class="book_title">
-                <%= link_to '本のタイトル', books_path %>
+                <%= link_to book.title, books_path %>
             </div>
+            <p> <%= book.created_at.strftime('%Y/%-m/%-d') %> </p>
         </div>
-        <p class="impression">
-            <%= link_to('感想の一部いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい') %>
-        </p>
+        <% if book.evaluation %>
+            <%= image_tag 'star-on.png' %>
+            <%= book.evaluation %>
+        <% else %>
+            未評価
+        <% end %>
+            <% book.impressions.each do |impression| %>
+                <p class="impression">
+                    <%= impression.impression.truncate(50) %>
+                </p>
+            <% end %>
+
+        <% end %>
+
     </div>
 </div>

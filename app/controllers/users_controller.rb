@@ -10,10 +10,24 @@ before_action :set_current_user, only:[ :index,
         # Impression, User, BookをINNER JOIN
         @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
 
+puts 'おはようございます。
+今日も一日元気に頑張りましょう。
+aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
+コロナウイルスが怖いので、あまり人混みの多いところには行かないほうがいいですね。
+通勤される方はマスクを活用し、こまめに消毒することが大切です。
+どちらもarimasenn
+'.encode("EUC-JP").bytesize
+
+
     end
 
     def show
         @user = User.find_by(id: params[:id])
+        @books = Book.where(user_id: current_user.id)
+        @books.each do |book|
+            book.impressions = Impression.where(user_id: book.user_id,
+                                                book_id: book.id)
+        end
     end
 
     def edit

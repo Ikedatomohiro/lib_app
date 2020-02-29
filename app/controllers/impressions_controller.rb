@@ -6,6 +6,16 @@ class ImpressionsController < ApplicationController
         @book = Book.find_by(impression_link: params[:id])
         @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
         @user = User.find_by(id: @book.user_id)
+        # ツイッターカード用のデータをセット
+        # 感想ページ所有ユーザーを取得
+        @user = User.find_by(id: @book.user_id)
+        @twitter_card = {
+            "site"        => "@#{@user.nickname}",
+            "image"       => @book.thumbnail,
+            "url"         => "https://dokusyo-no-wa.com/impressions/#{@book.impression_link}",
+            "title"       => @book.title,
+            "description" => @impressions.first.impression,
+        }
     end
 
     def new
@@ -35,11 +45,6 @@ class ImpressionsController < ApplicationController
         
     end
 
-    def impression
-        @book = Book.find_by(impression_link: params[:impression_link])
-        @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
-    end
-
     def add_impression_field
         @book = Book.find_by(id: params[:book_id])
         @impressions = Impression.new
@@ -55,7 +60,8 @@ class ImpressionsController < ApplicationController
         # ツイートする画像をセット
         # images = []
         # images << File.new(@impression.impression_img)
-        @client.update_with_media("#{@impression.impression}", open("#{@impression.impression_img}"))
+        @client.update("ツイッター初心者です。")
+        # @client.update_with_media("#{@impression.impression}", open("#{@impression.impression_img}"))
         redirect_to root_path
     end
 
@@ -70,10 +76,10 @@ class ImpressionsController < ApplicationController
 
     def twitter_client
         @client = Twitter::REST::Client.new do |config|
-            config.consumer_key        = "ENV['TWITTER_API_KEY']"
-            config.consumer_secret     = "ENV['TWITTER_API_SECRET']"
-            config.access_token        = "ENV['TWITTER_ACCESS_TOKEN']"
-            config.access_token_secret = "ENV['TWITTER_ACCESS_SECRET']"
+            config.consumer_key        = ENV['TWITTER_API_KEY']
+            config.consumer_secret     = ENV['TWITTER_API_SECRET']
+            config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
+            config.access_token_secret = ENV['TWITTER_ACCESS_SECRET']
     end
   end
 end

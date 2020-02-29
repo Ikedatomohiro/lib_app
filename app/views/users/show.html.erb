@@ -7,7 +7,7 @@
             <p><%= @user.name %></p>
         </div>
             <div class="twitter_account_link">
-                <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button impression_tweet_button">ツイッターへ</a>
+                <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button impression_tweet_button" target="_brank">ツイッターへ</a>
             </div>
         <% if @user.id === current_user.id %>
         <button>

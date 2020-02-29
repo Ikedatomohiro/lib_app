@@ -11,6 +11,28 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <%# レスポンシブ対応 %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%#= ツイッターカードの埋め込み %>
+    <% if @twitter_card %>
+      <meta name="twitter:card" content="Summary with Large Image" />
+      <meta name="twitter:creator" content="@paoDokushonowa" />
+      <meta name="twitter:site" content="<%= @twitter_card["site"] %>">
+      <meta property="og:image" content="<%= @twitter_card["image"] %>" />
+      <meta property="og:url" content="<%= @twitter_card["url"] %>" />
+      <meta property="og:title" content="<%= @twitter_card["title"] %>" /> 
+      <meta property="og:description" content="<%= @twitter_card["description"] %>" />
+
+    <% end %>
+    <% if @user && @user.nickname %>
+        <% else %>
+      <meta name="twitter:site" content="@paoDokushonowa">
+    <% end %>
+    <% if @book && @book.thumbnail%>
+        <% else %>
+      <meta property="og:image" content="" />
+    <% end %>
+
+
+
     <%# SweatAlert2の読み込み %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <%# ファビコン %>
@@ -20,20 +42,12 @@
                      {:rel => 'apple-touch-icon',
                       :sizes => '180x180',
                       :type => 'image/png'}) %>
-    <%# Twitterカード %>
-    <% if @h %>
-      <% twitter_card = get_twitter_card_info(@h) %>
-      <meta name="twitter:card" content=<%=twitter_card[:card]%> />
-      <meta property="og:url" content=<%=twitter_card[:url]%> />
-      <meta property="og:title" content=<%=twitter_card[:title]%> />
-      <meta property="og:description" content=<%=twitter_card[:description]%> />
-      <meta property="og:image" content=<%=twitter_card[:image]%> />
-    <% end %>
 
   </head>
 
   <body>
     <div class="main_container">
+      <%#= render "shared/header" %>
       <div class="sub_container">
           <%= yield %>
       </div>

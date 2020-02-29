@@ -9,13 +9,15 @@ class ImpressionsController < ApplicationController
         # ツイッターカード用のデータをセット
         # 感想ページ所有ユーザーを取得
         @user = User.find_by(id: @book.user_id)
-        @twitter_card = {
-            "site"        => "@#{@user.nickname}",
-            "image"       => @book.thumbnail,
-            "url"         => "https://dokusyo-no-wa.com/impressions/#{@book.impression_link}",
-            "title"       => @book.title,
-            "description" => @impressions.first.impression,
-        }
+        if @impressions.first
+            @twitter_card = {
+                "site"        => "@#{@user.nickname}",
+                "image"       => @book.thumbnail,
+                "url"         => "https://dokusyo-no-wa.com/impressions/#{@book.impression_link}",
+                "title"       => @book.title,
+                "description" => @impressions.first.impression,
+            }
+        end
     end
 
     def new
@@ -55,12 +57,15 @@ class ImpressionsController < ApplicationController
     end
 
     def post_to_twitter
-        @impression = Impression.find_by(id: params[:id])
-        @impression.update(tweeted_flg: true)
+        impression = Impression.find_by(id: params[:id])
+        book = Book.find_by(id: impression.book_id)
+        # @imprssion.update(tweeted_flg: true)
         # ツイートする画像をセット
         # images = []
         # images << File.new(@impression.impression_img)
-        @client.update("ツイッター初心者です。")
+        tweet = "#{impression.impression}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}"
+        @client.update(tweet)
+
         # @client.update_with_media("#{@impression.impression}", open("#{@impression.impression_img}"))
         redirect_to root_path
     end
@@ -78,8 +83,8 @@ class ImpressionsController < ApplicationController
         @client = Twitter::REST::Client.new do |config|
             config.consumer_key        = ENV['TWITTER_API_KEY']
             config.consumer_secret     = ENV['TWITTER_API_SECRET']
-            config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
-            config.access_token_secret = ENV['TWITTER_ACCESS_SECRET']
+            config.access_token        = current_user.oauth_token
+            config.access_token_secret = current_user.oauth_token_secret
     end
   end
 end

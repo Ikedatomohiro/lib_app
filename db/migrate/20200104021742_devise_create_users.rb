@@ -13,6 +13,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string  :email,              null: true, default: ''
       t.string  :encrypted_password, null: true, default: ''
       t.string  :self_introduction,  null: true
+      t.string  :oauth_token,        null: true
+      t.string  :oauth_token_secret, null: true
+      t.string  :twitter_link,       null: true
       t.boolean :admin_flg,          null: false, default: false
       t.integer :shelf_type,         null: false, default: '1'
       t.integer :user_type,          null: false, default: '1'
@@ -48,6 +51,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, [:provider, :uid], unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end

@@ -7,11 +7,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
-
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
- 
-    unless user
+    if user
+      user.update(
+        image:    auth.info.image,
+        name:     auth.info.name,
+        nickname: auth.info.nickname,
+        location: auth.info.location,
+        oauth_token: auth.credentials.token,
+        oauth_token_secret: auth.credentials.secret,
+        twitter_link: auth.info.urls.Twitter,
+        )
+
+    else
       user = User.create(
         uid:      auth.uid,
         provider: auth.provider,
@@ -20,7 +29,10 @@ class User < ApplicationRecord
         image:    auth.info.image,
         name:     auth.info.name,
         nickname: auth.info.nickname,
-        location: auth.info.location
+        location: auth.info.location,
+        oauth_token: auth.credentials.token,
+        oauth_token_secret: auth.credentials.secret,
+        twitter_link: auth.info.urls.Twitter,
       )
     end
  

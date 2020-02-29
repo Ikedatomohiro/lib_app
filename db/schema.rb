@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.string "email", default: ""
     t.string "encrypted_password", default: ""
     t.string "self_introduction"
+    t.string "oauth_token"
+    t.string "oauth_token_secret"
+    t.string "twitter_link"
     t.boolean "admin_flg", default: false, null: false
     t.integer "shelf_type", default: 1, null: false
     t.integer "user_type", default: 1, null: false
@@ -79,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

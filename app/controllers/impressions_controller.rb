@@ -56,17 +56,19 @@ class ImpressionsController < ApplicationController
         end
     end
 
+    # ツイートする。画像があれば画像を付けてツイートする。
     def post_to_twitter
         impression = Impression.find_by(id: params[:id])
         book = Book.find_by(id: impression.book_id)
-        # @imprssion.update(tweeted_flg: true)
         # ツイートする画像をセット
-        # images = []
-        # images << File.new(@impression.impression_img)
-        tweet = "#{impression.impression}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}"
-        @client.update(tweet)
-
-        # @client.update_with_media("#{@impression.impression}", open("#{@impression.impression_img}"))
+        tweet_content = impression.impression.truncate(120)
+        tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}"
+        # if impression.impression_img
+        #     @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
+        # else
+            @client.update(tweet)
+        # end
+        impression.update(tweeted_flg: true)
         redirect_to root_path
     end
 

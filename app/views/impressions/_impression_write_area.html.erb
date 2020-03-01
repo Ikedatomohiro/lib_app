@@ -1,12 +1,11 @@
 <%= form_with(model: Impression.new, url: impressions_path) do |f|%>
-    <%= f.submit '感想を保存する', class: 'submit_btn_small' %>
-    <%= f.text_area :impression, class: 'input_area' %>
+    <%= f.text_area :impression, class: 'input_area', onclick: "textAreaHeightSet(this)", onfocus: "colorReset(this)", oninput: "textAreaHeightSet(this)", onchange: "textAreaHeightSet(this)"%>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
     <p id="counter">0文字</p>
     <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
-
-
+<input type="hidden" id="byte_count" value="">
+<%= "ウル５７０３９４７８f０９８d７０９８江７あ０９７う９８いふやおいうFCない魚員q８４運おq８cぬx９おいqcvm９ぉうtm９尾オムq，c９ぅw，おfしうw，お９あいうとぉ、い8うyりえ８うqを、t８y０x８４尾んも、０q８里mぃ逢ふ...".encode("EUC-JP").bytesize %>
     <p id="star"></p>
     <%= 'おはようございます。
 今日も一日元気に頑張りましょう。
@@ -16,6 +15,7 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 どちらもarimasenn1
 '.encode("EUC-JP").bytesize %>
 <input type="button" name="btn-upload" id="btn-upload" value="ファイルを選択" onclick ="return clickUploadButton()" />  
+    <%= f.submit '感想を保存する', class: 'submit_btn_small' %>
 <% end %>
 
 <input type="text" id="letters_count" val="">
@@ -26,10 +26,6 @@ function clickUploadButton() {
       $("#impression_impression_img").click();
       return false;
 };
-
-
-
-
 
 // 星で評価を表現する。
 $('#star').raty({
@@ -47,9 +43,4 @@ $(function(){
         $('#letters_count').val(impression);
     });
 });
-
-
-
 </script>
-
-

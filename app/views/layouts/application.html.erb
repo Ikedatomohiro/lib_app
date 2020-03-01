@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%#= ツイッターカードの埋め込み %>
     <% if @twitter_card %>
-      <meta name="twitter:card" content="Summary with Large Image" />
+      <meta name="twitter:card" content="Summary" />
       <meta name="twitter:creator" content="@paoDokushonowa" />
       <meta name="twitter:site" content="<%= @twitter_card["site"] %>">
       <meta property="og:image" content="<%= @twitter_card["image"] %>" />
@@ -36,7 +36,7 @@
     <%# SweatAlert2の読み込み %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <%# ファビコン %>
-    <%= favicon_link_tag('favicon.png') %>
+    <%= favicon_link_tag('administrator.png') %>
     <%# スマホ用アイコン %>
     <%= favicon_link_tag('favicon.png',
                      {:rel => 'apple-touch-icon',

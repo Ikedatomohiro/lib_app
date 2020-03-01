@@ -4,7 +4,9 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
     <p id="counter">0文字</p>
-    <%= f.file_field :impression_img %>
+    <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+
+
     <p id="star"></p>
     <%= 'おはようございます。
 今日も一日元気に頑張りましょう。
@@ -13,12 +15,22 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 通勤される方はマスクを活用し、こまめに消毒することが大切です。
 どちらもarimasenn1
 '.encode("EUC-JP").bytesize %>
-
+<input type="button" name="btn-upload" id="btn-upload" value="ファイルを選択" onclick ="return clickUploadButton()" />  
 <% end %>
 
 <input type="text" id="letters_count" val="">
 
 <script>
+// 画像アップロード用ボタンをクリック
+function clickUploadButton() {
+      $("#impression_impression_img").click();
+      return false;
+};
+
+
+
+
+
 // 星で評価を表現する。
 $('#star').raty({
     size    : 36,
@@ -28,12 +40,12 @@ $('#star').raty({
 });
 
 $(function(){
- $("#impression_impression").on("keyup", function() {
-   let countNum = String($(this).val().length);
-   $("#counter").text(countNum + "文字");
-   let impression = String($(this).val());
-   $('#letters_count').val(impression);
- });
+    $("#impression_impression").on("keyup", function() {
+        let countNum = String($(this).val().length);
+        $("#counter").text(countNum + "文字");
+        let impression = String($(this).val());
+        $('#letters_count').val(impression);
+    });
 });
 
 

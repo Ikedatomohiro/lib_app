@@ -2,6 +2,13 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="sns_login_button">
     <%= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
-        
     </div>
+    <%= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
+
+<a href="/users/auth/twitter" class="twitter_button">Twitterアカウントでログイン</a>
+<div class="twitter_button sns_login_button">
+    <a href="/users/auth/twitter">Twitterアカウントでログイン</a>
+</div>
+    <a href="/users/auth/twitter">Twitterアカウントでログイン</a>
+
 <% end %>

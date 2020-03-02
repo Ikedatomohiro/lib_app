@@ -11,7 +11,7 @@
     <div class="book_img_box">
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">
-                <% if result["volumeInfo"]['imageLinks']['thumbnail'].present? %>
+                <% if result["volumeInfo"]['image']['thumbnail'].present? %>
                     <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
                 <% end %>
             </p>

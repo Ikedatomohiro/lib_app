@@ -1,6 +1,5 @@
 <%= form_with(model: User.new, url:"/users/update_self_introduction") do |form| %>
     <div class="page_wrapper">
-        <p class="page_title">プロフィール編集</p>
         <div class="home_header">
             <div class="user_icon">
             <%= image_tag(@user.image, alt:'ユーザーアイコン') %>
@@ -9,11 +8,11 @@
             <div class="user_name">
                 <%= @user.name %>
             </div>
-            <button>
+            <button class="submit_btn_small">
                 編集完了
             </button>
         </div>
-        <div>
+        <div class="self_introduction_area" >
                 <%= @user.user_icon %>
             <%= form.text_area :self_introduction ,value: @user.self_introduction, class: 'self_introduction input_area', maxlenth: '160' %>
             <%=  %>

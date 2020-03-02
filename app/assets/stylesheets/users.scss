@@ -19,7 +19,7 @@
 .home_header {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 3px;
     border-bottom: 1px solid;
 }
 
@@ -96,7 +96,7 @@
     height: 20vw;
     max-height: 150px;
     border:solid 1px #1D4E56;
-    margin: 0 20px;
+    margin-right :20px;
 }
 
 .title_top {
@@ -112,14 +112,17 @@
 /* 本棚はじめ */
 .book_img_box {
     display: flex;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 0;
 }
 
 .book_img {
-    width: 50px;
+    width: 20vw;
 }
 
+.search_book_button {
+    width: 88px;
+}
 /* 本棚終わり */
 
 /* 感想はじめ */
@@ -129,6 +132,7 @@
 
 .book_img_area {
     padding: 10px;
+    margin-right: 10px
 }
 
 #thumbnail img{
@@ -136,6 +140,16 @@
     max-height: 150px;
 }
 /* 感想終わり */
+
+
+/* ユーザー情報 */
+.self_introduction_area {
+    width: 100%;
+    margin: 10px 0;
+}
+/* ユーザー情報 */
+
+
 
 /* セッティングはじめ */
 .app_checkbox {
@@ -177,6 +191,7 @@
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+
 .app_checkbox input[type="checkbox"]:checked+label:before{
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
@@ -198,7 +213,7 @@
 
 .twitter_account_link {
     margin-top: 7px;
-    width: 115px;
+    width: 40px;
 }
 
 /* ユーザー情報終わり */

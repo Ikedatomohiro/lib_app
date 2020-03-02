@@ -7,48 +7,51 @@
             <p><%= @user.name %></p>
         </div>
             <div class="twitter_account_link">
-                <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button impression_tweet_button" target="_brank">ツイッターへ</a>
+                <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button impression_tweet_button" target="_brank"></a>
             </div>
+    </div>
         <% if @user.id === current_user.id %>
-        <button>
-            <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
-        </button>
         <% end %>
         <% if current_user %>
             <%#= link_to '読書履歴', readinghistory_path %>
         <% end %>
-    </div>
-    <div>
+    <div class="self_introduction_area">
         <p>
-            自己紹介
-            <%= @user.self_introduction %>
-            
+            <% if @user.self_introduction.present? %>
+                <%= @user.self_introduction %>
+            <% elsif @user == current_user %>
+                自己紹介を書こう。
+            <% end %>
         </p>
+        <button>
+            <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
+        </button>
     </div>
     <p>●最近読んだ本</p>
     <div class="recent_reading_book">
         <% @books.each do |book| %>
         <div class="book_img_box">
             <% if image_tag book.thumbnail %>
-                <%= image_tag book.thumbnail , class:'book_img'%>
+                <%= image_tag book.thumbnail , class:'book_img book_img_area'%>
             <% else %>
-                <%= link_to(image_tag('book_img.svg', class:'book_img'), book_path) %>
+                <%= link_to(image_tag('book_img.svg', class:'book_img book_img_area'), book_path) %>
             <% end %>
             <div class="book_title">
-                <%= link_to book.title, books_path %>
+                <%= link_to book.title.truncate(30), books_path, class: "book_title book_link" %>
+            <% if book.evaluation %>
+                <%= image_tag 'star-on.png' %>
+                <%= book.evaluation %>
+            <% else %>
+                未評価
+            <% end %>
+            <p class="impression_time"><%= book.created_at.strftime('%Y/%-m/%-d') %></p>
             </div>
-            <p> <%= book.created_at.strftime('%Y/%-m/%-d') %> </p>
         </div>
-        <% if book.evaluation %>
-            <%= image_tag 'star-on.png' %>
-            <%= book.evaluation %>
-        <% else %>
-            未評価
-        <% end %>
             <% book.impressions.each do |impression| %>
                 <p class="impression">
                     <%= impression.impression.truncate(50) %>
                 </p>
+                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
             <% end %>
 
         <% end %>

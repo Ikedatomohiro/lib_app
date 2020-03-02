@@ -57,7 +57,11 @@ class BooksController < ApplicationController
     end
 
     def search_books
-        redirect_to books_search_books_result_path(keyword: params[:keyword]) #リダイレクトだと値がリセットされるのでダメ。
+        if params[:keyword].present?
+            redirect_to books_search_books_result_path(keyword: params[:keyword]) #リダイレクトだと値がリセットされるのでダメ。
+        else
+            redirect_to shelf_path
+        end
     end
 
     def search_books_result

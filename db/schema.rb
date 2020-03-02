@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.integer "evaluation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["impression_link"], name: "index_books_on_impression_link", unique: true
+    t.index ["user_id"], name: "index_books_on_user_id", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.boolean "publish_impression", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_settings_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

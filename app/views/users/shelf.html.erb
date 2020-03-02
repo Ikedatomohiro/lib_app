@@ -1,4 +1,6 @@
-<%= link_to "本を探す", books_show_form_path, remote: true %>
+<div id="search_book_button" class="search_book_button submit_btn_small">
+    <%= link_to "本を探す", books_show_form_path, remote: true %>
+</div>
 <div class="page_wrapper">
     <%= @err %>
     <div id="search_book_form"></div>

@@ -1,4 +1,6 @@
 <%= form_with(url: books_search_path ) do |f| %>
-    <%= f.text_field :keyword, placeholder: 'キーワード' %>
-    <button>検索する</button>
+<div class="search_book_keyword_area">
+    <%= f.text_field :keyword, placeholder: 'キーワード', class: "search_book_keyword_input_area"%>
+    <button class="search_book_button submit_btn_small">検索する</button>
+</div>
 <% end %>

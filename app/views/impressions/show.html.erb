@@ -2,20 +2,6 @@
 <%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <div class="home_header">
-        <div class="user_icon">
-            <% if @user.image %>
-                <%= link_to image_tag(@user.image, alt:'ユーザーアイコン'), "/users/#{@user.id}" %>
-            <% else %>
-                <%= link_to(image_tag('person_default.svg', alt:'ユーザーアイコン'), "/users/#{@user.id}") %>
-            <% end %>
-        </div>
-        <div class="user_name">
-            <p>
-                <%= @user.name %>
-            </p>
-        </div>
-    </div>
 <div class="book_info">
 <p id="title">「<%= @book.title %>」</p>
     <div class="book_info_inner">
@@ -105,7 +91,6 @@
                     <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
                         <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
                             <input type="hidden" id="authenticity_token_datepicker" name="authenticity_token" value="<%= form_authenticity_token %>" >
-
                         <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
                         <button class="twitter_button impression_tweet_button">つぶやく</button>
                     <% end %>

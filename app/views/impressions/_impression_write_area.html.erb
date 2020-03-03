@@ -2,11 +2,14 @@
     <%= f.text_area :impression, class: 'input_area', onclick: "textAreaHeightSet(this)", onfocus: "colorReset(this)", oninput: "textAreaHeightSet(this)", onchange: "textAreaHeightSet(this)"%>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
-    <p id="counter">0文字</p>
-    <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png"%>
+    <div class="impression_sub_info">
+        <%= image_tag 'picture.svg', class: 'select_picture', onclick:"return clickUploadButton()" %>
+        <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf"%>
+        <!-- <p id="counter" class="letter_counter">0文字</p> -->
+        <%= f.submit '感想を保存する', class: 'submit_btn_small impression_save_button' %>
+    </div>
+
 <input type="hidden" id="byte_count" value="">
-<%= "ウル５７０３９４７８f０９８d７０９８江７あ０９７う９８いふやおいうFCない魚員q８４運おq８cぬx９おいqcvm９ぉうtm９尾オムq，c９ぅw，おfしうw，お９あいうとぉ、い8うyりえ８うqを、t８y０x８４尾んも、０q８里mぃ逢ふ...".encode("EUC-JP").bytesize %>
-    <p id="star"></p>
     <%= 'おはようございます。
 今日も一日元気に頑張りましょう。
 aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
@@ -14,11 +17,8 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 通勤される方はマスクを活用し、こまめに消毒することが大切です。
 どちらもarimasenn1
 '.encode("EUC-JP").bytesize %>
-<input type="button" name="btn-upload" id="btn-upload" value="ファイルを選択" onclick ="return clickUploadButton()" />  
-    <%= f.submit '感想を保存する', class: 'submit_btn_small' %>
 <% end %>
-
-<input type="text" id="letters_count" val="">
+    <img id="impression_img_preview" class="impression_img_preview">
 
 <script>
 // 画像アップロード用ボタンをクリック
@@ -42,5 +42,13 @@ $(function(){
         let impression = String($(this).val());
         $('#letters_count').val(impression);
     });
+});
+
+$('#impression_impression_img').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#impression_img_preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
 });
 </script>

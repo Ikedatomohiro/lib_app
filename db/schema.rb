@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_045349) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["impression_link"], name: "index_books_on_impression_link", unique: true
-    t.index ["user_id"], name: "index_books_on_user_id", unique: true
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|

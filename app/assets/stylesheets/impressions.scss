@@ -17,6 +17,9 @@
 
 .impression_tweet_button {
   display: block;
+  width: 86px;
+  text-align:right;
+  padding: 6px;
   margin: 0 0 0 auto;
 }
 
@@ -26,9 +29,33 @@
 
 .impression_write_area {
     width: 100%;
-
 }
 
+.impression_sub_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select_picture {
+  width: 30px;
+}
+
+.select_picture:active {
+  padding-top: 3px;
+}
+
+.select_picture:hover {
+  padding-bottom: 3px;
+  cursor: pointer;
+}
+
+.impression_img_preview {
+  width: 30vw;
+}
+
+.impression_save_button {
+  text-align: right;
+}
  /* --- INPUT=TEXTの標準デザイン設定 ---------------------*/
 .impression_write_area {
   border-radius : 4px;                 /* 入力域の角丸   */
@@ -62,7 +89,9 @@
   display: none;
 }
 
-
+.letter_counter {
+  text-align: right;
+}
 
 
 

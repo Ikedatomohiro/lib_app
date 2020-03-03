@@ -78,6 +78,11 @@
   padding: 10px;
 }
 
+.submit_btn_small input:active, .submit_btn_small a:active, .submit_btn_small:active　{
+  border-bottom: solid 2px #fd9535;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+}
+
 .input_area {
   border: 1px solid;
   border-radius: 5px;

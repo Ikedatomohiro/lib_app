@@ -46,6 +46,9 @@
   </head>
 
   <body>
+    <% if signed_in? %>
+      <%= render "shared/header" %>
+    <% end %>
     <div class="main_container">
       <%#= render "shared/header" %>
       <div class="sub_container">

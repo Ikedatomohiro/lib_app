@@ -142,12 +142,6 @@
 /* 感想終わり */
 
 
-/* ユーザー情報 */
-.self_introduction_area {
-    width: 100%;
-    margin: 10px 0;
-}
-/* ユーザー情報 */
 
 
 
@@ -212,9 +206,18 @@
 }
 
 .twitter_account_link {
+    position: absolute;
+    top: 0px;
+    right: 0px;
     margin-top: 7px;
     width: 40px;
 }
+
+.self_introduction_area {
+    width: 100%;
+    margin: 10px 0;
+}
+
 
 /* ユーザー情報終わり */
 

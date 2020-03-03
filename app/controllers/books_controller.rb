@@ -66,7 +66,7 @@ class BooksController < ApplicationController
 
     def search_books_result
         keyword = params[:keyword]
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=5")
+        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=10")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
     end

@@ -1,7 +1,4 @@
 <div class="home">
-    <% if signed_in? %>
-    <%= render "shared/header" %>
-    <% end %>
     <div>
         <% @vals.each do |val| %>
         <div class="top_impression_block">
@@ -114,4 +111,5 @@
             <p class="title_top">鬼滅の刃</p>
         </a>
     </div>
+      <%#= render "shared/affiliate" %>
 </div>

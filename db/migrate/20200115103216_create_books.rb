@@ -14,6 +14,6 @@ class CreateBooks < ActiveRecord::Migration[6.0]
         t.timestamps
     end
     add_index :books, :impression_link,     unique: true
-    add_index :books, :user_id,      unique: true
+    add_index :books, :user_id
   end
 end

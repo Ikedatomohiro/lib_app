@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+    before_action :authenticate_user! # ログインしていないときはログインページに移動
     def index
         if current_user.admin_flg
             @contacts = Contact.all.order(created_at: "DESC")

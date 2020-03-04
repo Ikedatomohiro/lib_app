@@ -1,5 +1,6 @@
 class ImpressionsController < ApplicationController
     before_action :twitter_client, only: [:post_to_twitter]
+    before_action :authenticate_user!, except: [:show] # ログインしていないときはログインページに移動
 
     def show
         # 表示したい本のデータを検索し、Book_idから感想レコードを検索する。

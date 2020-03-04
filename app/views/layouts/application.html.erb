@@ -21,7 +21,6 @@
       <meta property="og:title" content="<%= @twitter_card["title"] %>" /> 
       <meta property="og:description" content="<%= @twitter_card["description"] %>" />
 
-    <% end %>
     <% if @user && @user.nickname %>
         <% else %>
       <meta name="twitter:site" content="@paoDokushonowa">
@@ -29,6 +28,7 @@
     <% if @book && @book.thumbnail%>
         <% else %>
       <meta property="og:image" content="" />
+    <% end %>
     <% end %>
 
 
@@ -57,6 +57,8 @@
     </div>
     <% if signed_in? %>
       <%= render "shared/footer" %>
+    <% else %>
+      <%= render "shared/sign_in_link" %>
     <% end %>
   </body>
 </html>

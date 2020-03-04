@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="book_info">
-<p id="title">「<%= @book.title %>」</p>
+<p id="title" class="book_title">「<%= @book.title %>」</p>
     <div class="book_info_inner">
         <div class="book_img_area">
             <a href="/books/info/<%= @book.api_id %>" id="thumbnail">

@@ -3,6 +3,7 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
     <div class="impression_sub_info">
+        <p id="star"></p>
         <%= image_tag 'picture.svg', class: 'select_picture', onclick:"return clickUploadButton()" %>
         <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf"%>
         <!-- <p id="counter" class="letter_counter">0文字</p> -->

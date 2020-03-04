@@ -1,46 +1,55 @@
 <%= form_with(model: Book.new, url: books_path) do |f| %>
-    <%= f.hidden_field :api_path, value: @book['selfLink'] %>
-    <%= f.hidden_field :api_id, value: @book['id'] %>
-    <%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
-    <%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
-    <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
-    <button class="submit_btn_small">本棚に入れる</button>
+<%= f.hidden_field :api_path, value: @book['selfLink'] %>
+<%= f.hidden_field :api_id, value: @book['id'] %>
+<%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
+<%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
+<%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
+<button class="submit_btn_small">本棚に入れる</button>
 <% end %>
 <%# 本の情報を取得するapi_pathをセット %>
-    <input class="api_path" type="hidden" name="api_path" value="<%= params[:api_path] %>" >
+<input class="api_path" type="hidden" name="api_path" value="<%= params[:api_path] %>">
 <table class=book_detail>
     <tr>
         <th width="20%"></th>
-        <td id="thumbnail"><%= image_tag @book['volumeInfo']['imageLinks']['thumbnail'] %></td>
-    </tr>  
+        <td id="thumbnail">
+            <%= image_tag @book['volumeInfo']['imageLinks']['thumbnail'] %>
+        </td>
+    </tr>
     <tr>
         <th>書籍名：</th>
-        <td><p id="title" type="text" disabled="disabled" name="title"><%= @book["volumeInfo"]["title"] %></p></td>
+        <td>
+            <p id="title" type="text" disabled="disabled" name="title">
+                <%= @book["volumeInfo"]["title"] %>
+            </p>
+        </td>
     </tr>
     <tr>
         <th>著者：</th>
-        <td><p id="author" type="text" name="author">
-            <% if @book['volumeInfo']['authors'] %>
+        <td>
+            <p id="author" type="text" name="author">
+                <% if @book['volumeInfo']['authors'] %>
                 <% @book["volumeInfo"]['authors'].each do |author| %>
-                    <%= author %>
+                <%= author %>
                 <% end %>
-            <% end %>
-
-        </p></td>
+                <% end %>
+            </p>
+        </td>
     </tr>
     <tr>
         <th>出版日：</th>
-        <td><p id="pubdate" type="text" name="pubdate"></p></td>
+        <td>
+            <p id="pubdate" type="text" name="pubdate">
+                <%= @book["volumeInfo"]["publishedDate"] %>
+            </p>
+        </td>
     </tr>
     <tr>
         <th>詳細：</th>
-        <td><p id="description" type="text" name="description"></p></td>
+        <td>
+            <p id="description" type="text" name="description"></p>
+        </td>
     </tr>
 </table>
-
-<%= @impressions.each do |impression| %>
-    <%= impression.impression %>
-<% end %>
-
-
-
+<%#= @impressions.each do |impression| %>
+<%#= impression.impression %>
+<%# end %>

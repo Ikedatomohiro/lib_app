@@ -1,24 +1,44 @@
-<div id="search_book_button" class="search_book_button submit_btn_small">
-    <%= link_to "本を探す", books_show_form_path, remote: true %>
+<div id="search_book_button" class="search_book_button">
+    <%= link_to "本を探す", books_show_form_path, remote: true, class: " submit_btn_small"  %>
 </div>
 <div class="page_wrapper">
     <%= @err %>
     <div id="search_book_form"></div>
     <% if @books.present? %>
-        <% @books.each do |shelf| %>
-            <div class="book_img_box">
-                <a href="/impressions/<%= shelf.impression_link %>" >
-                    <p class="thumbnail_top">
-                        <%= image_tag shelf.thumbnail %>
-                    </p>
-                </a>
-                <div class="book_title" id="title_<%= shelf.id %>"><%= shelf.title %></div>
-                <input id="api_path_<%= shelf.id %>" type="hidden" name="api_path" value="<%= shelf.api_path %>" />
+    <% @books.each do |book| %>
+    <div class="book_img_box">
+        <a href="/impressions/<%= book.impression_link %>">
+            <p class="thumbnail_top">
+                <%= image_tag book.thumbnail %>
+            </p>
+        </a>
+        <div class="book_title" id="title_<%= book.id %>">
+            <%= book.title %>
+            <div class="book_count_info">
+                <% if book %>
+                <p class="book_count">
+                    <%= image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                    1
+                </p>
+                <% end %>
+                <% if book.evaluation %>
+                <p class="book_count">
+                    <%= image_tag "star-on.png" %>
+                    <%= book.evaluation %>
+                </p>
+                <% end %>
+                <% if book %>
+                <p class="book_count">
+                    <%= image_tag "impression.svg", class: "book_counter_icon" %>
+                    4
+                </p>
+                <% end %>
             </div>
-        <% end %>
+        </div>
+        <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+    </div>
+    <% end %>
     <% else %>
-        <p>本が登録されていません。</p>
+    <p>本が登録されていません。</p>
     <% end %>
 </div>
-
-

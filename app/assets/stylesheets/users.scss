@@ -57,6 +57,8 @@
 
 .book_title {
     color: #A9AC5F;
+    font-weight: 700;
+    font-size: 18px;
 }
 /* 感想ブロックおわり */
 
@@ -121,7 +123,20 @@
 }
 
 .search_book_button {
-    width: 88px;
+    padding: 12px;
+}
+
+.book_counter_icon {
+    width: 18px;
+}
+
+.book_count_info {
+    display: flex;
+}
+
+.book_count {
+    padding-top: 10px;
+    padding-left: 10px;
 }
 /* 本棚終わり */
 

@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+      before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
     def index
         @books = Book.where(user_id: current_user.id)
     end

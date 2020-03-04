@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+      before_action :authenticate_user!, except: [:index, :show] # ログインしていないときはログインページに移動
+
     def index
         private_impression_users = User.impression_private
         # Impression, User, BookをINNER JOIN
@@ -17,7 +19,7 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     def show
         @user = User.find_by(id: params[:id])
-        @books = Book.where(user_id: current_user.id)
+        @books = Book.where(user_id: current_user.id).order(created_at: "DESC")
         @books.each do |book|
             book.impressions = Impression.where(user_id: book.user_id,
                                                 book_id: book.id)
@@ -33,6 +35,15 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     def shelf
         @books = Book.where(user_id: current_user.id).order(created_at: "DESC")
+        @books.each do |book|
+        tweet = Impression.where(book_id: book.id,
+                                          user_id: current_user.id,
+                                          tweeted_flg: true).count
+        impression = Impression.where(book_id: book.id,
+                                      user_id: current_user.id).count
+        # book.push(tweet)
+        puts impression
+        end
     end
 
     def setting

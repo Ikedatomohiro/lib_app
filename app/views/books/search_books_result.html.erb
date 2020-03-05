@@ -11,7 +11,7 @@
     <div class="book_img_box">
         <a href="/books/info/978-4822289607" >
             <p id="thumbnail" class="thumbnail_top">
-                <% if result["volumeInfo"]['image']['thumbnail'].present? %>
+                <% if result["volumeInfo"]['imageLinks'].present? %>
                     <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
                 <% end %>
             </p>
@@ -22,7 +22,11 @@
             <%= f.hidden_field :api_id, value: result['id'] %>
             <%= f.hidden_field :title, value: result["volumeInfo"]['title'] %>
             <%= f.hidden_field :author, value: result["volumeInfo"]['authors'] %>
+                <% if result["volumeInfo"]['imageLinks'].present? %>
+                <% if result["volumeInfo"]['imageLinks']['thumbnail'].present? %>
             <%= f.hidden_field :thmumbnail, value: result["volumeInfo"]['imageLinks']['thumbnail'] %>
+                <% end %>
+                <% end %>
             <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
             <% end %>
         </p>

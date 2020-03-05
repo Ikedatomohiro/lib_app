@@ -61,7 +61,7 @@
         </table>
     </div>
     <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける %>
-    <% if @book.user_id === current_user.id %>
+    <% if signed_in? && @book.user_id === current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
@@ -98,6 +98,11 @@
             </div>
         <% end %>
     <% else %>
+        <div class="user_icon">
+            <a href="/users/<%= @user.id %>">
+                <%= image_tag @user.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            </a>
+        </div>
         <% @impressions.each do |impression| %>
                 <%= impression.impression %>
             <p>

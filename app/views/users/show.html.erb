@@ -2,11 +2,9 @@
     <a href=" https://twitter.com/<%= @user.nickname %> " class="twitter_button " target="_brank"></a>
 </div>
 <div class="page_wrapper">
-        <% if @user.id === current_user.id %>
-        <% end %>
-        <% if current_user %>
-            <%#= link_to '読書履歴', readinghistory_path %>
-        <% end %>
+    <% if current_user %>
+        <%#= link_to '読書履歴', readinghistory_path %>
+    <% end %>
     <div class="self_introduction_area">
         <p>
             <% if @user.self_introduction.present? %>
@@ -15,11 +13,16 @@
                 自己紹介を書こう。
             <% end %>
         </p>
-        <button>
-            <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
-        </button>
+        <% if signed_in? && @user.id === current_user.id %>
+            <button>
+                <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
+            </button>
+        <% end %>
     </div>
-    <p>●最近読んだ本</p>
+    <p>
+        <%= image_tag @user.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+        <%= @user.nickname %> さんが最近読んだ本
+    </p>
     <div class="recent_reading_book">
         <% @books.each do |book| %>
         <div class="book_img_box">
@@ -36,7 +39,6 @@
             <% else %>
                 未評価
             <% end %>
-            <p class="impression_time"><%= book.created_at.strftime('%Y/%-m/%-d') %></p>
             </div>
         </div>
             <% book.impressions.each do |impression| %>

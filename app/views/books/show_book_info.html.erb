@@ -46,7 +46,9 @@
     <tr>
         <th>詳細：</th>
         <td>
-            <p id="description" type="text" name="description"></p>
+            <p id="description" type="text" name="description">
+                <%= @book["volumeInfo"]["description"] %>
+            </p>
         </td>
     </tr>
 </table>

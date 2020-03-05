@@ -16,10 +16,6 @@
             <%= book.title %>
             <div class="book_count_info">
                 <% if book %>
-                <p class="book_count">
-                    <%= image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                    1
-                </p>
                 <% end %>
                 <% if book.evaluation %>
                 <p class="book_count">
@@ -29,8 +25,12 @@
                 <% end %>
                 <% if book %>
                 <p class="book_count">
-                    <%= image_tag "impression.svg", class: "book_counter_icon" %>
-                    4
+                    <%#= image_tag "impression.svg", class: "book_counter_icon" %>
+                    
+                </p>
+                <p class="book_count">
+                    <%#= image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                    
                 </p>
                 <% end %>
             </div>

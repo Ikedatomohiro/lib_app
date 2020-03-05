@@ -14,25 +14,27 @@
     <% end %>
 </div>
 
-<p class="title">過去のお問い合わせ</p>
-<% if @contacts %>
-    <% @contacts.each do |contact| %>
-            <%= contact.contact_type %>
-            <%= contact.contact_title %>
-            <%= contact.inquiry %>
-            <%= contact.created_at.strftime('%Y/%-m/%-d') %>
-        <p>管理者からの回答</p>
-        <% if contact.response %>
-            <p><%= contact.response %></p>
-            <%= contact.updated_at.strftime('%Y/%-m/%-d') %>
-        <% else %>
-            <p>お問い合わせありがとうございます。管理者から回答させていただきますので、今しばらくお待ちくださいませ。</p>
-        <% end %>
-        <% if current_user.admin_flg === true %>
-            <%= form_with(model:contact, url: contact_path(contact.id)) do |f| %>
-            <%= f.text_area :response, class: 'input_area', rows: 5 %>
-            <%= f.submit '回答する', class: 'submit_btn_small' %>
+<div class="previous_contact">
+    <p class="title">過去のお問い合わせ</p>
+    <% if @contacts %>
+        <% @contacts.each do |contact| %>
+                <%= contact.contact_type %>
+                <%= contact.contact_title %>
+                <%= contact.inquiry %>
+                <%= contact.created_at.strftime('%Y/%-m/%-d') %>
+            <p>管理者からの回答</p>
+            <% if contact.response %>
+                <p><%= contact.response %></p>
+                <%= contact.updated_at.strftime('%Y/%-m/%-d') %>
+            <% else %>
+                <p>お問い合わせありがとうございます。管理者から回答させていただきますので、今しばらくお待ちくださいませ。</p>
+            <% end %>
+            <% if current_user.admin_flg === true %>
+                <%= form_with(model:contact, url: contact_path(contact.id)) do |f| %>
+                <%= f.text_area :response, class: 'input_area', rows: 5 %>
+                <%= f.submit '回答する', class: 'submit_btn_small' %>
+                <% end %>
             <% end %>
         <% end %>
     <% end %>
-<% end %>
+</div>

@@ -31,5 +31,6 @@ post 'impressions/add_impression_field' => 'impressions#add_impression_field'
 post 'impressions/post_to_twitter'      => 'impressions#post_to_twitter'
 resources :impressions
 
+get  'contacts/thanks'                  => 'contacts#thanks'
 resources :contacts
 end

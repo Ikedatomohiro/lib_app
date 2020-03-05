@@ -11,6 +11,7 @@ class ContactsController < ApplicationController
     def create
         @contact = Contact.new(create_params)
         @contact.save!
+        redirect_to '/contacts/thanks'
     end
 
     def new

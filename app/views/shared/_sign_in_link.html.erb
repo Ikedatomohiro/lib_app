@@ -1,3 +1,13 @@
-<%= image_tag "administrator.png", class: "user_icon" %>
 
-<%= link_to root_path, "感想を書いたりツイートするときはここからログインしてね" %>
+<div class="balloon5">
+    <div class="faceicon">
+        <%= image_tag "administrator.png", class: "user_icon" %>
+    </div>
+    <a href="/users/sign_in" class="sign_in_link">
+        <div class="chatting">
+            <div class="says">
+                感想を書いたりツイートするときはこの吹き出しをクリックしてログインしてね
+            </div>
+        </div>
+    </a>
+</div>

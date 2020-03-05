@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>読書のわ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,28 +12,38 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <%# レスポンシブ対応 %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%#= ツイッターカードの埋め込み %>
+    <%# ツイッターカードの埋め込み %>
     <% if @twitter_card %>
       <meta name="twitter:card" content="Summary" />
       <meta name="twitter:creator" content="@paoDokushonowa" />
-      <meta name="twitter:site" content="<%= @twitter_card["site"] %>">
-      <meta property="og:image" content="<%= @twitter_card["image"] %>" />
-      <meta property="og:url" content="<%= @twitter_card["url"] %>" />
-      <meta property="og:title" content="<%= @twitter_card["title"] %>" /> 
-      <meta property="og:description" content="<%= @twitter_card["description"] %>" />
+      <meta name="twitter:site" content="<%= @twitter_card[" site"] %>" />
+      <meta property="og:image" content="<%= @twitter_card[" image"] %>" />
+      <meta property="og:url" content="<%= @twitter_card[" url"] %>" />
+      <meta property="og:title" content="<%= @twitter_card[" title"] %>" />
+      <meta property="og:description" content="<%= @twitter_card[" description"] %>" />
+      <% if @user && @user.nickname %>
+      <% else %>
+        <meta name="twitter:site" content="@paoDokushonowa">
+      <% end %>
+      <% if @book && @book.thumbnail %>
+      <% else %>
+        <meta property="og:image" content="<%= @book.thumbnail %>" />
+      <% end %>
+    <%# 感想ページからのツイッターカードがないときは固定の画像を表示 %>
+    <% else %>
 
-    <% if @user && @user.nickname %>
-        <% else %>
+
+      <meta name="twitter:card" content="Summary" />
+      <meta name="twitter:creator" content="@paoDokushonowa" />
       <meta name="twitter:site" content="@paoDokushonowa">
-    <% end %>
-    <% if @book && @book.thumbnail%>
-        <% else %>
-      <meta property="og:image" content="" />
-    <% end %>
-    <% end %>
+      <meta property="og:image" content="/assets/administrator.png" />
+      <meta property="og:url" content="https://dokusyo-no-wa.com/" />
+      <meta property="og:title" content="読書のわ" />
+      <meta property="og:description" content="読書の過程で考えたことを都度記録しながら発信しよう！" />
 
 
 
+    <% end %>
     <%# SweatAlert2の読み込み %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <%# ファビコン %>
@@ -42,24 +53,26 @@
                      {:rel => 'apple-touch-icon',
                       :sizes => '180x180',
                       :type => 'image/png'}) %>
+</head>
 
-  </head>
-
-  <body>
+<body>
     <% if signed_in? %>
-      <%= render "shared/header" %>
-    <% end %>
+    <%= render "shared/header" %>
     <div class="main_container">
-      <%#= render "shared/header" %>
-      <div class="sub_container">
-          <%= yield %>
-      </div>
+        <%#= render "shared/header" %>
+        <div class="sub_container">
+            <%= yield %>
+        </div>
     </div>
-    <% if signed_in? %>
-      <%= render "shared/footer" %>
+    <%= render "shared/footer" %>
     <% else %>
-      <%= render "shared/sign_in_link" %>
+    <%= render "shared/sign_in_link" %>
+      <div class="main_container">
+          <div class="sub_container">
+              <%= yield %>
+          </div>
+      </div>
     <% end %>
-  </body>
+</body>
+
 </html>
- 

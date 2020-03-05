@@ -1,4 +1,6 @@
-<p>検索条件</p>
+<p>●検索ワード</p>
+<%= @keyword %>
+<p>●検索結果</p>
 <% @results["items"].each do |result| %>
     <p class="book_title"><%= result["volumeInfo"]["title"] %></p>
     <p>

@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
       before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
     def index
-        @books = Book.where(user_id: current_user.id)
     end
 
     def new
@@ -66,8 +65,8 @@ class BooksController < ApplicationController
     end
 
     def search_books_result
-        keyword = params[:keyword]
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&maxResults=10")
+        @keyword = params[:keyword]
+        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=10")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
     end

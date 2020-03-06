@@ -1,10 +1,14 @@
 <%= form_with(model: Book.new, url: books_path) do |f| %>
-<%= f.hidden_field :api_path, value: @book['selfLink'] %>
-<%= f.hidden_field :api_id, value: @book['id'] %>
-<%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
-<%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
-<%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
-<button class="submit_btn_small">本棚に入れる</button>
+    <%= f.hidden_field :api_path, value: @book['selfLink'] %>
+    <%= f.hidden_field :api_id, value: @book['id'] %>
+    <%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
+    <%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
+    <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
+    <% if signed_in? %>
+        <button class="submit_btn_small">本棚に入れる</button>
+    <% else %>
+        <%= render "shared/sign_in_link" %>
+    <% end %>
 <% end %>
 <%# 本の情報を取得するapi_pathをセット %>
 <input class="api_path" type="hidden" name="api_path" value="<%= params[:api_path] %>">

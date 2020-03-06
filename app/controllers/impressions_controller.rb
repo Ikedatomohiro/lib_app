@@ -6,13 +6,13 @@ class ImpressionsController < ApplicationController
         # 表示したい本のデータを検索し、Book_idから感想レコードを検索する。
         @book = Book.find_by(impression_link: params[:id])
         @impressions = Impression.where(book_id: @book.id).order(created_at: "DESC")
-        @user = User.find_by(id: @book.user_id)
+        @book_owner = User.find_by(id: @book.user_id)
         # ツイッターカード用のデータをセット
         # 感想ページ所有ユーザーを取得
-        @user = User.find_by(id: @book.user_id)
+        @book_owner = User.find_by(id: @book.user_id)
         if @impressions.first
             @twitter_card = {
-                "site"        => "@#{@user.nickname}",
+                "site"        => "@#{@book_owner.nickname}",
                 "image"       => @book.thumbnail,
                 "url"         => "https://dokusyo-no-wa.com/impressions/#{@book.impression_link}",
                 "title"       => @book.title,

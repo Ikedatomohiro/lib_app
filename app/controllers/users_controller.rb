@@ -18,8 +18,8 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def show
-        @user = User.find_by(id: params[:id])
-        @books = Book.where(user_id:@user.id).order(created_at: "DESC")
+        @book_owner = User.find_by(id: params[:id])
+        @books = Book.where(user_id:@book_owner.id).order(created_at: "DESC")
         @books.each do |book|
             book.impressions = Impression.where(user_id: book.user_id,
                                                 book_id: book.id)

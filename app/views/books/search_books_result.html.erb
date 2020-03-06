@@ -11,10 +11,12 @@
         <% end %>
         </p>
     <div class="book_img_box">
-        <a href="/books/info/978-4822289607" >
+        <a href="/books/info/<%= result['id'] %>" >
             <p id="thumbnail" class="thumbnail_top">
                 <% if result["volumeInfo"]['imageLinks'].present? %>
                     <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
+                <% else %>
+                    <img src="/assets/book_img.svg" alt="本の画像">
                 <% end %>
             </p>
         </a>

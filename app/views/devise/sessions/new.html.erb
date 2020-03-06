@@ -1,7 +1,20 @@
+<div class="balloon5">
+    <div class="faceicon">
+        <%= image_tag "administrator.png", class: "user_icon" %>
+    </div>
+    <div class="chatting">
+        <div class="says">
+            ツイッターアカウントでログインをお願いします🙇<br>
+            以下の画像をクリックするとログインするよ！
+        </div>
+    </div>
+</div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <a href="/users/auth/twitter"><div class="logo_top"></div></a>
     <div class="sns_login_button">
     <%#= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
     </div>
-    <a href="/users/auth/twitter">Twitterアカウントでログイン</a>
+    <!-- <a href="/users/auth/twitter">Twitterアカウントでログイン</a> -->
 <% end %>
+利用規約
+プライバシーポリシー

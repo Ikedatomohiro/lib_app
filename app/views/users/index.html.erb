@@ -1,3 +1,6 @@
+<% if !signed_in? %>
+    <%= render "shared/sign_in_link" %>
+<% end %>
 <div class="home">
     <div>
         <% @vals.each do |val| %>
@@ -7,7 +10,7 @@
                 <%= image_tag val.image, class: 'user_icon' %>
             </a>
             <div class="top_impression_items">
-                <a href="/impressions/<%= val.impression_link %>">
+                <a href="/impressions/<%= val.impression_link %>" data-turbolinks="false">
                     <div class="top_impression">
                         <p class="book_title">
                             <%= val.title.truncate(20) %>

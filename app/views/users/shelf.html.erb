@@ -7,7 +7,7 @@
     <% if @books.present? %>
     <% @books.each do |book| %>
     <div class="book_img_box">
-        <a href="/impressions/<%= book.impression_link %>">
+        <a href="/impressions/<%= book.impression_link %>" data-turbolinks="false">
             <p class="thumbnail_top">
                 <%= image_tag book.thumbnail %>
             </p>

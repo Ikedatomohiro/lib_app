@@ -68,9 +68,10 @@ class ImpressionsController < ApplicationController
         #     @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
         # else
             @client.update(tweet)
-        # end
+        # # end
         impression.update(tweeted_flg: true)
         redirect_to root_path
+        redirect_to impression_path(book.impression_link)
     end
 
     private

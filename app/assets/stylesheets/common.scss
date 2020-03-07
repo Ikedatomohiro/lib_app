@@ -151,6 +151,8 @@
 
 .twitter_button {
   position: relative;
+  background-image: url(Twitter_Social_Icon.svg);
+  background-repeat: no-repeat;
   color : #ffffff;
   font-size: 12px;
   background-color: #1DA1F2;
@@ -162,8 +164,6 @@
 .twitter_button:before {
   content: '';
   position: absolute;
-  background-image: url(Twitter_Social_Icon.svg);
-  background-repeat: no-repeat;
   width: 30px;
   height: 30px;
   left: 0;

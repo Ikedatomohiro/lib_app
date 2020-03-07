@@ -3,129 +3,128 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="book_info">
-<% if !signed_in? %>
-    <%= render "shared/sign_in_link" %>
-    <div class="user_icon">
+    <% if !signed_in? %>
+        <%= render "shared/sign_in_link" %>
+        <div class="user_icon">
+            <a href="/users/<%= @book_owner.id %>">
+                <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            </a>
+            <%= @book_owner.nickname %>
+        </div>
+    <% end %>
+    <% if @book.user_id != current_user.id %>
         <a href="/users/<%= @book_owner.id %>">
             <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
         </a>
-        <%= @book_owner.nickname %>
-    </div>
-<% end %>
-<% if @book.user_id != current_user.id %>
-    <a href="/users/<%= @book_owner.id %>">
-        <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
-    </a>
-    <%= @book_owner.nickname %>&nbsp;さんの感想
-<% end %>
-
-<p id="title" class="book_title">「<%= @book.title %>」</p>
-
-<div class="book_info_inner">
-    <div class="book_img_area">
-        <a href="/books/info/
-    <%= @book.api_id %>" id="thumbnail">
-            <% if @book.thumbnail %>
-            <%= image_tag @book.thumbnail %>
-            <% else %>
-            <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
-            <% end %>
-        </a>
-    </div>
-    <table>
-        <tr>
-            <th>登録日</th>
-            <td>
-                <%= @book.created_at.strftime('%Y/%-m/%-d') %>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
-                <input type="hidden" name="calendar" value="reading_start_date">
-                <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                <% if @book.user_id === current_user.id %>
-                <%= f.submit '読始め' %>
-                <% else %>
-                読始め
-                <% end %>
-                <% end %>
-            </th>
-            <td id="reading_start_date">
-                <% if @book.reading_start_date %>
-                <%= @book.reading_start_date.strftime('%Y/%-m/%-d') %>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
-                <input type="hidden" name="calendar" value="reading_end_date">
-                <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                <% if @book.user_id === current_user.id %>
-                <%= f.submit '読了日' %>
-                <% else %>
-                読了日
-                <% end %>
-                <% end %>
-            </th>
-            <td id="reading_end_date">
-                <% if @book.reading_end_date %>
-                <%= @book.reading_end_date.strftime('%Y/%-m/%-d') %>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th>評価</th>
-            <td id="evaluation">
-                <% if @book.evaluation == nil%>
-                まだ評価していません。
-                <% end %>
-            </td>
-        </tr>
-    </table>
-</div>
-<%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける %>
-<% if signed_in? && @book.user_id === current_user.id %>
-<div>
-    <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
-    <%= f.hidden_field :book_id, value: @book.id %>
-    <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
+        <%= @book_owner.nickname %>&nbsp;さんの感想
     <% end %>
-</div>
-<div id="impression">
-</div>
-<% @impressions.each do |impression| %>   <div class="information_block">
-                <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
-                <input type="hidden" id="authenticity_token_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
-                    onfocus="colorReset(this)" 
-                    oninput="textAreaHeightSet(this)"
-                    onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
-                <p>
+
+    <p id="title" class="book_title">「<%= @book.title %>」</p>
+
+    <div class="book_info_inner">
+        <div class="book_img_area">
+            <a href="/books/info/<%= @book.api_id %>" id="thumbnail">
+                <% if @book.thumbnail %>
+                <%= image_tag @book.thumbnail %>
+                <% else %>
+                <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
                 <% end %>
+            </a>
+        </div>
+        <table>
+            <tr>
+                <th>登録日</th>
+                <td>
+                    <%= @book.created_at.strftime('%Y/%-m/%-d') %>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
+                    <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
+                    <input type="hidden" name="calendar" value="reading_start_date">
+                    <input type="hidden" name="book_id" value="<%= @book.id %> " />
+                    <% if @book.user_id === current_user.id %>
+                    <%= f.submit '読始め' %>
+                    <% else %>
+                    読始め
+                    <% end %>
+                    <% end %>
+                </th>
+                <td id="reading_start_date">
+                    <% if @book.reading_start_date %>
+                    <%= @book.reading_start_date.strftime('%Y/%-m/%-d') %>
+                    <% end %>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
+                    <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
+                    <input type="hidden" name="calendar" value="reading_end_date">
+                    <input type="hidden" name="book_id" value="<%= @book.id %> " />
+                    <% if @book.user_id === current_user.id %>
+                    <%= f.submit '読了日' %>
+                    <% else %>
+                    読了日
+                    <% end %>
+                    <% end %>
+                </th>
+                <td id="reading_end_date">
+                    <% if @book.reading_end_date %>
+                    <%= @book.reading_end_date.strftime('%Y/%-m/%-d') %>
+                    <% end %>
+                </td>
+            </tr>
+            <tr>
+                <th>評価</th>
+                <td id="evaluation">
+                    <% if @book.evaluation == nil%>
+                    まだ評価していません。
+                    <% end %>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
+    <% if signed_in? && @book.user_id === current_user.id %>
+        <div>
+            <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
+            <%= f.hidden_field :book_id, value: @book.id %>
+            <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
+            <% end %>
+        </div>
+            <% @impressions.each do |impression| %>
+                <div class="information_block">
+                    <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
+                        <input type="hidden" id="authenticity_token_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                        <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
+                                onfocus="colorReset(this)" 
+                                oninput="textAreaHeightSet(this)"
+                                onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
+                    <% end %>
                     <% if impression.impression_img_url%>
                         <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
                             <%= image_tag impression.impression_img_url , width: 200 %>
                         <% end %>
                     <% end %>
-                </p>
-                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
-                <% if !impression.tweeted_flg %>
-                    <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
-                        <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
-                        <input type="hidden" id="authenticity_token_tweet" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                        <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
-                        <%= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
+                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                    <% if !impression.tweeted_flg %>
+                        <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
+                            <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
+                            <input type="hidden" id="authenticity_token_tweet" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
+                            <%= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
+                            <%= image_tag "Twitter_Social_Icon_Rounded.png" %>
+                        <div class="twitter_button send_tweet"><%= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </div>
-        <% end %>
+                </div>
+            <% end %>
+    <%# この感想を書いたユーザーではない場合か、ログインしていない場合は閲覧のみ %>
     <% else %>
         <% @impressions.each do |impression| %>
-                <%= impression.impression %>
+            <%= impression.impression %>
             <p>
                 <% if impression.impression_img_url%>
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>
@@ -133,7 +132,7 @@
                     <% end %>
                 <% end %>
             </p>
-                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+            <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
         <% end %>
     <% end %>
 </div>

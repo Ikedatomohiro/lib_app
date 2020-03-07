@@ -114,11 +114,10 @@
                             <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
                             <input type="hidden" id="authenticity_token_tweet" name="authenticity_token" value="<%= form_authenticity_token %>" >
                             <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
-                            <%= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
-                            <%= image_tag "Twitter_Social_Icon_Rounded.png" %>
-                        <div class="twitter_button send_tweet"><%= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
-                            <%= image_tag "tweet_button.png" %>
-                            <%= image_tag "tweet_button.png", class: "tweet_button" %>
+                            <%#= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
+<!--                         <div class="twitter_button send_tweet"><%#= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
+ -->                            
+                            <%= image_tag "tweet_button.png", class: "tweet_button", id: "send_tweet_#{impression.id}" %>
                         <% end %>
                     <% end %>
                 </div>
@@ -165,7 +164,7 @@ $(document).on('turbolinks:load', function() {
           });
         });
 
-        $('.twitter_button').click(function() {
+        $('#send_tweet_<%= impression.id %>').click(function() {
         Swal.fire({
           title: '',
           text: "ツイートしますか？",

@@ -64,13 +64,13 @@ class ImpressionsController < ApplicationController
         # ツイートする画像をセット
         tweet_content = impression.impression.truncate(120)
         tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}"
+puts tweet
         # if impression.impression_img
         #     @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
         # else
-            @client.update(tweet)
+            # @client.update(tweet)
         # # end
-        impression.update(tweeted_flg: true)
-        redirect_to root_path
+        # impression.update(tweeted_flg: true)
         redirect_to impression_path(book.impression_link)
     end
 

@@ -236,6 +236,41 @@
 
 
 /* ユーザー情報終わり */
+.tweet_button {
+  display: block;
+  width: 80px;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.tweet_button:hover {
+  cursor: pointer;
+}
+
+.sign_in {
+  display: block;
+  width: 220px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
 
 
+.sign_in_button img{
+    background-color: #1DA1F2;
+    height: 30px;
+}
+
+.sign_in_button {
+    display: flex;
+    background-color: #1DA1F2;
+    border-radius: 5px;
+    padding: 5px;
+    width: 250px;
+}
+
+.sign_in_button p {
+    background-color: #1DA1F2;
+    color: #ffffff;
+    line-height: 30px;
+}
 

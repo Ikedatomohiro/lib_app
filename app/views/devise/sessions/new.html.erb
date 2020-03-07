@@ -4,8 +4,7 @@
     </div>
     <div class="chatting">
         <div class="says">
-            ツイッターアカウントでログインをお願いします🙇<br>
-            以下の画像をクリックするとログインできるよ！
+            ツイッターアカウントでログインをお願いします🙇
         </div>
     </div>
 </div>
@@ -14,7 +13,17 @@
     <div class="sns_login_button">
     <%#= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
     </div>
-    <!-- <a href="/users/auth/twitter">Twitterアカウントでログイン</a> -->
+    <a href="/users/auth/twitter">
+        <%= image_tag "sign_in_button.png", class: "sign_in" %>
+    </a>
 <% end %>
-利用規約
-プライバシーポリシー
+<div>
+    <a href="">利用規約</a>&nbsp;&nbsp;
+    <a href="">プライバシーポリシー</a>
+</div>
+
+<!-- 
+<div class="sign_in_button">
+    <%#= image_tag "Twitter_Social_Icon_Rounded.png" %>
+    <p>Twitterアカウントでログイン</p>
+</div> -->

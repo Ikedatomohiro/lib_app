@@ -118,9 +118,8 @@
                         <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
                         <input type="hidden" id="authenticity_token_tweet" name="authenticity_token" value="<%= form_authenticity_token %>" >
                         <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
-                        <div class="twitter_button send_tweet"><%= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
-<!--                         <button class="twitter_button impression_tweet_button">つぶやく</button>
- -->                    <% end %>
+                        <%= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
+                    <% end %>
                 <% end %>
             </div>
         <% end %>
@@ -137,7 +136,6 @@
                 <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
         <% end %>
     <% end %>
-
 </div>
 
 <script>

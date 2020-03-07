@@ -93,6 +93,17 @@
   text-align: right;
 }
 
+.tweet_button {
+  display: block;
+  width: 80px;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.tweet_button:hover {
+  cursor: pointer;
+}
+
 
 
 

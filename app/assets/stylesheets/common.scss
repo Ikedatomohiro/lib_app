@@ -149,38 +149,6 @@
   color: #666666;
 }
 
-.twitter_button {
-  display: flex;
-  height: 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #1DA1F2;
-}
-
-.twitter_button p {
-  line-height: 30px;
-  font-size: 14px;
-  color: #ffffff;
-  background-color: #1DA1F2;
-  margin-bottom: 10px;
-}
-
-.twitter_button img {
-  width: 30px;
-  background-color: #1DA1F2;
-  border-radius: 5px;
-}
-
-.send_tweet {
-  margin-left: auto
-}
-
-.tweet_button {
-  width: 80px;
-  border-radius: 5px;
-  text-align:right;
-}
-
 .twitter_button:active {
   margin-top: 3px;
 }

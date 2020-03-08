@@ -5,25 +5,28 @@
     <div>
         <% @vals.each do |val| %>
         <div class="top_impression_block">
-            <% val.impression_id %>
-            <a href="/users/<%= val.user_id %>">
-                <%= image_tag val.image, class: 'user_icon' %>
-            </a>
             <div class="top_impression_items">
-                <a href="/impressions/<%= val.impression_link %>" data-turbolinks="false">
-                    <div class="top_impression">
-                        <p class="book_title">
-                            <%= val.title.truncate(20) %>
-                        </p>
-                        <%= val.impression.truncate(100) %>
-                    </div>
+                <% val.impression_id %>
+                <a href="/users/<%= val.user_id %>">
+                    <%= image_tag val.image, class: 'user_icon' %>
                 </a>
-                <div>
-                    <a href="/books/info/<%= val.api_id %>" class="top_thumbnail">
-                        <%= image_tag val.thumbnail %>
+                <div class="top_impression_and_book">
+                    <a href="/impressions/<%= val.impression_link %>" data-turbolinks="false">
+                        <div class="top_impression">
+                            <p class="book_title">
+                                <%= val.title.truncate(20) %>
+                            </p>
+                            <%= val.impression.truncate(100) %>
+                        </div>
                     </a>
+                    <div>
+                        <a href="/books/info/<%= val.api_id %>" class="top_thumbnail">
+                            <%= image_tag val.thumbnail %>
+                        </a>
+                    </div>
                 </div>
             </div>
+            <p class="impression_time"><%= val.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
         </div>
         <% end %>
     </div>

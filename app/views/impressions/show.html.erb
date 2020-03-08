@@ -16,7 +16,7 @@
         <a href="/users/<%= @book_owner.id %>">
             <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
         </a>
-        <%= @book_owner.nickname %>&nbsp;さんの感想
+        <%= @book_owner.name %>&nbsp;さんの感想
     <% end %>
 
     <p id="title" class="book_title">「<%= @book.title %>」</p>

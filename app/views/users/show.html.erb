@@ -1,18 +1,19 @@
 <% if !signed_in? %>
     <%= render "shared/sign_in_link" %>
 <% end %>
-<div class="twitter_account_link">
-    <a href=" https://twitter.com/<%= @book_owner.nickname %> " class="twitter_button " target="_brank"></a>
-</div>
-
-
-
-    <p>
-        <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
-        <%= @book_owner.nickname %>
-    </p>
-
-
+<% if !signed_in? || @book_owner.id != current_user.id %>
+    <div class="book_owner_info">
+        <p class="book_owner_name">
+            <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            <p><%= @book_owner.name %></p>
+        </p>
+        <div class="twitter_account_link">
+            <a href="<%= @book_owner.twitter_link %>" class="twitter_button" target="_brank">
+                <%= image_tag "Twitter_icon_circle.svg" %>
+            </a>
+        </div>
+    </div>
+<% end %>
 <div class="page_wrapper">
     <% if current_user %>
         <%#= link_to '読書履歴', readinghistory_path %>
@@ -54,14 +55,16 @@
             <% end %>
             </div>
         </div>
-        <a href="/impressions/<%= book.impression_link %>" data-turbolinks="false">
-            <% book.impressions.each do |impression| %>
-                <p class="impression">
-                    <%= impression.impression.truncate(50) %>
-                </p>
-                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
-            <% end %>
-        </a>
+        <div class="book_impression_box">
+            <a href="/impressions/<%= book.impression_link %>" data-turbolinks="false">
+                <% book.impressions.each do |impression| %>
+                    <p class="impression">
+                        <%= impression.impression.truncate(50) %>
+                    </p>
+                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                <% end %>
+            </a>
+        </div>
         <% end %>
 
     </div>

@@ -1,3 +1,64 @@
 // Place all the styles related to the contacts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.contact_area {
+  margin-bottom: 20px;
+}
+
+.says p {
+  background: #d7ebfe;
+}
+
+.balloon5 {
+  width: 100%;
+  margin: 1.5em 0;
+  overflow: hidden;
+}
+
+.faceicon_admin {
+  float: right;
+  margin-left: 0px;
+  margin-top: 30px;
+  width: 65px;
+}
+
+.faceicon_admin img{
+  width: 100%;
+  height: auto;
+  border: solid 3px #d7ebfe;
+  border-radius: 50%;
+}
+
+.balloon5 .chatting {
+  width: 100%;
+}
+
+.says_admin {
+  display: inline-block;
+  position: relative; 
+  margin: 5px 20px 0 0;
+  padding: 17px 13px;
+  border-radius: 12px;
+  background: #d7ebfe;
+}
+
+.says_admin:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 18px; 
+  right: -24px;
+  border: 12px solid transparent;
+  border-left: 12px solid #d7ebfe;
+}
+
+.says_admin p {
+  margin: 0;
+  padding: 0;
+  background: #d7ebfe;
+}
+
+.reply {
+    display: flex;
+}

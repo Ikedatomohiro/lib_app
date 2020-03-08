@@ -35,22 +35,24 @@
 
 .top_impression_block {
     margin-bottom: 20px;
-    display: flex;
     padding: 10px 0;
-    border-bottom: 1px solid #FFCD89;
+    border-bottom: 1px solid #E8F7B6;
 }
 
 .top_impression_items {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-left: 20px;
 }
 
 .top_impression_items a {
     text-decoration: none
 }
 
+.top_impression_and_book {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    width: 100%;
+}
 .top_thumbnail img {
     width: 10vw;
 }
@@ -225,19 +227,30 @@
     height: 200px;
 }
 
-.twitter_account_link {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    margin-top: 7px;
-    width: 40px;
-}
-
 .self_introduction_area {
     width: 100%;
     margin: 10px 0;
 }
 
+.book_owner_info {
+    display: flex;
+}
+
+.book_owner_info p {
+    padding-left: 15px;
+    line-height: 48px;
+    text-align: left;
+}
+
+.book_owner_name {
+    display: flex;
+}
+
+.twitter_account_link {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
 
 /* ユーザー情報終わり */
 

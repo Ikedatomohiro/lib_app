@@ -76,6 +76,7 @@
   border-radius: 5px;
   text-decoration: none;
   padding: 10px;
+  line-height: 15px;
 }
 
 .submit_btn_small input:active, .submit_btn_small a:active, .submit_btn_small:active　{
@@ -172,7 +173,7 @@
 .balloon5 .faceicon {
   float: left;
   margin-right: -90px;
-  width: 80px;
+  width: 65px;
 }
 
 .balloon5 .faceicon img{
@@ -189,7 +190,7 @@
 .says {
   display: inline-block;
   position: relative; 
-  margin: 5px 0 0 105px;
+  margin: 5px 0 0 80px;
   padding: 17px 13px;
   border-radius: 12px;
   background: #d7ebfe;
@@ -209,5 +210,13 @@
   margin: 0;
   padding: 0;
 }
+
+.balloon5 {
+  width: 100%;
+  margin: 1.5em 0;
+  overflow: hidden;
+}
+
+
 /* 吹き出し終わり */
 

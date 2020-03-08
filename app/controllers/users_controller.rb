@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-      before_action :authenticate_user!, except: [:index, :show] # ログインしていないときはログインページに移動
+      before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy] # ログインしていないときはログインページに移動
 
     def index
         private_impression_users = User.impression_private
@@ -42,7 +42,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
         impression = Impression.where(book_id: book.id,
                                       user_id: current_user.id).count
         # book.push(tweet)
-        puts impression
         end
     end
 
@@ -77,6 +76,17 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     def reading_history
     end
+
+    # 利用規約ページ
+    def terms_of_service
+        
+    end
+
+    # 個人情報の取扱について説明ページ
+    def privacy_policy
+        
+    end
+
 
     private
         def self_introduction_params

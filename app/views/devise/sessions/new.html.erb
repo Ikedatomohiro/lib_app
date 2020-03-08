@@ -9,7 +9,7 @@
     </div>
 </div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<a href="/users/auth/twitter"><div class="logo_top"></div></a>
+    <div class="logo_top"></div>
     <div class="sns_login_button">
     <%#= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
     </div>
@@ -17,9 +17,9 @@
         <%= image_tag "sign_in_button.png", class: "sign_in" %>
     </a>
 <% end %>
-<div>
-    <a href="">利用規約</a>&nbsp;&nbsp;
-    <a href="">プライバシーポリシー</a>
+<div class="important_info">
+    <%= link_to "利用規約", users_terms_of_service_path %>&nbsp;&nbsp;
+    <%= link_to "プライバシーポリシー", users_privacy_policy_path %>&nbsp;&nbsp;
 </div>
 
 <!-- 

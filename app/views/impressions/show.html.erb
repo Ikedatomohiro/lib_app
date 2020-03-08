@@ -94,6 +94,8 @@
             <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
             <% end %>
         </div>
+        <%# 感想記入フィールド表示場所 %>
+        <div id="impression"></div>
             <% @impressions.each do |impression| %>
                 <div class="information_block">
                     <%= form_with model:impression, url: impression_path(impression.id) do |f| %>

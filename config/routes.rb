@@ -15,6 +15,8 @@ post 'users/update_self_introduction'   => 'users#update_self_introduction'
 post 'users/publish_impression'         => 'users#update_publish_impression'
 get  'readinghistory'                   => 'users#reading_history'
 get  'request'                          => 'users#request_page'
+get  'users/terms_of_service'           => 'users#terms_of_service'
+get  'users/privacy_policy'             => 'users#privacy_policy'
 post 'users/send_request'               => 'users#send_request'
 resources :users
 

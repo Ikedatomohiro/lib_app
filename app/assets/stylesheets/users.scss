@@ -160,7 +160,11 @@
 
 
 /* セッティングはじめ */
-
+.item_block a {
+    text-decoration: none;
+    margin: 20px;
+    line-height: 40px;
+}
 
 .app_checkbox {
     margin-left: 100px; 
@@ -236,6 +240,8 @@
 
 
 /* ユーザー情報終わり */
+
+/*ログインページ始め*/
 .tweet_button {
   display: block;
   width: 80px;
@@ -273,4 +279,14 @@
     color: #ffffff;
     line-height: 30px;
 }
+
+.important_info {
+    max-width: 300px;
+    margin: 50px auto 0;
+}
+
+.important_info a {
+    font-size: 12px;
+}
+/*ログインページ始め*/
 

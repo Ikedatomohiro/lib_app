@@ -121,6 +121,7 @@
 
 .book_img {
     width: 20vw;
+    max-width: 100px;
 }
 
 .search_book_button {
@@ -252,6 +253,11 @@
     margin: auto;
 }
 
+.twitter_button img {
+  width: 80px;
+  border-radius: 5px;
+
+}
 /* ユーザー情報終わり */
 
 /*ログインページ始め*/

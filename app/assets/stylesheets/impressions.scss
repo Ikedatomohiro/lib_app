@@ -40,12 +40,7 @@
   width: 30px;
 }
 
-.select_picture:active {
-  padding-top: 3px;
-}
-
 .select_picture:hover {
-  padding-bottom: 3px;
   cursor: pointer;
 }
 
@@ -108,5 +103,8 @@
   text-decoration: none;
 }
 
-
+.impression_submit_button {
+  margin-top: 15px;
+  text-align: right;
+}
 

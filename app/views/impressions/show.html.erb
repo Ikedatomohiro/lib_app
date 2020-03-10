@@ -4,19 +4,18 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="book_info">
     <% if !signed_in? %>
-        <%= render "shared/sign_in_link" %>
-        <div class="user_icon">
-            <a href="/users/<%= @book_owner.id %>">
-                <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
-            </a>
-            <%= @book_owner.nickname %>
-        </div>
     <% end %>
-    <% if @book.user_id != current_user.id %>
+    <% if signed_in? && @book.user_id != current_user.id %>
         <a href="/users/<%= @book_owner.id %>">
             <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
         </a>
         <%= @book_owner.name %>&nbsp;さんの感想
+    <% else %>
+        <%= render "shared/sign_in_link" %>
+            <a href="/users/<%= @book_owner.id %>">
+                <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            </a>
+            <%= @book_owner.name %>&nbsp;さんの感想
     <% end %>
 
     <p id="title" class="book_title">「<%= @book.title %>」</p>
@@ -44,7 +43,7 @@
                     <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
                     <input type="hidden" name="calendar" value="reading_start_date">
                     <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                    <% if @book.user_id === current_user.id %>
+                    <% if signed_in? && @book.user_id === current_user.id %>
                     <%= f.submit '読始め' %>
                     <% else %>
                     読始め
@@ -63,7 +62,7 @@
                     <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
                     <input type="hidden" name="calendar" value="reading_end_date">
                     <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                    <% if @book.user_id === current_user.id %>
+                    <% if signed_in? && @book.user_id === current_user.id %>
                     <%= f.submit '読了日' %>
                     <% else %>
                     読了日

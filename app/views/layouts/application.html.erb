@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%# ツイッターカードの埋め込み %>
     <% if @twitter_card %>
-        <meta name="twitter:card" content="Summary" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@paoDokushonowa" />
         <meta property="og:url" content="<%= @twitter_card["url"] %>" />
         <meta property="og:title" content="<%= @twitter_card["title"] %>" />
@@ -33,13 +33,13 @@
     <% end %>
     <%# 感想ページからのツイッターカードがないときは固定の画像を表示 %>
     <% else %>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@paoDokushonowa" />
-    <meta name="twitter:creator" content="@paoDokushonowa" />
-    <meta property="og:url" content="https://dokusyo-no-wa.com/" />
-    <meta property="og:title" content="読書のわ" />
-    <meta property="og:description" content="読書の過程で考えたことを都度記録して、発信もしちゃおう！" />
-    <meta property="og:image" content="https://dokusyo-no-wa.com/assets/administrator.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@paoDokushonowa" />
+        <meta name="twitter:creator" content="@paoDokushonowa" />
+        <meta property="og:url" content="https://dokusyo-no-wa.com/" />
+        <meta property="og:title" content="読書のわ" />
+        <meta property="og:description" content="読書の過程で考えたことを都度記録して、発信もしちゃおう！" />
+        <meta property="og:image" content="https://dokusyo-no-wa.com/assets/administrator.png" />
     <% end %>
     <%# SweatAlert2の読み込み %>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

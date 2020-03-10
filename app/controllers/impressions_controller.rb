@@ -19,6 +19,7 @@ class ImpressionsController < ApplicationController
                 "description" => @impressions.first.impression,
             }
         end
+puts @twitter_card
     end
 
     def new

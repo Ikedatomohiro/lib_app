@@ -3,7 +3,9 @@
     <%= f.hidden_field :api_id, value: @book['id'] %>
     <%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
     <%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
-    <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
+    <% if @book["volumeInfo"]['imageLinks'] %>
+        <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
+    <% end %>
     <% if signed_in? %>
         <button class="submit_btn_small">本棚に入れる</button>
     <% else %>
@@ -16,7 +18,11 @@
     <tr>
         <th width="20%"></th>
         <td id="thumbnail">
+        <% if @book["volumeInfo"]['imageLinks'] %>
             <%= image_tag @book['volumeInfo']['imageLinks']['thumbnail'] %>
+        <% else %>
+            <img src="/assets/book_img.svg" alt="本の画像">
+        <% end %>
         </td>
     </tr>
     <tr>

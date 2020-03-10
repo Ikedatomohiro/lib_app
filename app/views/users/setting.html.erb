@@ -32,11 +32,24 @@
     </p>
 </div>
 <div class="item_block">
-</div>
-<div class="item_block">
+    <p class="sub_title">
+    <%= link_to "●利用規約", users_terms_of_service_path %>&nbsp;&nbsp;
+    </p>
+    <p class="sub_title">
+    <%= link_to "●プライバシーポリシー", users_privacy_policy_path %>&nbsp;&nbsp;
+    </p>
+    <p class="greeting_from_admin">
+        ★本アプリを訪れていただきありがとうございます！
+        管理者のツイッターアカウントもご覧いただけると嬉しいです！
+    </p>
+    <p class="greeting_from_admin">
+        <%= link_to "●管理者のアカウントへ", "https://twitter.com/paoDokushonowa", target: "_blank" %>
+    </p>
     <p class="sub_title">
         <%= link_to "●ログアウト", destroy_user_session_path, method: :delete %>
     </p>
+</div>
+<div class="item_block">
 </div>
 <script>
 $('#impression').change(function() {

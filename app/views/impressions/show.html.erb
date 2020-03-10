@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="book_info">
     <% if !signed_in? %>
+        <%= render "shared/sign_in_link" %>
     <% end %>
     <% if signed_in? && @book.user_id != current_user.id %>
         <a href="/users/<%= @book_owner.id %>">
@@ -11,7 +12,6 @@
         </a>
         <%= @book_owner.name %>&nbsp;さんの感想
     <% else %>
-        <%= render "shared/sign_in_link" %>
             <a href="/users/<%= @book_owner.id %>">
                 <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
             </a>

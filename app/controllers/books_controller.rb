@@ -28,6 +28,12 @@ class BooksController < ApplicationController
         # すでに登録済かどうか確認する
         book = Book.find_by(api_path: params[:book][:api_path],
                             user_id: current_user.id)
+        if params[:book][:thmumbnail]
+            thumbnail = params[:book][:thmumbnail]
+        else
+            thumbnail = '/assets/book_img.svg'
+        end
+
         if book
             puts 'すでに本棚に入っています。'
         else
@@ -39,7 +45,7 @@ class BooksController < ApplicationController
                              api_id: params[:book][:api_id],
                              title: params[:book][:title],
                              author: params[:book][:author],
-                             thumbnail: params[:book][:thmumbnail],
+                             thumbnail: thumbnail,
                              impression_link: unique_id)
             @book.save!
         end

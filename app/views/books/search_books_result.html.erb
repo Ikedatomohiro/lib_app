@@ -16,7 +16,7 @@
                 <% if result["volumeInfo"]['imageLinks'].present? %>
                     <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
                 <% else %>
-                    <img src="/assets/book_img.svg" alt="本の画像">
+                    <img src="/assets/book_img.svg" alt="本の画像" class="result_book_img">
                 <% end %>
             </p>
         </a>

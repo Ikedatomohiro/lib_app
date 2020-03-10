@@ -28,7 +28,7 @@
 </div>
  --><div class="item_block">
     <p class="sub_title">
-        <%= link_to('●ご意見・ご要望', contacts_path) %>
+        <%= link_to('●ご意見・ご要望はこちら', contacts_path) %>
     </p>
 </div>
 <div class="item_block">
@@ -38,18 +38,24 @@
     <p class="sub_title">
     <%= link_to "●プライバシーポリシー", users_privacy_policy_path %>&nbsp;&nbsp;
     </p>
-    <p class="greeting_from_admin">
-        ★本アプリを訪れていただきありがとうございます！
-        管理者のツイッターアカウントもご覧いただけると嬉しいです！
-    </p>
-    <p class="greeting_from_admin">
-        <%= link_to "●管理者のアカウントへ", "https://twitter.com/paoDokushonowa", target: "_blank" %>
-    </p>
     <p class="sub_title">
         <%= link_to "●ログアウト", destroy_user_session_path, method: :delete %>
     </p>
 </div>
-<div class="item_block">
+<div class="balloon5">
+    <div class="faceicon">
+        <%= image_tag "administrator.png", class: "user_icon" %>
+    </div>
+    <a href="https://twitter.com/paoDokushonowa" target="_blank">
+        <div class="chatting">
+            <div class="says">
+                このアプリを訪れていただきありがとうございます！<br>
+                皆様のご意見をもとに改良していきます！<br>
+                ぜひコメントお願いいたします！<br>
+                この吹き出しから管理者のツイッターアカウントもご覧いただけると嬉しいです！
+            </div>
+        </div>
+    </a>
 </div>
 <script>
 $('#impression').change(function() {

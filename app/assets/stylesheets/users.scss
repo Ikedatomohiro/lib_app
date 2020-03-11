@@ -251,14 +251,12 @@
 }
 
 .twitter_account_link {
-    width: 30px;
-    height: 30px;
-    margin: auto;
+    margin: auto 0;
 }
 
-.twitter_button img {
-  width: 35px;
-  border-radius: 50%;
+.twitter_link img {
+  width: 80px;
+  border-radius: 5px;
 
 }
 /* ユーザー情報終わり */
@@ -310,5 +308,5 @@
 .important_info a {
     font-size: 12px;
 }
-/*ログインページ始め*/
+/*ログインページ終わり*/
 

@@ -46,7 +46,7 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def setting
-        if !Setting.find_by(id: current_user.id)
+        if !Setting.find_by(user_id: current_user.id)
             @user_setting = Setting.new(user_id: current_user.id)
             @user_setting.save!
         end

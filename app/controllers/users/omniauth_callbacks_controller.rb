@@ -16,6 +16,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  def failure
+    redirect_to root_path
+  end
+
   # common callback method
   private
  
@@ -32,10 +36,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.#{provider}_data"] = request.env['omniauth.auth'].except("extra")
       redirect_to new_user_registration_url
     end
-  end
-
-  def failure
-    redirect_to root_path
   end
 
   # You should configure your model like this:

@@ -34,6 +34,9 @@ class User < ApplicationRecord
         oauth_token_secret: auth.credentials.secret,
         twitter_link:       auth.info.urls.Twitter,
       )
+      setting = Setting.create(
+        user_id: user.id
+      )
     end
  
     user

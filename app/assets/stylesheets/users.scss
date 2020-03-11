@@ -61,7 +61,7 @@
 .book_title {
     color: #A9AC5F;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
 }
 /* 感想ブロックおわり */
 
@@ -72,6 +72,10 @@
 
 .user_name {
     padding: 10px;
+}
+
+.user_name p {
+    line-height: 2em;
 }
 
 .user_icon .user_icon_img{

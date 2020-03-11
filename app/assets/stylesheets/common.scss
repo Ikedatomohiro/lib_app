@@ -72,17 +72,60 @@
 .submit_btn_small input, .submit_btn_small a, .submit_btn_small{
   color :#ffffff;
   font-size: 12px;
-  background-color: #1D4E56;
   border-radius: 5px;
   text-decoration: none;
   padding: 10px;
   line-height: 15px;
+  font-weight: bold;
+  background: linear-gradient(#A1BE40 0%, #1D4E56 100%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
 }
 
 .submit_btn_small input:active, .submit_btn_small a:active, .submit_btn_small:active　{
   border-bottom: solid 2px #fd9535;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
+
+
+
+
+.btn-square-soft {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #f9a9ae;
+  width: 120px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  background: linear-gradient(#fed6e3 0%, #ffaaaa 100%);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+}
+
+.btn-square-soft:active {
+  /*押したとき*/
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);/*沈むように*/
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  background-image: linear-gradient(#fed6e3 0%, #ffbcbc 100%);/*グラデーションを明るく*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .input_area {
   border: 1px solid;

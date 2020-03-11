@@ -19,5 +19,17 @@
     max-width: 82px;
 }
 
-.shelf_book_img {
+.thumbnail_shelf {
+    height: 20vw;
+    max-width: 67px;
+    max-height: 100px;
+    margin-right :20px;
+}
+
+.book_img_box {
+    border-bottom: 1px solid #E8F7B6;
+}
+
+.into_shelf_button {
+    margin: 15px;
 }

@@ -54,7 +54,8 @@
     width: 100%;
 }
 .top_thumbnail img {
-    width: 10vw;
+    width: 13vw;
+    margin-right: 5px;
 }
 
 .book_title {
@@ -96,13 +97,6 @@
     display: flex;
 }
 
-.thumbnail_top img {
-    height: 20vw;
-    max-width: 67px;
-    max-height: 100px;
-    margin-right :20px;
-}
-
 .title_top {
     margin-top: 5vw;
     max-height: 150px;
@@ -121,7 +115,7 @@
 }
 
 .book_img {
-    width: 20vw;
+    width: 13vw;
     max-width: 100px;
 }
 
@@ -140,6 +134,14 @@
 .book_count {
     padding-top: 10px;
     padding-left: 10px;
+}
+
+.shelf_book {
+    margin: 5px;
+}
+
+.shelf_impression_link {
+    text-decoration: none;
 }
 /* 本棚終わり */
 
@@ -251,7 +253,8 @@
 }
 
 .twitter_account_link {
-    margin: auto 0;
+    width: 40px;
+    margin: auto;
 }
 
 .twitter_icon img {

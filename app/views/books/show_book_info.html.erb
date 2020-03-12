@@ -1,9 +1,7 @@
 <%= form_with(model: Book.new, url: books_path) do |f| %>
     <%= f.hidden_field :api_path, value: @book['selfLink'] %>
     <%= f.hidden_field :api_id, value: @book['id'] %>
-    <% if @book["volumeInfo"]['title'] %>
-        <%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
-    <% end %>
+    <%= f.hidden_field :title, value: @book['volumeInfo']['title'] %>
     <%= f.hidden_field :author, value: @book["volumeInfo"]['authors'] %>
     <% if @book["volumeInfo"]['imageLinks'] %>
         <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>

@@ -1,7 +1,18 @@
+/* ホームはじめ */
+.home_header {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px;
+    border-bottom: 1px solid;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 .main_container {
     margin: 0 auto;
     position: relative;
     padding-bottom: 50px;
+    max-width: 700px;
 }
 
 .sub_container {

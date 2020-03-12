@@ -15,14 +15,6 @@
 
 /* ログインページ終わり */
 
-/* ホームはじめ */
-.home_header {
-    display: flex;
-    justify-content: space-around;
-    padding: 3px;
-    border-bottom: 1px solid;
-}
-
 /* 感想ブロックはじめ */
 .user_icon {
     width: 48px;
@@ -55,6 +47,7 @@
 }
 .top_thumbnail img {
     width: 13vw;
+    max-width: 100px;
     margin-right: 5px;
 }
 

@@ -4,7 +4,8 @@ class UsersController < ApplicationController
     def index
         private_impression_users = User.impression_private
         # Impression, User, BookをINNER JOIN
-        @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
+        # @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
+        @impressions = Impression.all.order(updated_at: "DESC")
 
 puts 'おはようございます。
 今日も一日元気に頑張りましょう。
@@ -46,10 +47,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def setting
-        if !Setting.find_by(user_id: current_user.id)
-            @user_setting = Setting.new(user_id: current_user.id)
-            @user_setting.save!
-        end
         @user_setting = Setting.find_by(user_id: current_user.id)
 
     end

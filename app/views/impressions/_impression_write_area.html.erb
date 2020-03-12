@@ -27,12 +27,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     <img id="impression_img_preview" class="impression_img_preview">
 
 <script>
-// 画像アップロード用ボタンをクリック
-function clickUploadButton() {
-      $("#impression_impression_img").click();
-      return false;
-};
-
 // 星で評価を表現する。
 $('#star').raty({
     size    : 36,
@@ -40,6 +34,12 @@ $('#star').raty({
     starOn  : '<%= asset_path('star-on.png') %>',
     score   : '<%= @book.evaluation %>'
 });
+
+// 画像アップロード用ボタンをクリック
+function clickUploadButton() {
+      $("#impression_impression_img").click();
+      return false;
+};
 
 $(function(){
     $("#impression_impression").on("keyup", function() {
@@ -50,6 +50,7 @@ $(function(){
     });
 });
 
+// 画像を選択したらすぐに表示する。
 $('#impression_impression_img').on('change', function (e) {
     var reader = new FileReader();
     reader.onload = function (e) {

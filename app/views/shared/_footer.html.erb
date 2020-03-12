@@ -1,5 +1,11 @@
 <div class="footer">
-    <%= link_to image_tag('home.svg'), '/' , alt:'ホーム', class:'home_icon'%>
-    <%= link_to image_tag('bookshelf.svg'), shelf_path, alt:'本棚', class:'bookshelf_icon' %>
-    <%= link_to image_tag('setting.svg'), setting_path, alt:'設定', class:'setting_icon'%>
+    <a href="<%= root_path %>" class="home_icon" data-turbolinks="false">
+        <img src="/assets/home.svg" alt="">
+    </a>
+    <a href="<%= shelf_path %>" class="bookshelf_icon">
+        <img src="/assets/bookshelf.svg" alt="">
+    </a>
+    <a href="<%= setting_path %>" class="setting_icon">
+        <img src="/assets/setting.svg" alt="">
+    </a>
 </div>

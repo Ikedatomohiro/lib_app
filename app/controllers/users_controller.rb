@@ -84,6 +84,11 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
         
     end
 
+    # リリースノート
+    def release_note
+        
+    end
+
 
     private
         def self_introduction_params

@@ -316,3 +316,21 @@
 }
 /*ログインページ終わり*/
 
+/* リリースノート始め */
+.release_note_block {
+    padding: 10px 0;
+    border-bottom: 1px solid #E8F7B6;
+}
+
+.release_note_header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.release_note_title {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+/* リリースノート終わり */
+

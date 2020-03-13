@@ -18,6 +18,7 @@ get  'request'                          => 'users#request_page'
 get  'users/terms_of_service'           => 'users#terms_of_service'
 get  'users/privacy_policy'             => 'users#privacy_policy'
 post 'users/send_request'               => 'users#send_request'
+get  'users/release_note'               => 'users#release_note'
 resources :users
 
 get  'books/search_books_result'        => 'books#search_books_result'

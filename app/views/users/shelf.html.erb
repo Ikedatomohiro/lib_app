@@ -12,7 +12,7 @@
                         <%= image_tag book.thumbnail ,class: "book_img shelf_book" %>
                     </p>
                 </a>
-                <a href="/impressions/<%= book.impression_link %>" class="shelf_impression_link" data-turbolinks="false">
+                <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
                     <div class="book_title" id="title_<%= book.id %>">
                         <%= book.title %>
                         <div class="book_count_info">

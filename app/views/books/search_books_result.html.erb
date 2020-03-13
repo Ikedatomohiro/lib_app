@@ -24,7 +24,7 @@
                 <% end %>
             </p>
         </a>
-        <p>
+        <p class="into_shelf_button">
             <%= form_with model: Book.new, url: books_path do |f| %>
             <%= f.hidden_field :api_path, value: result['selfLink'] %>
             <%= f.hidden_field :api_id, value: result['id'] %>
@@ -35,7 +35,7 @@
             <%= f.hidden_field :thmumbnail, value: result["volumeInfo"]['imageLinks']['thumbnail'] %>
                 <% end %>
                 <% end %>
-            <%= f.submit '本棚に入れる', class: 'submit_btn_small into_shelf_button' %>
+            <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
             <% end %>
         </p>
     </div>

@@ -104,8 +104,15 @@
   text-decoration: none;
 }
 
-.impression_submit_button {
-  text-align: right;
+.impression_buttons {
+  display: flex; 
+  justify-content: flex-end;
 }
 
+.impression_img_button {
+  margin-right: 20px;
+}
 
+.impression_submit_button {
+  padding-top: 5px;
+}

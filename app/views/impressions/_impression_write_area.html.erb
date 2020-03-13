@@ -6,12 +6,17 @@
         <p id="star"></p>
     </div>
     <div>
-    <p class="impression_submit_button">
+    <div class="impression_buttons">
+        <div class="impression_img_button">
         <%= image_tag 'picture.svg', class: 'select_picture', onclick:"return clickUploadButton()" %>
+        </div>
+        <div class="impression_submit_button">
         <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf"%>
-        <!-- <p id="counter" class="letter_counter">0文字</p> -->
+
         <%= f.submit '感想を保存する', class: 'submit_btn_small impression_save_button' %>
-    </p>
+        </div>
+        <!-- <p id="counter" class="letter_counter">0文字</p> -->
+    </div>
         
     </div>
 

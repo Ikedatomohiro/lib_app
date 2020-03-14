@@ -13,6 +13,8 @@
 .impression_time {
     font-size: 8px;
     text-align: right;
+    line-height: 26px;
+    padding-left: 15px;
 }
 
 .impression_tweet_button {
@@ -115,4 +117,17 @@
 
 .impression_submit_button {
   padding-top: 5px;
+}
+
+.impression_sub_item {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fire_work {
+  width: 10px;
+}
+
+.fire_work:hover {
+  cursor: pointer;
 }

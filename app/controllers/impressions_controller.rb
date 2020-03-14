@@ -45,7 +45,10 @@ class ImpressionsController < ApplicationController
     end
 
     def destroy
-        
+        impression =Impression.find_by(id: params[:id])
+        book = Book.find_by(id: impression.book_id)
+        impression.destroy
+        redirect_to "/impressions/#{book.impression_link}"
     end
 
     def add_impression_field

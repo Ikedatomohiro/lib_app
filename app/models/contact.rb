@@ -1,4 +1,5 @@
 class Contact < ApplicationRecord
+    belongs_to :user
     enum contact_type:{
         ご利用の感想: 0,
         機能追加の要望: 1,

@@ -84,7 +84,7 @@
             </tr>
         </table>
     </div>
-    <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
+<%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
         <div>
             <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
@@ -92,7 +92,7 @@
             <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
             <% end %>
         </div>
-        <%# 感想記入フィールド表示場所 %>
+<%# 感想記入フィールド表示場所 %>
         <div id="impression"></div>
             <% @impressions.each do |impression| %>
                 <div class="information_block">
@@ -108,11 +108,19 @@
                             <%= image_tag impression.impression_img_url , width: 200 %>
                         <% end %>
                     <% end %>
-                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+<%# 感想削除ボタン %>
+                    <div class="impression_sub_item">
+                        <%= form_with(model: @impression, url: impression_path) do |form| %>
+                            <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
+                        <% end %>
+                        <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                    </div>
+<%# ツイッター投稿ボタン %>
                     <% if !impression.tweeted_flg %>
                         <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
                             <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
-                            <input type="hidden" id="authenticity_token_tweet" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <input type="hidden" id="authenticity_token_tweet_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
                             <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
                             <%#= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
 <!--                         <div class="twitter_button send_tweet"><%#= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
@@ -163,15 +171,15 @@ $(document).on('turbolinks:load', function() {
              }
           });
         });
-
+        // ツイッター似投稿する
         $('#send_tweet_<%= impression.id %>').click(function() {
-        Swal.fire({
-          title: '',
-          text: "ツイッターに投稿しますか？",
-          type: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'おっけー',
-          cancelButtonText: 'やめる'  
+            Swal.fire({
+              title: '',
+              text: "ツイッターに投稿しますか？",
+              type: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'おっけー',
+              cancelButtonText: 'やめる'
             }).then((result) => {
               if (result.value) {
                 var impression = $('#impression_edit_<%= impression.id %>').val();
@@ -180,7 +188,27 @@ $(document).on('turbolinks:load', function() {
                     type: 'post',
                     data: { impression: impression,
                             id: <%= impression.id %>,
-                            authenticity_token: $("#authenticity_token_tweet").val()
+                            authenticity_token: $("#authenticity_token_tweet_<%= impression.id %>").val()
+                        }
+                    });
+              }
+            });
+        });
+        // 感想を削除する
+        $('#destroy_impression_<%= impression.id %>').click(function() {
+            Swal.fire({
+              title: '',
+              text: "感想を削除しますか？",
+              type: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'おっけー',
+              cancelButtonText: 'やめる'
+            }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                    url:  "<%= impression_path(impression.id) %>",
+                    type: 'delete',
+                    data: { authenticity_token: $("#authenticity_token_destroy").val()
                         }
                     });
               }

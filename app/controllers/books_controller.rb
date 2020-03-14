@@ -54,6 +54,13 @@ class BooksController < ApplicationController
         # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
+    def destroy
+        book = Book.find_by(id: params[:id])
+        book.destroy
+        redirect_to shelf_path
+    end
+
+
     def show_search_form
         @books = Book.new
         respond_to do |format|

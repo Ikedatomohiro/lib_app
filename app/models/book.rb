@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
     belongs_to :user
-    has_many :impressions
+    has_many :impressions, dependent: :destroy
 
     def tweet
         count = Impression.where(self.id)

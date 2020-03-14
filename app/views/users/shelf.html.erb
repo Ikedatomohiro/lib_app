@@ -38,9 +38,48 @@
                     </div>
                 </a>
                 <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                <div class="book_destroy">
+                <%= form_with(model: @book, url: book_path(book.id)) do |form| %>
+                    <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                    <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                <% end %>
+                </div>
             </div>
         <% end %>
     <% else %>
     <p>本が登録されていません。</p>
     <% end %>
 </div>
+
+<script>
+    <% @books.each do |book| %>
+
+        // 本を削除する
+        $('#destroy_book_<%= book.id %>').click(function() {
+            Swal.fire({
+              title: '',
+              text: "本を削除すると感想も削除されるよ。",
+              type: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'おっけー',
+              cancelButtonText: 'やめる'
+            }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                    url:  "<%= book_path(book.id) %>",
+                    type: 'delete',
+                    data: { authenticity_token: $("#authenticity_token_destroy").val()
+                        }
+                    });
+              }
+            });
+        });
+    <% end %>
+
+
+
+
+
+
+</script>
+

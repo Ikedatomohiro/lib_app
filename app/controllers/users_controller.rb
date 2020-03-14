@@ -42,7 +42,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
                                           tweeted_flg: true).count
         impression = Impression.where(book_id: book.id,
                                       user_id: current_user.id).count
-        # book.push(tweet)
         end
     end
 

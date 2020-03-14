@@ -2,31 +2,31 @@
     <%= link_to '●プロフィールの編集', "/users/#{current_user.id}/edit" %>
 </div>
 <div class="item_block">
-<!--     <p class="sub_title">公開情報設定</p>
+    <p class="sub_title">●公開情報設定</p>
+</div>
     <table class="sub_item">
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <th>
-                感想
+                感想を公開する
             </th>
             <td>
                 <div class="app_checkbox">
-                    <%#= form_with(model:Setting, url: users_publish_impression_path) do |f|%>
+                    <%= form_with(model:Setting, url: users_publish_impression_path) do |f|%>
                         <input type="hidden" id="authenticity_token_publish_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
 
-                        <%#= f.check_box :publish_impression, checked: @user_setting.publish_impression, id:'impression',name: 'publish_impression' %>
+                        <%= f.check_box :publish_impression, checked: @user_setting.publish_impression, id:'impression',name: 'publish_impression' %>
                         <label for="impression" id="publish_impression"></label>
-                        <%#= f.hidden_field :publish_impression, id:'publish_impression_value', value: @user_setting.publish_impression %>
-                    <%# end %>
+                        <%= f.hidden_field :publish_impression, id:'publish_impression_value', value: @user_setting.publish_impression %>
+                    <% end %>
                 </div>
             </td>
         </tr>
     </table>
- --></div>
 <!-- <div class="item_block">
     <p class="sub_title">読書履歴</p>
-</div>
- --><div class="item_block">
+</div> -->
+<div class="item_block">
     <p class="sub_title">
         <%= link_to('●ご意見・ご要望はこちら', contacts_path) %>
     </p>

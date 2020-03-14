@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 
     def index
         private_impression_users = User.impression_private
-        # Impression, User, BookをINNER JOIN
+        # Impression, User, BookをINNER JOINしたけどうまくいかなかった。
         # @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
+        public_users = Setting.where(publish_impression: true)
+puts public_users.ids
         @impressions = Impression.all.order(updated_at: "DESC")
-
+        @impressions = @impressions.where(user_id: public_users.ids)
 puts 'おはようございます。
 今日も一日元気に頑張りましょう。
 aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj

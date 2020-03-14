@@ -4,37 +4,37 @@
 <div class="home">
     <div>
         <% @impressions.each do |impression| %>
-        <div class="top_impression_block">
-            <div class="top_impression_items">
-                <% impression.id %>
-                <a href="/users/<%= impression.user_id %>">
-                    <%= image_tag impression.user.image, class: 'user_icon' %>
-                </a>
-                <div class="top_impression_and_book">
-                    <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false">
-                        <div class="top_impression">
-                            <p class="book_title">
-                                <%= impression.book.title.truncate(20) %>
-                            </p>
-                            <%= impression.impression.truncate(100) %>
-                        </div>
+            <div class="top_impression_block">
+                <div class="top_impression_items">
+                    <% impression.id %>
+                    <a href="/users/<%= impression.user_id %>">
+                        <%= image_tag impression.user.image, class: 'user_icon' %>
                     </a>
-                    <div>
-                        <a href="/books/info/<%= impression.book.api_id %>" class="top_thumbnail">
-                            <%= image_tag impression.book.thumbnail %>
+                    <div class="top_impression_and_book">
+                        <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false">
+                            <div class="top_impression">
+                                <p class="book_title">
+                                    <%= impression.book.title.truncate(20) %>
+                                </p>
+                                <%= impression.impression.truncate(100) %>
+                            </div>
                         </a>
+                        <div>
+                            <a href="/books/info/<%= impression.book.api_id %>" class="top_thumbnail">
+                                <%= image_tag impression.book.thumbnail %>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <% if impression.impression_img_url%>
-                        <div class="impression_img">
-                <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
-                    <%= image_tag impression.impression_img_url %>
+                <% if impression.impression_img_url%>
+                            <div class="impression_img">
+                    <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
+                        <%= image_tag impression.impression_img_url %>
+                    <% end %>
+                            </div>
                 <% end %>
-                        </div>
-            <% end %>
-            <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %T') %></p>
-        </div>
+                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %T') %></p>
+            </div>
         <% end %>
     </div>
     <div>

@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%# ツイッターカードの埋め込み %>
     <% if @twitter_card %>
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <%# ニックネームがあるときはニックネームを使う。 %>
         <% if @user && @user.nickname %>
             <meta name="twitter:site" content="<%= @twitter_card["site"] %>" />
@@ -26,11 +26,11 @@
         <meta property="og:title" content="<%= @twitter_card["title"] %>" />
         <meta property="og:description" content="<%= @twitter_card["description"] %>" />
         <%# サムネイルがあるときはサムネイルを使い、ないときはデフォルトの表示にする。 %>
-        <% if @book && @book.thumbnail %>
+        <%# if @book && @book.thumbnail %>
             <meta property="og:image" content="<%= @twitter_card["image"] %>" />
-        <% else %>
-            <meta property="og:image" content="<%= @book.thumbnail %>" />
-        <% end %>
+        <%# else %>
+            <!-- <meta property="og:image" content="<%= @book.thumbnail %>" /> -->
+        <%# end %>
         <%# 感想ページからのツイッターカードがないときは固定の画像を表示 %>
     <% else %>
         <meta name="twitter:card" content="summary" />

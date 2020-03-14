@@ -10,10 +10,18 @@ class ImpressionsController < ApplicationController
         # ツイッターカード用のデータをセット
         # 感想ページ所有ユーザーを取得
         @book_owner = User.find_by(id: @book.user_id)
+        # ツイッターカードに表示させる画像を投稿した画像にする。なければ、本の画像にする。
+        thumbnail = @book.thumbnail
+        if params[:imp]
+            impression = Impression.find_by(id: params[:imp])
+            if impression.impression_img
+                thumbnail = impression.impression_img
+            end
+        end
         if @impressions.first
             @twitter_card = {
                 "site"        => "@#{@book_owner.nickname}",
-                "image"       => @book.thumbnail,
+                "image"       => thumbnail,
                 "url"         => "https://dokusyo-no-wa.com/impressions/#{@book.impression_link}",
                 "title"       => @book.title,
                 "description" => @impressions.first.impression,
@@ -66,12 +74,13 @@ class ImpressionsController < ApplicationController
         book = Book.find_by(id: impression.book_id)
         # ツイートする画像をセット
         tweet_content = impression.impression.truncate(120)
-        tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}"
+        tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}?imp=#{impression.id}"
+        # 画像投稿機能はペンディング。ツイッターカードに画像を表示させる仕様にする。
         # if impression.impression_img
         #     @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
         # else
             @client.update(tweet)
-        # # end
+        # # end?
         impression.update(tweeted_flg: true)
         redirect_to impression_path(book.impression_link)
     end

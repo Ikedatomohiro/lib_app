@@ -96,24 +96,31 @@
         <div id="impression"></div>
             <% @impressions.each do |impression| %>
                 <div class="information_block">
-                    <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
-                        <input type="hidden" id="authenticity_token_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                        <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
-                                onfocus="colorReset(this)" 
-                                oninput="textAreaHeightSet(this)"
-                                onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
-                    <% end %>
+                    <div class="impression_head">
+<%# 感想テキスト %>
+                        <div class="impression_text">
+                            <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
+                                <input type="hidden" id="authenticity_token_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                                <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
+                                        onfocus="colorReset(this)" 
+                                        oninput="textAreaHeightSet(this)"
+                                        onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
+                            <% end %>
+                        </div>
+<%# 感想削除ボタン %>
+                        <%= form_with(model: @impression, url: impression_path) do |form| %>
+                            <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
+                        <% end %>
+                    </div>
+
                     <% if impression.impression_img_url%>
                         <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
                             <%= image_tag impression.impression_img_url , width: 200 %>
                         <% end %>
                     <% end %>
-<%# 感想削除ボタン %>
                     <div class="impression_sub_item">
-                        <%= form_with(model: @impression, url: impression_path) do |form| %>
-                            <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                            <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
-                        <% end %>
+<%# 感想更新時間 %>
                         <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
                     </div>
 <%# ツイッター投稿ボタン %>

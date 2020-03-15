@@ -14,8 +14,9 @@ class ImpressionsController < ApplicationController
         thumbnail = @book.thumbnail
         if params[:imp]
             impression = Impression.find_by(id: params[:imp])
-            if impression.impression_img
+            if impression.impression_img.present?
                 thumbnail = impression.impression_img
+                thumbnail = "https://dokusyo-no-wa.com#{thumbnail}"
             end
         end
         if @impressions.first

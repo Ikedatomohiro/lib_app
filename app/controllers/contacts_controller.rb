@@ -26,7 +26,7 @@ class ContactsController < ApplicationController
 
     def update
         contact = Contact.find_by(id: params[:id])
-        contact.update(response: params[:response])
+        contact.update(response: params[:contact][:response])
         render '/contacts/thanks'
     end
 

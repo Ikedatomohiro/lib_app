@@ -41,6 +41,7 @@
   padding: 17px 13px;
   border-radius: 12px;
   background: #d7ebfe;
+  width: 95%;
 }
 
 .says_admin:after {
@@ -61,4 +62,5 @@
 
 .reply {
     display: flex;
+    justify-content: flex-end;
 }

@@ -22,7 +22,9 @@ class BooksController < ApplicationController
         @user_book = Book.find_by(api_id: params[:api_id],
                                   user_id: current_user.id)
         # 取得した本についての感想を取得
-        @impressions = Impression.all_impressions.where(api_id: params[:api_id])
+        books = Book.where(api_id: params[:api_id])
+        @impressions = Impression.where(book_id: books.ids)
+puts @impressions
     end
 
     def create

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
         # Impression, User, BookをINNER JOINしたけどうまくいかなかった。
         # @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
         public_users = Setting.where(publish_impression: true)
-puts public_users.ids
         @impressions = Impression.all.order(updated_at: "DESC")
         @impressions = @impressions.where(user_id: public_users.ids)
 puts 'おはようございます。

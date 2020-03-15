@@ -45,7 +45,7 @@
                     <% if signed_in? && @book.user_id === current_user.id %>
                     <%= f.submit '読始め：' %>
                     <% else %>
-                    読始め
+                    読始め：
                     <% end %>
                     <% end %>
                 </th>
@@ -64,7 +64,7 @@
                     <% if signed_in? && @book.user_id === current_user.id %>
                     <%= f.submit '読了日：' %>
                     <% else %>
-                    読了日
+                    読了日：
                     <% end %>
                     <% end %>
                 </th>
@@ -137,7 +137,7 @@
                     <% end %>
                 </div>
             <% end %>
-    <%# この感想を書いたユーザーではない場合か、ログインしていない場合は閲覧のみ %>
+<%# この感想を書いたユーザーではない場合か、ログインしていない場合は閲覧のみ %>
     <% else %>
         <% @impressions.each do |impression| %>
             <%= impression.impression %>

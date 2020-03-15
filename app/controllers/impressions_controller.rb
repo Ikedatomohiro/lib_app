@@ -11,13 +11,14 @@ class ImpressionsController < ApplicationController
         # 感想ページ所有ユーザーを取得
         @book_owner = User.find_by(id: @book.user_id)
         # ツイッターカードに表示させる画像を投稿した画像にする。なければ、本の画像にする。
-        thumbnail = @book.thumbnail
         if params[:imp]
             impression = Impression.find_by(id: params[:imp])
             if impression.impression_img.present?
                 thumbnail = impression.impression_img
                 thumbnail = "https://dokusyo-no-wa.com#{thumbnail}"
             end
+        else
+            thumbnail = @book.thumbnail
         end
         if @impressions.first
             @twitter_card = {

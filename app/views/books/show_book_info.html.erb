@@ -6,9 +6,9 @@
     <% if @book["volumeInfo"]['imageLinks'] %>
         <%= f.hidden_field :thmumbnail, value: @book["volumeInfo"]['imageLinks']['thumbnail'] %>
     <% end %>
-    <% if signed_in? %>
+    <% if signed_in? && !@user_book %>
         <button class="submit_btn_small">本棚に入れる</button>
-    <% else %>
+    <% elsif !signed_in? %>
         <%= render "shared/sign_in_link" %>
     <% end %>
 <% end %>

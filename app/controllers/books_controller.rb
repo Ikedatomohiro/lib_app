@@ -15,12 +15,12 @@ class BooksController < ApplicationController
         api_id = params[:api_id]
         # GoogleAPIで本の情報を取得
         api_path = "https://www.googleapis.com/books/v1/volumes/#{api_id}"
-puts api_path
         uri = URI.encode("#{api_path}")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         res = JSON.parse(json) #返り値をRubyの配列に変換
         @book = res
-
+        @user_book = Book.find_by(api_id: params[:api_id],
+                                  user_id: current_user.id)
         # 取得した本についての感想を取得
         @impressions = Impression.all_impressions.where(api_id: params[:api_id])
     end
@@ -34,21 +34,21 @@ puts api_path
         else
             thumbnail = '/assets/book_img.svg'
         end
-        # if book
-        #     puts 'すでに本棚に入っています。'
-        # else
-        #     puts '新たに本棚に追加します。'
-        #     # 感想表示用のリンク名を作成
-        #     unique_id = create_id()
-        #     @book = Book.new(user_id: current_user.id,
-        #                      api_path: params[:book][:api_path],
-        #                      api_id: params[:book][:api_id],
-        #                      title: params[:book][:title],
-        #                      author: params[:book][:author],
-        #                      thumbnail: thumbnail,
-        #                      impression_link: unique_id)
-        #     @book.save!
-        # end
+        if book
+            puts 'すでに本棚に入っています。'
+        else
+            puts '新たに本棚に追加します。'
+            # 感想表示用のリンク名を作成
+            unique_id = create_id()
+            @book = Book.new(user_id: current_user.id,
+                             api_path: params[:book][:api_path],
+                             api_id: params[:book][:api_id],
+                             title: params[:book][:title],
+                             author: params[:book][:author],
+                             thumbnail: thumbnail,
+                             impression_link: unique_id)
+            @book.save!
+        end
         @books = Book.where(user_id: current_user.id)
         redirect_to shelf_path
         # render :template => "users/shelf" なんでこれだと表示してくれないの？

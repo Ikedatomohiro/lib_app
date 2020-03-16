@@ -20,6 +20,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path
   end
 
+  def passthru
+    super
+  end
   # common callback method
   private
  
@@ -49,9 +52,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # https://github.com/plataformatec/devise#omniauth
 
   # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
 
   # GET|POST /users/auth/twitter/callback
   # def failure

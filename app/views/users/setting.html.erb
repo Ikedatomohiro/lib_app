@@ -42,7 +42,7 @@
     <%= link_to "●リリースノート", users_release_note_path %>&nbsp;&nbsp;
     </p>
     <p class="sub_title">
-        <%= link_to "●ログアウト", destroy_user_session_path, method: :delete %>
+        <span class="delete_user_button" id="delete_user">●退会します。</span>
     </p>
 </div>
 <div class="balloon5">
@@ -70,4 +70,23 @@ $('#impression').change(function() {
               }
     });
 });
+// 退会ボタンをクリック
+$('#delete_user').click(function() {
+    Swal.fire({
+      title: '',
+      text: "退会しますか？",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'グッバイ！',
+      cancelButtonText: 'やめる'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+            url: "<%= user_registration_path %>",
+            type: 'delete'
+            });
+      }
+    });
+});
+
 </script>

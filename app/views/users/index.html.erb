@@ -37,8 +37,9 @@
                 <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
             </div>
 
+<% add_count += 1 %>
 
-<% if add_count%10 == 0 && add_count != 0 %>
+<% if add_count%20 == 0 && add_count != 0 %>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
 style="display:block"
@@ -50,21 +51,9 @@ data-ad-slot="3066092712"></ins>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 <% end %>
-<% add_count += 1 %>
 
         <% end %>
     </div>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 横長広告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2474857545411323"
-     data-ad-slot="3806181512"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     <div>
         <p>最近のオススメ書籍</p>
     </div>
@@ -155,3 +144,14 @@ data-ad-slot="3066092712"></ins>
       <%#= render "shared/affiliate" %>
 </div>
 <iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=21&l=ur1&category=audible&banner=1M2B6BNH82V647H5A7R2&f=ifr&linkID=9ba7024a2426353d5eb38afc94c1f0d2&t=dokusyonowa-22&tracking_id=dokusyonowa-22" width="125" height="125" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 横長広告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2474857545411323"
+     data-ad-slot="3806181512"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

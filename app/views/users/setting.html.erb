@@ -42,6 +42,9 @@
     <%= link_to "●リリースノート", users_release_note_path %>&nbsp;&nbsp;
     </p>
     <p class="sub_title">
+     <%= link_to "●ログアウト", destroy_user_session_path, method: :delete %>
+    </p>
+    <p class="sub_title">
         <span class="delete_user_button" id="delete_user">●退会します。</span>
     </p>
 </div>

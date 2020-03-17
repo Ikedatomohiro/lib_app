@@ -5,38 +5,40 @@
 </div>
 <% end %>
 <p>●検索結果</p>
-<% @results["items"].each do |result| %>
-    <p class="book_title"><%= result["volumeInfo"]["title"] %></p>
-    <p>
-        <%if result["volumeInfo"]['authors'] %>
-            <% result["volumeInfo"]['authors'].each do |author| %>
-                <%= author %>
+<%= if @results.present? %>
+    <% @results["items"].each do |result| %>
+        <p class="book_title"><%= result["volumeInfo"]["title"] %></p>
+        <p>
+            <%if result["volumeInfo"]['authors'] %>
+                <% result["volumeInfo"]['authors'].each do |author| %>
+                    <%= author %>
+                <% end %>
             <% end %>
-        <% end %>
-        </p>
-    <div class="book_img_box">
-        <a href="/books/info/<%= result['id'] %>" >
-            <p id="thumbnail" class="thumbnail_top">
-                <% if result["volumeInfo"]['imageLinks'].present? %>
-                    <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>">
-                <% else %>
-                    <img src="/assets/book_img.svg" alt="本の画像" class="result_book_img">
+            </p>
+        <div class="book_img_box">
+            <a href="/books/info/<%= result['id'] %>" >
+                <p id="thumbnail" class="thumbnail_top">
+                    <% if result["volumeInfo"]['imageLinks'].present? %>
+                        <img src="<%= result["volumeInfo"]['imageLinks']['thumbnail'] %>" alt="本のサムネイル" >
+                    <% else %>
+                        <img src="/assets/book_img.svg" alt="本のサムネイル" class="result_book_img">
+                    <% end %>
+                </p>
+            </a>
+            <p class="into_shelf_button">
+                <%= form_with model: Book.new, url: books_path do |f| %>
+                <%= f.hidden_field :api_path, value: result['selfLink'] %>
+                <%= f.hidden_field :api_id, value: result['id'] %>
+                <%= f.hidden_field :title, value: result["volumeInfo"]['title'] %>
+                <%= f.hidden_field :author, value: result["volumeInfo"]['authors'] %>
+                    <% if result["volumeInfo"]['imageLinks'].present? %>
+                    <% if result["volumeInfo"]['imageLinks']['thumbnail'].present? %>
+                <%= f.hidden_field :thmumbnail, value: result["volumeInfo"]['imageLinks']['thumbnail'] %>
+                    <% end %>
+                    <% end %>
+                <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
                 <% end %>
             </p>
-        </a>
-        <p class="into_shelf_button">
-            <%= form_with model: Book.new, url: books_path do |f| %>
-            <%= f.hidden_field :api_path, value: result['selfLink'] %>
-            <%= f.hidden_field :api_id, value: result['id'] %>
-            <%= f.hidden_field :title, value: result["volumeInfo"]['title'] %>
-            <%= f.hidden_field :author, value: result["volumeInfo"]['authors'] %>
-                <% if result["volumeInfo"]['imageLinks'].present? %>
-                <% if result["volumeInfo"]['imageLinks']['thumbnail'].present? %>
-            <%= f.hidden_field :thmumbnail, value: result["volumeInfo"]['imageLinks']['thumbnail'] %>
-                <% end %>
-                <% end %>
-            <%= f.submit '本棚に入れる', class: 'submit_btn_small' %>
-            <% end %>
-        </p>
-    </div>
+        </div>
+    <% end %>
 <% end %>

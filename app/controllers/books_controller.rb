@@ -19,12 +19,13 @@ class BooksController < ApplicationController
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         res = JSON.parse(json) #返り値をRubyの配列に変換
         @book = res
-        @user_book = Book.find_by(api_id: params[:api_id],
-                                  user_id: current_user.id)
+        if signed_in?
+            @user_book = Book.find_by(api_id: params[:api_id],
+                                      user_id: current_user.id)
+        end
         # 取得した本についての感想を取得
         books = Book.where(api_id: params[:api_id])
         @impressions = Impression.where(book_id: books.ids)
-puts @impressions
     end
 
     def create
@@ -84,6 +85,8 @@ puts @impressions
         uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=10")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
+puts 'fadfasfasdfds'
+puts @results["totalItems"]
     end
 
     def show_reading_date

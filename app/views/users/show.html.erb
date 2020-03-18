@@ -9,7 +9,7 @@
         </p>
         <div class="twitter_account_link">
             <a href="<%= @book_owner.twitter_link %>" class="twitter_icon" target="_brank">
-                <%= image_tag "twitter_icon.png" %>
+                <%= image_tag "twitter_icon.png", alt: "ツイッターへリンクするボタン" %>
             </a>
         </div>
     </div>
@@ -27,9 +27,14 @@
             <% end %>
         </p>
         <% if signed_in? && @book_owner.id === current_user.id %>
-            <button>
-                <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
-            </button>
+            <div class="user_dedicated_button">
+                <button>
+                    <%= link_to '編集', edit_user_path, class:'submit_btn_small' %>
+                </button>
+                <a href="<%= @book_owner.twitter_link %>" class="twitter_icon" target="_brank">
+                    <%= image_tag "twitter_icon.png", alt: "ツイッターへリンクするボタン" %>
+                </a>
+            </div>
         <% end %>
     </div>
     <p>
@@ -40,15 +45,15 @@
         <div class="book_img_box">
             <a href="/books/info/<%= book.api_id %>">
                 <% if image_tag book.thumbnail %>
-                    <%= image_tag book.thumbnail , class:'book_img book_img_area'%>
+                    <%= image_tag book.thumbnail , class:'book_img book_img_area', alt: "ユーザーが読んだ本の画像"%>
                 <% else %>
-                    <%= link_to(image_tag('book_img.svg', class:'book_img book_img_area'), book_path) %>
+                    <%= link_to(image_tag('book_img.svg', class:'book_img book_img_area', alt: "ユーザーが読んだ本の画像"), book_path) %>
                 <% end %>
             </a>
             <div class="book_title">
                 <a href="/impressions/<%= book.impression_link %>" data-turbolinks="false" class="book_title book_link" ><%= book.title.truncate(30) %></a>
             <% if book.evaluation %>
-                <%= image_tag 'star-on.png' %>
+                <%= image_tag 'star-on.png', alt: "評価点数を表す星" %>
                 <%= book.evaluation %>
             <% else %>
                 未評価

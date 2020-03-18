@@ -281,7 +281,10 @@
   border-radius: 50%;
 }
 
-
+.user_dedicated_button {
+    display: flex;
+    justify-content: space-between;
+}
 /* ユーザー情報終わり */
 
 /*ログインページ始め*/

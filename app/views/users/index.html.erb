@@ -12,7 +12,7 @@
                         <%= image_tag impression.user.image, class: 'user_icon' %>
                     </a>
                     <div class="top_impression_and_book">
-                        <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false">
+                        <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false" class="link_to_impression">
                             <div class="top_impression">
                                 <p class="book_title">
                                     <%= impression.book.title.truncate(20) %>
@@ -34,7 +34,19 @@
                     <% end %>
                             </div>
                 <% end %>
-                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                <div class="bottom_impression_block">
+                    <p>
+                        <%= image_tag "star-on.png" %>
+                        <span class="evaluation_score">
+                            <% if impression.book.evaluation %>
+                                <%= impression.book.evaluation %>
+                            <% else %>
+                            -
+                            <% end %>
+                        </span>
+                    </p>
+                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                </div>
             </div>
 
 <% add_count += 1 %>

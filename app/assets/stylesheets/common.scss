@@ -98,9 +98,6 @@
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 
-
-
-
 .btn-square-soft {
   display: inline-block;
   position: relative;
@@ -125,18 +122,6 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
   background-image: linear-gradient(#fed6e3 0%, #ffbcbc 100%);/*グラデーションを明るく*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .input_area {
   border: 1px solid;
@@ -277,5 +262,10 @@
   margin: 10px 0;
   border-bottom: 1px solid #E8F7B6;
 }
-
 /* 広告終わり */
+
+/* 星の点数の数字 */
+.evaluation_score {
+  font-size: 14px;
+  vertical-align: middle;
+}

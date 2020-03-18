@@ -45,6 +45,7 @@
     margin-left: 20px;
     width: 100%;
 }
+
 .top_thumbnail img {
     width: 13vw;
     max-width: 100px;
@@ -57,10 +58,19 @@
     font-size: 16px;
 }
 
+.link_to_impression {
+    width: 100%;
+}
 .impression_img img {
     max-height: 20vh;
     padding: 0 20px;
 }
+
+.bottom_impression_block {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /* 感想ブロックおわり */
 
 
@@ -144,6 +154,7 @@
 
 .shelf_link {
     text-decoration: none;
+    width: 100%;
 }
 
 .book_destroy {

@@ -18,12 +18,14 @@
                         <div class="book_count_info">
                             <% if book %>
                             <% end %>
-                            <% if book.evaluation %>
                             <p class="book_count">
                                 <%= image_tag "star-on.png" %>
-                                <%= book.evaluation %>
+                                <% if book.evaluation %>
+                                    <%= book.evaluation %>
+                                <% else %>
+                                -
+                                <% end %>
                             </p>
-                            <% end %>
                             <% if book %>
                             <p class="book_count">
                                 <%#= image_tag "impression.svg", class: "book_counter_icon" %>

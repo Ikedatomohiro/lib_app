@@ -36,12 +36,13 @@
                 <% end %>
                 <div class="bottom_impression_block">
                     <p>
-                        <%= image_tag "star-on.png", alt: "評価点数を表す星" %>
                         <span class="evaluation_score">
                             <% if impression.book.evaluation %>
-                                <%= impression.book.evaluation %>
+                                <% impression.book.evaluation.times do %>
+                                    <%= image_tag "star-on.png", alt: "評価点数を表す星" %>
+                                <% end %>
                             <% else %>
-                            -
+                                未評価
                             <% end %>
                         </span>
                     </p>

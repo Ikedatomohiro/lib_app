@@ -5,6 +5,7 @@
 </div>
 <% end %>
 <p>●検索結果</p>
+<% if @results["totalItems"] != 0 %>
     <% @results["items"].each do |result| %>
         <p class="book_title"><%= result["volumeInfo"]["title"] %></p>
         <p>
@@ -40,3 +41,6 @@
             </p>
         </div>
     <% end %>
+<% else %>
+見つかりせんでした。
+<% end %>

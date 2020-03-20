@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
       before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
+include BooksHelper
+
     def index
     end
 
@@ -26,6 +28,9 @@ class BooksController < ApplicationController
         # 取得した本についての感想を取得
         books = Book.where(api_id: params[:api_id])
         @impressions = Impression.where(book_id: books.ids)
+        @amazon_afi_link = setAmazonAfiLink(params[:api_id])
+puts params[:api_id]
+puts @amazon_afi_link
     end
 
     def create
@@ -63,7 +68,6 @@ class BooksController < ApplicationController
         redirect_to shelf_path
     end
 
-
     def show_search_form
         @books = Book.new
         respond_to do |format|
@@ -85,7 +89,6 @@ class BooksController < ApplicationController
         uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=10")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
-puts @results
     end
 
     def show_reading_date

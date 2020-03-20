@@ -23,7 +23,18 @@
         <% else %>
             <img src="/assets/book_img.svg" alt="本の画像">
         <% end %>
+
         </td>
+    </tr>
+    <tr>
+        <th></th>
+        <th align="left" valign="top">
+            <% if @amazon_afi_link.present? %>
+                <a href="<%= @amazon_afi_link %>" target="_blank">
+                    <button class="submit_btn_small">詳細を見る</button>
+                </a>
+            <% end %>
+        </th>
     </tr>
     <tr>
         <th align="right" valign="top">書籍名：</th>

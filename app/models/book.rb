@@ -7,4 +7,5 @@ class Book < ApplicationRecord
         return 'tweet'
         # viewから呼ぶ
     end
+
 end

@@ -1,13 +1,14 @@
 お知らせ
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<%# スマホなどタッチアクションで動作するようにするscript %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
   <style>
-  #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+  #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
   </style>
   <script>
   $(function() {
-    $( "#sortable1, #sortable2" ).sortable().disableSelection();
+    $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable().disableSelection();
     var $tabs = $( "#tabs" ).tabs();
     var $tab_items = $( "ul:first li", $tabs ).droppable({
       accept: ".connectedSortable li",
@@ -26,8 +27,10 @@
   </script>
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">タブ1(ドロップしてください)</a></li>
-    <li><a href="#tabs-2">タブ2(ドロップしてください)</a></li>
+    <li><a href="#tabs-1">タブ1</a></li>
+    <li><a href="#tabs-2">タブ2</a></li>
+    <li><a href="#tabs-3">タブ3</a></li>
+    <li><a href="#tabs-4">タブ4</a></li>
   </ul>
   <div id="tabs-1">
     <ul id="sortable1" class="connectedSortable ui-helper-reset">
@@ -40,11 +43,19 @@
       <li class="ui-state-highlight">項目 2</li>
       <li class="ui-state-highlight">項目 3</li>
       <li class="ui-state-highlight">項目 4</li>
-      <li class="ui-state-highlight">項目 5</li>    </ul>
+      <li class="ui-state-highlight">項目 5</li>
+    </ul>
   </div>
   <div id="tabs-2">
     <ul id="sortable2" class="connectedSortable ui-helper-reset">
-
+    </ul>
+  </div>
+  <div id="tabs-3">
+    <ul id="sortable3" class="connectedSortable ui-helper-reset">
+    </ul>
+  </div>
+  <div id="tabs-4">
+    <ul id="sortable4" class="connectedSortable ui-helper-reset">
     </ul>
   </div>
 </div>

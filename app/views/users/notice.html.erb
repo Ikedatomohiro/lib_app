@@ -1,6 +1,6 @@
 お知らせ
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
   <style>
   #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
@@ -36,36 +36,16 @@
       <li class="ui-state-default">項目 3</li>
       <li class="ui-state-default">項目 4</li>
       <li class="ui-state-default">項目 5</li>
-    </ul>
-  </div>
-  <div id="tabs-2">
-    <ul id="sortable2" class="connectedSortable ui-helper-reset">
       <li class="ui-state-highlight">項目 1</li>
       <li class="ui-state-highlight">項目 2</li>
       <li class="ui-state-highlight">項目 3</li>
       <li class="ui-state-highlight">項目 4</li>
-      <li class="ui-state-highlight">項目 5</li>
+      <li class="ui-state-highlight">項目 5</li>    </ul>
+  </div>
+  <div id="tabs-2">
+    <ul id="sortable2" class="connectedSortable ui-helper-reset">
+
     </ul>
   </div>
 </div>
 
-タッチイベント可能？？
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-
-<script type="text/javascript">
-<!--
-$(function() {
-  $("#sortableArea").sortable();
-});
-//-->
-</script>
-
-<div style="background-color:#CCC; padding : 20px 20px 10px;">
-  <div id="sortableArea">
-    <div class="ui-state-default">１</div>
-    <div class="ui-state-default">２</div>
-    <div class="ui-state-default">３</div>
-    <div class="ui-state-default">４</div>
-    <div class="ui-state-default">５</div>
-  </div>
-</div>

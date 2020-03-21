@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-      before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy] # ログインしていないときはログインページに移動
+      before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy, :notice] # ログインしていないときはログインページに移動
 
     def index
         private_impression_users = User.impression_private
@@ -29,10 +29,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def edit
-    end
-
-    def notice
-
     end
 
     def shelf
@@ -89,6 +85,9 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
         
     end
 
+    def notice
+
+    end
 
     private
         def self_introduction_params

@@ -16,6 +16,8 @@ class ImpressionsController < ApplicationController
             if impression.impression_img.present?
                 thumbnail = impression.impression_img
                 thumbnail = "https://dokusyo-no-wa.com#{thumbnail}"
+            elsif impression.book.users_thumbnail.present?
+                thumbnail = impression.book.users_thumbnail
             end
         else
             thumbnail = @book.thumbnail

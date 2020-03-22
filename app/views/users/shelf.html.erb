@@ -9,7 +9,11 @@
             <div class="book_img_box">
                 <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                     <p class="thumbnail_top">
-                        <%= image_tag book.thumbnail ,class: "book_img shelf_book" %>
+                        <% if book.users_thumbnail.present? %>
+                        <%= image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
+                        <% else %>
+                        <%= image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
+                        <% end %>
                     </p>
                 </a>
                 <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">

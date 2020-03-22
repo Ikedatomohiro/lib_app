@@ -115,7 +115,6 @@
 }
 
 
-
 /* ホーム終わり */
 
 
@@ -127,7 +126,7 @@
 }
 
 .book_img {
-    width: 13vw;
+    width: 20vw;
     max-width: 100px;
 }
 
@@ -155,32 +154,13 @@
 .shelf_link {
     text-decoration: none;
     width: 100%;
+    height: 14vh;
 }
 
 .book_destroy {
     margin-left: auto;
 }
 /* 本棚終わり */
-
-/* 感想はじめ */
-.book_info_inner {
-    display: flex;
-}
-
-.book_img_area {
-    padding: 10px;
-    margin-right: 10px
-}
-
-#thumbnail img{
-    height: 20vw;
-    max-height: 150px;
-}
-/* 感想終わり */
-
-
-
-
 
 /* セッティングはじめ */
 .item_block a {

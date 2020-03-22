@@ -20,15 +20,17 @@
     <p id="title" class="book_title">「<%= @book.title %>」</p>
 
     <div class="book_info_inner">
-        <div class="book_img_area">
             <a href="/books/info/<%= @book.api_id %>" id="thumbnail">
-                <% if @book.thumbnail %>
-                <%= image_tag @book.thumbnail %>
+        <p class="thumbnail_top">
+                <% if @book.users_thumbnail.present? %>
+                <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
+                <% elsif @book.thumbnail %>
+                <%= image_tag @book.thumbnail, class:'book_img' %>
                 <% else %>
                 <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
                 <% end %>
+        </p>
             </a>
-        </div>
         <table>
             <tr>
                 <th align="right">登録日：</th>
@@ -86,11 +88,33 @@
     </div>
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
-        <div>
-            <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
-            <%= f.hidden_field :book_id, value: @book.id %>
-            <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
-            <% end %>
+        <div class="impression_edit_buttons">
+            <div>
+                <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
+                <%= f.hidden_field :book_id, value: @book.id %>
+                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small impression_edit' %>
+                <% end %>
+            </div>
+<%# サムネイルを変更する %>
+            <div>
+            <%# if @book.users_thumbnail.present? %>
+                <%#= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
+<!--                 <input type="hidden" id="authenticity_token_change_thumbnail" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                <p class="submit_btn_small change_thumbnail" onclick="clickThumbnailDefaultButton()">
+                    サムネイルを元に戻す
+                </p>
+ -->                <%# end %>
+            <%# else %>
+                <%= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
+                <p class="submit_btn_small change_thumbnail" onclick="clickThumbnailChangeButton()">
+                    サムネイルを変更する
+                </p>
+                <%= f.file_field :users_thumbnail, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf" %>
+                <%# 送信用ボタン（ajaxでクリックさせる） %>
+                <button id="send_thumbnail"></button>
+                <% end %>
+            <%# end %>
+            </div>
         </div>
 <%# 感想記入フィールド表示場所 %>
         <div id="impression"></div>
@@ -100,7 +124,7 @@
 <%# 感想テキスト %>
                         <div class="impression_text">
                             <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
-                                <input type="hidden" id="authenticity_token_impression" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                                <input type="hidden" id="authenticity_token_impression_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
                                 <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
                                         onfocus="colorReset(this)" 
                                         oninput="textAreaHeightSet(this)"
@@ -109,7 +133,7 @@
                         </div>
 <%# 感想削除ボタン %>
                         <%= form_with(model: @impression, url: impression_path) do |form| %>
-                            <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <input type="hidden" id="authenticity_token_destroy_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
                             <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
                         <% end %>
                     </div>
@@ -129,9 +153,6 @@
                             <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
                             <input type="hidden" id="authenticity_token_tweet_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
                             <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
-                            <%#= image_tag "Twitter_Social_Icon_Rounded.png", class: "twitter_button send_tweet" %>
-<!--                         <div class="twitter_button send_tweet"><%#= image_tag "Twitter_Social_Icon_Rounded.png" %><p>つぶやく<p></div>
- -->                            
                             <%= image_tag "tweet_button.png", class: "tweet_button", id: "send_tweet_#{impression.id}" %>
                         <% end %>
                     <% end %>
@@ -174,7 +195,7 @@ $(document).on('turbolinks:load', function() {
             url:  "<%= impression_path(impression.id) %>",
             type: 'patch',
             data: { impression: impression,
-                   authenticity_token: $("#authenticity_token_impression").val()
+                   authenticity_token: $("#authenticity_token_impression_<%= impression.id %>").val()
              }
           });
         });
@@ -215,7 +236,7 @@ $(document).on('turbolinks:load', function() {
                 $.ajax({
                     url:  "<%= impression_path(impression.id) %>",
                     type: 'delete',
-                    data: { authenticity_token: $("#authenticity_token_destroy").val()
+                    data: { authenticity_token: $("#authenticity_token_destroy_<%= impression.id %>").val()
                         }
                     });
               }
@@ -247,7 +268,53 @@ function textAreaHeightSet(argObj){
   argObj.style.height = wSclollHeight + "px";
 }
 
+// thumbnailを変更するボタンをクリック
+function clickThumbnailChangeButton() {
+    Swal.fire({
+      title: '',
+      text: "サムネイルを変更しますか？",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'おっけー',
+      cancelButtonText: 'やめる'
+    }).then((result) => {
+      if (result.value) {
+          $("#book_users_thumbnail").click();
+          return false;
+      }
+    });
+};
 
+// サムネイルの画像が選択されたら送信ボタンを押す
+$('#book_users_thumbnail').on('change', function () {
+    $('#send_thumbnail').click();
+    return false;
+});
+// thumbnail画像を保存する。
+
+function clickThumbnailDefaultButton() {
+    Swal.fire({
+      title: '',
+      text: "サムネイルをもとに戻しますか？",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'おっけー',
+      cancelButtonText: 'やめる'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+            url:  "/books/update_thumbnail/<%= @book.id %>",
+            type: 'patch',
+            data: { thumbnail: '',
+                    authenticity_token: $("#authenticity_token_change_thumbnail").val()
+                }
+            });
+
+
+
+      }
+    });
+}
 </script>
 
  

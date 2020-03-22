@@ -110,6 +110,17 @@ puts @amazon_afi_link
         redirect_to "/impressions/#{book.impression_link}"
     end
 
+    def update_thumbnail
+        book = Book.find_by(id: params[:book_id])
+        if params[:thumbnail] != ''
+puts '////////////////////////////'
+            book.update(users_thumbnails_params)
+        else
+puts '..............................'
+            book.update(users_thumbnail: nil)
+        end
+        redirect_to impression_path(book.impression_link)
+    end
 
     private
         def create_id
@@ -129,6 +140,11 @@ puts @amazon_afi_link
                 puts 'confirmed unique id in check_id function'
                 return id
             end
+        end
+
+        # 本のサムネイルをユーザーのに更新させる。
+        def users_thumbnails_params
+            params.require(:book).permit(:users_thumbnail)
         end
 
 

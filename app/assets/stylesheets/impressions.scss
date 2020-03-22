@@ -10,11 +10,26 @@
     background-color: transparent;
 }
 
+.book_img_area img {
+  width:auto;
+  height:auto;
+  max-width:120px;
+  max-height:150px;
+}
+
 .impression_time {
     font-size: 8px;
     text-align: right;
     line-height: 26px;
     padding-left: 15px;
+}
+
+.impression_edit_buttons {
+  display: flex;
+}
+
+.impression_edit {
+  margin-right: 20px;
 }
 
 .impression_tweet_button {
@@ -140,5 +155,28 @@
   margin-right:15px;
   width: 95%;
 }
+
+#book_users_thumbnail {
+  display: none;
+}
+
+/* 感想はじめ */
+.book_info_inner {
+    display: flex;
+}
+
+.book_info_inner table{
+    margin-left: 20px;
+}
+
+.book_img_area {
+    padding: 10px;
+    margin-right: 10px
+}
+
+#thumbnail img{
+    max-height: 150px;
+}
+/* 感想終わり */
 
 

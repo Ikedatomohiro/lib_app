@@ -16,11 +16,13 @@ class ImpressionsController < ApplicationController
             if impression.impression_img.present?
                 thumbnail = impression.impression_img
                 thumbnail = "https://dokusyo-no-wa.com#{thumbnail}"
-            elsif impression.book.users_thumbnail.present?
-                thumbnail = impression.book.users_thumbnail
             end
         else
-            thumbnail = @book.thumbnail
+            if @book.users_thumbnail.present?
+                thumbnail = @book.users_thumbnail
+            else
+                thumbnail = @book.thumbnail
+            end
         end
         if @impressions.first
             @twitter_card = {

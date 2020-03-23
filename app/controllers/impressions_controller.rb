@@ -24,6 +24,7 @@ class ImpressionsController < ApplicationController
                 thumbnail = @book.thumbnail #GoogleAPIの画像アドレス
             end
         end
+puts thumbnail
         if @impressions.first
             @twitter_card = {
                 "site"        => "@#{@book_owner.nickname}",

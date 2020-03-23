@@ -19,9 +19,9 @@ class ImpressionsController < ApplicationController
             end
         else
             if @book.users_thumbnail.present?
-                thumbnail = @book.users_thumbnail
+                thumbnail = "https://dokusyo-no-wa.com#{@book.users_thumbnail}"
             else
-                thumbnail = @book.thumbnail
+                thumbnail = @book.thumbnail #GoogleAPIの画像アドレス
             end
         end
         if @impressions.first

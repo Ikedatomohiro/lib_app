@@ -8,7 +8,10 @@
   </style>
   <script>
   $(function() {
-    $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable().disableSelection();
+    $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
+      cursor: "pointer",
+      opacity: "0.8",
+    }).disableSelection();
     var $tabs = $( "#tabs" ).tabs();
     var $tab_items = $( "ul:first li", $tabs ).droppable({
       accept: ".connectedSortable li",
@@ -60,3 +63,22 @@
   </div>
 </div>
 
+
+<ul id="datas">
+  <li id="1あ">1</li>
+  <li id="2い">2</li>
+  <li id="3う">3</li>
+  <li id="4え">4</li>
+  <li id="5お">5</li>
+  <li id="6か">6</li>
+</ul>
+<p id="log"></p>
+
+<script>
+$('#datas').sortable({
+  update: function(){
+      var log = $(this).sortable("toArray");
+      $("#log").text(log);
+  }
+});
+</script>

@@ -32,7 +32,7 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def shelf
-        @books = Book.where(user_id: current_user.id).order(created_at: "DESC")
+        @books = Book.where(user_id: current_user.id).rank(:row_order)
         @books.each do |book|
         tweet = Impression.where(book_id: book.id,
                                           user_id: current_user.id,

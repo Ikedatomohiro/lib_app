@@ -1,3 +1,5 @@
+<%# 遅延読み込みのためのスクリプト %>
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <% if !signed_in? %>
     <%= render "shared/sign_in_link" %>
 <% end %>
@@ -9,7 +11,7 @@
                 <div class="top_impression_items">
                     <% impression.id %>
                     <a href="/users/<%= impression.user_id %>">
-                        <%= image_tag impression.user.image, class: 'user_icon' %>
+                        <%= lazysizes_image_tag impression.user.image, class: 'user_icon' %>
                     </a>
                     <div class="top_impression_and_book">
                         <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false" class="link_to_impression">
@@ -22,7 +24,7 @@
                         </a>
                         <div>
                             <a href="/books/info/<%= impression.book.api_id %>" class="top_thumbnail">
-                                <%= image_tag impression.book.thumbnail %>
+                                <%= lazysizes_image_tag impression.book.thumbnail %>
                             </a>
                         </div>
                     </div>
@@ -30,7 +32,7 @@
                 <% if impression.impression_img_url%>
                             <div class="impression_img">
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
-                        <%= image_tag impression.impression_img_url %>
+                        <%= lazysizes_image_tag impression.impression_img_url %>
                     <% end %>
                             </div>
                 <% end %>
@@ -39,7 +41,7 @@
                         <span class="evaluation_score">
                             <% if impression.book.evaluation %>
                                 <% impression.book.evaluation.times do %>
-                                    <%= image_tag "star-on.png", alt: "評価点数を表す星" %>
+                                    <%= lazysizes_image_tag "star-on.png", alt: "評価点数を表す星" %>
                                 <% end %>
                             <% else %>
                                 未評価

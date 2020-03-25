@@ -107,7 +107,7 @@
             <div>
                 <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
-                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
+                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small impression_edit_buttons' %>
                 <% end %>
             </div>
         </div>

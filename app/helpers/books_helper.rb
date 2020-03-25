@@ -21,10 +21,10 @@ module BooksHelper
             'EkEcNwAACAAJ' => 'https://amzn.to/2xOMl9y', # 陽気なギャングが地球を回す
             'Vl9DswEACAAJ' => 'https://amzn.to/2U2zN7k', # 「自分の中に毒を持て」新装版
             'NG1TDwAAQBAJ' => 'https://amzn.to/2J1x6wq', # 「自分の中に毒を持て」
-            # '' => '', # 
-            # '' => '', # 
-            # '' => '', # 
-            # '' => '', # 
+            '8Tg7AAAAQBAJ' => 'https://amzn.to/3btOLJ9', # 配達あかずきん
+            '48qoDwAAQBAJ' => 'https://amzn.to/2WFGI7Z', # 好きなことしか本気になれない
+            'qm9dAwAAQBAJ' => 'https://amzn.to/2QLv1cb', # ひとり暮らしな日々
+            'RCkoDgAAQBAJ' => 'https://amzn.to/2xq1lKM', # 最後の医者は桜を見上げて君を想う
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

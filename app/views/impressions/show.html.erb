@@ -20,8 +20,7 @@
     <p id="title" class="book_title">「<%= @book.title %>」</p>
 
     <div class="book_info_inner">
-            <a href="/books/info/<%= @book.api_id %>" id="thumbnail">
-        <p class="thumbnail_top">
+        <p onclick="clickThumbnailChangeButton()">
                 <% if @book.users_thumbnail.present? %>
                 <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
                 <% elsif @book.thumbnail %>
@@ -29,8 +28,24 @@
                 <% else %>
                 <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
                 <% end %>
+<%# サムネイルを変更する %>
+                <%= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
+                <%= f.file_field :users_thumbnail, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf" %>
+                <%# 送信用ボタン（ajaxでクリックさせる） %>
+                <button id="send_thumbnail"></button>
+                <% end %>
+<%# サムネイルを元に戻す %>
+            <%# if @book.users_thumbnail.present? %>
+                <%#= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
+<!--                 <input type="hidden" id="authenticity_token_change_thumbnail" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                <p class="submit_btn_small change_thumbnail" onclick="clickThumbnailDefaultButton()">
+                    サムネイルを元に戻す
+                </p>
+ -->                <%# end %>
+            <%# else %>
+            <%# end %>
+
         </p>
-            </a>
         <table>
             <tr>
                 <th align="right">登録日：</th>
@@ -88,32 +103,12 @@
     </div>
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
-        <div class="impression_edit_buttons">
+        <div class="impression_edit">
             <div>
                 <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
-                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small impression_edit' %>
+                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
                 <% end %>
-            </div>
-<%# サムネイルを変更する %>
-            <div>
-            <%# if @book.users_thumbnail.present? %>
-                <%#= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
-<!--                 <input type="hidden" id="authenticity_token_change_thumbnail" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                <p class="submit_btn_small change_thumbnail" onclick="clickThumbnailDefaultButton()">
-                    サムネイルを元に戻す
-                </p>
- -->                <%# end %>
-            <%# else %>
-                <%= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
-                <p class="submit_btn_small change_thumbnail" onclick="clickThumbnailChangeButton()">
-                    サムネイルを変更する
-                </p>
-                <%= f.file_field :users_thumbnail, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf" %>
-                <%# 送信用ボタン（ajaxでクリックさせる） %>
-                <button id="send_thumbnail"></button>
-                <% end %>
-            <%# end %>
             </div>
         </div>
 <%# 感想記入フィールド表示場所 %>

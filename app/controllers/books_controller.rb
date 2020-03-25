@@ -27,7 +27,8 @@ include BooksHelper
         end
         # 取得した本についての感想を取得
         books = Book.where(api_id: params[:api_id])
-        @impressions = Impression.where(book_id: books.ids)
+        public_users = Setting.where(publish_impression: true)
+        @impressions = Impression.where(book_id: books.ids).where(user_id: public_users.ids)
         @amazon_afi_link = setAmazonAfiLink(params[:api_id])
 puts params[:api_id]
 puts @amazon_afi_link
@@ -86,7 +87,7 @@ puts @amazon_afi_link
 
     def search_books_result
         @keyword = params[:keyword]
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=10")
+        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=20")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
     end

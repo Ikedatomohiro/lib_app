@@ -66,19 +66,57 @@
             </p>
         </td>
     </tr>
+    <% if @book["volumeInfo"]["description"].present? %>
     <tr>
         <th align="right" valign="top">詳細：</th>
         <td>
             <p id="description" type="text" name="description">
-                <%= @book["volumeInfo"]["description"] %>
+                <%= @book["volumeInfo"]["description"].truncate(150) %>
             </p>
         </td>
     </tr>
+    <% end %>
 </table>
-<%# ●投稿された感想 %>
-<%# @impressions.each do |impression| %>
-<%#= image_tag impression.user.image %>
-<%#= impression.user.name %>
-<%#= impression.impression %>
-<%#= impression.updated_at.strftime("%Y/%m/%d %H:%M") %>
-<%# end %>
+<p>●投稿された感想</p>
+<% if @impressions.present? %>
+    <% @impressions.each do |impression| %>
+        <div class="top_impression_block">
+            <div class="top_impression_items">
+                <% impression.id %>
+                <a href="/users/<%= impression.user_id %>">
+                    <%= image_tag impression.user.image, class: 'user_icon' %>
+                </a>
+                <div class="top_impression_and_book">
+                    <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false" class="link_to_impression">
+                        <div class="top_impression">
+                            <%= impression.impression.truncate(100) %>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% if impression.impression_img_url%>
+                        <div class="impression_img">
+                <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
+                    <%= image_tag impression.impression_img_url %>
+                <% end %>
+                        </div>
+            <% end %>
+            <div class="bottom_impression_block">
+                <p>
+                    <span class="evaluation_score">
+                        <% if impression.book.evaluation %>
+                            <% impression.book.evaluation.times do %>
+                                <%= image_tag "star-on.png", alt: "評価点数を表す星" %>
+                            <% end %>
+                        <% else %>
+                            未評価
+                        <% end %>
+                    </span>
+                </p>
+                <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+<p>投稿はまだありません。</p>
+<% end %>

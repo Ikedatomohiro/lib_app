@@ -2,7 +2,6 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <%# スマホなどタッチアクションで動作するようにするscript %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
   <style>
   #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
   </style>
@@ -11,6 +10,7 @@
     $( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
       cursor: "pointer",
       opacity: "0.8",
+      delay:200,
     }).disableSelection();
     var $tabs = $( "#tabs" ).tabs();
     var $tab_items = $( "ul:first li", $tabs ).droppable({

@@ -20,7 +20,7 @@
     <p id="title" class="book_title">「<%= @book.title %>」</p>
 
     <div class="book_info_inner">
-        <p onclick="clickThumbnailChangeButton()">
+        <p <% if signed_in? && @book.user_id === current_user.id %>onclick="clickThumbnailChangeButton()" <% end %>>
                 <% if @book.users_thumbnail.present? %>
                 <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
                 <% elsif @book.thumbnail %>

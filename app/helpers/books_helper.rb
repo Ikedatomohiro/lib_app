@@ -25,7 +25,18 @@ module BooksHelper
             '48qoDwAAQBAJ' => 'https://amzn.to/2WFGI7Z', # 好きなことしか本気になれない
             'qm9dAwAAQBAJ' => 'https://amzn.to/2QLv1cb', # ひとり暮らしな日々
             'RCkoDgAAQBAJ' => 'https://amzn.to/2xq1lKM', # 最後の医者は桜を見上げて君を想う
-            # '' => '', # 
+# 本屋大賞2020年ノミネート作品
+            'OJ6dDwAAQBAJ' => 'https://amzn.to/33MNGtl', # 線は、僕を描く
+            'g0cdyAEACAAJ' => 'https://amzn.to/39jDYQx', # 店長がバカすぎて
+            'yd7MDwAAQBAJ' => 'https://amzn.to/3bkjhp0', # 夏物語
+            'YOvMDwAAQBAJ' => 'https://amzn.to/3by2GOJ', # 熱源
+            'vcmlDwAAQBAJ' => 'https://amzn.to/2UBPEsD', # ノースライト
+            '8JudDwAAQBAJ' => 'https://amzn.to/2ybMcNN', # むかしむかしあるところに、死体がありました。
+            '7QSwDwAAQBAJ' => 'https://amzn.to/39kd2zZ', # ムゲンのｉ ： 上
+            'WdAsygEACAAJ' => 'https://amzn.to/2UxuYBW', # ムゲンのi 下
+            'kYGsDwAAQBAJ' => 'https://amzn.to/2WJHTU3', # medium 霊媒探偵城塚翡翠
+            'https://amzn.to/2QKyxU4' => '', # ライオンのおやつ
+            'znWqDwAAQBAJ' => 'https://amzn.to/2UBflJD', # 流浪の月
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

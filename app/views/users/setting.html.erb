@@ -76,12 +76,12 @@ $('#impression').change(function() {
 // 退会ボタンをクリック
 $('#delete_user').click(function() {
     Swal.fire({
-      title: '',
-      text: "退会しますか？",
+      title: '退会しますか？',
+      text: 'これまでのすべてのデータを削除します。',
       type: 'question',
       showCancelButton: true,
       confirmButtonText: 'グッバイ！',
-      cancelButtonText: 'やめる'
+      cancelButtonText: 'もう少し使う'
     }).then((result) => {
       if (result.value) {
         $.ajax({

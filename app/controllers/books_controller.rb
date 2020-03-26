@@ -30,6 +30,7 @@ include BooksHelper
         public_users = Setting.where(publish_impression: true)
         @impressions = Impression.where(book_id: books.ids).where(user_id: public_users.ids)
         @amazon_afi_link = setAmazonAfiLink(params[:api_id])
+# アマゾンのアフィリンクを確認しやすくするのに使う。
 puts params[:api_id]
 puts @amazon_afi_link
     end
@@ -123,6 +124,16 @@ puts '..............................'
         redirect_to impression_path(book.impression_link)
     end
 
+    # 本棚の並び替え
+    def sort
+        book = Book.find_by(id: params[:book_id])
+puts book.title
+puts params[:book_id]
+        # book.update(book_sort_params)
+        book.update(row_order_position: params[:row_order_position])
+        render nothing: true
+    end
+
     private
         def create_id
             # ランダムな文字列を生成
@@ -148,6 +159,10 @@ puts '..............................'
             params.require(:book).permit(:users_thumbnail)
         end
 
+        def book_sort_params
+            # ranked-model gem の仕様でrow_order_positionを更新する。
+            params.require(:book).permit(:row_order_position)
+        end
 
 
 end

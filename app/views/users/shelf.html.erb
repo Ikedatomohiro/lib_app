@@ -1,3 +1,5 @@
+<%# 遅延読み込みのためのスクリプト %>
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <div id="search_book_button" class="search_book_button">
     <%= link_to "本を探す", books_show_form_path, remote: true, class: " submit_btn_small"  %>
 </div>
@@ -5,87 +7,112 @@
     <%= @err %>
     <div id="search_book_form"></div>
     <% if @books.present? %>
-        <% @books.each do |book| %>
-            <div class="book_img_box">
-                <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
-                    <p class="thumbnail_top">
-                        <% if book.users_thumbnail.present? %>
-                        <%= image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
-                        <% else %>
-                        <%= image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
-                        <% end %>
-                    </p>
-                </a>
-                <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
-                    <div class="book_title" id="title_<%= book.id %>">
-                        <%= book.title %>
-                        <div class="book_count_info">
-                            <% if book %>
+        <div id="books_in_shelf">
+            <% @books.each do |book| %>
+                <div class="book_img_box" item.data = { update_url: <%= book_sort_path(book.id) %> } >
+                    <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
+                        <p class="thumbnail_top">
+                            <% if book.users_thumbnail.present? %>
+                            <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
+                            <% else %>
+                            <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
                             <% end %>
-                            <p class="book_count">
-                                <%= image_tag "star-on.png" %>
-                                <% if book.evaluation %>
-                                    <%= book.evaluation %>
-                                <% else %>
-                                -
+                        </p>
+                    </a>
+                    <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                        <div class="book_title" id="title_<%= book.id %>">
+                            <%= book.title %>
+                            <div class="book_count_info">
+                                <% if book %>
                                 <% end %>
-                            </p>
-                            <% if book %>
-                            <p class="book_count">
-                                <%#= image_tag "impression.svg", class: "book_counter_icon" %>
-                                
-                            </p>
-                            <p class="book_count">
-                                <%#= image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                
-                            </p>
-                            <% end %>
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "star-on.png" %>
+                                    <% if book.evaluation %>
+                                        <%= book.evaluation %>
+                                    <% else %>
+                                    -
+                                    <% end %>
+                                </p>
+                                <% if book %>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    
+                                </p>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    
+                                </p>
+                                <% end %>
+                            </div>
                         </div>
+                    </a>
+                    <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                    <div class="book_destroy">
+                    <%= form_with(model: @book, url: book_path(book.id)) do |form| %>
+                        <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                        <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                    <% end %>
                     </div>
-                </a>
-                <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
-                <div class="book_destroy">
-                <%= form_with(model: @book, url: book_path(book.id)) do |form| %>
-                    <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                    <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
-                <% end %>
                 </div>
-            </div>
-        <% end %>
+            <% end %>
+        </div>
     <% else %>
     <p>本が登録されていません。</p>
     <% end %>
 </div>
+<p id="log"></p>
+<%# 本当はgemで読み込みたかったが以下のコードを消すと動かなくなるので、読み込めてないかもしれない。 %>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<%# スマホなどタッチアクションで動作するようにするscript %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <script>
-    <% @books.each do |book| %>
+// 本を並べ替える。
+$('#books_in_shelf').sortable({
+    scrollSpeed: 10,
+    delay: 200,
+    revert: 200,
+    opacity: 0.8,
+    update: function(event, ui){
+        var item = ui.item;
+        var item_data = item.data();
+        var params = { _mesthod: 'put' }:
+        params[item_data.modelName] = {
+          row_order_position: item.index()
+        };
+            $.ajax({
+                url:  "<%= book_sort_path(5) %>",
+                type: 'post',
+                url: item_data.update_url,
+                dataType: 'json',
+                data: params
+                });
+      }
+});
 
-        // 本を削除する
-        $('#destroy_book_<%= book.id %>').click(function() {
-            Swal.fire({
-              title: '',
-              text: "本を削除すると感想も削除されるよ。",
-              type: 'question',
-              showCancelButton: true,
-              confirmButtonText: 'おっけー',
-              cancelButtonText: 'やめる'
-            }).then((result) => {
-              if (result.value) {
-                $.ajax({
-                    url:  "<%= book_path(book.id) %>",
-                    type: 'delete',
-                    data: { authenticity_token: $("#authenticity_token_destroy").val()
-                        }
-                    });
-              }
-            });
+
+    // 本を削除するボタン
+<% @books.each do |book| %>
+    $('#destroy_book_<%= book.id %>').click(function() {
+        Swal.fire({
+          title: '',
+          text: "本を削除すると感想も削除されるよ。",
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'おっけー',
+          cancelButtonText: 'やめる'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+                url:  "<%= book_path(book.id) %>",
+                type: 'delete',
+                data: { authenticity_token: $("#authenticity_token_destroy").val()
+                    }
+                });
+          }
         });
-    <% end %>
-
-
-
-
-
-
+    });
+<% end %>
 </script>
 

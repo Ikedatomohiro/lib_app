@@ -6,7 +6,7 @@ class Book < ApplicationRecord
 
     # 本棚の並び替え
     include RankedModel
-    ranks :row_order, with_sama: :user_id # with_sameの部分を書かないと正常に順番が保存されないらしい
+    ranks :row_order, with_same: :user_id # with_sameの部分を書かないと正常に順番が保存されないらしい
 
     def tweet
         count = Impression.where(self.id)

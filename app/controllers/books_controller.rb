@@ -127,11 +127,11 @@ puts '..............................'
     # 本棚の並び替え
     def sort
         book = Book.find_by(id: params[:book_id])
-puts book.title
+
 puts params[:book_id]
         # book.update(book_sort_params)
         book.update(row_order_position: params[:row_order_position])
-        render nothing: true
+        render body: nil
     end
 
     private

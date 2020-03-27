@@ -9,7 +9,7 @@
     <% if @books.present? %>
         <div id="books_in_shelf">
             <% @books.each do |book| %>
-                <div class="book_img_box" item.data = { update_url: <%= book_sort_path(book.id) %> } >
+                <div class="book_img_box" id="<%= book.id %>" >
                     <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                         <p class="thumbnail_top">
                             <% if book.users_thumbnail.present? %>
@@ -76,21 +76,21 @@ $('#books_in_shelf').sortable({
     opacity: 0.8,
     update: function(event, ui){
         var item = ui.item;
+        var book_id = item.attr("id");
+        var sort_url = "/books/"+ book_id +"/sort";
         var item_data = item.data();
-        var params = { _mesthod: 'put' }:
-        params[item_data.modelName] = {
+        var params = { _mesthod: 'put' }
+        params = {
           row_order_position: item.index()
         };
             $.ajax({
-                url:  "<%= book_sort_path(5) %>",
-                type: 'post',
-                url: item_data.update_url,
+                url:  sort_url,
+                type: 'put',
                 dataType: 'json',
                 data: params
                 });
       }
 });
-
 
     // 本を削除するボタン
 <% @books.each do |book| %>

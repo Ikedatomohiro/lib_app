@@ -55,4 +55,24 @@ module BooksHelper
         return amazonAfiLinkList[api_id]
     end
 
+    def create_id
+        # ランダムな文字列を生成
+        random_char = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+        random_id = (0...24).map { random_char[rand(random_char.length)] }.join
+        unique_id = check_id(random_id)
+        return unique_id
+    end
+
+    def check_id(id)
+        book = Book.find_by(impression_link: id)
+        if book
+            puts 'found same id'
+            create_id()
+        else
+            puts 'confirmed unique id in check_id function'
+            return id
+        end
+    end
+
+
 end

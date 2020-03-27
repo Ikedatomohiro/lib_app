@@ -3,6 +3,8 @@
 <div id="search_book_button" class="search_book_button">
     <%= link_to "本を探す", books_show_form_path, remote: true, class: " submit_btn_small"  %>
 </div>
+<%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
+    <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
 <div class="page_wrapper">
     <%= @err %>
     <div id="search_book_form"></div>
@@ -10,6 +12,7 @@
         <div id="books_in_shelf">
             <% @books.each do |book| %>
                 <div class="book_img_box" id="<%= book.id %>" >
+
                     <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                         <p class="thumbnail_top">
                             <% if book.users_thumbnail.present? %>
@@ -47,11 +50,10 @@
                         </div>
                     </a>
                     <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
-                    <div class="book_destroy">
-                    <%= form_with(model: @book, url: book_path(book.id)) do |form| %>
-                        <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                    <div class="shelf_side_ico">
                         <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
-                    <% end %>
+                        <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
+
                     </div>
                 </div>
             <% end %>
@@ -60,6 +62,7 @@
     <p>本が登録されていません。</p>
     <% end %>
 </div>
+<% end %>
 <p id="log"></p>
 <%# 本当はgemで読み込みたかったが以下のコードを消すと動かなくなるので、読み込めてないかもしれない。 %>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
@@ -68,12 +71,14 @@
   <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <script>
+$(document).on('turbolinks:load', function() {
 // 本を並べ替える。
 $('#books_in_shelf').sortable({
     scrollSpeed: 10,
-    delay: 200,
     revert: 200,
+    animation: 100,
     opacity: 0.8,
+    handle: "p.handle",
     update: function(event, ui){
         var item = ui.item;
         var book_id = item.attr("id");
@@ -83,13 +88,13 @@ $('#books_in_shelf').sortable({
         params = {
           row_order_position: item.index()
         };
-            $.ajax({
-                url:  sort_url,
-                type: 'put',
-                dataType: 'json',
-                data: params
-                });
-      }
+        $.ajax({
+            url:      sort_url,
+            type:     'put',
+            dataType: 'json',
+            data:     params
+        });
+    }
 });
 
     // 本を削除するボタン
@@ -114,5 +119,6 @@ $('#books_in_shelf').sortable({
         });
     });
 <% end %>
+});
 </script>
 

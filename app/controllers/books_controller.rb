@@ -56,7 +56,8 @@ puts @amazon_afi_link
                              title: params[:book][:title],
                              author: params[:book][:author],
                              thumbnail: thumbnail,
-                             impression_link: unique_id)
+                             impression_link: unique_id,
+                             row_order_position: 0)
             @book.save!
         end
         @books = Book.where(user_id: current_user.id)
@@ -127,33 +128,14 @@ puts '..............................'
     # 本棚の並び替え
     def sort
         book = Book.find_by(id: params[:book_id])
-
-puts params[:book_id]
         # book.update(book_sort_params)
         book.update(row_order_position: params[:row_order_position])
         render body: nil
+        # render nothing: true この書き方はrails 4までしか使えない
+
     end
 
     private
-        def create_id
-            # ランダムな文字列を生成
-            random_char = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
-            random_id = (0...24).map { random_char[rand(random_char.length)] }.join
-            unique_id = check_id(random_id)
-            return unique_id
-        end
-
-        def check_id(id)
-            book = Book.find_by(impression_link: id)
-            if book
-                puts 'found same id'
-                create_id()
-            else
-                puts 'confirmed unique id in check_id function'
-                return id
-            end
-        end
-
         # 本のサムネイルをユーザーのに更新させる。
         def users_thumbnails_params
             params.require(:book).permit(:users_thumbnail)

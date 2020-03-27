@@ -160,9 +160,19 @@
     height: 14vh;
 }
 
-.book_destroy {
+.shelf_side_ico {
     margin-left: auto;
 }
+
+.handle:hover {
+    cursor: pointer;
+}
+
+.handle {
+    width: 10px;
+    margin: 40px auto 0;
+}
+
 /* 本棚終わり */
 
 /* セッティングはじめ */

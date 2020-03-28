@@ -1,7 +1,9 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <div id="search_book_button" class="search_book_button">
-    <%= link_to "本を探す", books_show_form_path, remote: true, class: " submit_btn_small"  %>
+    <a href="<%= books_show_form_path %>" data-remote="true">
+        <button class="search_book_button submit_btn_small">本を探す</button>
+    </a>
 </div>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >

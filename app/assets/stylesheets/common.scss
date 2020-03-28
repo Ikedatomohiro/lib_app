@@ -272,3 +272,14 @@
   font-size: 14px;
   vertical-align: middle;
 }
+
+/* 削除ボタンの花火マーク */
+.fire_work {
+    width: 25px;
+    padding: 8px;
+}
+
+.fire_work:hover {
+  cursor: pointer;
+}
+

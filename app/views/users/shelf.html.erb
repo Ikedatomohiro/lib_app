@@ -5,11 +5,11 @@
         <button class="search_book_button submit_btn_small">本を探す</button>
     </a>
 </div>
+<div id="search_book_form"></div>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
 <div class="page_wrapper">
     <%= @err %>
-    <div id="search_book_form"></div>
     <% if @books.present? %>
         <div id="books_in_shelf">
             <% @books.each do |book| %>

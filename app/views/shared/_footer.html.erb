@@ -1,11 +1,23 @@
 <div class="footer">
     <a href="<%= root_path %>" class="home_icon" data-turbolinks="false">
-        <img src="/assets/home.svg" alt="">
+        <% if @home_flg.present? && @home_flg === true %>
+            <img src="/assets/home.svg" alt="ホームアイコン選択時">
+        <% else %>
+            <img src="/assets/home_gray.svg" alt="ホームアイコン非選択時">
+        <% end %>
     </a>
     <a href="<%= shelf_path %>" class="bookshelf_icon" data-turbolinks="false">
-        <img src="/assets/bookshelf.svg" alt="">
+        <% if @bookshelf_flg.present? && @bookshelf_flg === true %>
+            <img src="/assets/bookshelf.svg" alt="本棚アイコン選択時">
+        <% else %>
+            <img src="/assets/bookshelf_gray.svg" alt="本棚アイコン非選択時">
+        <% end %>
     </a>
     <a href="<%= setting_path %>" class="setting_icon">
-        <img src="/assets/setting.svg" alt="">
+        <% if @setting_flg.present? && @setting_flg === true %>
+            <img src="/assets/setting.svg" alt="設定アイコン選択時">
+        <% else %>
+            <img src="/assets/setting_gray.svg" alt="設定アイコン非選択時">
+        <% end %>
     </a>
 </div>

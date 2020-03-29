@@ -14,7 +14,6 @@
         <div id="books_in_shelf">
             <% @books.each do |book| %>
                 <div class="book_img_box" id="<%= book.id %>" >
-
                     <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                         <p class="thumbnail_top">
                             <% if book.users_thumbnail.present? %>

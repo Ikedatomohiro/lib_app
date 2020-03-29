@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-      before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy, :notice] # ログインしていないときはログインページに移動
+    before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy, :notice] # ログインしていないときはログインページに移動
+    include ApplicationHelper
+    before_action :set_home_flg, only: [:index, :show]
+    before_action :set_setting_flg, only: [:edit, :setting, :terms_of_service, :privacy_policy, :release_note, :notice]
+    before_action :set_bookshelf_flg, only: [:shelf]
 
     def index
         private_impression_users = User.impression_private
@@ -15,7 +19,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 通勤される方はマスクを活用し、こまめに消毒することが大切です。
 どちらもarimasenn
 '.encode("EUC-JP").bytesize
-
 
     end
 
@@ -44,7 +47,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     def setting
         @user_setting = Setting.find_by(user_id: current_user.id)
-
     end
 
     def update_setting
@@ -72,25 +74,22 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     # 利用規約ページ
     def terms_of_service
-        
     end
 
     # 個人情報の取扱について説明ページ
     def privacy_policy
-        
     end
 
     # リリースノート
     def release_note
-        
     end
 
     def notice
-
     end
 
     private
         def self_introduction_params
             params.require(:user).permit(:account_name, :self_introduction, :user_icon)
         end
+
 end

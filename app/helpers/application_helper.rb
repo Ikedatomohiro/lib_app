@@ -9,4 +9,17 @@ module ApplicationHelper
       end
        image_tag("", options) + ("<noscript>#{image_tag(source, options)}</noscript>").html_safe
     end
+
+    # フッターアイコンの色制御
+    def set_home_flg
+        @home_flg = true
+    end
+
+    def set_bookshelf_flg
+        @bookshelf_flg = true
+    end
+
+    def set_setting_flg
+        @setting_flg = true
+    end
 end

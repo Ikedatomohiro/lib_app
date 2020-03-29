@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
       before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
-include BooksHelper
+    include BooksHelper
+    include ApplicationHelper
+    before_action :set_bookshelf_flg, only: [:search_books_result, :show_book_info]
 
     def index
     end
@@ -26,9 +28,9 @@ include BooksHelper
                                       user_id: current_user.id)
         end
         # 取得した本についての感想を取得
-        books = Book.where(api_id: params[:api_id])
         public_users = Setting.where(publish_impression: true)
-        @impressions = Impression.where(book_id: books.ids).where(user_id: public_users.ids)
+        @books = Book.where(api_id: params[:api_id]).where(user_id: public_users.ids)
+        @impressions = Impression.where(book_id: @books.ids).order(created_at: "DESC")
         @amazon_afi_link = setAmazonAfiLink(params[:api_id])
 # アマゾンのアフィリンクを確認しやすくするのに使う。
 puts params[:api_id]

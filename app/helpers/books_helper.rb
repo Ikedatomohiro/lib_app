@@ -35,9 +35,10 @@ module BooksHelper
             '7QSwDwAAQBAJ' => 'https://amzn.to/39kd2zZ', # ムゲンのｉ ： 上
             'WdAsygEACAAJ' => 'https://amzn.to/2UxuYBW', # ムゲンのi 下
             'kYGsDwAAQBAJ' => 'https://amzn.to/2WJHTU3', # medium 霊媒探偵城塚翡翠
-            'https://amzn.to/2QKyxU4' => '', # ライオンのおやつ
+            'mo26DwAAQBAJ' => 'https://amzn.to/2QKyxU4', # ライオンのおやつ
             'znWqDwAAQBAJ' => 'https://amzn.to/2UBflJD', # 流浪の月
-            # '' => '', # 
+# ユーザーの投稿
+            'tL9evgAACAAJ' => 'https://amzn.to/2QW04SR', # 手のひらの音符
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

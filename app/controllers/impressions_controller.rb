@@ -87,11 +87,11 @@ class ImpressionsController < ApplicationController
         tweet_content = impression.impression.truncate(120)
         tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}#{impression_id}"
         # 画像投稿機能はペンディング。ツイッターカードに画像を表示させる仕様にする。
-        # if impression.impression_img
-        #     @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
-        # else
+        if impression.impression_img
+            @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
+        else
             @client.update(tweet)
-        # # end?
+        end
         impression.update(tweeted_flg: true)
         redirect_to impression_path(book.impression_link)
     end

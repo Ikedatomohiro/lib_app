@@ -87,10 +87,12 @@ class ImpressionsController < ApplicationController
         tweet_content = impression.impression.truncate(120)
         tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}#{impression_id}"
         # 画像があれば、画像を投稿する。画像がなければツイッターカードにサムネイル画像を表示させる仕様にする。
-        if impression.impression_img
+        if impression.impression_img.present?
             @client.update_with_media(tweet, open("./public#{impression.impression_img}"))
+            puts 'tweet with image data'
         else
             @client.update(tweet)
+            puts 'tweet only text'
         end
         impression.update(tweeted_flg: true)
         redirect_to impression_path(book.impression_link)

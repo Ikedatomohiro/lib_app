@@ -39,7 +39,7 @@ module BooksHelper
             'znWqDwAAQBAJ' => 'https://amzn.to/2UBflJD', # 流浪の月
 # ユーザーの投稿
             'tL9evgAACAAJ' => 'https://amzn.to/2QW04SR', # 手のひらの音符
-            # '' => '', # 
+            'ELR_OQAACAAJ' => 'https://amzn.to/2xCbOD8', # 白昼の死角
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

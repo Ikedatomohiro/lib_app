@@ -40,8 +40,8 @@ module BooksHelper
 # ユーザーの投稿
             'tL9evgAACAAJ' => 'https://amzn.to/2QW04SR', # 手のひらの音符
             'ELR_OQAACAAJ' => 'https://amzn.to/2xCbOD8', # 白昼の死角
-            # '' => '', # 
-            # '' => '', # 
+            '5TCTCwAAQBAJ' => 'https://amzn.to/3bQKvnw', # 稼ぐ言葉の法則
+            'w7nTCQAAQBAJ' => 'https://amzn.to/39AEObK', # アドラー心理学が教える　新しい自分の創めかた
             # '' => '', # 
 
         }

@@ -119,6 +119,20 @@
 
 
 /* 本棚はじめ */
+#shelf_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book_type_icon {
+    width: 32px;
+    padding: 4px;
+}
+
+.book_type_icon:hover {
+    cursor: pointer;
+}
+
 .book_img_box {
     display: flex;
     padding: 5px;

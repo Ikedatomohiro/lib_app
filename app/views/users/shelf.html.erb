@@ -1,9 +1,12 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
-<div id="search_book_button" class="search_book_button">
-    <a href="<%= books_show_form_path %>" data-remote="true">
-        <button class="search_book_button submit_btn_small">本を探す</button>
-    </a>
+<div id="shelf_menu">
+    <p class="book_type_icon"><%= lazysizes_image_tag 'book_block' %></p>
+    <div id="search_book_button" class="search_book_button">
+        <a href="<%= books_show_form_path %>" data-remote="true">
+            <button class="search_book_button submit_btn_small">本を探す</button>
+        </a>
+    </div>
 </div>
 <div id="search_book_form"></div>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>

@@ -3,12 +3,17 @@
       <canvas width="320" height="240" id="picture"></canvas>
       <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
       <p id="textbit"></p>
+      <input type="text" id="barcode" value="">
     </div>
     <script type="text/javascript" src="/JOB.js"></script>
     <script type="text/javascript">
       var takePicture = document.querySelector("#Take-Picture"),
       showPicture = document.createElement("img");
       Result = document.querySelector("#textbit");
+      sendBarcode = document.querySelector("#barcode");
+      sendBarcode.value = 'aaaaaaa';
+
+
       var canvas =document.getElementById("picture");
       var ctx = canvas.getContext("2d");
       JOB.Init();
@@ -19,6 +24,8 @@
             tempArray.push(result[i].Format+" : "+result[i].Value);
           }
           Result.innerHTML=tempArray.join("<br />");
+          sendBarcode.value = tempArray;
+
         }else{
           if(result.length === 0) {
             Result.innerHTML="Decoding failed.";

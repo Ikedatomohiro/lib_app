@@ -11,9 +11,7 @@
       showPicture = document.createElement("img");
       Result = document.querySelector("#textbit");
       sendBarcode = document.querySelector("#barcode");
-      sendBarcode.value = 'aaaaaaa';
-
-
+      // sendBarcode.value = 'aaaaaaa'; // 表示確認
       var canvas =document.getElementById("picture");
       var ctx = canvas.getContext("2d");
       JOB.Init();
@@ -24,7 +22,18 @@
             tempArray.push(result[i].Format+" : "+result[i].Value);
           }
           Result.innerHTML=tempArray.join("<br />");
-          sendBarcode.value = tempArray;
+          sendBarcode.value = tempArray; // 
+          // ajaxを記述
+            $.ajax({
+                url:  "user_path",
+                type: 'get',
+                data: { barcode: tempArray
+                    }
+                });
+
+
+
+
 
         }else{
           if(result.length === 0) {

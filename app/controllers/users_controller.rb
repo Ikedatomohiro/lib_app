@@ -87,6 +87,10 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     def notice
     end
 
+    def job
+        
+    end
+
     private
         def self_introduction_params
             params.require(:user).permit(:account_name, :self_introduction, :user_icon)

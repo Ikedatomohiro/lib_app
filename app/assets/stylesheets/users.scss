@@ -129,10 +129,6 @@
     padding: 4px;
 }
 
-.book_type_icon:hover {
-    cursor: pointer;
-}
-
 .book_img_box {
     display: flex;
     padding: 5px;
@@ -187,6 +183,21 @@
     width: 21px;
     padding: 10px 4px;
 }
+
+.books_in_shelf {
+    display: flex;
+}
+
+.block_shelf_book_and_icon {
+    display: flex;
+    max-width: 100px;
+}
+
+.book_count_info_block {
+    max-width: 100px;
+}
+
+
 
 /* 本棚終わり */
 

@@ -124,7 +124,7 @@ $('#books_in_shelf').sortable({
 </script>
 
     <div id="container">
-      <!-- <canvas width="320" height="240" id="picture"></canvas> -->
+      <canvas width="320" height="240" id="picture"></canvas>
       <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
       <p id="textbit"></p>
       <input type="hidden" id="barcode" value="">
@@ -146,14 +146,15 @@ $('#books_in_shelf').sortable({
             tempArray.push(result[i].Format+" : "+result[i].Value);
           }
           Result.innerHTML=tempArray.join("<br />");
-          sendBarcode.value = tempArray; // 
+          sendBarcode.value = tempArray; // tempArrayをvalueにセット
+console.log(tempArray);
           // ajaxを記述
-            $.ajax({
-                url:  "user_path",
-                type: 'get',
-                data: { barcode: tempArray
-                    }
-                });
+            // $.ajax({
+            //     url:  "user_path",
+            //     type: 'get',
+            //     data: { barcode: tempArray
+            //         }
+            //     });
 
 
 

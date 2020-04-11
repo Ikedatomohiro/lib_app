@@ -1,10 +1,22 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
-<div id="search_book_button" class="search_book_button">
-    <a href="<%= books_show_form_path %>" data-remote="true">
-        <button class="search_book_button submit_btn_small">本を探す</button>
-    </a>
+<div id="shelf_buttons" class="shelf_buttons">
+    <div class="search_book_button">
+        <a href="<%= books_show_form_path %>" data-remote="true">
+            <button class="submit_btn_small">本をキーワードで探す</button>
+        </a>
+    </div>
+    <div>
+        <div style="display: none;">
+            <canvas id="picture"></canvas>
+            <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
+            <input type="hidden" name="" id="textbit" value="">
+            <input type="hidden" id="barcode" value="">
+        </div>
+        <button class="barcode_scan_button submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
+    </div>
 </div>
+<%# 検索キーワード入力ボックスの設置場所 %>
 <div id="search_book_form"></div>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
@@ -121,3 +133,98 @@ $('#books_in_shelf').sortable({
     });
 <% end %>
 });
+</script>
+
+    <script type="text/javascript" src="/JOB.js"></script>
+    <script type="text/javascript">
+      // バーコードスキャン用ボタンをクリック
+      function clickBarcodeScanButton() {
+          $("#Take-Picture").click();
+          return false;
+      };
+      var takePicture = document.querySelector("#Take-Picture"),
+      showPicture = document.createElement("img");
+      Result = document.querySelector("#textbit");
+      sendBarcode = document.querySelector("#barcode");
+      // sendBarcode.value = 'aaaaaaa'; // 表示確認
+      var canvas =document.getElementById("picture");
+      var ctx = canvas.getContext("2d");
+      JOB.Init();
+      JOB.SetImageCallback(function(result) {
+        if(result.length > 0){
+          var tempArray = [];
+          for(var i = 0; i < result.length; i++) {
+            // tempArray.push(result[i].Format+" : "+result[i].Value);
+            tempArray.push(result[i].Value);
+          }
+          Result.innerHTML=tempArray.join("<br />");
+          sendBarcode.value = tempArray;
+          // ajaxを記述
+          $.ajax({
+                url: "<%= books_search_from_barcode_path %>",
+              type: 'post',
+              data: { barcode: tempArray }
+              });
+        }else{
+          if(result.length === 0) {
+            Result.innerHTML="Decoding failed.";
+          }
+        }
+      });
+      JOB.PostOrientation = true;
+      JOB.OrientationCallback = function(result) {
+        // 表示画像のサイズ
+        // canvas.width = result.width;
+        // canvas.height = result.height;
+        canvas.width = 0;
+        canvas.height = 0;
+        var data = ctx.getImageData(0,0,canvas.width,canvas.height);
+        for(var i = 0; i < data.data.length; i++) {
+          data.data[i] = result.data[i];
+        }
+        ctx.putImageData(data,0,0);
+      };
+      JOB.SwitchLocalizationFeedback(true);
+      JOB.SetLocalizationCallback(function(result) {
+        ctx.beginPath();
+        ctx.lineWIdth = "2";
+        ctx.strokeStyle="red";
+        for(var i = 0; i < result.length; i++) {
+          ctx.rect(result[i].x,result[i].y,result[i].width,result[i].height); 
+        }
+        ctx.stroke();
+      });
+      if(takePicture && showPicture) {
+        takePicture.onchange = function (event) {
+          var files = event.target.files;
+          if (files && files.length > 0) {
+            file = files[0];
+            try {
+              var URL = window.URL || window.webkitURL;
+              showPicture.onload = function(event) {
+                Result.innerHTML="";
+                JOB.DecodeImage(showPicture);
+                URL.revokeObjectURL(showPicture.src);
+              };
+              showPicture.src = URL.createObjectURL(file);
+            }
+            catch (e) {
+              try {
+                var fileReader = new FileReader();
+                fileReader.onload = function (event) {
+                  showPicture.onload = function(event) {
+                    Result.innerHTML="";
+                    JOB.DecodeImage(showPicture);
+                  };
+                  showPicture.src = event.target.result;
+                };
+                fileReader.readAsDataURL(file);
+              }
+              catch (e) {
+                Result.innerHTML = "Neither createObjectURL or FileReader are supported";
+              }
+            }
+          }
+        };
+      }
+    </script>

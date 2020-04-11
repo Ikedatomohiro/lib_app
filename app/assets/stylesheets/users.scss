@@ -119,6 +119,12 @@
 
 
 /* 本棚はじめ */
+.shelf_buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
 .book_img_box {
     display: flex;
     padding: 5px;
@@ -133,9 +139,7 @@
 }
 
 .search_book_button {
-    width: 100px;
-    margin-left: auto;
-    height: 40px;
+    margin-right: 20px;
 }
 
 .book_counter_icon {

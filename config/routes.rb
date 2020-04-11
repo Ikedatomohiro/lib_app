@@ -30,6 +30,7 @@ get  'books/info/:api_id'               => 'books#show_book_info'
 post 'books/set_reading_date'           => 'books#set_reading_date'
 patch 'books/show_reading_date'         => 'books#show_reading_date'
 patch 'books/update_thumbnail/:book_id'  => 'books#update_thumbnail'
+post 'books/search_from_barcode'        => 'books#search_from_barcode'
 resources :books do
     put :sort
 end

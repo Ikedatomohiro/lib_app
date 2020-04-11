@@ -1,4 +1,11 @@
-    <a href="StreamDemo.html" style="position:absolute;left:350px;">GetUserMedia Demo</a>
+
+
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+
     <div id="container">
       <canvas width="320" height="240" id="picture"></canvas>
       <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
@@ -24,8 +31,16 @@
           Result.innerHTML=tempArray.join("<br />");
           sendBarcode.value = tempArray;
 console.log(tempArray);
+console.lig('.................');
+console.log(tempArray["EAN-13"]);
 
           // ajaxを記述
+          $.ajax({
+              url:  "books_search_books_result_path",
+              type: 'get',
+              data: { barcode: tempArray
+                  }
+              });
 
 
         }else{

@@ -125,7 +125,7 @@ $('#books_in_shelf').sortable({
 
     <div id="container">
       <!-- <canvas width="320" height="240" id="picture"></canvas> -->
-      <!-- <input id="Take-Picture" type="file" accept="image/*;capture=camera" /> -->
+      <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
       <p id="textbit"></p>
       <input type="hidden" id="barcode" value="">
     </div>
@@ -150,7 +150,7 @@ $('#books_in_shelf').sortable({
 console.log(tempArray);
           // ajaxを記述
             $.ajax({
-                url:  "user_path",
+                url:  "books_search_books_result_path",
                 type: 'get',
                 data: { barcode: tempArray
                     }

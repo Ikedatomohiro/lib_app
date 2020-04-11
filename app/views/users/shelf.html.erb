@@ -159,12 +159,21 @@ $('#books_in_shelf').sortable({
           }
           Result.innerHTML=tempArray.join("<br />");
           sendBarcode.value = tempArray;
-          // ajaxを記述
-          $.ajax({
-                url: "<%= books_search_from_barcode_path %>",
-              type: 'post',
-              data: { barcode: tempArray }
-              });
+
+        Swal.fire({
+            title: '',
+            text: "本を探しているよ！",
+            type: 'info',
+            timer: 1000, // 3秒後に自動的にアラートを閉じる
+            buttons: false,
+        })
+
+        // ajaxを記述
+        $.ajax({
+            url: "<%= books_search_from_barcode_path %>",
+            type: 'post',
+            data: { barcode: tempArray }
+            });
         }else{
           if(result.length === 0) {
             Result.innerHTML="Decoding failed.";

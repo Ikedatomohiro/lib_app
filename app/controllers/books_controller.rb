@@ -90,10 +90,20 @@ puts @amazon_afi_link
     end
 
     def search_books_result
-        @keyword = params[:keyword]
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=20")
-        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
-        @results = JSON.parse(json) #返り値をRubyの配列に変換
+        # キーワードから検索
+        if params[:keyword].present?
+            @keyword = params[:keyword]
+            uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=20")
+            json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+            @results = JSON.parse(json) #返り値をRubyの配列に変換
+        # バーコードで読み取り
+        elsif params[:barcode].present?
+            @keyword = params[:barcode]
+            uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=10")
+            json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
+            @results = JSON.parse(json) #返り値をRubyの配列に変換
+
+        end
     end
 
     def show_reading_date

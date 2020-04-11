@@ -26,23 +26,17 @@ crossorigin="anonymous"></script>
         if(result.length > 0){
           var tempArray = [];
           for(var i = 0; i < result.length; i++) {
-            tempArray.push(result[i].Format+" : "+result[i].Value);
+            // tempArray.push(result[i].Format+" : "+result[i].Value);
+            tempArray.push(result[i].Value);
           }
           Result.innerHTML=tempArray.join("<br />");
           sendBarcode.value = tempArray;
-console.log(tempArray);
-console.log('.................');
-console.log(tempArray["EAN-13"]);
-
           // ajaxを記述
           $.ajax({
-              url:  "books_search_books_result_path",
+                url:  "<%= books_search_books_result_path %>",
               type: 'get',
-              data: { barcode: tempArray
-                  }
+              data: { barcode: tempArray }
               });
-
-
         }else{
           if(result.length === 0) {
             Result.innerHTML="Decoding failed.";

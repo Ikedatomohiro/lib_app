@@ -150,7 +150,7 @@ $('#books_in_shelf').sortable({
 console.log(tempArray);
           // ajaxを記述
             $.ajax({
-                url:  "books_search_books_result_path",
+                url:  "<%= books_search_books_result_path %>",
                 type: 'get',
                 data: { barcode: tempArray
                     }

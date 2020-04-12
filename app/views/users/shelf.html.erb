@@ -21,7 +21,7 @@
 <div class="page_wrapper">
     <%= @err %>
     <% if @books.present? %>
-        <div id="books_in_shelf">
+        <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
             <% @books.each do |book| %>
                 <% if @user_setting.shelf_type == 0 %>
                 <div class="book_img_box" id="<%= book.id %>" >
@@ -68,14 +68,14 @@
                 </div>
 <%# 本棚タイプがブロックのとき %>
                 <% elsif @user_setting.shelf_type == 1 %>
-                <div class="book_img_box_block" id="<%= book.id %>" >
+                <div id="<%= book.id %>" class="block_shelf_item">
                     <div class="block_shelf_book_and_icon">
                         <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
-                            <p class="thumbnail_top">
+                            <p class="thumbnail_block_shelf">
                                 <% if book.users_thumbnail.present? %>
-                                <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
+                                    <%= lazysizes_image_tag book.users_thumbnail_url ,class: " shelf_book", alt:'本の画像' %>
                                 <% else %>
-                                <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
+                                    <%= lazysizes_image_tag book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
                                 <% end %>
                             </p>
                         </a>

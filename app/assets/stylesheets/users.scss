@@ -184,10 +184,6 @@
     padding: 10px 4px;
 }
 
-.books_in_shelf {
-    display: flex;
-}
-
 .block_shelf_book_and_icon {
     display: flex;
     max-width: 100px;
@@ -197,8 +193,36 @@
     max-width: 100px;
 }
 
+.shelf_type_block {
+    display: flex;
+    flex-wrap: wrap;
+}
 
+.block_shelf_item {
+    width: 20%;
+    max-height: 130px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #E8F7B6;
+}
 
+.thumbnail_block_shelf {
+    width: 11vw;
+    max-height: 140px;
+}
+
+.block_shelf_item .shelf_book {
+    width: 10vw;
+    max-width: 53px;
+    margin: 5px;
+}
+
+.block_shelf_item .book_count {
+    padding: 0;
+}
+
+.block_shelf_item .book_count_info {
+    align-items: flex-end;
+}
 /* 本棚終わり */
 
 /* セッティングはじめ */

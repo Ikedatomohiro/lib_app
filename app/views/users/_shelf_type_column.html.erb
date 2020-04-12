@@ -1,0 +1,44 @@
+                <div class="book_img_box" id="<%= book.id %>" >
+                    <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
+                        <p class="thumbnail_top">
+                            <% if book.users_thumbnail.present? %>
+                            <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
+                            <% else %>
+                            <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
+                            <% end %>
+                        </p>
+                    </a>
+                    <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                        <div class="book_title" id="title_<%= book.id %>">
+                            <%= book.title %>
+                            <div class="book_count_info">
+                                <% if book %>
+                                <% end %>
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "star-on.png" %>
+                                    <% if book.evaluation %>
+                                        <%= book.evaluation %>
+                                    <% else %>
+                                    -
+                                    <% end %>
+                                </p>
+                                <% if book %>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    
+                                </p>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    
+                                </p>
+                                <% end %>
+                            </div>
+                        </div>
+                    </a>
+                    <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                    <div class="shelf_side_ico">
+                        <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                        <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
+
+                    </div>
+                </div>

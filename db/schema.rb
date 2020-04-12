@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_080129) do
+ActiveRecord::Schema.define(version: 2020_04_04_134913) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_080129) do
     t.boolean "publish_impression", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "shelf_type", default: 0, null: false
     t.index ["user_id"], name: "index_settings_on_user_id", unique: true
   end
 

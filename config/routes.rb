@@ -20,6 +20,7 @@ get  'users/privacy_policy'             => 'users#privacy_policy'
 post 'users/send_request'               => 'users#send_request'
 get  'users/release_note'               => 'users#release_note'
 get  'job'                        => 'users#job'
+get  'users/change_shelf_type/:shelf_type' => 'users#change_shelf_type'
 resources :users
 
 get  'books/search_books_result'        => 'books#search_books_result'
@@ -35,10 +36,10 @@ resources :books do
     put :sort
 end
 
-post 'impressions/add_impression_field' => 'impressions#add_impression_field'
-post 'impressions/post_to_twitter'      => 'impressions#post_to_twitter'
+post 'impressions/add_impression_field'    => 'impressions#add_impression_field'
+post 'impressions/post_to_twitter'         => 'impressions#post_to_twitter'
 resources :impressions
 
-get  'contacts/thanks'                  => 'contacts#thanks'
+get  'contacts/thanks'                     => 'contacts#thanks'
 resources :contacts
 end

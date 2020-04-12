@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     before_action :set_home_flg, only: [:index, :show]
     before_action :set_setting_flg, only: [:edit, :setting, :terms_of_service, :privacy_policy, :release_note, :notice]
     before_action :set_bookshelf_flg, only: [:shelf]
-
+    before_action :set_user_setting_info, only: [:setting, :shelf, :update_publish_impression, :change_shelf_type]
     def index
         private_impression_users = User.impression_private
         # Impression, User, BookをINNER JOINしたけどうまくいかなかった。
@@ -46,7 +46,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     end
 
     def setting
-        @user_setting = Setting.find_by(user_id: current_user.id)
     end
 
     def update_setting
@@ -61,12 +60,22 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
 
     # 感想を公開するかどうかのフラグを変更する。
     def update_publish_impression
-        @user_setting = Setting.find_by(user_id: current_user.id)
         if params[:publish_impression] == "true"
             @user_setting.update(publish_impression: true)
         else
             @user_setting.update(publish_impression: false)
         end
+    end
+
+    # 本棚をカラムとブロックを変更
+    def change_shelf_type
+        if params[:shelf_type] == '0'
+            @user_setting.update(shelf_type: 1)
+        elsif params[:shelf_type] == '1'
+            @user_setting.update(shelf_type: 0)
+        end
+
+        redirect_to shelf_path
     end
 
     def reading_history
@@ -96,4 +105,7 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
             params.require(:user).permit(:account_name, :self_introduction, :user_icon)
         end
 
+        def set_user_setting_info
+            @user_setting = Setting.find_by(user_id: current_user.id)
+        end
 end

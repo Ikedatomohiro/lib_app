@@ -1,6 +1,13 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <div id="shelf_buttons" class="shelf_buttons">
+    <a href="/users/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
+        <% if @user_setting.shelf_type == 0 %>
+            <%= lazysizes_image_tag 'shelf_type_block' %>
+        <% elsif @user_setting.shelf_type == 1 %>
+            <%= lazysizes_image_tag 'shelf_type_column' %>
+        <% end %>
+    </a>
     <div class="search_book_button">
         <a href="<%= books_show_form_path %>" data-remote="true">
             <button class="submit_btn_small">本をキーワードで探す</button>
@@ -23,8 +30,9 @@
 <div class="page_wrapper">
     <%= @err %>
     <% if @books.present? %>
-        <div id="books_in_shelf">
+        <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
             <% @books.each do |book| %>
+                <% if @user_setting.shelf_type == 0 %>
                 <div class="book_img_box" id="<%= book.id %>" >
                     <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                         <p class="thumbnail_top">
@@ -39,8 +47,6 @@
                         <div class="book_title" id="title_<%= book.id %>">
                             <%= book.title %>
                             <div class="book_count_info">
-                                <% if book %>
-                                <% end %>
                                 <p class="book_count">
                                     <%= lazysizes_image_tag "star-on.png" %>
                                     <% if book.evaluation %>
@@ -69,14 +75,64 @@
 
                     </div>
                 </div>
+<%# 本棚タイプがブロックのとき %>
+                <% elsif @user_setting.shelf_type == 1 %>
+                <div id="<%= book.id %>" class="block_shelf_item">
+                    <div class="block_shelf_book_and_icon">
+                        <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
+                            <p class="thumbnail_block_shelf">
+                                <% if book.users_thumbnail.present? %>
+                                    <%= lazysizes_image_tag book.users_thumbnail_url ,class: " shelf_book", alt:'本の画像' %>
+                                <% else %>
+                                    <%= lazysizes_image_tag book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
+                                <% end %>
+                            </p>
+                        </a>
+                        <div class="shelf_side_ico">
+                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                            <p class="handle">
+                                <%= lazysizes_image_tag 'dot_for_handle.svg' %>
+                            </p>
+                        </div>
+                    </div>
+                    <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                            <div class="book_count_info">
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "star-on.png" %>
+                                    <% if book.evaluation %>
+                                        <%= book.evaluation %>
+                                    <% else %>
+                                    -
+                                    <% end %>
+                                </p>
+                                <% if book %>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    
+                                </p>
+                                <p class="book_count">
+                                    <%#= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                </p>
+                                <% end %>
+                            </div>
+                    </a>
+                    <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                </div>
+
+
+
+
+
+                <% end %>
+    <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 
             <% end %>
         </div>
     <% else %>
     <p>本が登録されていません。</p>
     <% end %>
 </div>
+<div id="shelf_view_area"></div>
 <% end %>
-<p id="log"></p>
 <%# 本当はgemで読み込みたかったが以下のコードを消すと動かなくなるので、読み込めてないかもしれない。 %>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <%# スマホなどタッチアクションで動作するようにするscript %>

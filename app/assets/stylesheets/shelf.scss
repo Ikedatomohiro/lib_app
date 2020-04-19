@@ -36,6 +36,9 @@
 .search_book_button {
     margin-right: 20px;
 }
+.search_book_button, .scan_book_button, .book_type_icon, .shelf_side_ico {
+    display: none;
+}
 
 .book_counter_icon {
     width: 18px;

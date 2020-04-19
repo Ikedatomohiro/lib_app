@@ -174,7 +174,6 @@ $('#books_in_shelf').sortable({
 });
 
 // 本を探すボタンの動作
-$('.search_book_button, .scan_book_button').hide();
 $('#search_book_button').click(function() {
     $('#search_book_button, #show_shelf_side_ico').hide();
     $('.search_book_button, .scan_book_button').fadeIn(500);
@@ -182,7 +181,6 @@ $('#search_book_button').click(function() {
 
 // 本棚を整理ボタンの操作
 // 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
-$('.book_type_icon, .shelf_side_ico').hide();
 $('#show_shelf_side_ico').click(function() {
     $('#show_shelf_side_ico').hide();
     $('.book_type_icon, .shelf_side_ico').fadeIn(500);

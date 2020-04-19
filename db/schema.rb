@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_134913) do
+ActiveRecord::Schema.define(version: 2020_04_19_060551) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -58,6 +58,26 @@ ActiveRecord::Schema.define(version: 2020_04_04_134913) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "shelf_type", default: 0, null: false
     t.index ["user_id"], name: "index_settings_on_user_id", unique: true
+  end
+
+  create_table "shelf_items", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.integer "row_order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_shelf_items_on_book_id"
+    t.index ["user_id"], name: "index_shelf_items_on_user_id"
+  end
+
+  create_table "shelves", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "shelf_name", null: false
+    t.string "shelf_tab_color"
+    t.integer "row_order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shelves_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,2 @@
+class ShelfControll < ApplicationRecord
+end

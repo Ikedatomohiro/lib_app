@@ -1,26 +1,34 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <div id="shelf_buttons" class="shelf_buttons">
-    <a href="/users/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
-        <% if @user_setting.shelf_type == 0 %>
-            <%= lazysizes_image_tag 'shelf_type_block' %>
-        <% elsif @user_setting.shelf_type == 1 %>
-            <%= lazysizes_image_tag 'shelf_type_column' %>
-        <% end %>
-    </a>
+    <div class="arrange_shelf">
+        <a href="/users/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
+            <% if @user_setting.shelf_type == 0 %>
+                <%= lazysizes_image_tag 'shelf_type_block' %>
+            <% elsif @user_setting.shelf_type == 1 %>
+                <%= lazysizes_image_tag 'shelf_type_column' %>
+            <% end %>
+        </a>
+        <div id="show_shelf_side_ico">
+            <button class="submit_btn_small">本棚を整理</button>
+        </div>
+    </div>
     <div class="search_book_button">
         <a href="<%= books_show_form_path %>" data-remote="true">
             <button class="submit_btn_small">本をキーワードで探す</button>
         </a>
     </div>
-    <div>
+    <div class="scan_book_button">
         <div style="display: none;">
             <canvas id="picture"></canvas>
             <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
             <input type="hidden" name="" id="textbit" value="">
             <input type="hidden" id="barcode" value="">
         </div>
-        <button class="barcode_scan_button submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
+        <button class="submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
+    </div>
+    <div id="search_book_button">
+        <button class="submit_btn_small">本を探す</button>
     </div>
 </div>
 <%# 検索キーワード入力ボックスの設置場所 %>
@@ -72,7 +80,6 @@
                     <div class="shelf_side_ico">
                         <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
                         <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
-
                     </div>
                 </div>
 <%# 本棚タイプがブロックのとき %>
@@ -164,6 +171,19 @@ $('#books_in_shelf').sortable({
             data:     params
         });
     }
+});
+
+// 本を探すボタンの動作
+$('#search_book_button').click(function() {
+    $('#search_book_button, #show_shelf_side_ico').hide();
+    $('.search_book_button, .scan_book_button').fadeIn(500);
+});
+
+// 本棚を整理ボタンの操作
+// 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
+$('#show_shelf_side_ico').click(function() {
+    $('#show_shelf_side_ico').hide();
+    $('.book_type_icon, .shelf_side_ico').fadeIn(500);
 });
 
     // 本を削除するボタン

@@ -43,7 +43,7 @@ module BooksHelper
             '5TCTCwAAQBAJ' => 'https://amzn.to/3bQKvnw', # 稼ぐ言葉の法則
             'w7nTCQAAQBAJ' => 'https://amzn.to/39AEObK', # アドラー心理学が教える　新しい自分の創めかた
             '48vFCQAAQBAJ' => 'https://amzn.to/2RclCLb', # 免疫学の基本がわかる事典
-            # '' => '', # 
+            '8PNQDwAAQBAJ' => 'https://amzn.to/2S8swkZ', # 最後の医者は雨上がりの空に君を願う（下）
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

@@ -8,8 +8,8 @@ root 'users#index'
 
 get  'notice'                           => 'users#notice'
 post 'notice'                           => 'users#notice'
-get  'shelf'                            => 'users#shelf'
 get  'setting'                          => 'users#setting'
+get  'shelf'                            => 'users#shelf'
 get  'users/update_setting'             => 'users#update_setting'
 post 'users/update_self_introduction'   => 'users#update_self_introduction' 
 post 'users/publish_impression'         => 'users#update_publish_impression'
@@ -42,4 +42,9 @@ resources :impressions
 
 get  'contacts/thanks'                     => 'contacts#thanks'
 resources :contacts
+
+get  'shelf'                            => 'shelves#index'
+resources :shelves
+
+
 end

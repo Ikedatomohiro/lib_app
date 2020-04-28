@@ -35,11 +35,11 @@
 <div id="search_book_form"></div>
 <ul>
   <li>すべて</li>
-  <%# shelves.each do |shelf|%>
+  <% shelves.each do |shelf|%>
   <li>
-    <%#= shelf.name %>
+    <%= shelf.name %>
   </li>
-  <%# end %>
+  <% end %>
 </ul>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >

@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <div id="shelf_buttons" class="shelf_buttons">
     <div class="arrange_shelf">
-        <a href="/users/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
+        <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
             <% if @user_setting.shelf_type == 0 %>
                 <%= lazysizes_image_tag 'shelf_type_block' %>
             <% elsif @user_setting.shelf_type == 1 %>
@@ -33,11 +33,12 @@
 </div>
 <%# 検索キーワード入力ボックスの設置場所 %>
 <div id="search_book_form"></div>
-<ul>
+<ul class="shelves_list">
+  <li id="add_shelf">プラスボタン</li>
   <li>すべて</li>
-  <% shelves.each do |shelf|%>
+  <% @shelves.each do |shelf|%>
   <li>
-    <%= shelf.name %>
+    <%= shelf.shelf_name %>
   </li>
   <% end %>
 </ul>
@@ -156,6 +157,27 @@
 
 <script>
 $(document).on('turbolinks:load', function() {
+// 本棚を追加する
+$('#add_shelf').click(function() {
+    Swal.fire({
+      title: '',
+      text: "追加する本棚の名前を入力してね。",
+      // type: '',
+      input: "text",
+      showCancelButton: true,
+      confirmButtonText: 'おっけー',
+      cancelButtonText: 'やめる'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+            url:  "<%= shelves_add_shelf_path %>",
+            type: 'post',
+            data: { shelf_name: result.value }
+            });
+      }
+    });
+});
+
 // 本を並べ替える。
 $('#books_in_shelf').sortable({
     scrollSpeed: 10,

@@ -9,7 +9,6 @@ root 'users#index'
 get  'notice'                           => 'users#notice'
 post 'notice'                           => 'users#notice'
 get  'setting'                          => 'users#setting'
-get  'shelf'                            => 'users#shelf'
 get  'users/update_setting'             => 'users#update_setting'
 post 'users/update_self_introduction'   => 'users#update_self_introduction' 
 post 'users/publish_impression'         => 'users#update_publish_impression'
@@ -20,7 +19,6 @@ get  'users/privacy_policy'             => 'users#privacy_policy'
 post 'users/send_request'               => 'users#send_request'
 get  'users/release_note'               => 'users#release_note'
 get  'job'                        => 'users#job'
-get  'users/change_shelf_type/:shelf_type' => 'users#change_shelf_type'
 resources :users
 
 get  'books/search_books_result'        => 'books#search_books_result'
@@ -30,20 +28,22 @@ get  'books/show_form'                  => 'books#show_search_form'
 get  'books/info/:api_id'               => 'books#show_book_info'
 post 'books/set_reading_date'           => 'books#set_reading_date'
 patch 'books/show_reading_date'         => 'books#show_reading_date'
-patch 'books/update_thumbnail/:book_id'  => 'books#update_thumbnail'
+patch 'books/update_thumbnail/:book_id' => 'books#update_thumbnail'
 post 'books/search_from_barcode'        => 'books#search_from_barcode'
 resources :books do
     put :sort
 end
 
-post 'impressions/add_impression_field'    => 'impressions#add_impression_field'
-post 'impressions/post_to_twitter'         => 'impressions#post_to_twitter'
+post 'impressions/add_impression_field' => 'impressions#add_impression_field'
+post 'impressions/post_to_twitter'      => 'impressions#post_to_twitter'
 resources :impressions
 
-get  'contacts/thanks'                     => 'contacts#thanks'
+get  'contacts/thanks'                  => 'contacts#thanks'
 resources :contacts
 
 get  'shelf'                            => 'shelves#index'
+post 'shelves/add_shelf'                => 'shelves#add_shelf'
+get  'change_shelf_type/:shelf_type'    => 'shelves#change_shelf_type'
 resources :shelves
 
 

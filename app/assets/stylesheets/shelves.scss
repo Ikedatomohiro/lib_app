@@ -1,3 +1,15 @@
 // Place all the styles related to the shelves controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.shelves_list {
+    display: flex;
+}
+
+.shelves_list li {
+    list-style: none;
+}
+
+.shelf_modal li {
+    list-style: none;
+}

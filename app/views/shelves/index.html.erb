@@ -1,5 +1,6 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
+    <%= javascript_pack_tag 'shelf', 'data-turbolinks-track': 'reload' %>
 <div id="shelf_buttons" class="shelf_buttons">
     <div class="arrange_shelf">
         <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
@@ -105,7 +106,14 @@
                             </p>
                         </a>
                         <div class="shelf_side_ico">
-                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                            <ul class="shelf_modal">
+                              <li>本棚を移動</li>
+
+
+
+                              <li id="destroy_book_<%= book.id %>">本を削除</li>
+                            </ul>
                             <p class="handle">
                                 <%= lazysizes_image_tag 'dot_for_handle.svg' %>
                             </p>
@@ -134,11 +142,6 @@
                     </a>
                     <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
                 </div>
-
-
-
-
-
                 <% end %>
     <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 
             <% end %>
@@ -178,44 +181,6 @@ $('#add_shelf').click(function() {
     });
 });
 
-// 本を並べ替える。
-$('#books_in_shelf').sortable({
-    scrollSpeed: 10,
-    revert: 200,
-    animation: 100,
-    opacity: 0.8,
-    handle: "p.handle",
-    update: function(event, ui){
-        var item = ui.item;
-        var book_id = item.attr("id");
-        var sort_url = "/books/"+ book_id +"/sort";
-        var item_data = item.data();
-        var params = { _mesthod: 'put' }
-        params = {
-          row_order_position: item.index()
-        };
-        $.ajax({
-            url:      sort_url,
-            type:     'put',
-            dataType: 'json',
-            data:     params
-        });
-    }
-});
-
-// 本を探すボタンの動作
-$('#search_book_button').click(function() {
-    $('#search_book_button, #show_shelf_side_ico').hide();
-    $('.search_book_button, .scan_book_button').fadeIn(500);
-});
-
-// 本棚を整理ボタンの操作
-// 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
-$('#show_shelf_side_ico').click(function() {
-    $('#show_shelf_side_ico').hide();
-    $('.book_type_icon, .shelf_side_ico').fadeIn(500);
-});
-
     // 本を削除するボタン
 <% @books.each do |book| %>
     $('#destroy_book_<%= book.id %>').click(function() {
@@ -231,8 +196,7 @@ $('#show_shelf_side_ico').click(function() {
             $.ajax({
                 url:  "<%= book_path(book.id) %>",
                 type: 'delete',
-                data: { authenticity_token: $("#authenticity_token_destroy").val()
-                    }
+                data: { authenticity_token: $("#authenticity_token_destroy").val() }
                 });
           }
         });
@@ -258,6 +222,13 @@ $('#show_shelf_side_ico').click(function() {
       JOB.Init();
       JOB.SetImageCallback(function(result) {
         if(result.length > 0){
+          // 検索していることをアラートする
+          Swal.fire({
+              title: '',
+              text: "本を探しているよ！",
+              type: 'info',
+              timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+          })
           var tempArray = [];
           for(var i = 0; i < result.length; i++) {
             // tempArray.push(result[i].Format+" : "+result[i].Value);
@@ -265,24 +236,23 @@ $('#show_shelf_side_ico').click(function() {
           }
           Result.innerHTML=tempArray.join("<br />");
           sendBarcode.value = tempArray;
-        // 検索していることをアラートする
-        Swal.fire({
-            title: '',
-            text: "本を探しているよ！",
-            type: 'info',
-            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
-            buttons: false,
-        })
-
         // ajaxを記述
         $.ajax({
             url: "<%= books_search_from_barcode_path %>",
             type: 'post',
-            data: { barcode: tempArray }
+            data: { barcode: tempArray,
+                    authenticity_token: $("#authenticity_token_destroy").val() }
             });
         }else{
           if(result.length === 0) {
-            Result.innerHTML="Decoding failed.";
+          // バーコードの読み取り失敗
+          Swal.fire({
+              title: '',
+              text: "うまくバーコードを読み取れなかったよ。。。",
+              type: 'warning',
+              timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+          })
+            // Result.innerHTML="Decoding failed.";
           }
         }
       });

@@ -39,7 +39,8 @@ $(document).on('turbolinks:load', function() {
     });
     $('.shelf_modal').hide();
     $('.fire_work').click(function(){
-        $('.shelf_modal').fadeIn(500);
+        $('.shelf_modal').fadeOut(200);
+        $(this).parent().children('.shelf_modal').fadeIn(500);
     });
 
 

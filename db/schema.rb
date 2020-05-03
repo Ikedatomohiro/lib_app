@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_060551) do
+ActiveRecord::Schema.define(version: 2020_05_03_071942) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(version: 2020_04_19_060551) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "shelf_type", default: 0, null: false
+    t.integer "latest_shelf"
     t.index ["user_id"], name: "index_settings_on_user_id", unique: true
   end
 
   create_table "shelf_items", force: :cascade do |t|
+    t.integer "shelf_id", null: false
     t.integer "user_id", null: false
     t.integer "book_id", null: false
     t.integer "row_order"

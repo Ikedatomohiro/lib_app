@@ -4,7 +4,7 @@ class ShelvesController < ApplicationController
     before_action :set_home_flg, only: [:index, :show]
     before_action :set_setting_flg, only: [:index]
     before_action :set_bookshelf_flg, only: [:index]
-    before_action :set_user_setting_info, only: [:index, :change_shelf_type]
+    before_action :set_user_setting_info, only: [:index, :change_shelf_type, :show]
     def index
         @books = Book.where(user_id: current_user.id).rank(:row_order)
         @books.each do |book|
@@ -19,6 +19,11 @@ class ShelvesController < ApplicationController
 
     def show
         
+# 本棚を切り替える
+# 最後に閲覧した本棚情報を保存する「latest_shelf」みたいな感じ。フィールドはsetting。
+
+
+
     end
 
     def delete

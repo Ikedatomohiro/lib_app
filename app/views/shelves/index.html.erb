@@ -35,13 +35,15 @@
 <%# 検索キーワード入力ボックスの設置場所 %>
 <div id="search_book_form"></div>
 <ul class="shelves_list">
-  <li id="add_shelf">プラスボタン</li>
-  <li>すべて</li>
-  <% @shelves.each do |shelf|%>
-  <li>
-    <%= shelf.shelf_name %>
-  </li>
-  <% end %>
+    <li id="add_shelf">プラスボタン</li>
+    <li>すべて</li>
+    <% if @shelves %>
+        <% @shelves.each do |shelf|%>
+            <li>
+                <%= shelf.shelf_name %>
+            </li>
+        <% end %>
+    <% end %>
 </ul>
 <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
@@ -73,17 +75,15 @@
                                     -
                                     <% end %>
                                 </p>
-                                <% if book %>
                                 <p class="book_count">
-                                    <%#= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                    
+                                    <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    <%= impression_times(book.id) %>
                                 </p>
                                 <p class="book_count">
-                                    <%#= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                    
+                                    <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    <%= tweet_times(book.id) %>
                                 </p>
-                                <% end %>
-                            </div>
+                           </div>
                         </div>
                     </a>
                     <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
@@ -109,10 +109,11 @@
                             <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                             <ul class="shelf_modal">
                               <li>本棚を移動</li>
+                                <%=  %>
 
-
-
+                              <%# if 「すべて」の本棚のとき %>
                               <li id="destroy_book_<%= book.id %>">本を削除</li>
+                              <%# end %>
                             </ul>
                             <p class="handle">
                                 <%= lazysizes_image_tag 'dot_for_handle.svg' %>
@@ -129,15 +130,14 @@
                                     -
                                     <% end %>
                                 </p>
-                                <% if book %>
                                 <p class="book_count">
-                                    <%#= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                    
+                                    <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    <%= impression_times(book.id) %>
                                 </p>
                                 <p class="book_count">
-                                    <%#= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    <%= tweet_times(book.id) %>
                                 </p>
-                                <% end %>
                             </div>
                     </a>
                     <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />

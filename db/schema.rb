@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_071942) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "shelf_type", default: 0, null: false
-    t.integer "latest_shelf"
+    t.integer "latest_shelf", default: 0
     t.index ["user_id"], name: "index_settings_on_user_id", unique: true
   end
 

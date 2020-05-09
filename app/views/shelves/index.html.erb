@@ -1,6 +1,6 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
-    <%= javascript_pack_tag 'shelf', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'shelf', 'data-turbolinks-track': 'reload' %>
 <div id="shelf_buttons" class="shelf_buttons">
     <div class="arrange_shelf">
         <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
@@ -33,283 +33,238 @@
     </div>
 </div>
 <%# 検索キーワード入力ボックスの設置場所 %>
+
+
 <div id="search_book_form"></div>
 <ul class="shelves_list">
     <li id="add_shelf">プラスボタン</li>
-    <li>すべて</li>
+    <li class="shelf_name" value="0">すべて</li>
     <% if @shelves %>
         <% @shelves.each do |shelf|%>
-            <li>
-                <%= shelf.shelf_name %>
+            <li class="shelf_name" value="<%= shelf.id %>">
+                <span><%= shelf.shelf_name %></span>
             </li>
         <% end %>
     <% end %>
 </ul>
-<%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
-    <input type="hidden" id="authenticity_token_destroy" name="authenticity_token" value="<%= form_authenticity_token %>" >
-<div class="page_wrapper">
-    <%= @err %>
-    <% if @books.present? %>
-        <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
-            <% @books.each do |book| %>
-                <% if @user_setting.shelf_type == 0 %>
-                <div class="book_img_box" id="<%= book.id %>" >
-                    <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
-                        <p class="thumbnail_top">
-                            <% if book.users_thumbnail.present? %>
-                            <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
-                            <% else %>
-                            <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
-                            <% end %>
-                        </p>
-                    </a>
-                    <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
-                        <div class="book_title" id="title_<%= book.id %>">
-                            <%= book.title %>
-                            <div class="book_count_info">
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "star-on.png" %>
-                                    <% if book.evaluation %>
-                                        <%= book.evaluation %>
-                                    <% else %>
-                                    -
-                                    <% end %>
-                                </p>
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                    <%= impression_times(book.id) %>
-                                </p>
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                    <%= tweet_times(book.id) %>
-                                </p>
-                           </div>
-                        </div>
-                    </a>
-                    <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
-                    <div class="shelf_side_ico">
-                        <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
-                        <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
-                    </div>
-                </div>
-<%# 本棚タイプがブロックのとき %>
-                <% elsif @user_setting.shelf_type == 1 %>
-                <div id="<%= book.id %>" class="block_shelf_item">
-                    <div class="block_shelf_book_and_icon">
+<% if @books.present? %>
+    <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
+    <input type="hidden" id="authenticity_token" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <div class="page_wrapper">
+        <%= @err %>
+            <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
+                <% @books.each do |book| %>
+                    <% if @user_setting.shelf_type == 0 %>
+                    <div class="book_img_box" id="<%= book.id %>" >
                         <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
-                            <p class="thumbnail_block_shelf">
+                            <p class="thumbnail_top">
                                 <% if book.users_thumbnail.present? %>
-                                    <%= lazysizes_image_tag book.users_thumbnail_url ,class: " shelf_book", alt:'本の画像' %>
+                                <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% else %>
-                                    <%= lazysizes_image_tag book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
+                                <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% end %>
                             </p>
                         </a>
+                        <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                            <div class="book_title" id="title_<%= book.id %>">
+                                <%= book.title %>
+                                <div class="book_count_info">
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "star-on.png" %>
+                                        <% if book.evaluation %>
+                                            <%= book.evaluation %>
+                                        <% else %>
+                                        -
+                                        <% end %>
+                                    </p>
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                        <%= impression_times(book.id) %>
+                                    </p>
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                        <%= tweet_times(book.id) %>
+                                    </p>
+                               </div>
+                            </div>
+                        </a>
+                        <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
                         <div class="shelf_side_ico">
-                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
-                            <ul class="shelf_modal">
-                              <li>本棚を移動</li>
-                                <%=  %>
-
-                              <%# if 「すべて」の本棚のとき %>
-                              <li id="destroy_book_<%= book.id %>">本を削除</li>
-                              <%# end %>
-                            </ul>
-                            <p class="handle">
-                                <%= lazysizes_image_tag 'dot_for_handle.svg' %>
-                            </p>
+                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
+                            <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
                         </div>
                     </div>
-                    <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
-                            <div class="book_count_info">
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "star-on.png" %>
-                                    <% if book.evaluation %>
-                                        <%= book.evaluation %>
+    <%# 本棚タイプがブロックのとき %>
+                    <% elsif @user_setting.shelf_type == 1 %>
+                    <div id="<%= book.id %>" class="block_shelf_item">
+                        <div class="block_shelf_book_and_icon">
+                            <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
+                                <p class="thumbnail_block_shelf">
+                                    <% if book.users_thumbnail.present? %>
+                                        <%= lazysizes_image_tag book.users_thumbnail_url ,class: " shelf_book", alt:'本の画像' %>
                                     <% else %>
-                                    -
+                                        <%= lazysizes_image_tag book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
                                     <% end %>
                                 </p>
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                    <%= impression_times(book.id) %>
-                                </p>
-                                <p class="book_count">
-                                    <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                    <%= tweet_times(book.id) %>
+                            </a>
+                            <div class="shelf_side_ico">
+                                <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                                <ul class="shelf_modal">
+                                  <li>本棚を移動</li>
+                                    <%=  %>
+
+                                  <%# if 「すべて」の本棚のとき %>
+                                  <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">本を削除</li>
+                                  <%# end %>
+                                </ul>
+                                <p class="handle">
+                                    <%= lazysizes_image_tag 'dot_for_handle.svg' %>
                                 </p>
                             </div>
-                    </a>
-                    <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
-                </div>
+                        </div>
+                        <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                                <div class="book_count_info">
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "star-on.png" %>
+                                        <% if book.evaluation %>
+                                            <%= book.evaluation %>
+                                        <% else %>
+                                        -
+                                        <% end %>
+                                    </p>
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                        <%= impression_times(book.id) %>
+                                    </p>
+                                    <p class="book_count">
+                                        <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                        <%= tweet_times(book.id) %>
+                                    </p>
+                                </div>
+                        </a>
+                        <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                    </div>
+                    <% end %>
+        <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 
                 <% end %>
-    <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 
-            <% end %>
-        </div>
-    <% else %>
-    <p>本が登録されていません。</p>
+            </div>
     <% end %>
-</div>
-<div id="shelf_view_area"></div>
+    </div>
+<% else %>
+    <p>本が登録されていません。</p>
 <% end %>
+<div id="shelf_view_area"></div>
 <%# 本当はgemで読み込みたかったが以下のコードを消すと動かなくなるので、読み込めてないかもしれない。 %>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <%# スマホなどタッチアクションで動作するようにするscript %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
-<script>
-$(document).on('turbolinks:load', function() {
-// 本棚を追加する
-$('#add_shelf').click(function() {
-    Swal.fire({
-      title: '',
-      text: "追加する本棚の名前を入力してね。",
-      // type: '',
-      input: "text",
-      showCancelButton: true,
-      confirmButtonText: 'おっけー',
-      cancelButtonText: 'やめる'
-    }).then((result) => {
-      if (result.value) {
-        $.ajax({
-            url:  "<%= shelves_add_shelf_path %>",
-            type: 'post',
-            data: { shelf_name: result.value }
-            });
+<script type="text/javascript" src="/JOB.js"></script>
+<script type="text/javascript">
+    // バーコードスキャン用ボタンをクリック
+    function clickBarcodeScanButton() {
+        $("#Take-Picture").click();
+        return false;
+    };
+    var takePicture = document.querySelector("#Take-Picture"),
+    showPicture = document.createElement("img");
+    Result = document.querySelector("#textbit");
+    sendBarcode = document.querySelector("#barcode");
+    // sendBarcode.value = 'aaaaaaa'; // 表示確認
+    var canvas =document.getElementById("picture");
+    var ctx = canvas.getContext("2d");
+    JOB.Init();
+    JOB.SetImageCallback(function(result) {
+      if(result.length > 0){
+        // 検索していることをアラートする
+        Swal.fire({
+            title: '',
+            text: "本を探しているよ！",
+            type: 'info',
+            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+        })
+        var tempArray = [];
+        for(var i = 0; i < result.length; i++) {
+          // tempArray.push(result[i].Format+" : "+result[i].Value);
+          tempArray.push(result[i].Value);
+        }
+        Result.innerHTML=tempArray.join("<br />");
+        sendBarcode.value = tempArray;
+      // ajaxを記述
+      $.ajax({
+          url: "/books/search_from_barcode",
+          type: 'post',
+          data: { barcode: tempArray,
+                  authenticity_token: $("#authenticity_token").val() }
+          });
+      }else{
+        if(result.length === 0) {
+        // バーコードの読み取り失敗
+        Swal.fire({
+            title: '',
+            text: "うまくバーコードを読み取れなかったよ。。。",
+            type: 'warning',
+            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+        })
+          // Result.innerHTML="Decoding failed.";
+        }
       }
     });
-});
-
-    // 本を削除するボタン
-<% @books.each do |book| %>
-    $('#destroy_book_<%= book.id %>').click(function() {
-        Swal.fire({
-          title: '',
-          text: "本を削除すると感想も削除されるよ。",
-          type: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'おっけー',
-          cancelButtonText: 'やめる'
-        }).then((result) => {
-          if (result.value) {
-            $.ajax({
-                url:  "<%= book_path(book.id) %>",
-                type: 'delete',
-                data: { authenticity_token: $("#authenticity_token_destroy").val() }
-                });
-          }
-        });
+    JOB.PostOrientation = true;
+    JOB.OrientationCallback = function(result) {
+      // 表示画像のサイズ
+      // canvas.width = result.width;
+      // canvas.height = result.height;
+      canvas.width = 0;
+      canvas.height = 0;
+      var data = ctx.getImageData(0,0,canvas.width,canvas.height);
+      for(var i = 0; i < data.data.length; i++) {
+        data.data[i] = result.data[i];
+      }
+      ctx.putImageData(data,0,0);
+    };
+    JOB.SwitchLocalizationFeedback(true);
+    JOB.SetLocalizationCallback(function(result) {
+      ctx.beginPath();
+      ctx.lineWIdth = "2";
+      ctx.strokeStyle="red";
+      for(var i = 0; i < result.length; i++) {
+        ctx.rect(result[i].x,result[i].y,result[i].width,result[i].height); 
+      }
+      ctx.stroke();
     });
-<% end %>
-});
-</script>
-
-    <script type="text/javascript" src="/JOB.js"></script>
-    <script type="text/javascript">
-      // バーコードスキャン用ボタンをクリック
-      function clickBarcodeScanButton() {
-          $("#Take-Picture").click();
-          return false;
-      };
-      var takePicture = document.querySelector("#Take-Picture"),
-      showPicture = document.createElement("img");
-      Result = document.querySelector("#textbit");
-      sendBarcode = document.querySelector("#barcode");
-      // sendBarcode.value = 'aaaaaaa'; // 表示確認
-      var canvas =document.getElementById("picture");
-      var ctx = canvas.getContext("2d");
-      JOB.Init();
-      JOB.SetImageCallback(function(result) {
-        if(result.length > 0){
-          // 検索していることをアラートする
-          Swal.fire({
-              title: '',
-              text: "本を探しているよ！",
-              type: 'info',
-              timer: 1500, // 1.5秒後に自動的にアラートを閉じる
-          })
-          var tempArray = [];
-          for(var i = 0; i < result.length; i++) {
-            // tempArray.push(result[i].Format+" : "+result[i].Value);
-            tempArray.push(result[i].Value);
+    if(takePicture && showPicture) {
+      takePicture.onchange = function (event) {
+        var files = event.target.files;
+        if (files && files.length > 0) {
+          file = files[0];
+          try {
+            var URL = window.URL || window.webkitURL;
+            showPicture.onload = function(event) {
+              Result.innerHTML="";
+              JOB.DecodeImage(showPicture);
+              URL.revokeObjectURL(showPicture.src);
+            };
+            showPicture.src = URL.createObjectURL(file);
           }
-          Result.innerHTML=tempArray.join("<br />");
-          sendBarcode.value = tempArray;
-        // ajaxを記述
-        $.ajax({
-            url: "<%= books_search_from_barcode_path %>",
-            type: 'post',
-            data: { barcode: tempArray,
-                    authenticity_token: $("#authenticity_token_destroy").val() }
-            });
-        }else{
-          if(result.length === 0) {
-          // バーコードの読み取り失敗
-          Swal.fire({
-              title: '',
-              text: "うまくバーコードを読み取れなかったよ。。。",
-              type: 'warning',
-              timer: 1500, // 1.5秒後に自動的にアラートを閉じる
-          })
-            // Result.innerHTML="Decoding failed.";
-          }
-        }
-      });
-      JOB.PostOrientation = true;
-      JOB.OrientationCallback = function(result) {
-        // 表示画像のサイズ
-        // canvas.width = result.width;
-        // canvas.height = result.height;
-        canvas.width = 0;
-        canvas.height = 0;
-        var data = ctx.getImageData(0,0,canvas.width,canvas.height);
-        for(var i = 0; i < data.data.length; i++) {
-          data.data[i] = result.data[i];
-        }
-        ctx.putImageData(data,0,0);
-      };
-      JOB.SwitchLocalizationFeedback(true);
-      JOB.SetLocalizationCallback(function(result) {
-        ctx.beginPath();
-        ctx.lineWIdth = "2";
-        ctx.strokeStyle="red";
-        for(var i = 0; i < result.length; i++) {
-          ctx.rect(result[i].x,result[i].y,result[i].width,result[i].height); 
-        }
-        ctx.stroke();
-      });
-      if(takePicture && showPicture) {
-        takePicture.onchange = function (event) {
-          var files = event.target.files;
-          if (files && files.length > 0) {
-            file = files[0];
+          catch (e) {
             try {
-              var URL = window.URL || window.webkitURL;
-              showPicture.onload = function(event) {
-                Result.innerHTML="";
-                JOB.DecodeImage(showPicture);
-                URL.revokeObjectURL(showPicture.src);
+              var fileReader = new FileReader();
+              fileReader.onload = function (event) {
+                showPicture.onload = function(event) {
+                  Result.innerHTML="";
+                  JOB.DecodeImage(showPicture);
+                };
+                showPicture.src = event.target.result;
               };
-              showPicture.src = URL.createObjectURL(file);
+              fileReader.readAsDataURL(file);
             }
             catch (e) {
-              try {
-                var fileReader = new FileReader();
-                fileReader.onload = function (event) {
-                  showPicture.onload = function(event) {
-                    Result.innerHTML="";
-                    JOB.DecodeImage(showPicture);
-                  };
-                  showPicture.src = event.target.result;
-                };
-                fileReader.readAsDataURL(file);
-              }
-              catch (e) {
-                Result.innerHTML = "Neither createObjectURL or FileReader are supported";
-              }
+              Result.innerHTML = "Neither createObjectURL or FileReader are supported";
             }
           }
-        };
-      }
-    </script>
+        }
+      };
+    }
+</script>

@@ -1,24 +1,33 @@
 class ShelvesController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy, :notice] # ログインしていないときはログインページに移動
     include ApplicationHelper
-    before_action :set_home_flg, only: [:index, :show]
-    before_action :set_setting_flg, only: [:index]
-    before_action :set_bookshelf_flg, only: [:index]
-    before_action :set_user_setting_info, only: [:index, :change_shelf_type, :show]
+    before_action :set_bookshelf_flg, only: [:index, :show]
+    before_action :set_user_setting_info, only: [:index, :show, :change_shelf_type]
     def index
-        @books = Book.where(user_id: current_user.id).rank(:row_order)
-        @books.each do |book|
-        tweet = Impression.where(book_id: book.id,
-                                          user_id: current_user.id,
-                                          tweeted_flg: true).count
-        impression = Impression.where(book_id: book.id,
-                                      user_id: current_user.id).count
-        @shelves = Shelf.where(user_id: current_user.id).rank(:row_order)
+        if @user_setting.latest_shelf == 0
+            @books = Book.where(user_id: current_user.id).rank(:row_order)
+            @shelves = Shelf.where(user_id: current_user.id).rank(:row_order)
+        else
+            @books = Book.where(user_id: current_user.id).rank(:row_order)
+            @shelves = Shelf.where(user_id: current_user.id).rank(:row_order)
+            render "/shelves/index"
+            # redirect_to "/shelves/#{@user_setting.latest_shelf}"
         end
     end
 
     def show
-        
+        shelf_id = params[:id]
+        @books = Book.where(user_id: current_user.id)
+        @user_setting.update(latest_shelf: shelf_id)
+        # if params[:shelf_id] != '0'
+        #     @books = ShelfItem.where(user_id: current_user.id,
+        #                              shelf_id: )
+        # else
+        # @books = Book.where(user_id: current_user.id).rank(:row_order)
+        # @shelves = Shelf.where(user_id: current_user.id).rank(:row_order)
+
+        # end
+
 # 本棚を切り替える
 # 最後に閲覧した本棚情報を保存する「latest_shelf」みたいな感じ。フィールドはsetting。
 

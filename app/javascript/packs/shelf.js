@@ -12,6 +12,28 @@ $(document).on('turbolinks:load', function() {
         $('.book_type_icon, .shelf_side_ico').fadeIn(500);
     });
 
+    // 本棚を追加する
+    $('#add_shelf').click(function() {
+        Swal.fire({
+          title: '',
+          text: "追加する本棚の名前を入力してね。",
+          // type: '',
+          input: "text",
+          showCancelButton: true,
+          confirmButtonText: 'おっけー',
+          cancelButtonText: 'やめる'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+                url:  "/shelves/add_shelf",
+                type: 'post',
+                data: { shelf_name: result.value,
+                        authenticity_token: $("#authenticity_token").val() }
+                });
+          }
+        });
+    });
+
     // 本を並べ替える。
     $('#books_in_shelf').sortable({
         scrollSpeed: 10,
@@ -37,14 +59,45 @@ $(document).on('turbolinks:load', function() {
             });
         }
     });
+
+    //  本棚を整理ボタンをクリックしたときに表示させる
     $('.shelf_modal').hide();
     $('.fire_work').click(function(){
         $('.shelf_modal').fadeOut(200);
         $(this).parent().children('.shelf_modal').fadeIn(500);
     });
 
+    // 本を削除するボタン
+    $('.destroy_book').click(function() {
+        var book_id = $(this).val();
+        var destroy_url = "books/" + book_id
+        Swal.fire({
+          title: '',
+          text: "本を削除すると感想も削除されるよ。",
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'おっけー',
+          cancelButtonText: 'やめる'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+                url:  destroy_url,
+                type: 'delete',
+                data: { authenticity_token: $("#authenticity_token").val() }
+            });
+          }
+        });
+    });
 
-
+    $('.shelf_name').click(function() {
+        var shelf_id = $(this).val();
+        var shelf_show_url = '/shelves/' + shelf_id;
+        $.ajax({
+            url: shelf_show_url,
+            type: 'get',
+            data: {}
+        });
+    });
 
 
 

@@ -1,15 +1,25 @@
 $(document).on('turbolinks:load', function() {
     // 本を探すボタンの動作
     $('#search_book_button').click(function() {
-        $('#search_book_button, #show_shelf_side_ico').hide();
-        $('.search_book_button, .scan_book_button').fadeIn(500);
+        $('#shelf_buttons').hide();
+        $('.search_button, .scan_book_button').fadeIn(500);
     });
 
     // 本棚を整理ボタンの操作
     // 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
+    $('#hide_shelf_side_ico').hide();
+    $('#add_shelf').hide();
     $('#show_shelf_side_ico').click(function() {
         $('#show_shelf_side_ico').hide();
+        $('#hide_shelf_side_ico').fadeIn(500);
         $('.book_type_icon, .shelf_side_ico').fadeIn(500);
+        $('#add_shelf').fadeIn(500);
+    });
+    $('#hide_shelf_side_ico').click(function() {
+        $('#show_shelf_side_ico').fadeIn(500);
+        $('#hide_shelf_side_ico').hide();
+        $('.book_type_icon, .shelf_side_ico').hide();
+        $('#add_shelf').hide();
     });
 
     // 本棚を追加する
@@ -49,7 +59,7 @@ $(document).on('turbolinks:load', function() {
             var params = { _mesthod: 'put' }
             params = {
               row_order_position: item.index(),
-              authenticity_token: $("#authenticity_token_destroy").val()
+              authenticity_token: $("#authenticity_token").val()
             };
             $.ajax({
                 url:      sort_url,
@@ -60,7 +70,7 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-    //  本棚を整理ボタンをクリックしたときに表示させる
+    //  本棚を整理ボタンをクリックしたときに表示させるモーダルの動作
     $('.shelf_modal').hide();
     $('.fire_work').click(function(){
         $('.shelf_modal').fadeOut(200);
@@ -89,17 +99,32 @@ $(document).on('turbolinks:load', function() {
         });
     });
 
-    $('.shelf_name').click(function() {
+    // 本棚を移動
+    // $('.shelf_name').click(function() {
+    //     var shelf_id = $(this).val();
+    //     var shelf_show_url = '/shelves/' + shelf_id;
+    //     $.ajax({
+    //         url: shelf_show_url,
+    //         type: 'get',
+    //         data: {}
+    //     });
+    // });
+
+    // 本を別の本棚に移動
+    $('select').change(function() {
         var shelf_id = $(this).val();
-        var shelf_show_url = '/shelves/' + shelf_id;
-        $.ajax({
-            url: shelf_show_url,
-            type: 'get',
-            data: {}
-        });
+        var book_id = $(this).nextAll('#book_id').val();
+        var current_shelf_id = $(this).nextAll('#current_shelf_id').val();
+            $.ajax({
+                url:  '/shelves/add_book',
+                type: 'post',
+                data: {shelf_id: shelf_id,
+                       book_id: book_id,
+                       current_shelf_id: current_shelf_id,
+                       authenticity_token: $("#authenticity_token").val()
+                      }
+            });
     });
-
-
 
 
 

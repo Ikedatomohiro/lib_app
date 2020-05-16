@@ -24,7 +24,6 @@ resources :users
 get  'books/search_books_result'        => 'books#search_books_result'
 post 'books/search'                     => 'books#search_books'
 get  'books/search'                     => 'books#search_books'
-get  'books/show_form'                  => 'books#show_search_form'
 get  'books/info/:api_id'               => 'books#show_book_info'
 post 'books/set_reading_date'           => 'books#set_reading_date'
 patch 'books/show_reading_date'         => 'books#show_reading_date'
@@ -41,9 +40,10 @@ resources :impressions
 get  'contacts/thanks'                  => 'contacts#thanks'
 resources :contacts
 
-get  'shelf'                            => 'shelves#index'
+get  'shelves'                          => 'shelves#index'
 post 'shelves/add_shelf'                => 'shelves#add_shelf'
 get  'change_shelf_type/:shelf_type'    => 'shelves#change_shelf_type'
+post 'shelves/add_book'                 => 'shelves#add_book'
 resources :shelves
 
 

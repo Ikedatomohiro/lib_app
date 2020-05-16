@@ -63,29 +63,23 @@ puts @amazon_afi_link
             @book.save!
         end
         @books = Book.where(user_id: current_user.id)
-        redirect_to shelf_path
+        user_setting = Setting.find_by(user_id: current_user.id)
+        user_setting.update(latest_shelf: 0)
+        redirect_to shelves_path
         # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
     def destroy
         book = Book.find_by(id: params[:id])
         book.destroy
-        redirect_to shelf_path
-    end
-
-    def show_search_form
-        @books = Book.new
-        respond_to do |format|
-            format.html
-            format.js
-        end
+        redirect_to "/shelves"
     end
 
     def search_books
         if params[:keyword].present?
             redirect_to books_search_books_result_path(keyword: params[:keyword]) #リダイレクトだと値がリセットされるのでダメ。
         else
-            redirect_to shelf_path
+            redirect_to shelves_path
         end
     end
 
@@ -138,7 +132,7 @@ puts '..............................'
         redirect_to impression_path(book.impression_link)
     end
 
-    # 本棚の並び替え
+    # 本の並び替え
     def sort
         book = Book.find_by(id: params[:book_id])
         # book.update(book_sort_params)

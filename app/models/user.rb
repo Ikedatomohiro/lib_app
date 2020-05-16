@@ -43,7 +43,6 @@ class User < ApplicationRecord
  
     user
   end
- 
 
   # 画像アップロード
   mount_uploader :user_icon, ImageUploader

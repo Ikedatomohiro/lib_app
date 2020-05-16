@@ -6,7 +6,7 @@
             <img src="/assets/home_gray.svg" alt="ホームアイコン非選択時">
         <% end %>
     </a>
-    <a href="<%= shelf_path %>" class="bookshelf_icon" data-turbolinks="false">
+    <a href="<%= shelves_path %>" class="bookshelf_icon" data-turbolinks="false">
         <% if @bookshelf_flg.present? && @bookshelf_flg === true %>
             <img src="/assets/bookshelf.svg" alt="本棚アイコン選択時">
         <% else %>

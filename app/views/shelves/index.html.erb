@@ -1,8 +1,11 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
-<%= javascript_pack_tag 'shelf', 'data-turbolinks-track': 'reload' %>
 <div id="shelf_buttons" class="shelf_buttons">
     <div class="arrange_shelf">
+        <div>
+            <button id="show_shelf_side_ico" class="submit_btn_small">本棚を整理</button>
+            <button id="hide_shelf_side_ico" class="submit_btn_small hide_shelf_side_ico">整理終了</button>
+        </div>
         <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
             <% if @user_setting.shelf_type == 0 %>
                 <%= lazysizes_image_tag 'shelf_type_block' %>
@@ -10,14 +13,18 @@
                 <%= lazysizes_image_tag 'shelf_type_column' %>
             <% end %>
         </a>
-        <div id="show_shelf_side_ico">
-            <button class="submit_btn_small">本棚を整理</button>
-        </div>
     </div>
-    <div class="search_book_button">
-        <a href="<%= books_show_form_path %>" data-remote="true">
-            <button class="submit_btn_small">本をキーワードで探す</button>
-        </a>
+    <div id="search_book_button">
+        <button class="submit_btn_small">本を探す</button>
+    </div>
+</div>
+    <div class="search_button">
+        <%= form_with(url: books_search_path ) do |f| %>
+          <div class="search_book_keyword_area">
+              <%= f.text_field :keyword, placeholder: 'キーワード', class: "search_book_keyword_input_area"%>
+              <button class="submit_btn_small">検索する</button>
+          </div>
+        <% end %>
     </div>
     <div class="scan_book_button">
         <div style="display: none;">
@@ -28,25 +35,25 @@
         </div>
         <button class="submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
     </div>
-    <div id="search_book_button">
-        <button class="submit_btn_small">本を探す</button>
-    </div>
-</div>
-<%# 検索キーワード入力ボックスの設置場所 %>
 
+<div id="search_book_form"><%# 検索キーワード入力ボックスの設置場所 %></div>
 
-<div id="search_book_form"></div>
 <ul class="shelves_list">
-    <li id="add_shelf">プラスボタン</li>
-    <li class="shelf_name" value="0">すべて</li>
+    <li id="add_shelf"><%= lazysizes_image_tag "plus.svg", class: "add_shelf" %></li>
+    <li class="shelf_name" value="0"><a href="/shelves/0">すべて</a>&nbsp;&nbsp;
+                  </li>
     <% if @shelves %>
         <% @shelves.each do |shelf|%>
             <li class="shelf_name" value="<%= shelf.id %>">
-                <span><%= shelf.shelf_name %></span>
+                <span>
+                  <a href="/shelves/<%= shelf.id %>"><%= shelf.shelf_name %></a>&nbsp;&nbsp;
+                  
+                  </span>
             </li>
         <% end %>
     <% end %>
 </ul>
+
 <% if @books.present? %>
     <%= form_with(model: @book, url: book_path(@books.ids)) do |form| %>
     <input type="hidden" id="authenticity_token" name="authenticity_token" value="<%= form_authenticity_token %>" >
@@ -111,8 +118,11 @@
                                 <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                                 <ul class="shelf_modal">
                                   <li>本棚を移動</li>
-                                    <%=  %>
-
+                                      <%= form_with(model: @shelf, url: shelves_path) do |f| %>
+                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_order), :id, :shelf_name, include_blank: "選択して下さい" %>
+                                          <%= f.hidden_field :book_id, value: book.id %>
+                                          <%= f.hidden_field :current_shelf_id, value: @user_setting.latest_shelf %>
+                                      <% end %>
                                   <%# if 「すべて」の本棚のとき %>
                                   <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">本を削除</li>
                                   <%# end %>
@@ -153,13 +163,6 @@
 <% else %>
     <p>本が登録されていません。</p>
 <% end %>
-<div id="shelf_view_area"></div>
-<%# 本当はgemで読み込みたかったが以下のコードを消すと動かなくなるので、読み込めてないかもしれない。 %>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-<%# スマホなどタッチアクションで動作するようにするscript %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-
 <script type="text/javascript" src="/JOB.js"></script>
 <script type="text/javascript">
     // バーコードスキャン用ボタンをクリック

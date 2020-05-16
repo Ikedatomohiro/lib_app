@@ -9,10 +9,4 @@ class Book < ApplicationRecord
     include RankedModel
     ranks :row_order, with_same: :user_id # with_sameの部分を書かないと正常に順番が保存されないらしい
 
-    def tweet
-        count = Impression.where(self.id)
-        return 'tweet'
-        # viewから呼ぶ
-    end
-
 end

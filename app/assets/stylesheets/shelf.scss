@@ -20,6 +20,19 @@
     margin-right: auto;
 }
 
+.add_shelf {
+    width: 30px;
+    height: 30px;
+}
+
+.hide_shelf_side_ico {
+    margin-right: 10px;
+}
+
+.shelves_list a{
+    text-decoration: none;
+}
+
 .book_img_box {
     display: flex;
     padding: 5px;
@@ -33,11 +46,14 @@
     cursor: pointer;
 }
 
-.search_book_button {
-    margin-right: 20px;
-}
-.search_book_button, .scan_book_button, .book_type_icon, .shelf_side_ico {
+.search_button, .scan_book_button, .book_type_icon, .shelf_side_ico {
     display: none;
+}
+
+.scan_book_button {
+    height: 40px;
+    width:  170px;
+    margin: 10px 0 0 auto;
 }
 
 .book_counter_icon {

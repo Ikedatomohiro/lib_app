@@ -44,9 +44,9 @@ module BooksHelper
             'w7nTCQAAQBAJ' => 'https://amzn.to/39AEObK', # アドラー心理学が教える　新しい自分の創めかた
             '48vFCQAAQBAJ' => 'https://amzn.to/2RclCLb', # 免疫学の基本がわかる事典
             '8PNQDwAAQBAJ' => 'https://amzn.to/2S8swkZ', # 最後の医者は雨上がりの空に君を願う（下）
-            # '' => '', # 
-            # '' => '', # 
-            # '' => '', # 
+            'Tq80swEACAAJ' => 'https://amzn.to/2zHDTKh', # 虚ろな十字架
+            'hfl2uQAACAAJ' => 'https://amzn.to/2ybN1Xf', # モンスター 百田尚樹
+            'VHReYgEACAAJ' => 'https://amzn.to/2LE2u5u', # 変身 東野圭吾
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

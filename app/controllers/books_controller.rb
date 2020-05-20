@@ -143,7 +143,13 @@ puts '..............................'
     # 本の並び替え
     def sort
         puts params[:book_id]
-        book = Book.find_by(id: params[:book_id])
+        if params[:current_shelf_id] == '0'
+            book = Book.find_by(id: params[:book_id])
+        else
+            book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
+                                     user_id: current_user.id,
+                                     book_id: params[:book_id])
+        end
         # book.update(book_sort_params)
         book.update(row_order_position: params[:row_order_position])
         render body: nil

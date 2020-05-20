@@ -56,9 +56,11 @@ $(document).on('turbolinks:load', function() {
             var book_id = item.attr("value");
             var sort_url = "/books/"+ book_id +"/sort";
             var item_data = item.data();
+            var current_shelf_id = $('#current_shelf_id').val();
             var params = { _mesthod: 'put' }
             params = {
               row_order_position: item.index(),
+              current_shelf_id: current_shelf_id,
               authenticity_token: $("#authenticity_token").val()
             };
             $.ajax({

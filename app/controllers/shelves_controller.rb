@@ -14,10 +14,12 @@ class ShelvesController < ApplicationController
         else
             shelf_id = @user_setting.latest_shelf
             shelf_items = ShelfItem.where(user_id: current_user.id,
-                                          shelf_id: shelf_id)
+                                          shelf_id: shelf_id).order(row_order: "DESC")
             book_id_array = []
             shelf_items.each do |item|
                 book_id_array.push(item.book_id)
+                puts item.id
+                puts item.row_order
             end
             @books = Book.where(id: book_id_array)
             puts 'その他の本棚'

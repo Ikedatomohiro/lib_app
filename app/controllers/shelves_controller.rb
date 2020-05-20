@@ -32,9 +32,8 @@ class ShelvesController < ApplicationController
 
     def add_book
         book_exists = ShelfItem.find_by(shelf_id: params[:shelf_id],
-                                 user_id: current_user.id,
-                                 book_id: params[:book_id]
-                                )
+                                        user_id: current_user.id,
+                                        book_id: params[:book_id])
         if !book_exists
             book = ShelfItem.new(shelf_id: params[:shelf_id],
                                  user_id: current_user.id,
@@ -43,6 +42,18 @@ class ShelvesController < ApplicationController
             book.save!
         end
 
+        delete_shelf_item
+
+    end
+
+    def delete_shelf_item
+puts params[:current_shelf_id]
+        if params[:current_shelf_id] != 0
+            target_book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
+                                            user_id: current_user.id,
+                                            book_id: params[:book_id])
+            target_book.destroy
+        end
     end
 
     def delete

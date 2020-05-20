@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function() {
         handle: "p.handle",
         update: function(event, ui){
             var item = ui.item;
-            var book_id = item.attr("id");
+            var book_id = item.attr("value");
             var sort_url = "/books/"+ book_id +"/sort";
             var item_data = item.data();
             var params = { _mesthod: 'put' }
@@ -114,27 +114,30 @@ $(document).on('turbolinks:load', function() {
     $('select').change(function() {
         var shelf_id = $(this).val();
         var book_id = $(this).nextAll('#book_id').val();
-        var current_shelf_id = $(this).nextAll('#current_shelf_id').val();
-            $.ajax({
-                url:  '/shelves/add_book',
-                type: 'post',
-                data: {shelf_id: shelf_id,
-                       book_id: book_id,
-                       current_shelf_id: current_shelf_id,
-                       authenticity_token: $("#authenticity_token").val()
-                      }
-            });
+        var current_shelf_id = $('#current_shelf_id').val();
+        var new_shelf_name = $(this).children('option').val(shelf_id);
+        console.log(current_shelf_id);
+        $.ajax({
+            url:  '/shelves/add_book',
+            type: 'post',
+            data: {shelf_id: shelf_id,
+                   book_id: book_id,
+                   current_shelf_id: current_shelf_id,
+                   authenticity_token: $("#authenticity_token").val()
+                  }
+        });
+        Swal.fire({
+          title: '',
+          text: "本を移動したよ",
+          type: 'info',
+          timer: 1500,
+        })
+        // 移動した本の要素を非表示にする
+        if (current_shelf_id != 0 && shelf_id != current_shelf_id) {
+            $('#book_id_' + book_id).fadeOut(500);
+        }
+
     });
-
-
-
-
-
-
-
-
-
-
 
 
 });

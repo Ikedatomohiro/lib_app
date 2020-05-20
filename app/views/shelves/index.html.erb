@@ -103,15 +103,16 @@
                     </div>
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
-                    <div id="<%= book.id %>" class="block_shelf_item">
+                    <input type="hidden" id="current_shelf_id" value="<%= @user_setting.latest_shelf %>">
+                    <div id="book_id_<%= book.id %>" class="block_shelf_item" value="<%= book.id %>">
                         <div class="block_shelf_book_and_icon">
                             <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                                 <p class="thumbnail_block_shelf">
                                     <% if book.users_thumbnail.present? %>
-                                        <%= lazysizes_image_tag book.users_thumbnail_url ,class: " shelf_book", alt:'本の画像' %>
+                                        <%= lazysizes_image_tag book.users_thumbnail_url ,class: "shelf_book", alt:'本の画像' %>
                                     <% else %>
                                         <%= lazysizes_image_tag book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
-                                    <% end %>
+                                    <% end %> <%= book.id %>
                                 </p>
                             </a>
                             <div class="shelf_side_ico">
@@ -121,7 +122,6 @@
                                       <%= form_with(model: @shelf, url: shelves_path) do |f| %>
                                           <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_order), :id, :shelf_name, include_blank: "選択して下さい" %>
                                           <%= f.hidden_field :book_id, value: book.id %>
-                                          <%= f.hidden_field :current_shelf_id, value: @user_setting.latest_shelf %>
                                       <% end %>
                                   <%# if 「すべて」の本棚のとき %>
                                   <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">本を削除</li>

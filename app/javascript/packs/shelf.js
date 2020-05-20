@@ -81,9 +81,16 @@ $(document).on('turbolinks:load', function() {
     $('.destroy_book').click(function() {
         var book_id = $(this).val();
         var destroy_url = "books/" + book_id
+        var current_shelf_id = $('#current_shelf_id').val();
+        console.log(current_shelf_id);
+        if (current_shelf_id == 0) {
+          var message = '本を削除すると感想も削除されるよ。';
+        } else {
+          var message = 'この本棚の本だけが削除されるよ。';
+        }
         Swal.fire({
           title: '',
-          text: "本を削除すると感想も削除されるよ。",
+          text: message,
           type: 'question',
           showCancelButton: true,
           confirmButtonText: 'おっけー',
@@ -93,7 +100,8 @@ $(document).on('turbolinks:load', function() {
             $.ajax({
                 url:  destroy_url,
                 type: 'delete',
-                data: { authenticity_token: $("#authenticity_token").val() }
+                data: { current_shelf_id: current_shelf_id,
+                        authenticity_token: $("#authenticity_token").val() }
             });
           }
         });
@@ -116,7 +124,6 @@ $(document).on('turbolinks:load', function() {
         var book_id = $(this).nextAll('#book_id').val();
         var current_shelf_id = $('#current_shelf_id').val();
         var new_shelf_name = $(this).children('option').val(shelf_id);
-        console.log(current_shelf_id);
         $.ajax({
             url:  '/shelves/add_book',
             type: 'post',

@@ -70,9 +70,17 @@ puts @amazon_afi_link
     end
 
     def destroy
-        book = Book.find_by(id: params[:id])
+        if params[:current_shelf_id] == '0'
+            book = Book.find_by(id: params[:id])
+        else
+            book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
+                                     user_id: current_user.id,
+                                     book_id: params[:id])
+        end
+puts book
+puts 'sad;lkj;lafjksdl;kj;lkjfas';
         book.destroy
-        redirect_to "/shelves"
+        redirect_to '/shelves'
     end
 
     def search_books

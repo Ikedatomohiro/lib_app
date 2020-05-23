@@ -142,13 +142,15 @@ puts '..............................'
     def sort
         if params[:current_shelf_id] == '0'
             book = Book.find_by(id: params[:book_id])
+            book.update(row_order_position: params[:row_order_position])
+puts '..............................'
         else
             book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
                                      user_id: current_user.id,
                                      book_id: params[:book_id])
+            book.update(row_shelf_items_order: params[:row_order_position])
         end
         # book.update(book_sort_params)
-        book.update(row_order_position: params[:row_order_position])
         render body: nil
         # render nothing: true この書き方はrails 4までしか使えない
 

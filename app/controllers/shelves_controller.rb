@@ -6,24 +6,19 @@ class ShelvesController < ApplicationController
 
     def index
 
-        # @shelves = Shelf.where(user_id: current_user.id).rank(:row_order)
-        @shelves = Shelf.where(user_id: current_user.id)
+        @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         if @user_setting.latest_shelf == 0
             @books = Book.where(user_id: current_user.id).rank(:row_order)
-            # @books = Book.where(user_id: current_user.id)
-            @shelves = Shelf.where(user_id: current_user.id).order(row_order: "DESC")
-            # @shelves = Shelf.where(user_id: current_user.id)
+            @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
             book_id_array = []
             puts 'すべての本'
         else
             shelf_id = @user_setting.latest_shelf
             shelf_items = ShelfItem.where(user_id: current_user.id,
-                                          shelf_id: shelf_id).order(row_order: "DESC")
+                                          shelf_id: shelf_id).rank(:row_shelf_items_order)
             book_id_array = []
             shelf_items.each do |item|
                 book_id_array.push(item.book_id)
-                puts item.id
-                puts item.row_order
             end
             @books = Book.where(id: book_id_array)
             puts 'その他の本棚'
@@ -44,7 +39,7 @@ class ShelvesController < ApplicationController
             book = ShelfItem.new(shelf_id: params[:shelf_id],
                                  user_id: current_user.id,
                                  book_id: params[:book_id],
-                                 row_order: 0)
+                                 row_shelf_items_order: 0)
             book.save!
         end
 
@@ -80,7 +75,7 @@ class ShelvesController < ApplicationController
         if params[:shelf_name]
             shelf = Shelf.new(user_id: current_user.id,
                               shelf_name: params[:shelf_name],
-                              row_order_position: 0)
+                              row_shelves_order_position: 0)
             shelf.save!
         else
             redirect_to shelves_path
@@ -90,7 +85,7 @@ class ShelvesController < ApplicationController
 
     def sort
         shelf = Shelf.find_by(id: params[:shelf_id])
-        shelf.update(row_order_position: params[:row_order_position])
+        shelf.update(row_shelves_order_position: params[:row_order_position])
         render body: nil
     end
 

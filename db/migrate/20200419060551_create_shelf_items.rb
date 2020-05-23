@@ -4,7 +4,7 @@ class CreateShelfItems < ActiveRecord::Migration[6.0]
         t.integer :shelf_id,         null: false
         t.integer :user_id,          null: false
         t.integer :book_id,          null: false
-        t.integer :row_order
+        t.integer :row_shelf_items_order
       t.timestamps
     end
     add_index :shelf_items, :user_id

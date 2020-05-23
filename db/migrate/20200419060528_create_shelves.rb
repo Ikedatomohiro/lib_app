@@ -4,7 +4,7 @@ class CreateShelves < ActiveRecord::Migration[6.0]
         t.integer :user_id,                 null: false
         t.string  :shelf_name,              null: false
         t.string  :shelf_tab_color,         null: true
-        t.integer :row_order
+        t.integer :row_shelves_order
       t.timestamps
     end
     add_index :shelves, :user_id

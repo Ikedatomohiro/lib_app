@@ -44,7 +44,9 @@ get  'shelves'                          => 'shelves#index'
 post 'shelves/add_shelf'                => 'shelves#add_shelf'
 get  'change_shelf_type/:shelf_type'    => 'shelves#change_shelf_type'
 post 'shelves/add_book'                 => 'shelves#add_book'
-resources :shelves
+resources :shelves do
+    put :sort
+end
 
 
 end

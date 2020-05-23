@@ -7,17 +7,17 @@ $(document).on('turbolinks:load', function() {
 
     // 本棚を整理ボタンの操作
     // 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
-    $('#hide_shelf_side_ico').hide();
+    $('#hide_shelf_arrange_ico').hide();
     $('#add_shelf').hide();
-    $('#show_shelf_side_ico').click(function() {
-        $('#show_shelf_side_ico').hide();
-        $('#hide_shelf_side_ico').fadeIn(500);
+    $('#show_shelf_arrange_ico').click(function() {
+        $('#show_shelf_arrange_ico').hide();
+        $('#hide_shelf_arrange_ico').fadeIn(500);
         $('.book_type_icon, .shelf_side_ico').fadeIn(500);
         $('#add_shelf').fadeIn(500);
     });
-    $('#hide_shelf_side_ico').click(function() {
-        $('#show_shelf_side_ico').fadeIn(500);
-        $('#hide_shelf_side_ico').hide();
+    $('#hide_shelf_arrange_ico').click(function() {
+        $('#show_shelf_arrange_ico').fadeIn(500);
+        $('#hide_shelf_arrange_ico').hide();
         $('.book_type_icon, .shelf_side_ico').hide();
         $('#add_shelf').hide();
     });
@@ -82,7 +82,7 @@ $(document).on('turbolinks:load', function() {
     // 本を削除するボタン
     $('.destroy_book').click(function() {
         var book_id = $(this).val();
-        var destroy_url = "books/" + book_id
+        var destroy_url = "books/" + book_id;
         var current_shelf_id = $('#current_shelf_id').val();
         console.log(current_shelf_id);
         if (current_shelf_id == 0) {
@@ -103,7 +103,8 @@ $(document).on('turbolinks:load', function() {
                 url:  destroy_url,
                 type: 'delete',
                 data: { current_shelf_id: current_shelf_id,
-                        authenticity_token: $("#authenticity_token").val() }
+                        authenticity_token: $("#authenticity_token").val()
+                      }
             });
           }
         });
@@ -145,9 +146,58 @@ $(document).on('turbolinks:load', function() {
         if (current_shelf_id != 0 && shelf_id != current_shelf_id) {
             $('#book_id_' + book_id).fadeOut(500);
         }
-
     });
 
+    // 本棚の削除
+    $('.destroy_shelf').click(function() {
+        var shelf_id = $(this).val();
+        console.log(shelf_id);
+        var destroy_url = "shelves/" + shelf_id;
+        var message = '本だなを削除するよ。';
+    //     Swal.fire({
+    //       title: '',
+    //       text: message,
+    //       type: 'question',
+    //       showCancelButton: true,
+    //       confirmButtonText: 'おっけー',
+    //       cancelButtonText: 'やめる'
+    //     }).then((result) => {
+    //       if (result.value) {
+    //         $.ajax({
+    //             url:  destroy_url,
+    //             type: 'delete',
+    //             data: { authenticity_token: $("#authenticity_token").val()}
+    //         });
+    //       }
+    //     });
+    });
 
+    // 本棚の並べ替え
+    $('#shelves_list').sortable({
+        scrollSpeed: 10,
+        revert: 200,
+        animation: 100,
+        opacity: 0.8,
+        handle: "p.handle",
+        update: function(event, ui){
+            var item = ui.item;
+            var shelf_id = item.attr("value");
+            var sort_url = "/shelves/"+ shelf_id +"/sort";
+            var item_data = item.data();
+            var current_shelf_id = $('#current_shelf_id').val();
+            var params = { _mesthod: 'put' }
+            params = {
+              row_order_position: item.index(),
+              current_shelf_id: current_shelf_id,
+              authenticity_token: $("#authenticity_token").val()
+            };
+            $.ajax({
+                url:      sort_url,
+                type:     'put',
+                dataType: 'json',
+                data:     params
+            });
+        }
+    });
 });
 

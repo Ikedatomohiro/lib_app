@@ -77,8 +77,6 @@ puts @amazon_afi_link
                                      user_id: current_user.id,
                                      book_id: params[:id])
         end
-puts book
-puts 'sad;lkj;lafjksdl;kj;lkjfas';
         book.destroy
         redirect_to '/shelves'
     end
@@ -142,7 +140,6 @@ puts '..............................'
 
     # 本の並び替え
     def sort
-        puts params[:book_id]
         if params[:current_shelf_id] == '0'
             book = Book.find_by(id: params[:book_id])
         else

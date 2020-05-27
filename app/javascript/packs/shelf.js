@@ -58,6 +58,7 @@ $(document).on('turbolinks:load', function() {
             var item_data = item.data();
             var current_shelf_id = $('#current_shelf_id').val();
             var params = { _mesthod: 'put' }
+console.log(item.index());
             params = {
               row_order_position: item.index(),
               current_shelf_id: current_shelf_id,
@@ -150,26 +151,26 @@ $(document).on('turbolinks:load', function() {
 
     // 本棚の削除
     $('.destroy_shelf').click(function() {
-        var shelf_id = $(this).val();
-        console.log(shelf_id);
+        var shelf_id = $(this).children('input').val();
         var destroy_url = "shelves/" + shelf_id;
         var message = '本だなを削除するよ。';
-    //     Swal.fire({
-    //       title: '',
-    //       text: message,
-    //       type: 'question',
-    //       showCancelButton: true,
-    //       confirmButtonText: 'おっけー',
-    //       cancelButtonText: 'やめる'
-    //     }).then((result) => {
-    //       if (result.value) {
-    //         $.ajax({
-    //             url:  destroy_url,
-    //             type: 'delete',
-    //             data: { authenticity_token: $("#authenticity_token").val()}
-    //         });
-    //       }
-    //     });
+        Swal.fire({
+          title: '',
+          text: message,
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'おっけー',
+          cancelButtonText: 'やめる'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+                url:  destroy_url,
+                type: 'delete',
+                data: { authenticity_token: $("#authenticity_token").val()}
+            });
+        console.log(destroy_url);
+          }
+        });
     });
 
     // 本棚の並べ替え
@@ -177,6 +178,7 @@ $(document).on('turbolinks:load', function() {
         scrollSpeed: 10,
         revert: 200,
         animation: 100,
+        axis: 'x',
         opacity: 0.8,
         handle: "p.handle",
         update: function(event, ui){

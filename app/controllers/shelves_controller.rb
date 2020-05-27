@@ -5,7 +5,6 @@ class ShelvesController < ApplicationController
     before_action :set_user_setting_info, only: [:index, :show, :change_shelf_type]
 
     def index
-
         @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         if @user_setting.latest_shelf == 0
             @books = Book.where(user_id: current_user.id).rank(:row_order)
@@ -28,7 +27,9 @@ class ShelvesController < ApplicationController
     def show
         shelf_id = params[:id]
         @user_setting.update(latest_shelf: shelf_id)
-        redirect_to shelves_path
+        if shelf_id == '0'
+            redirect_to shelves_path
+        end
     end
 
     def add_book
@@ -57,7 +58,10 @@ class ShelvesController < ApplicationController
     end
 
     def destroy
-        puts 'いまここ'
+        shelf = Shelf.find_by(id: params[:id],
+                                user_id: current_user.id)
+        shelf.destroy
+        redirect_to shelves_path
     end
 
     # 本棚をカラムとブロックを変更

@@ -1,5 +1,6 @@
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
+<input type="hidden" id="current_shelf_id" value="<%= @user_setting.latest_shelf %>">
 <div id="shelf_buttons" class="shelf_buttons">
     <div class="arrange_shelf">
         <div>
@@ -37,23 +38,25 @@
     </div>
 
 <div id="search_book_form"><%# 検索キーワード入力ボックスの設置場所 %></div>
-
-<ul id="shelves_list" class="shelves_list">
+<ul>
     <li id="add_shelf"><%= lazysizes_image_tag "plus.svg", class: "add_shelf" %></li>
-    <li class="shelf_name" value="0"><a href="/shelves/0">すべて</a>&nbsp;&nbsp;</li>
+    <li class="shelf_name shelf_rabel" value="0"><a href="/shelves/0">すべて</a>&nbsp;&nbsp;</li>
+  
+</ul>
+<ul id="shelves_list" class="shelves_list">
     <% if @shelves %>
         <% @shelves.each do |shelf|%>
-            <li class="shelf_name" value="<%= shelf.id %>">
+            <li class="shelf_name shelf_label" value="<%= shelf.id %>">
                 <span>
-                    <a href="/shelves/<%= shelf.id %>"><%= shelf.shelf_name %></a>&nbsp;&nbsp;
+                    <a href="/shelves/<%= shelf.id %>"><%= shelf.shelf_name %>&nbsp;<%= shelf.id %></a>&nbsp;&nbsp;
                 </span>
-                <p class="destroy_shelf" value="<%= shelf.id %>">
+                <p class="destroy_shelf">
                     <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                    <input type="hidden" value="<%= shelf.id %>">
                 </p>
                 <p class="handle">
                     <%= lazysizes_image_tag 'dot_for_handle.svg' %>
                 </p>
-                <p><%= shelf.row_shelves_order %></p>
            </li>
         <% end %>
     <% end %>
@@ -108,7 +111,6 @@
                     </div>
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
-                    <input type="hidden" id="current_shelf_id" value="<%= @user_setting.latest_shelf %>">
                     <div id="book_id_<%= book.id %>" class="block_shelf_item" value="<%= book.id %>">
                         <div class="block_shelf_book_and_icon">
                             <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
@@ -125,8 +127,7 @@
                                 <ul class="shelf_modal">
                                   <li>本棚を移動</li>
                                       <%= form_with(model: @shelf, url: shelves_path) do |f| %>
-                                          <%#= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_order), :id, :shelf_name, include_blank: "選択して下さい" %>
-                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id), :id, :shelf_name, include_blank: "選択して下さい" %>
+                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "選択して下さい" %>
                                           <%= f.hidden_field :book_id, value: book.id %>
                                       <% end %>
                                   <%# if 「すべて」の本棚のとき %>

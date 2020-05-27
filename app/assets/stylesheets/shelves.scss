@@ -13,3 +13,23 @@
 .shelf_modal li {
     list-style: none;
 }
+
+
+.shelf_label {
+  /*background: LightGray;*/
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: center;
+  padding: 10px .5em;
+  order: -1;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  border: solid 1px #325A8C;
+  flex: 1;
+}
+
+.tab-switch:checked+.tab-label {
+  background: #325A8C;
+}

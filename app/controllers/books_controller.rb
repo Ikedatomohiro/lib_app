@@ -143,12 +143,11 @@ puts '..............................'
         if params[:current_shelf_id] == '0'
             book = Book.find_by(id: params[:book_id])
             book.update(row_order_position: params[:row_order_position])
-puts '..............................'
         else
             book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
                                      user_id: current_user.id,
                                      book_id: params[:book_id])
-            book.update(row_shelf_items_order: params[:row_order_position])
+            book.update(row_shelf_items_order_position: params[:row_order_position])
         end
         # book.update(book_sort_params)
         render body: nil

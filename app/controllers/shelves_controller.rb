@@ -4,6 +4,7 @@ class ShelvesController < ApplicationController
     before_action :set_bookshelf_flg, only: [:index, :show]
     before_action :set_user_setting_info, only: [:index, :show, :change_shelf_type]
 
+
     def index
         @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         if @user_setting.latest_shelf == 0
@@ -11,24 +12,22 @@ class ShelvesController < ApplicationController
             @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
             book_id_array = []
             puts 'すべての本'
-        else
-            shelf_id = @user_setting.latest_shelf
-            shelf_items = ShelfItem.where(user_id: current_user.id,
-                                          shelf_id: shelf_id).rank(:row_shelf_items_order)
-            book_id_array = []
-            shelf_items.each do |item|
-                book_id_array.push(item.book_id)
-            end
-            @books = Book.where(id: book_id_array)
-            puts 'その他の本棚'
         end
     end
 
     def show
+        @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         shelf_id = params[:id]
-        @user_setting.update(latest_shelf: shelf_id)
+        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s
+            @user_setting.update(latest_shelf: shelf_id)
+        end
         if shelf_id == '0'
             redirect_to shelves_path
+        else
+            shelf_id = @user_setting.latest_shelf
+            @shelf_items = ShelfItem.where(user_id: current_user.id,
+                                          shelf_id: shelf_id).rank(:row_shelf_items_order)
+            puts 'その他の本棚'
         end
     end
 

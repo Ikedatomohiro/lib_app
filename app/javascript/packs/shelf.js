@@ -9,17 +9,20 @@ $(document).on('turbolinks:load', function() {
     // 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
     $('#hide_shelf_arrange_ico').hide();
     $('#add_shelf').hide();
+    $('.shelf_modify_buttons').hide();
     $('#show_shelf_arrange_ico').click(function() {
         $('#show_shelf_arrange_ico').hide();
         $('#hide_shelf_arrange_ico').fadeIn(500);
         $('.book_type_icon, .shelf_side_ico').fadeIn(500);
         $('#add_shelf').fadeIn(500);
-    });
+        $('.shelf_modify_buttons').fadeIn(500);
+   });
     $('#hide_shelf_arrange_ico').click(function() {
         $('#show_shelf_arrange_ico').fadeIn(500);
         $('#hide_shelf_arrange_ico').hide();
         $('.book_type_icon, .shelf_side_ico').hide();
         $('#add_shelf').hide();
+        $('.shelf_modify_buttons').hide();
     });
 
     // 本棚を追加する
@@ -201,5 +204,9 @@ console.log(item.index());
             });
         }
     });
+
+    // 本棚ラベルにclassを与える
+    var current_shelf = $('#current_shelf_id').val();
+    
 });
 

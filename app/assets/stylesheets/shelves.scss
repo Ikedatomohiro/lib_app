@@ -15,26 +15,31 @@
 }
 
 .shelf_area {
-    display: flex; 
+    display: flex;
+    justify-content: flex-start;
 }
 
 .shelf_label {
   /*background: LightGray;*/
+  max-width: 80px;
+  margin: 5px 5px 10px 5px;
   font-weight: bold;
   white-space: nowrap;
-  text-align: center;
   padding: 10px .5em;
   order: -1;
   position: relative;
   z-index: 1;
   cursor: pointer;
-  border-radius: 5px 5px 0 0;
-  border: solid 1px #325A8C;
   flex: 1;
+  text-align: center;
 }
 
-.tab-switch:checked+.tab-label {
-  background: #325A8C;
+.shelf_area a {
+  text-decoration: none;
+}
+
+.shelf_marker {
+    border-bottom: 2px solid #1D4E56;
 }
 
 .shelf_buttons {
@@ -44,6 +49,11 @@
 }
 
 #shelf_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shelf_modify_buttons {
     display: flex;
     justify-content: space-between;
 }

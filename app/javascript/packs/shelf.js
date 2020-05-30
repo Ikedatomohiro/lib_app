@@ -113,17 +113,6 @@ $(document).on('turbolinks:load', function() {
         });
     });
 
-    // 本棚を移動
-    // $('.shelf_name').click(function() {
-    //     var shelf_id = $(this).val();
-    //     var shelf_show_url = '/shelves/' + shelf_id;
-    //     $.ajax({
-    //         url: shelf_show_url,
-    //         type: 'get',
-    //         data: {}
-    //     });
-    // });
-
     // 本を別の本棚に移動
     $('select').change(function() {
         var shelf_id = $(this).val();

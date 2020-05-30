@@ -8,7 +8,7 @@
             <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
                 <% @books.each do |book| %>
                     <% if @user_setting.shelf_type == 0 %>
-                    <div class="book_img_box" id="<%= book.id %>" >
+                    <div class="book_img_box" id="book_id_<%= book.id %>" value="<%= book.id %>">
                         <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                             <p class="thumbnail_top">
                                 <% if book.users_thumbnail.present? %>
@@ -38,13 +38,25 @@
                                         <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
                                         <%= tweet_times(book.id) %>
                                     </p>
-                               </div>
+                                </div>
                             </div>
                         </a>
                         <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
                         <div class="shelf_side_ico">
-                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
-                            <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
+                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                            <ul class="shelf_modal">
+                              <li>▶「<%= book.title %>」 を移動</li>
+                              <%= form_with(model: @shelf, url: shelves_path) do |f| %>
+                                  <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
+                                  <%= f.hidden_field :book_id, value: book.id %>
+                              <% end %>
+                              <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">
+                                  <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                              </li>
+                            </ul>
+                            <p class="handle">
+                                <%= lazysizes_image_tag 'dot_for_handle.svg' %>
+                            </p>
                         </div>
                     </div>
     <%# 本棚タイプがブロックのとき %>
@@ -62,7 +74,7 @@
                                 <div class="shelf_side_ico">
                                     <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                                     <ul class="shelf_modal">
-                                      <li>▶本を移動</li>
+                                      <li>▶▶「<%= book.title %>」 を移動</li>
                                       <%= form_with(model: @shelf, url: shelves_path) do |f| %>
                                           <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼", class: 'select_shelf' %>
                                           <%= f.hidden_field :book_id, value: book.id %>

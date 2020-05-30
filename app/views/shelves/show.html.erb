@@ -8,44 +8,58 @@
             <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
                 <% @shelf_items.each do |item| %>
                     <% if @user_setting.shelf_type == 0 %>
-                    <div class="book_img_box" id="<%= item.book.id %>" >
-                        <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
+                    <div class="book_img_box" id="book_id_<%= item.book.id %>" >
+                        <a href="/books/info/<%= item.book.api_id %>" data-turbolinks="false">
                             <p class="thumbnail_top">
-                                <% if book.users_thumbnail.present? %>
+                                <% if item.book.users_thumbnail.present? %>
                                 <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% else %>
-                                <%= lazysizes_image_tag book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
+                                <%= lazysizes_image_tag item.book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% end %>
                             </p>
                         </a>
-                        <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
-                            <div class="book_title" id="title_<%= book.id %>">
-                                <%= book.title %>
+                        <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                            <div class="book_title" id="title_<%= item.book_id %>">
+                                <%= item.book.title %>
                                 <div class="book_count_info">
                                     <p class="book_count">
                                         <%= lazysizes_image_tag "star-on.png" %>
-                                        <% if book.evaluation %>
-                                            <%= book.evaluation %>
+                                        <% if item.book.evaluation %>
+                                            <%= item.book.evaluation %>
                                         <% else %>
                                         -
                                         <% end %>
                                     </p>
                                     <p class="book_count">
                                         <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                        <%= impression_times(book.id) %>
+                                        <%= impression_times(item.book_id) %>
                                     </p>
                                     <p class="book_count">
                                         <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                        <%= tweet_times(book.id) %>
+                                        <%= tweet_times(item.book_id) %>
                                     </p>
                                </div>
                             </div>
                         </a>
-                        <input id="api_path_<%= book.id %>" type="hidden" name="api_path" value="<%= book.api_path %>" />
+                        <input id="api_path_<%= item.book_id %>" type="hidden" name="api_path" value="<%= item.book.api_path %>" />
                         <div class="shelf_side_ico">
-                            <%= lazysizes_image_tag "fire_work.svg", class: "fire_work", id: "destroy_book_#{book.id}" %>
-                            <p class="handle"><%= lazysizes_image_tag 'dot_for_handle.svg' %></p>
-                        </div>
+                                <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                                <ul class="shelf_modal">
+                                  <li>▶「<%= item.book.title %>」 を移動</li>
+                                      <%= form_with(model: @shelf, url: shelves_path) do |f| %>
+                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
+                                          <%= f.hidden_field :book_id, value: item.book_id %>
+                                      <% end %>
+                                  <%# if 「すべて」の本棚のとき %>
+                                  <li id="<%= item.book_id %>" class="destroy_book" value="<%= item.book_id %>">
+                                    <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                                </li>
+                                  <%# end %>
+                                </ul>
+                                <p class="handle">
+                                    <%= lazysizes_image_tag 'dot_for_handle.svg' %>
+                                </p>
+                         </div>
                     </div>
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
@@ -62,7 +76,7 @@
                             <div class="shelf_side_ico">
                                 <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                                 <ul class="shelf_modal">
-                                  <li>本棚を移動</li>
+                                  <li>▶「<%= book.title %>」 を移動</li>
                                       <%= form_with(model: @shelf, url: shelves_path) do |f| %>
                                           <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
                                           <%= f.hidden_field :book_id, value: item.book_id %>

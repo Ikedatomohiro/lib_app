@@ -50,8 +50,8 @@
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
                     <div id="book_id_<%= item.book_id %>" class="block_shelf_item" value="<%= item.book_id %>">
+                        <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
                         <div class="block_shelf_book_and_icon">
-                            <a href="/books/info/<%= item.book.api_id %>" data-turbolinks="false">
                                 <p class="thumbnail_block_shelf">
                                     <% if item.book.users_thumbnail.present? %>
                                         <%= lazysizes_image_tag item.book.users_thumbnail_url ,class: "shelf_book", alt:'本の画像' %>
@@ -59,17 +59,18 @@
                                         <%= lazysizes_image_tag item.book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
                                     <% end %>
                                 </p>
-                            </a>
                             <div class="shelf_side_ico">
                                 <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                                 <ul class="shelf_modal">
                                   <li>本棚を移動</li>
                                       <%= form_with(model: @shelf, url: shelves_path) do |f| %>
-                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "選択して下さい" %>
+                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
                                           <%= f.hidden_field :book_id, value: item.book_id %>
                                       <% end %>
                                   <%# if 「すべて」の本棚のとき %>
-                                  <li id="<%= item.book_id %>" class="destroy_book" value="<%= item.book_id %>">本を削除</li>
+                                  <li id="<%= item.book_id %>" class="destroy_book" value="<%= item.book_id %>">
+                                    <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                                </li>
                                   <%# end %>
                                 </ul>
                                 <p class="handle">
@@ -77,7 +78,6 @@
                                 </p>
                             </div>
                         </div>
-                        <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
                                 <div class="book_count_info">
                                     <p class="book_count">
                                         <%= lazysizes_image_tag "star-on.png" %>
@@ -96,8 +96,8 @@
                                         <%= tweet_times(item.book_id) %>
                                     </p>
                                 </div>
-                        </a>
                         <input id="api_path_<%= item.book_id %>" type="hidden" name="api_path" value="<%= item.book.api_path %>" />
+                        </a>
                     </div>
                     <% end %>
         <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 

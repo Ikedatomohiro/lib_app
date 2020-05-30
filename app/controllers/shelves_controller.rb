@@ -12,6 +12,8 @@ class ShelvesController < ApplicationController
             @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
             book_id_array = []
             puts 'すべての本'
+        else
+            redirect_to "/shelves/#{@user_setting.latest_shelf}"
         end
     end
 

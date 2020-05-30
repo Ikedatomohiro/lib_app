@@ -1,0 +1,65 @@
+<%# 遅延読み込みのためのスクリプト %>
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
+<input type="hidden" id="current_shelf_id" value="<%= @user_setting.latest_shelf %>">
+<div id="shelf_buttons" class="shelf_buttons">
+    <div class="arrange_shelf">
+        <div>
+            <button id="show_shelf_arrange_ico" class="submit_btn_small">本棚を整理</button>
+            <button id="hide_shelf_arrange_ico" class="submit_btn_small hide_shelf_side_ico">整理終了</button>
+        </div>
+        <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
+            <% if @user_setting.shelf_type == 0 %>
+            <%= lazysizes_image_tag 'shelf_type_block' %>
+            <% elsif @user_setting.shelf_type == 1 %>
+            <%= lazysizes_image_tag 'shelf_type_column' %>
+            <% end %>
+        </a>
+    </div>
+    <div id="search_book_button">
+        <button class="submit_btn_small">本を探す</button>
+    </div>
+</div>
+<div class="search_button">
+    <%= form_with(url: books_search_path ) do |f| %>
+    <div class="search_book_keyword_area">
+        <%= f.text_field :keyword, placeholder: 'キーワード', class: "search_book_keyword_input_area"%>
+        <button class="submit_btn_small">検索する</button>
+    </div>
+    <% end %>
+</div>
+<div class="scan_book_button">
+    <div style="display: none;">
+        <canvas id="picture"></canvas>
+        <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
+        <input type="hidden" name="" id="textbit" value="">
+        <input type="hidden" id="barcode" value="">
+    </div>
+    <button class="submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
+</div>
+<div id="search_book_form">
+    <%# 検索結果表示場所 %>
+</div>
+<div class="shelf_area">
+    <p id="add_shelf">
+        <%= lazysizes_image_tag "plus.svg", class: "add_shelf" %>
+    </p>
+    <a href="/shelves/0"><p class="shelf_name shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p></a>
+    <ul id="shelves_list" class="shelves_list">
+        <% if @shelves %>
+        <% @shelves.each do |shelf|%>
+        <li class="shelf_name shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>">
+            <a href="/shelves/<%= shelf.id %>"><%= shelf.shelf_name %></a>
+            <div class="shelf_modify_buttons">
+                <p class="destroy_shelf">
+                    <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                    <input type="hidden" value="<%= shelf.id %>">
+                </p>
+                <p class="handle">
+                    <%= lazysizes_image_tag 'dot_for_handle.svg' %>
+                </p>
+            </div>
+        </li>
+        <% end %>
+        <% end %>
+    </ul>
+</div>

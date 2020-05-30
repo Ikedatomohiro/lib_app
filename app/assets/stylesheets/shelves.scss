@@ -1,0 +1,213 @@
+// Place all the styles related to the shelves controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.shelves_list {
+    display: flex;
+    overflow: scroll;
+}
+
+.shelves_list li {
+    list-style: none;
+}
+
+.shelf_modal li {
+    list-style: none;
+}
+
+.shelf_area {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.shelf_label {
+  /*background: LightGray;*/
+  max-width: 80px;
+  margin: 5px 5px 10px 5px;
+  font-weight: bold;
+  white-space: nowrap;
+  padding: 10px .5em;
+  order: -1;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.shelf_area a {
+  text-decoration: none;
+}
+
+.shelf_marker {
+    border-bottom: 2px solid #1D4E56;
+}
+
+.shelf_buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+#shelf_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shelf_modify_buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book_type_icon {
+    width: 32px;
+    padding: 4px;
+    margin-right: 15px;
+}
+
+.arrange_shelf {
+    display: flex;
+    margin-right: auto;
+}
+
+.add_shelf {
+    width: 30px;
+    height: 30px;
+}
+
+.hide_shelf_side_ico {
+    margin-right: 10px;
+}
+
+.shelves_list a{
+    text-decoration: none;
+}
+
+.book_img_box {
+    display: flex;
+    padding: 5px;
+    margin: 10px 0;
+    border-bottom: 1px solid #E8F7B6;
+}
+
+.book_img {
+    width: 20vw;
+    max-width: 100px;
+    cursor: pointer;
+}
+
+.search_button, .scan_book_button, .book_type_icon, .shelf_side_ico {
+    display: none;
+}
+
+.scan_book_button {
+    height: 40px;
+    width:  170px;
+    margin: 10px 0 0 auto;
+}
+
+.book_counter_icon {
+    width: 18px;
+}
+
+.book_count_info {
+    display: flex;
+}
+
+.shelf_book {
+    width: 8vw;
+    margin: 5px;
+}
+
+.shelf_link {
+    text-decoration: none;
+    width: 100%;
+}
+
+.shelf_side_ico {
+    margin-left: auto;
+}
+
+.handle:hover {
+    cursor: pointer;
+}
+
+.handle {
+    width: 21px;
+    padding: 10px 4px;
+}
+
+.block_shelf_book_and_icon {
+    position: relative;
+    display: flex;
+    max-width: 100px;
+}
+
+.book_count_info_block {
+    max-width: 100px;
+}
+
+.shelf_type_block {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block_shelf_item {
+    width: 20%;
+    max-height: 130px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #E8F7B6;
+}
+
+.thumbnail_block_shelf {
+    width: 11vw;
+    max-width: 75px;
+    max-height: 140px;
+}
+
+.block_shelf_item .shelf_book {
+    width: 10vw;
+    max-width: 53px;
+    margin: 5px;
+}
+
+.book_count {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+.block_shelf_item .book_count {
+    padding: 0;
+    font-size: 10px;
+}
+
+.block_shelf_item .book_count_info {
+    align-items: flex-end;
+}
+
+.block_shelf_item .book_count_info img {
+    width: 10px;
+}
+
+/* 本棚整理のモーダル */
+.shelf_modal {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
+    z-index: 10;
+}
+
+select[name="shelf_id"] {
+    margin: 0 0 15px 15px;
+    padding: 5px;
+    border: 1.5px solid #1D4E56;
+    border-radius: 3px;
+    position: relative;
+}
+
+
+

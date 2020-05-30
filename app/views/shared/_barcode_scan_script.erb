@@ -1,0 +1,108 @@
+<script type="text/javascript" src="/JOB.js"></script>
+<script type="text/javascript">
+    // バーコードスキャン用ボタンをクリック
+    function clickBarcodeScanButton() {
+        $("#Take-Picture").click();
+        return false;
+    };
+    var takePicture = document.querySelector("#Take-Picture"),
+    showPicture = document.createElement("img");
+    Result = document.querySelector("#textbit");
+    sendBarcode = document.querySelector("#barcode");
+    // sendBarcode.value = 'aaaaaaa'; // 表示確認
+    var canvas =document.getElementById("picture");
+    var ctx = canvas.getContext("2d");
+    JOB.Init();
+    JOB.SetImageCallback(function(result) {
+      if(result.length > 0){
+        // 検索していることをアラートする
+        Swal.fire({
+            title: '',
+            text: "本を探しているよ！",
+            type: 'info',
+            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+        })
+        var tempArray = [];
+        for(var i = 0; i < result.length; i++) {
+          // tempArray.push(result[i].Format+" : "+result[i].Value);
+          tempArray.push(result[i].Value);
+        }
+        Result.innerHTML=tempArray.join("<br />");
+        sendBarcode.value = tempArray;
+      // ajaxを記述
+      $.ajax({
+          url: "/books/search_from_barcode",
+          type: 'post',
+          data: { barcode: tempArray,
+                  authenticity_token: $("#authenticity_token").val() }
+          });
+      }else{
+        if(result.length === 0) {
+        // バーコードの読み取り失敗
+        Swal.fire({
+            title: '',
+            text: "うまくバーコードを読み取れなかったよ。。。",
+            type: 'warning',
+            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+        })
+          // Result.innerHTML="Decoding failed.";
+        }
+      }
+    });
+    JOB.PostOrientation = true;
+    JOB.OrientationCallback = function(result) {
+      // 表示画像のサイズ
+      // canvas.width = result.width;
+      // canvas.height = result.height;
+      canvas.width = 0;
+      canvas.height = 0;
+      var data = ctx.getImageData(0,0,canvas.width,canvas.height);
+      for(var i = 0; i < data.data.length; i++) {
+        data.data[i] = result.data[i];
+      }
+      ctx.putImageData(data,0,0);
+    };
+    JOB.SwitchLocalizationFeedback(true);
+    JOB.SetLocalizationCallback(function(result) {
+      ctx.beginPath();
+      ctx.lineWIdth = "2";
+      ctx.strokeStyle="red";
+      for(var i = 0; i < result.length; i++) {
+        ctx.rect(result[i].x,result[i].y,result[i].width,result[i].height); 
+      }
+      ctx.stroke();
+    });
+    if(takePicture && showPicture) {
+      takePicture.onchange = function (event) {
+        var files = event.target.files;
+        if (files && files.length > 0) {
+          file = files[0];
+          try {
+            var URL = window.URL || window.webkitURL;
+            showPicture.onload = function(event) {
+              Result.innerHTML="";
+              JOB.DecodeImage(showPicture);
+              URL.revokeObjectURL(showPicture.src);
+            };
+            showPicture.src = URL.createObjectURL(file);
+          }
+          catch (e) {
+            try {
+              var fileReader = new FileReader();
+              fileReader.onload = function (event) {
+                showPicture.onload = function(event) {
+                  Result.innerHTML="";
+                  JOB.DecodeImage(showPicture);
+                };
+                showPicture.src = event.target.result;
+              };
+              fileReader.readAsDataURL(file);
+            }
+            catch (e) {
+              Result.innerHTML = "Neither createObjectURL or FileReader are supported";
+            }
+          }
+        }
+      };
+    }
+</script>

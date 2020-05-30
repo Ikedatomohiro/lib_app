@@ -1,5 +1,9 @@
-<%= render "books/search_books_form" %>
-<p>●検索結果</p>
+<%= form_with(url: books_search_path ) do |f| %>
+  <div class="search_book_keyword_area">
+      <%= f.text_field :keyword, placeholder: 'キーワード', class: "search_book_keyword_input_area"%>
+      <button class="submit_btn_small">検索する</button>
+  </div>
+<% end %><p>●検索結果</p>
 <% if @results["totalItems"] != 0 %>
     <% @results["items"].each do |result| %>
         <p class="book_title"><%= result["volumeInfo"]["title"] %></p>

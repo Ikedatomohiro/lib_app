@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :setting, dependent: :destroy
   has_many :books, dependent: :destroy
+  has_many :shleves, dependent: :destroy
   has_many :impressions, dependent: :destroy
   has_many :contacts, dependent: :destroy
   # Include default devise modules. Others available are:
@@ -42,7 +43,6 @@ class User < ApplicationRecord
  
     user
   end
- 
 
   # 画像アップロード
   mount_uploader :user_icon, ImageUploader

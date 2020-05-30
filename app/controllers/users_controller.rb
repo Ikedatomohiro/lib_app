@@ -34,17 +34,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
     def edit
     end
 
-    def shelf
-        @books = Book.where(user_id: current_user.id).rank(:row_order)
-        @books.each do |book|
-        tweet = Impression.where(book_id: book.id,
-                                          user_id: current_user.id,
-                                          tweeted_flg: true).count
-        impression = Impression.where(book_id: book.id,
-                                      user_id: current_user.id).count
-        end
-    end
-
     def setting
     end
 
@@ -65,17 +54,6 @@ aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
         else
             @user_setting.update(publish_impression: false)
         end
-    end
-
-    # 本棚をカラムとブロックを変更
-    def change_shelf_type
-        if params[:shelf_type] == '0'
-            @user_setting.update(shelf_type: 1)
-        elsif params[:shelf_type] == '1'
-            @user_setting.update(shelf_type: 0)
-        end
-
-        redirect_to shelf_path
     end
 
     def reading_history

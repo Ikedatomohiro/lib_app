@@ -61,7 +61,6 @@ $(document).on('turbolinks:load', function() {
             var item_data = item.data();
             var current_shelf_id = $('#current_shelf_id').val();
             var params = { _mesthod: 'put' }
-console.log(item.index());
             params = {
               row_order_position: item.index(),
               current_shelf_id: current_shelf_id,
@@ -146,6 +145,8 @@ console.log(item.index());
           type: 'info',
           timer: 1500,
         })
+        // モーダルを非表示にする
+        $('.shelf_modal').fadeOut(500);
         // 移動した本の要素を非表示にする
         if (current_shelf_id != 0 && shelf_id != current_shelf_id) {
             $('#book_id_' + book_id).fadeOut(500);

@@ -1,7 +1,8 @@
 <%= render "shared/shelf_header" %>
-<% if @shelf_items.present? %>
-    <%= form_with(model: @shelf_items, url: book_path(@shelf_items.ids)) do |form| %>
+    <%= form_with(model: @shelf_items, url: book_path(current_user.id)) do |form| %>
     <input type="hidden" id="authenticity_token" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <% end %>
+<% if @shelf_items.present? %>
     <div class="page_wrapper">
         <%= @err %>
             <div id="books_in_shelf" <% if @user_setting.shelf_type == 1 %> class="shelf_type_block" <% end %> >
@@ -102,7 +103,6 @@
         <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 
                 <% end %>
             </div>
-    <% end %>
     </div>
 <% else %>
     <p>本が登録されていません。</p>

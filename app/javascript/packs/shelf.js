@@ -132,7 +132,7 @@ $(document).on('turbolinks:load', function() {
           title: '',
           text: "本を移動したよ",
           type: 'info',
-          timer: 1500,
+          timer: 1000,
         })
         // モーダルを非表示にする
         $('.shelf_modal').fadeOut(500);

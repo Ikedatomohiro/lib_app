@@ -43,12 +43,14 @@
     <p id="add_shelf">
         <%= lazysizes_image_tag "plus.svg", class: "add_shelf" %>
     </p>
-    <a href="/shelves/0"><p class="shelf_name shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p></a>
+    <a href="/shelves/0" data-turbolinks="false">
+        <p class="shelf_name shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p>
+    </a>
     <ul id="shelves_list" class="shelves_list">
         <% if @shelves %>
         <% @shelves.each do |shelf|%>
         <li class="shelf_name shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>">
-            <a href="/shelves/<%= shelf.id %>"><%= shelf.shelf_name %></a>
+            <a href="/shelves/<%= shelf.id %>" data-turbolinks="false"><%= shelf.shelf_name %></a>
             <div class="shelf_modify_buttons">
                 <p class="destroy_shelf">
                     <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>

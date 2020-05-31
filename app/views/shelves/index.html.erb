@@ -45,14 +45,14 @@
                         <div class="shelf_side_ico">
                             <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                             <ul class="shelf_modal">
-                              <li>▶「<%= book.title %>」 を移動</li>
-                              <%= form_with(model: @shelf, url: shelves_path) do |f| %>
-                                  <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
-                                  <%= f.hidden_field :book_id, value: book.id %>
-                              <% end %>
-                              <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">
-                                  <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
-                              </li>
+                                <li>▶「<%= book.title %>」 を移動</li>
+                                <%= form_with(model: @shelf, url: shelves_path) do |f| %>
+                                    <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
+                                    <%= f.hidden_field :book_id, value: book.id %>
+                                <% end %>
+                                <li id="<%= book.id %>" class="destroy_book" value="<%= book.id %>">
+                                    <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                                </li>
                             </ul>
                             <p class="handle">
                                 <%= lazysizes_image_tag 'dot_for_handle.svg' %>

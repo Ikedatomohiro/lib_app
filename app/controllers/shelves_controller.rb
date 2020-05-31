@@ -21,18 +21,20 @@ class ShelvesController < ApplicationController
         @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         shelf_id = params[:id]
         shelf = Shelf.find_by(id: shelf_id, user_id: current_user.id)
-        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s && shelf
-            @user_setting.update(latest_shelf: shelf_id)
+        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s
+            if shelf_id == "0"
+                @user_setting.update(latest_shelf: shelf_id)
+                redirect_to shelves_path
+            elsif shelf
+                @user_setting.update(latest_shelf: shelf_id)
+                @shelf_items = ShelfItem.where(user_id: current_user.id,
+                                              shelf_id: shelf_id).rank(:row_shelf_items_order)
+                puts 'その他の本棚'
+            else
+                puts '不正なshelf_id'
+            end
         else
             puts '不正なshelf_id'
-        end
-        if shelf_id == '0'
-            redirect_to shelves_path
-        else
-            shelf_id = @user_setting.latest_shelf
-            @shelf_items = ShelfItem.where(user_id: current_user.id,
-                                          shelf_id: shelf_id).rank(:row_shelf_items_order)
-            puts 'その他の本棚'
         end
     end
 

@@ -58,11 +58,12 @@
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160756627-1"></script>
+    <%# GoogleAdSense用のスクリプト %>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-160756627-1');
     </script>
 </head>
@@ -71,20 +72,21 @@
 <amp-auto-ads type="adsense" data-ad-client="ca-pub-2474857545411323">
 </amp-auto-ads>
     <% if signed_in? %>
-    <%= render "shared/header" %>
-    <div class="main_container">
-        <%#= render "shared/header" %>
-        <div class="sub_container">
-            <%= yield %>
+        <%= render "shared/header" %>
+        <div class="main_container">
+            <%#= render "shared/header" %>
+            <div class="sub_container">
+                <%= yield %>
+            </div>
         </div>
-    </div>
-    <%= render "shared/footer" %>
+        <%= render "shared/footer" %>
     <% else %>
-    <div class="main_container">
-        <div class="sub_container">
-            <%= yield %>
+        <div class="main_container">
+            <div class="sub_container">
+                <%= yield %>
+            </div>
         </div>
-    </div>
+        <%= render "shared/footer" %>
     <% end %>
 </body>
 

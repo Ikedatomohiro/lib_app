@@ -14,7 +14,6 @@
     var ctx = canvas.getContext("2d");
     JOB.Init();
     JOB.SetImageCallback(function(result) {
-console.log(result.length);
       if(result.length > 0){
         // 検索していることをアラートする
         Swal.fire({

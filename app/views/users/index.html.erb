@@ -1,5 +1,3 @@
-<%# GoogleAdSense用のスクリプト %>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <% if !signed_in? %>
@@ -21,7 +19,7 @@
                                 <p class="book_title">
                                     <%= impression.book.title.truncate(20) %>
                                 </p>
-                                <%= impression.impression.truncate(100) %>
+                                <%= impression.impression.truncate(200) %>
                             </div>
                         </a>
                         <div>
@@ -55,6 +53,22 @@
             </div>
 
 <% add_count += 1 %>
+
+<% if add_count == 3 %>
+<div class="advertise">
+<p>●広告</p>
+<!-- トップページ上部 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2474857545411323"
+     data-ad-slot="3806181512"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<% end %>
 <% if add_count%20 == 0 %>
 <div class="advertise">
 <p>●広告</p>
@@ -79,6 +93,20 @@
             <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=4GqdwAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top book_title">FACTFULNESS（ファクトフルネス）</p>
+        </a>
+    </div>
+    <div class="recomend">
+        <a href="/books/info/13gDwgEACAAJ" class="book_link">
+            <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=13gDwgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
+            </p>
+            <p class="title_top book_title">鬼滅の刃</p>
+        </a>
+    </div>
+    <div class="recomend">
+        <a href="/books/info/qNMHnwEACAAJ" class="book_link">
+            <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=qNMHnwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
+            </p>
+            <p class="title_top book_title">嫌われる勇気 : 自己啓発の源流「アドラー」の教え</p>
         </a>
     </div>
     <div class="recomend">
@@ -107,13 +135,6 @@
             <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=KZesyAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top book_title">こども六法</p>
-        </a>
-    </div>
-    <div class="recomend">
-        <a href="/books/info/qNMHnwEACAAJ" class="book_link">
-            <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=qNMHnwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-            </p>
-            <p class="title_top book_title">嫌われる勇気 : 自己啓発の源流「アドラー」の教え</p>
         </a>
     </div>
     <div class="recomend">
@@ -149,13 +170,6 @@
             <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=l7-1ngEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
             </p>
             <p class="title_top book_title">三日間の幸福</p>
-        </a>
-    </div>
-    <div class="recomend">
-        <a href="/books/info/13gDwgEACAAJ" class="book_link">
-            <p class="top_thumbnail"><img src="http://books.google.com/books/content?id=13gDwgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-            </p>
-            <p class="title_top book_title">鬼滅の刃</p>
         </a>
     </div>
       <%#= render "shared/affiliate" %>

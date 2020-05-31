@@ -1,6 +1,6 @@
 class ShelvesController < ApplicationController
     include ApplicationHelper
-    before_action :authenticate_user!, except: [:index, :show, :terms_of_service, :privacy_policy, :notice] # ログインしていないときはログインページに移動
+    before_action :authenticate_user!, except: [] # ログインしていないときはログインページに移動
     before_action :set_bookshelf_flg, only: [:index, :show]
     before_action :set_user_setting_info, only: [:index, :show, :change_shelf_type]
 

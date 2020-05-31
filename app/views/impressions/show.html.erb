@@ -46,22 +46,17 @@
             <%# else %>
             <%# end %>
         </p>
-      <% else %>
-          <a href="/books/info/<%= @book.api_id %>">
-              <% if @book.users_thumbnail.present? %>
-              <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
-              <% elsif @book.thumbnail %>
-              <%= image_tag @book.thumbnail, class:'book_img' %>
-              <% else %>
-              <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
-              <% end %>
-          </a>
-      <% end %>
-
-
-
-
-
+        <% else %>
+            <a href="/books/info/<%= @book.api_id %>">
+                <% if @book.users_thumbnail.present? %>
+                <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
+                <% elsif @book.thumbnail %>
+                <%= image_tag @book.thumbnail, class:'book_img' %>
+                <% else %>
+                <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
+                <% end %>
+            </a>
+        <% end %>
         <table>
             <tr>
                 <th align="right">登録日：</th>
@@ -72,33 +67,33 @@
             <tr>
                 <th align="right">
                     <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                    <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
-                    <input type="hidden" name="calendar" value="reading_start_date">
-                    <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                    <% if signed_in? && @book.user_id === current_user.id %>
-                    <%= f.submit '読始め：' %>
-                    <% else %>
-                    読始め：
-                    <% end %>
+                        <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
+                        <input type="hidden" name="calendar" value="reading_start_date">
+                        <input type="hidden" name="book_id" value="<%= @book.id %> " />
+                        <% if signed_in? && @book.user_id === current_user.id %>
+                            <%= f.submit '読始め：' %>
+                        <% else %>
+                            読始め：
+                        <% end %>
                     <% end %>
                 </th>
                 <td id="reading_start_date">
                     <% if @book.reading_start_date %>
-                    <%= @book.reading_start_date.strftime('%Y/%-m/%-d') %>
+                        <%= @book.reading_start_date.strftime('%Y/%-m/%-d') %>
                     <% end %>
                 </td>
             </tr>
             <tr>
                 <th align="right">
                     <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                    <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
-                    <input type="hidden" name="calendar" value="reading_end_date">
-                    <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                    <% if signed_in? && @book.user_id === current_user.id %>
-                    <%= f.submit '読了日：' %>
-                    <% else %>
-                    読了日：
-                    <% end %>
+                        <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
+                        <input type="hidden" name="calendar" value="reading_end_date">
+                        <input type="hidden" name="book_id" value="<%= @book.id %> " />
+                        <% if signed_in? && @book.user_id === current_user.id %>
+                            <%= f.submit '読了日：' %>
+                        <% else %>
+                            読了日：
+                        <% end %>
                     <% end %>
                 </th>
                 <td id="reading_end_date">
@@ -187,7 +182,6 @@
 
 <%# 広告始め %>
 <p>●広告</p>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"

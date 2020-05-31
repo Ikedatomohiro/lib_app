@@ -64,8 +64,8 @@
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
                     <div id="book_id_<%= item.book_id %>" class="block_shelf_item" value="<%= item.book_id %>">
-                        <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
                         <div class="block_shelf_book_and_icon">
+                            <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
                                 <p class="thumbnail_block_shelf">
                                     <% if item.book.users_thumbnail.present? %>
                                         <%= lazysizes_image_tag item.book.users_thumbnail_url ,class: "shelf_book", alt:'本の画像' %>
@@ -73,6 +73,7 @@
                                         <%= lazysizes_image_tag item.book.thumbnail ,class: " shelf_book", alt:'本の画像' %>
                                     <% end %>
                                 </p>
+                            </a>
                             <div class="shelf_side_ico">
                                 <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
                                 <ul class="shelf_modal">
@@ -92,26 +93,27 @@
                                 </p>
                             </div>
                         </div>
-                                <div class="book_count_info">
-                                    <p class="book_count">
-                                        <%= lazysizes_image_tag "star-on.png" %>
-                                        <% if item.book.evaluation %>
-                                            <%= item.book.evaluation %>
-                                        <% else %>
-                                        -
-                                        <% end %>
-                                    </p>
-                                    <p class="book_count">
-                                        <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
-                                        <%= impression_times(item.book_id) %>
-                                    </p>
-                                    <p class="book_count">
-                                        <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
-                                        <%= tweet_times(item.book_id) %>
-                                    </p>
-                                </div>
-                        <input id="api_path_<%= item.book_id %>" type="hidden" name="api_path" value="<%= item.book.api_path %>" />
+                        <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">
+                            <div class="book_count_info">
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "star-on.png" %>
+                                    <% if item.book.evaluation %>
+                                        <%= item.book.evaluation %>
+                                    <% else %>
+                                    -
+                                    <% end %>
+                                </p>
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "impression.svg", class: "book_counter_icon" %>
+                                    <%= impression_times(item.book_id) %>
+                                </p>
+                                <p class="book_count">
+                                    <%= lazysizes_image_tag "Twitter_icon_circle.svg", class: "book_counter_icon" %>
+                                    <%= tweet_times(item.book_id) %>
+                                </p>
+                            </div>
                         </a>
+                        <input id="api_path_<%= item.book_id %>" type="hidden" name="api_path" value="<%= item.book.api_path %>" />
                     </div>
                     <% end %>
         <%#= render "users/shelf_type_column" ←読み込むとエラーになる%> 

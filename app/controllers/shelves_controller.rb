@@ -20,8 +20,11 @@ class ShelvesController < ApplicationController
     def show
         @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         shelf_id = params[:id]
-        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s
+        shelf = Shelf.find_by(id: shelf_id, user_id: current_user.id)
+        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s && shelf
             @user_setting.update(latest_shelf: shelf_id)
+        else
+            puts '不正なshelf_id'
         end
         if shelf_id == '0'
             redirect_to shelves_path

@@ -48,6 +48,27 @@ class User < ApplicationRecord
   mount_uploader :user_icon, ImageUploader
 
   scope :impression_private, -> {joins(:setting).select("users.*, settings.*")}
+
+  def provider
+    'twitter'
+    
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   private
  
   # ダミーのemailを取得（deviseではemailがないと登録できないので）

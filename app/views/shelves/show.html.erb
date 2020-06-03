@@ -12,7 +12,7 @@
                         <a href="/books/info/<%= item.book.api_id %>" data-turbolinks="false">
                             <p class="thumbnail_top">
                                 <% if item.book.users_thumbnail.present? %>
-                                <%= lazysizes_image_tag book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
+                                <%= lazysizes_image_tag item.book.users_thumbnail_url ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% else %>
                                 <%= lazysizes_image_tag item.book.thumbnail ,class: "book_img shelf_book", alt:'本の画像' %>
                                 <% end %>

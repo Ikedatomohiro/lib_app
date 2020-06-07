@@ -124,48 +124,50 @@
         </div>
 <%# 感想記入フィールド表示場所 %>
         <div id="impression"></div>
-            <% @impressions.each do |impression| %>
-                <div class="information_block">
-                    <div class="impression_head">
+        <% @impressions.each do |impression| %>
+            <div class="information_block">
+                <div class="impression_head">
 <%# 感想テキスト %>
-                        <div class="impression_text">
-                            <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
-                                <input type="hidden" id="authenticity_token_impression_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                                <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
-                                        onfocus="colorReset(this)" 
-                                        oninput="textAreaHeightSet(this)"
-                                        onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
-                            <% end %>
-                        </div>
+                    <div class="impression_text">
+                        <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
+                            <input type="hidden" id="authenticity_token_impression_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                            <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
+                                    onfocus="colorReset(this)" 
+                                    oninput="textAreaHeightSet(this)"
+                                    onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
+                        <% end %>
+                    </div>
 <%# 感想削除ボタン %>
-                        <%= form_with(model: @impression, url: impression_path) do |form| %>
-                            <input type="hidden" id="authenticity_token_destroy_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                            <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
-                        <% end %>
-                    </div>
-
-                    <% if impression.impression_img_url%>
-                        <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
-                            <%= image_tag impression.impression_img_url , width: 200 %>
-                        <% end %>
-                    <% end %>
-                    <div class="impression_sub_item">
-<%# 感想更新時間 %>
-                        <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
-                    </div>
-<%# ツイッター投稿ボタン %>
-                    <% if !impression.tweeted_flg %>
-                        <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
-                            <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
-                            <input type="hidden" id="authenticity_token_tweet_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                            <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
-                            <%= image_tag "tweet_button.png", class: "tweet_button", id: "send_tweet_#{impression.id}" %>
-                        <% end %>
+                    <%= form_with(model: @impression, url: impression_path) do |form| %>
+                        <input type="hidden" id="authenticity_token_destroy_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                        <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
                     <% end %>
                 </div>
-            <% end %>
+
+                <% if impression.impression_img_url%>
+                    <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
+                        <%= image_tag impression.impression_img_url , width: 200 %>
+                    <% end %>
+                <% end %>
+                <div class="impression_sub_item">
+<%# 感想更新時間 %>
+                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                </div>
+<%# ツイッター投稿ボタン %>
+                <% if !impression.tweeted_flg %>
+                    <%= form_with(model: @impression, url: impressions_post_to_twitter_path) do |form| %>
+                        <%= form.hidden_field :impression, value: impression.impression, id: "impression_#{impression.id}" %>
+                        <input type="hidden" id="authenticity_token_tweet_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
+                        <%= form.hidden_field :id, value: impression.id ,id: impression.id %>
+                        <%= image_tag "tweet_button.png", class: "tweet_button", id: "send_tweet_#{impression.id}" %>
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %>
+        <%= render "impressions/advertisement_impression" %>
 <%# この感想を書いたユーザーではない場合か、ログインしていない場合は閲覧のみ %>
     <% else %>
+        <% impression_count = 0%>
         <% @impressions.each do |impression| %>
             <%= impression.impression %>
             <p>
@@ -176,22 +178,15 @@
                 <% end %>
             </p>
             <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+            <% impression_count += 1 %>
+            <%= impression_count %>
+            <% if impression_count === 1 %> <%# はじめの感想の後ろに広告を表示 %>
+                <%= render "impressions/advertisement_impression" %>
+            <% end %>
         <% end %>
     <% end %>
 </div>
 
-<%# 広告始め %>
-<p>●広告</p>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-2474857545411323"
-     data-ad-slot="9337982866"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<%# 広告おわり %>
 
 <script>
 $(document).on('turbolinks:load', function() {

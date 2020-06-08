@@ -179,7 +179,6 @@
             </p>
             <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
             <% impression_count += 1 %>
-            <%= impression_count %>
             <% if impression_count === 1 %> <%# はじめの感想の後ろに広告を表示 %>
                 <%= render "impressions/advertisement_impression" %>
             <% end %>

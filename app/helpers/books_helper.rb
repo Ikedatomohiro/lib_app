@@ -47,10 +47,13 @@ module BooksHelper
             'Tq80swEACAAJ' => 'https://amzn.to/2zHDTKh', # 虚ろな十字架
             'hfl2uQAACAAJ' => 'https://amzn.to/2ybN1Xf', # モンスター 百田尚樹
             'VHReYgEACAAJ' => 'https://amzn.to/2LE2u5u', # 変身 東野圭吾
-            # '' => '', # 
-            # '' => '', # 
-            # '' => '', # 
-            # '' => '', # 
+            'tvQvAAAACAAJ' => 'https://amzn.to/2C59Nl9', # 秘密 東野圭吾
+            'EL0Dz4IEupsC' => 'https://amzn.to/3flWZFn', # 図書館戦争 図書館戦争シリーズ (1) 有川浩
+            'vZAduAEACAAJ' => 'https://amzn.to/3fkSGdh', # 図書館危機図書館戦争シリーズ(２) 有川浩
+            '_fmtwmObVz8C' => 'https://amzn.to/3cWmueU', # 図書館危機図書館戦争シリーズ(3) 有川浩
+            'R-FguAEACAAJ' => 'https://amzn.to/3e006Tc', # 図書館危機図書館戦争シリーズ(４) 有川浩
+            'CsZZXwAACAAJ' => 'https://amzn.to/30FymQ2', # 図書館危機図書館戦争シリーズ(５) 有川浩
+            'SZhJOgAACAAJ' => 'https://amzn.to/3fmcP2C', # 図書館危機図書館戦争シリーズ(６) 有川浩
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

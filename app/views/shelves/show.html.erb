@@ -51,7 +51,8 @@
                                         <%= f.hidden_field :book_id, value: item.book_id %>
                                     <% end %>
                                 <li id="<%= item.book_id %>" class="destroy_book" value="<%= item.book_id %>">
-                                  <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                                    <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
+                                    <input type="hidden" value="<%= item.book.id %>">
                                 </li>
                             </ul>
                             <p class="handle">
@@ -72,23 +73,9 @@
                                     <% end %>
                                 </p>
                             </a>
-                            <div class="shelf_side_ico">
-                                <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
-                                <ul class="shelf_modal">
-                                  <li>▶「<%= item.book.title %>」 を移動</li>
-                                      <%= form_with(model: @shelf, url: shelves_path) do |f| %>
-                                          <%= f.collection_select :shelf_id, Shelf.where(user_id: current_user.id).rank(:row_shelves_order), :id, :shelf_name, include_blank: "移動先の本棚を選択　　▼" %>
-                                          <%= f.hidden_field :book_id, value: item.book_id %>
-                                      <% end %>
-                                  <%# if 「すべて」の本棚のとき %>
-                                  <li id="<%= item.book_id %>" class="destroy_book" value="<%= item.book_id %>">
-                                    <button id="show_shelf_arrange_ico" class="submit_btn_small">本を削除</button>
-                                </li>
-                                  <%# end %>
-                                </ul>
-                                <p class="handle">
-                                    <%= lazysizes_image_tag 'dot_for_handle.svg' %>
-                                </p>
+                            <div class="shelf_side_ico destroy_book">
+                                <%= lazysizes_image_tag "batsu_button.svg", class: "batsu_button"%>
+                                <input type="hidden" value="<%= item.book.id %>">
                             </div>
                         </div>
                         <a href="/impressions/<%= item.book.impression_link %>" class="shelf_link" data-turbolinks="false">

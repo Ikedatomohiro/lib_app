@@ -50,15 +50,16 @@ class ShelvesController < ApplicationController
             book.save!
         end
 
-        delete_shelf_item
-
+        if params[:current_shelf_id] != 0
+            delete_shelf_item
+        end
     end
 
     def delete_shelf_item
-        if params[:current_shelf_id] != 0
-            target_book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
-                                            user_id: current_user.id,
-                                            book_id: params[:book_id])
+        target_book = ShelfItem.find_by(shelf_id: params[:current_shelf_id],
+                                        user_id: current_user.id,
+                                        book_id: params[:book_id])
+        if target_book.present?
             target_book.destroy
         end
     end

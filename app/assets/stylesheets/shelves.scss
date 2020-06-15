@@ -209,5 +209,39 @@ select[name="shelf_id"] {
     position: relative;
 }
 
+/* 本の移動先の本棚 */
+.shelf_label_hover {
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transform: scale(1.5);
+    max-width: 300px;
+}
 
+/* ゆらゆら動く */
+@keyframes horizontal {
+    0% { transform:translateX( -2px); }
+  100% { transform:translateX(  0px); }
+}
+@keyframes vertical {
+    0% { transform:translateY( 1px); }
+  100% { transform:translateY(  0px); }
+}
+
+.flow_horizontal {
+  animation: horizontal 0.5s ease-in-out infinite alternate;
+}
+
+.flow_virtical {
+  animation: vertical 0.2s ease-in-out infinite alternate;
+}
+
+/* 本の削除ボタン */
+.shelf_side_ico .batsu_button {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    content: '';
+    width: 20px;
+    background-color: transparent;
+}
 

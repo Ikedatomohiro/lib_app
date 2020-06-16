@@ -99,6 +99,7 @@ window.onload = function () {
       var shelf_item = $(".shelf_label").droppable({
             hoverClass: "shelf_label_hover",
             accept: ".block_shelf_item",
+            tolerance: "pointer",
 
             drop: function(event, ui) {
                 var shelf_id = $(this).val();
@@ -134,7 +135,6 @@ window.onload = function () {
     $('.destroy_book').click(function() {
         var book_id = $(this).children('input').val();
         var destroy_url = "/books/" + book_id;
-console.log(destroy_url);
 
         var current_shelf_id = $('#current_shelf_id').val();
         if (current_shelf_id == 0) {

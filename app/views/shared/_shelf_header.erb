@@ -7,6 +7,9 @@
             <button id="show_shelf_arrange_ico" class="submit_btn_small">本棚を整理</button>
             <button id="hide_shelf_arrange_ico" class="submit_btn_small hide_shelf_side_ico">整理終了</button>
         </div>
+        <div>
+             <button id="add_shelf" class="submit_btn_small">本棚を追加</button>
+         </div>
         <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
             <% if @user_setting.shelf_type == 0 %>
             <%= lazysizes_image_tag 'shelf_type_block' %>
@@ -40,20 +43,17 @@
     <%# 検索結果表示場所 %>
 </div>
 <div class="shelf_area">
-    <p id="add_shelf">
-        <%= lazysizes_image_tag "plus.svg", class: "add_shelf" %>
-    </p>
     <a href="/shelves/0" data-turbolinks="false">
-        <p class="shelf_name shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p>
+        <p class="shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p>
     </a>
     <ul id="shelves_list" class="shelves_list">
         <% if @shelves %>
         <% @shelves.each do |shelf|%>
-        <li class="shelf_name shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>">
+        <li class="shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>">
             <a href="/shelves/<%= shelf.id %>" data-turbolinks="false"><%= shelf.shelf_name %></a>
             <div class="shelf_modify_buttons">
                 <p class="destroy_shelf">
-                    <%= lazysizes_image_tag "fire_work.svg", class: "fire_work"%>
+                    <%= lazysizes_image_tag "batsu_button.svg", class: "fire_work"%>
                     <input type="hidden" value="<%= shelf.id %>">
                 </p>
                 <p class="handle">

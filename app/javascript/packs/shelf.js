@@ -100,7 +100,6 @@ window.onload = function () {
             hoverClass: "shelf_label_hover",
             accept: ".block_shelf_item",
             tolerance: "pointer",
-
             drop: function(event, ui) {
                 var shelf_id = $(this).val();
                 var $book = ui.draggable
@@ -123,7 +122,6 @@ window.onload = function () {
             }
         });
 
-
     //  本棚を整理ボタンをクリックしたときに表示させるモーダルの動作
     $('.shelf_modal').hide();
     $('.fire_work').click(function() {
@@ -135,7 +133,6 @@ window.onload = function () {
     $('.destroy_book').click(function() {
         var book_id = $(this).children('input').val();
         var destroy_url = "/books/" + book_id;
-
         var current_shelf_id = $('#current_shelf_id').val();
         if (current_shelf_id == 0) {
             var message = '本を削除すると感想も削除されるよ。';
@@ -224,7 +221,7 @@ window.onload = function () {
         animation: 100,
         axis: 'x',
         opacity: 0.8,
-        handle: "p.handle",
+        handle: ".handle, .handle2",
         update: function(event, ui) {
             var item = ui.item;
             var shelf_id = item.attr("value");

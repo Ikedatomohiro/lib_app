@@ -9,7 +9,7 @@
         </div>
         <div>
              <button id="add_shelf" class="submit_btn_small">本棚を追加</button>
-         </div>
+        </div>
         <a href="/change_shelf_type/<%= @user_setting.shelf_type %>" class="book_type_icon">
             <% if @user_setting.shelf_type == 0 %>
             <%= lazysizes_image_tag 'shelf_type_block' %>

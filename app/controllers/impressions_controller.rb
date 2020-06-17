@@ -1,6 +1,7 @@
 class ImpressionsController < ApplicationController
     before_action :twitter_client, only: [:post_to_twitter]
     before_action :authenticate_user!, except: [:show] # ログインしていないときはログインページに移動
+    include BooksHelper
     include ApplicationHelper
     before_action :set_bookshelf_flg, only: [:show]
 
@@ -35,6 +36,7 @@ class ImpressionsController < ApplicationController
                 "description" => @impressions.first.impression,
             }
         end
+        @amazon_afi_link = setAmazonAfiLink(@book[:api_id])
     end
 
     def new

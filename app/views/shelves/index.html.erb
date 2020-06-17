@@ -62,7 +62,7 @@
                     </div>
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
-                    <div id="book_id_<%= book.id %>" class="block_shelf_item" value="<%= book.id %>">
+                    <div id="book_id_<%= book.id %>" class="block_shelf_item" value="<%= book.id %>" name="<%= book.title.truncate(12) %>">
                         <div class="block_shelf_book_and_icon">
                             <a href="/impressions/<%= book.impression_link %>" class="shelf_link" data-turbolinks="false">
                                 <p class="thumbnail_block_shelf">

@@ -73,6 +73,7 @@ window.onload = function () {
         revert: 200,
         animation: 100,
         opacity: 0.6,
+        tolerance: "pointer",
         handle: "div.book_handle, p.handle",
         update: function(event, ui) {
             var item = ui.item;
@@ -101,11 +102,21 @@ window.onload = function () {
             accept: ".block_shelf_item",
             tolerance: "pointer",
             drop: function(event, ui) {
+              // $('#books_in_shelf').sortable("cancel");
+              var drop_flg = true;
                 var shelf_id = $(this).val();
+                var shelf_name = $(this).attr("name");
                 var $book = ui.draggable
                 var book_id = $book.attr("value");
+                var book_title = $book.attr("name");
                 var current_shelf_id = $('#current_shelf_id').val();
-                // book.hide('slow');
+                var message = "「" + book_title + "」を「" + shelf_name + "」に移動したよ。";
+                Swal.fire({
+                    title: '',
+                    text: message,
+                    type: 'info',
+                    timer: 2500,
+                });
                 $.ajax({
                     url: '/shelves/add_book',
                     type: 'post',
@@ -181,7 +192,7 @@ window.onload = function () {
             text: "本を移動したよ",
             type: 'info',
             timer: 1000,
-        })
+        });
         // モーダルを非表示にする
         $('.shelf_modal').fadeOut(500);
         // 移動した本の要素を非表示にする
@@ -221,6 +232,7 @@ window.onload = function () {
         animation: 100,
         axis: 'x',
         opacity: 0.8,
+        tolerance: "pointer",
         handle: ".handle, .handle2",
         update: function(event, ui) {
             var item = ui.item;

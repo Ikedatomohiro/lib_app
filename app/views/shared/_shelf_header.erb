@@ -49,7 +49,7 @@
     <ul id="shelves_list" class="shelves_list">
         <% if @shelves %>
         <% @shelves.each do |shelf|%>
-        <li class="shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>">
+        <li class="shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>" name="<%= shelf.shelf_name.truncate(12) %>">
             <a href="/shelves/<%= shelf.id %>" data-turbolinks="false"><%= shelf.shelf_name %></a>
             <div class="shelf_modify_buttons">
                 <p class="destroy_shelf">

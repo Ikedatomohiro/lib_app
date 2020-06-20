@@ -198,6 +198,8 @@
 /* 本棚整理のモーダル */
 .shelf_modal {
     position: absolute;
+    -moz-position: absolute;
+    -webkit-position: absolute;
     left: 0;
     top: 60px;
     border: 2px solid #f0f0f0;
@@ -230,6 +232,10 @@ select[name="shelf_id"] {
 
     100% {
         transform: translateX(0px);
+
+
+
+        
     }
 }
 
@@ -254,6 +260,8 @@ select[name="shelf_id"] {
 /* 本の削除ボタン */
 .shelf_side_ico .batsu_button {
     position: absolute;
+    -moz-position: absolute;
+    -webkit-position: absolute;
     top: 0;
     right: 20px;
     content: '';

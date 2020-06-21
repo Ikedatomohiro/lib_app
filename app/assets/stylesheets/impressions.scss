@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #start_date {
-    cursor : pointer;
+    cursor: pointer;
 }
 
 .lb-nav {
@@ -11,10 +11,10 @@
 }
 
 .book_img_area img {
-  width:auto;
-  height:auto;
-  max-width:120px;
-  max-height:150px;
+    width: auto;
+    height: auto;
+    max-width: 120px;
+    max-height: 150px;
 }
 
 .impression_time {
@@ -25,17 +25,17 @@
 }
 
 .impression_edit {
-  width: 100px;
-  margin-left: auto;
+    width: 80px;
+    margin-left: auto;
 
 }
 
 .impression_tweet_button {
-  display: block;
-  width: 86px;
-  text-align:right;
-  padding: 6px;
-  margin: 0 0 0 auto;
+    display: block;
+    width: 86px;
+    text-align: right;
+    padding: 6px;
+    margin: 0 0 0 auto;
 }
 
 .impression_write_area:hover {
@@ -47,107 +47,124 @@
 }
 
 .impression_sub_info {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .select_picture {
-  width: 30px;
+    width: 30px;
 }
 
 .select_picture:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .impression_img_preview {
-  width: 30vw;
+    width: 30vw;
 }
 
 .impression_save_button {
-  text-align: right;
-  margin-top: -10px;
+    text-align: right;
+    margin-top: -10px;
 }
- /* --- INPUT=TEXTの標準デザイン設定 ---------------------*/
+
+/* --- INPUT=TEXTの標準デザイン設定 ---------------------*/
 .impression_write_area {
-  border-radius : 4px;                 /* 入力域の角丸   */
-  padding       : 8px;                /* 入力文字の余白 */
-  font-size     : 16px;                /* 入力文字サイズ */
-  color         : #333333;             /* 入力文字の色   */
-  font-weight   : bold;                /* 入力文字の太字 */
-  letter-spacing: .1em;                /* 入力文字の間隔 */
-  line-height   : 19px;                /* 入力文字の間隔 */
+    border-radius: 4px;
+    /* 入力域の角丸   */
+    padding: 8px;
+    /* 入力文字の余白 */
+    font-size: 16px;
+    /* 入力文字サイズ */
+    color: #333333;
+    /* 入力文字の色   */
+    font-weight: bold;
+    /* 入力文字の太字 */
+    letter-spacing: .1em;
+    /* 入力文字の間隔 */
+    line-height: 19px;
+    /* 入力文字の間隔 */
 }
- /* --- 入力フィールドにフォーカスか来たら ----------------*/
+
+/* --- 入力フィールドにフォーカスか来たら ----------------*/
 .impression_write_area:focus {
-  border-color  : #59b300;                 /* 枠線色     */
-  background    : rgba(89, 179, 0, 0.20);  /* 背景色     */
-  outline       : 0;
+    border-color: #59b300;
+    /* 枠線色     */
+    background: rgba(89, 179, 0, 0.20);
+    /* 背景色     */
+    outline: 0;
 }
- /* --- 入力説明の文字(標準) -----------------------------*/
+
+/* --- 入力説明の文字(標準) -----------------------------*/
 .impression_write_area:placeholder-shown {
-  color         : #808080;                 /* 文字色     */
+    color: #808080;
+    /* 文字色     */
 }
- /* --- 入力説明の文字(Chrome,Safari,Android,iOS等) ---- -*/
+
+/* --- 入力説明の文字(Chrome,Safari,Android,iOS等) ---- -*/
 .impression_write_area::-webkit-input-placeholder {
-  color         : #808080;                 /* 文字色     */
+    color: #808080;
+    /* 文字色     */
 }
- /* --- 入力説明の文字(IE用) -----------------------------*/
+
+/* --- 入力説明の文字(IE用) -----------------------------*/
 .impression_write_area:-ms-input-placeholder {
-  color         : #808080;                 /* 文字色     */
+    color: #808080;
+    /* 文字色     */
 }
 
 #impression_impression_img {
-  display: none;
+    display: none;
 }
 
 .letter_counter {
-  text-align: right;
+    text-align: right;
 }
 
 .tweet_button {
-  display: block;
-  width: 80px;
-  border-radius: 5px;
-  margin-left: auto;
+    display: block;
+    width: 80px;
+    border-radius: 5px;
+    margin-left: auto;
 }
 
 .tweet_button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .book_impression_box a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .impression_buttons {
-  display: flex; 
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .impression_img_button {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .impression_submit_button {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 
 .impression_sub_item {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.impression_head{
-  display: flex;
+.impression_head {
+    display: flex;
 }
 
 .impression_text {
-  margin-right:15px;
-  width: 95%;
+    margin-right: 15px;
+    width: 95%;
 }
 
 #book_users_thumbnail {
-  display: none;
+    display: none;
 }
 
 /* 感想はじめ */
@@ -155,7 +172,7 @@
     display: flex;
 }
 
-.book_info_inner table{
+.book_info_inner table {
     margin-left: 20px;
 }
 
@@ -164,11 +181,13 @@
     margin-right: 10px
 }
 
-#thumbnail img{
+#thumbnail img {
     max-height: 150px;
 }
+
 /* 感想終わり */
 
 .book_afi_link_button {
-  margin-bottom: 10px;
+    margin: 0 0 10px auto;
+    width: 105px;
 }

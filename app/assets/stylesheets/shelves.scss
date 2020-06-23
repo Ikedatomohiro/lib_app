@@ -262,11 +262,8 @@ select[name="shelf_id"] {
     width: 60px;
 }
 
-.shelf_side_ico .batsu_button {
-/*    position: absolute;
-*/    top: 0;
-    right: 20px;
-    content: '';
+.destroy_book {
+    background-image: url(batsu_button.svg);
     width: 20px;
     background-color: transparent;
 }

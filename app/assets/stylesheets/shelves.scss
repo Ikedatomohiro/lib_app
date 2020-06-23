@@ -258,12 +258,13 @@ select[name="shelf_id"] {
 }
 
 /* 本の削除ボタン */
-.shelf_side_ico {
-    width: 60px;
-}
-
-.destroy_book {
-    background-image: url(batsu_button.svg);
+.shelf_side_ico .batsu_button {
+    position: absolute;
+    -moz-position: absolute;
+    -webkit-position: absolute;
+    top: 0;
+    right: 20px;
+    content: '';
     width: 20px;
     background-color: transparent;
 }

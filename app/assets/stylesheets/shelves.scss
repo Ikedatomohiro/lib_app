@@ -258,16 +258,17 @@ select[name="shelf_id"] {
 }
 
 /* 本の削除ボタン */
+.shelf_side_ico {
+    width: 60px;
+}
+
 .shelf_side_ico .batsu_button {
-    position: absolute;
-    -moz-position: absolute;
-    -webkit-position: absolute;
-    top: 0;
+/*    position: absolute;
+*/    top: 0;
     right: 20px;
     content: '';
     width: 20px;
     background-color: transparent;
-    z-index: 10;
 }
 
 .shelf_side_ico:hover .batsu_button:hover {

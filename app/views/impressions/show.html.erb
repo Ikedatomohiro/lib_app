@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
 <div class="book_info">
     <% if !signed_in? %>
         <%= render "shared/message_to_top_page" %>
@@ -199,7 +199,6 @@
             <% end %>
         <% end %>
     <% end %>
-<input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
 </div>
 
 
@@ -208,8 +207,8 @@ $(document).on('turbolinks:load', function() {
     <% if @book.evaluation %> // 評価されていないときは星を表示しない
         $('#evaluation').raty({
             size    : 36,
-            starOff : '<%= asset_path('star-off.png') %>',
-            starOn  : '<%= asset_path('star-on.png') %>',
+            starOff : '/assets/star-off.png',
+            starOn  : '/assets/star-on.png',
             // starHalf: '<%#= asset_path('star-half.png') %>',
             score   : '<%= @book.evaluation %>',
             readOnly: true
@@ -267,11 +266,43 @@ $(document).on('turbolinks:load', function() {
                     type: 'delete',
                     data: { authenticity_token: $("#authenticity_token_destroy_<%= impression.id %>").val()
                         }
-                    });
+                });
               }
             });
         });
     <% end %>
+    // いいねのつけ外し
+    $('.heart').click(function(){
+        var impression_id = $(this).children('input').val();
+        var authenticity_token = $('input[name="authenticity_token').val();
+        var current_user_id = $('#user_id').val();
+        if ($(this).hasClass('like')) {
+            var delete_url = "/likes/" + impression_id;
+            $.ajax({
+                url:  delete_url,
+                type: 'delete',
+                data: { impression_id: impression_id,
+                        user_id: current_user_id,
+                        authenticity_token: authenticity_token
+                    }
+            });
+            $(this).removeClass('like');
+            $('#like_' + impression_id).removeClass('already_like');
+        } else {
+            $.ajax({
+                url:  "/likes",
+                type: 'post',
+                data: { impression_id: impression_id,
+                        user_id: current_user_id,
+                        authenticity_token: authenticity_token
+                    }
+            });
+            $(this).addClass('like');
+            $('#like_' + impression_id).addClass('already_like');
+        }
+
+    });
+
 });
 
 function colorReset(argObj){

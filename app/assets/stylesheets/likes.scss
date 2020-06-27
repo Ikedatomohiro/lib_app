@@ -2,10 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.like_area {
+  display: flex;
+}
 /* いいねボタン */
 .heart {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: url(./like_unchecked.svg) no-repeat;
   background-size: cover;
   cursor: pointer;
@@ -13,8 +16,8 @@
 }
 
 .like {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: url(./like_checked.svg) no-repeat;
   background-size: cover;
   cursor: pointer;
@@ -39,4 +42,9 @@
 
 .already_like {
     color: #E51B1B;
+}
+
+.like_counter {
+  font-size: 12px;
+  min-width: 30px;
 }

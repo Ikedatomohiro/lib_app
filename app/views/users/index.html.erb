@@ -1,9 +1,13 @@
+<%= javascript_pack_tag 'like', 'data-turbolinks-track': 'reload' %>
 <%# 遅延読み込みのためのスクリプト %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js' %>
 <% if !signed_in? %>
     <%= render "shared/sign_in_link" %>
 <% end %>
 <div class="home">
+    <%= form_with(model: Like.new, url:likes_path) do |form| %>
+    <input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
+    <% end %>
     <div>
         <% add_count = 0 %>
         <% @impressions.each do |impression| %>
@@ -39,7 +43,7 @@
                 <div class="bottom_impression_block">
 <%# いいねボタン %>
                     <%= render partial: "likes/like", locals: {impression: impression}%>
-                    <p>
+                    <p class="score_area">
                         <span class="evaluation_score">
                             <% if impression.book.evaluation %>
                                 <% impression.book.evaluation.times do %>
@@ -50,7 +54,7 @@
                             <% end %>
                         </span>
                     </p>
-                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                    <p class="impression_time"><%= impression.created_at.strftime('%Y/%-m/%-d %H:%M') %></p>
                 </div>
             </div>
 

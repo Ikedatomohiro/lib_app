@@ -37,6 +37,8 @@
                             </div>
                 <% end %>
                 <div class="bottom_impression_block">
+<%# いいねボタン %>
+                    <%= render partial: "likes/like", locals: {impression: impression}%>
                     <p>
                         <span class="evaluation_score">
                             <% if impression.book.evaluation %>

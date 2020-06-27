@@ -192,33 +192,3 @@
     width: 105px;
 }
 
-/* いいねボタン */
-.heart {
-  width: 20px;
-  height: 20px;
-  background: url(./like_unchecked.svg) no-repeat;
-  background-size: cover;
-  cursor: pointer;
-}
-.like {
-  width: 20px;
-  height: 20px;
-  background: url(./like_checked.svg) no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  animation: fave-heart 0.5s;
-}
-@keyframes fave-heart {
-  0% {
-    transform: scale(0.1);
-  }
-  30% {
-    transform: scale(0.5);
-  }
-  50%{
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1.0);
-  }
-}

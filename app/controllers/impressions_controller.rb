@@ -115,6 +115,6 @@ class ImpressionsController < ApplicationController
             config.consumer_secret     = ENV['TWITTER_API_SECRET']
             config.access_token        = current_user.oauth_token
             config.access_token_secret = current_user.oauth_token_secret
+        end
     end
-  end
 end

@@ -1,0 +1,12 @@
+<% if signed_in? && impression.likes.find_by(user_id: current_user.id).present? %>
+<%# この行の記述がなぜだめなのかわからない %>   <%# if impression.already_like(current_user.id).present? %>
+    <div class="heart like">
+        <input type="hidden" name="heart" value="<%= impression.id %>" >
+    </div>
+    <span id="like_<%= impression.id %>" class="already_like"><%= impression.like_count %></span>
+<% else %>
+    <div class="heart">
+        <input type="hidden" name="heart" value="<%= impression.id %>" >
+    </div>
+    <span id="like_<%= impression.id %>"><%= impression.like_count %></span>
+<% end %>

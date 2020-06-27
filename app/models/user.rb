@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :shleves, dependent: :destroy
   has_many :impressions, dependent: :destroy
   has_many :contacts, dependent: :destroy
+  has_many :likes, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -48,25 +49,6 @@ class User < ApplicationRecord
   mount_uploader :user_icon, ImageUploader
 
   scope :impression_private, -> {joins(:setting).select("users.*, settings.*")}
-
-  def provider
-    'twitter'
-    
-  end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   private

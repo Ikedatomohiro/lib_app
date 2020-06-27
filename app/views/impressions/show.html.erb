@@ -159,7 +159,7 @@
                 <% end %>
                 <div class="impression_sub_item">
 <%# いいねボタン %>
-                    <div class="heart"></div>
+                    <%= render partial: "likes/like", locals: {impression: impression}%>
 <%# 感想更新時間 %>
                     <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
                 </div>
@@ -187,16 +187,19 @@
                     <% end %>
                 <% end %>
             </p>
+                <div class="impression_sub_item">
 <%# いいねボタン %>
-                    <div class="heart"></div>
+                    <%= render partial: "likes/like", locals: {impression: impression}%>
 <%# 感想更新時間 %>
-            <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                    <p class="impression_time"><%= impression.updated_at.strftime('%Y/%-m/%-d %H:%M') %></p>
+                </div>
             <% impression_count += 1 %>
             <% if impression_count === 1 %> <%# はじめの感想の後ろに広告を表示 %>
                 <%= render "impressions/advertisement_impression" %>
             <% end %>
         <% end %>
     <% end %>
+<input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
 </div>
 
 

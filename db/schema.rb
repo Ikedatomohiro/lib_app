@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_071942) do
+ActiveRecord::Schema.define(version: 2020_06_24_135514) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(version: 2020_05_03_071942) do
     t.boolean "tweeted_flg", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "like_count", default: 0
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "impression_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["impression_id"], name: "index_likes_on_impression_id"
   end
 
   create_table "settings", force: :cascade do |t|

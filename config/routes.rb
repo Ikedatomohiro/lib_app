@@ -48,5 +48,6 @@ resources :shelves do
     put :sort
 end
 
-
+resources :likes, only: [:create]
+delete 'likes/:impression_id'           => 'likes#destroy'
 end

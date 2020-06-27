@@ -7,8 +7,10 @@
         <span id="like_<%= impression.id %>" class="like_counter already_like"><%= impression.like_count %></span>
     </div>
 <% else %>
-    <p class="heart">
-        <input type="hidden" name="heart" value="<%= impression.id %>" >
-    </p>
-    <span id="like_<%= impression.id %>" class="like_counter"><%= impression.like_count %></span>
+    <div class="like_area">
+        <p class="heart">
+            <input type="hidden" name="heart" value="<%= impression.id %>" >
+        </p>
+        <span id="like_<%= impression.id %>" class="like_counter"><%= impression.like_count %></span>
+    </div>
 <% end %>

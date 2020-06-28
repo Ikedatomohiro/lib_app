@@ -7,7 +7,7 @@ class LikesController < ApplicationController
     def create
         @impression = Impression.find_by(id: params[:impression_id])
 
-        unless signed_in?
+        if !signed_in?
             @impression.like_count += 1
             @impression.update_columns(like_count: @impression.like_count)
         end
@@ -20,7 +20,7 @@ class LikesController < ApplicationController
 
     def destroy
         @impression = Impression.find_by(id: params[:impression_id])
-        unless signed_in?
+        if !signed_in?
             if @impression.like_count > 0
                 @impression.like_count -= 1
                 @impression.update_columns(like_count: @impression.like_count)

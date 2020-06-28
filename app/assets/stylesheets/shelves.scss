@@ -158,6 +158,7 @@
 }
 
 .block_shelf_item {
+    position: relative;
     width: 20%;
     max-height: 130px;
     margin-bottom: 5px;
@@ -232,10 +233,6 @@ select[name="shelf_id"] {
 
     100% {
         transform: translateX(0px);
-
-
-
-        
     }
 }
 
@@ -271,4 +268,16 @@ select[name="shelf_id"] {
 
 .shelf_side_ico:hover .batsu_button:hover {
     cursor: pointer;
+}
+
+
+
+.block_shelf_book_and_icon .destroy_book {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background-image: url(batsu_button.svg);
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
 }

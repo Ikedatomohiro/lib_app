@@ -1,4 +1,4 @@
-<%= render "shared/shelf_header" %>
+<%= render partial: "shelves/shelf_header" %>
     <%= form_with(model: @book, url: book_path(current_user.id)) do |form| %>
     <input type="hidden" id="authenticity_token" name="authenticity_token" value="<%= form_authenticity_token %>" >
     <% end %>

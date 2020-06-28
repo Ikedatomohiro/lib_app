@@ -112,17 +112,17 @@
             </tr>
         </table>
         </div>
-        <div class="book_afi_link_button">
-            <% if @amazon_afi_link.present? %>
+        <% if @amazon_afi_link.present? %>
+            <div class="book_afi_link_button">
                 <a href="<%= @amazon_afi_link %>" target="_blank">
                     <button class="submit_btn_small">本の情報を見る</button>
                 </a>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
 
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
-        <div class="impression_edit">
+        <div id="impression_edit_button" class="impression_edit">
             <div>
                 <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>

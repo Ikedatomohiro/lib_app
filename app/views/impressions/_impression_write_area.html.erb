@@ -5,6 +5,7 @@
     <%= f.hidden_field :tweet_content, value: "" %>
     <div class="impression_sub_info">
         <p id="star"></p>
+        <p id="letter_count_alart"></p>
     </div>
     <div>
         <div class="impression_buttons">
@@ -15,10 +16,9 @@
             <div class="impression_submit_button">
                 <%= f.submit '感想を保存する', class: 'submit_btn_small impression_save_button' %>
             </div>
+        </div>
     </div>
-    </div>
-
-<input type="hidden" id="byte_count" value="">
+    <input type="hidden" id="byte_count" value="">
 <% end %>
     <img id="impression_img_preview" class="impression_img_preview">
 
@@ -43,6 +43,8 @@ $(function(){
         var count_target = $('#impression_impression').val();
         var result = 0;
         var tweet_content = '';
+        var letter_count = 0;
+        var remaining_letter = 0;
         for(var i=0;i<count_target.length;i++){
           var chr = count_target.charCodeAt(i);
           if((chr >= 0x00 && chr < 0x81) ||
@@ -63,11 +65,21 @@ $(function(){
           }
         }
         $('#output_count').text(result);
+        // 文字数アラートを表示
+        letter_count = Math.ceil(result/2);
+        remaining_letter = 128 - letter_count;
         // バイト数によって背景色を変える。
-        if (result > 255) {
-            $('#impression_impression').css('background-color', '#FCEAFF');
+        if (result <= 214) {
+            $('#impression_impression').css('background-color', '#EAF8FF'); // 背景色水色
+            $('#letter_count_alart').fadeOut();
+        } else if (result <= 255){
+            $('#impression_impression').css('background-color', '#EAF8FF'); // 背景色水色 
+            $('#letter_count_alart').show();
+            $('#letter_count_alart').text('あと' + remaining_letter + '文字までTwitterに投稿できるよ');
         } else {
-            $('#impression_impression').css('background-color', '#EAF8FF');
+            $('#impression_impression').css('background-color', '#FCEAFF'); // 背景色ピンク色
+            $('#letter_count_alart').show();
+            $('#letter_count_alart').text('これ以降の分は、Twitter投稿時に非表示になるよ');
         }
             $('#impression_tweet_content').val(tweet_content);
     });

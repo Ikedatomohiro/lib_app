@@ -3,106 +3,116 @@
 <%# スマホなどタッチアクションで動作するようにするscript %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
-  <style>
-  #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
-  </style>
-  <script>
-  $(function() {
-    $( "#sortable1, #sortable2" ).sortable().disableSelection();
-
-    var $tabs = $( "#tabs" ).tabs();
-
-    var $tab_items = $( "ul:first li", $tabs ).droppable({
-      accept: ".connectedSortable li",
-      hoverClass: "ui-state-hover shelf_label_hover",
-      drop: function( event, ui ) {
-        var $item = $( this );
-        var $list = $( $item.find( "a" ).attr( "href" ) )
-          .find( ".connectedSortable" );
-console.log($tab_items);
-        ui.draggable.hide( "slow", function() {
-          $tabs.tabs( "option", "", $tab_items.index( $item ) );
-          $( this ).appendTo( $list ).show( "slow" );
-        });
-      }
-    });
-  });
-  </script>
-
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">タブ1(ドロップしてください)</a></li>
-    <li><a href="#tabs-2">タブ2(ドロップしてください)</a></li>
-  </ul>
-  <div id="tabs-1">
-    <ul id="sortable1" class="connectedSortable ui-helper-reset">
-      <li class="ui-state-default">項目 1</li>
-      <li class="ui-state-default">項目 2</li>
-      <li class="ui-state-default">項目 3</li>
-      <li class="ui-state-default">項目 4</li>
-      <li class="ui-state-default">項目 5</li>
-    </ul>
-  </div>
-  <div id="tabs-2">
-    <ul id="sortable2" class="connectedSortable ui-helper-reset">
-      <li class="ui-state-highlight">項目 1</li>
-      <li class="ui-state-highlight">項目 2</li>
-      <li class="ui-state-highlight">項目 3</li>
-      <li class="ui-state-highlight">項目 4</li>
-      <li class="ui-state-highlight">項目 5</li>
-    </ul>
-  </div>
-</div>
-
-
-
-
-
-
-<ul id="datas">
-  <li id="1あ">1</li>
-  <li id="2い">2</li>
-  <li id="3う">3</li>
-  <li id="4え">4</li>
-  <li id="5お">5</li>
-  <li id="6か">6</li>
-</ul>
-<p id="log"></p>
+<h4>●バイト数カウント</h4>
+<textarea id="byte_count">😚</textarea>
+<p id="output_count"></p>
 
 <script>
-$('#datas').sortable({
-  update: function(){
-      var log = $(this).sortable("toArray");
-      $("#log").text(log);
-  }
+$(function() {
+    // クラスの付け外し
+    $('.favorite').click(function() {
+        if ($(this).hasClass('checked')) {
+            console.log('あります');
+        } else {
+            console.log('ありません');
+        }
+        $(this).toggleClass('checked');
+    });
+
+    // クリックでクリップボードにコピー
+    $('.clipboard').click(function() {
+        var target = $(this);
+        target.select();
+        document.execCommand('copy');
+    });
+
+    // 文字のバイト数カウント
+    $('#byte_count').keyup(function() {
+        var count_target = $('#byte_count').val();
+        // console.log(count_target.length);
+        var byte_count = getByteLength(count_target);
+        var result = 0;
+        for(var i=0;i<count_target.length;i++){
+          var chr = count_target.charCodeAt(i);
+          if((chr >= 0x00 && chr < 0x81) ||
+             (chr === 0xf8f0) ||
+             (chr >= 0xff61 && chr < 0xffa0) ||
+             (chr >= 0xf8f1 && chr < 0xf8f4) ||
+             (chr >= 0xD800 && chr <= 0xDBFF) || // サロゲートペア上位部分
+             (chr >= 0xDC00 && chr <= 0xDFFF)    // サロゲートペア下位部分
+             ){
+            //半角文字の場合は1を加算
+            result += 1;
+          }else{
+            //それ以外の文字の場合は2を加算
+            result += 2;
+          }
+        }
+        $('#output_count').text(result);
+        // バイト数によって背景色を変える。
+        if (byte_count > 100) {
+            $('#output_count').css('background-color', 'red');
+        } else {
+            $('#output_count').css('background-color', '#ffffff');
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
+
+function getByteLength(str){
+  str = (str==null)?"":str;
+  return encodeURI(str).replace(/%../g, "*").length;
+}
+
+
+
+
 </script>
 
 
-  <style>
-  #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
-  </style>
-  <script>
-  $(function() {
-    $( "#draggable" ).draggable();
-    $( ".droppable" ).droppable({
-      drop: function( event, ui ) {
-        var text = $( this ).children('p').text();
-        console.log(text);
-      }
-    });
-  });
-  </script>
 
-<div id="draggable" class="ui-widget-content">
-  <p>ターゲットにドラッグしてください</p>
-</div>
-<div id="" class="ui-widget-header droppable">
-  <p>ここにドロップしてください1</p>
-</div>
-<div id="" class="ui-widget-header droppable">
-  <p>ここにドロップしてください2</p>
-</div>
+
+
+
+
+
+
+
+
+
+
 
 

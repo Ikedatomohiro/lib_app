@@ -86,7 +86,7 @@ class ImpressionsController < ApplicationController
         if impression.impression_img.present?
             impression_id = "?imp=#{impression.id}"
         end
-        tweet_content = impression.impression.truncate(120)
+        tweet_content = impression.tweet_content
         tweet = "#{tweet_content}\nhttps://dokusyo-no-wa.com/impressions/#{book.impression_link}#{impression_id}"
         # 画像があれば、画像を投稿する。画像がなければツイッターカードにサムネイル画像を表示させる仕様にする。
         if impression.impression_img.present?
@@ -102,7 +102,7 @@ class ImpressionsController < ApplicationController
 
     private
     def impression_params
-        params.require(:impression).permit(:user_id, :book_id, :impression, :impression_img)
+        params.require(:impression).permit(:user_id, :book_id, :impression, :impression_img, :tweet_content)
     end
 
     def reading_date_params

@@ -2,31 +2,23 @@
     <%= f.text_area :impression, class: 'input_area', onclick: "textAreaHeightSet(this)", onfocus: "colorReset(this)", oninput: "textAreaHeightSet(this)", onchange: "textAreaHeightSet(this)"%>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :book_id, value: @book.id%>
+    <%= f.hidden_field :tweet_content, value: "" %>
     <div class="impression_sub_info">
         <p id="star"></p>
     </div>
     <div>
-    <div class="impression_buttons">
-        <div class="impression_img_button">
-            <%= image_tag 'picture.svg', class: 'select_picture', onclick:"return clickUploadButton()" %>
-            <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf"%>
-        </div>
-        <div class="impression_submit_button">
-            <%= f.submit '感想を保存する', class: 'submit_btn_small impression_save_button' %>
-        </div>
-        <!-- <p id="counter" class="letter_counter">0文字</p> -->
+        <div class="impression_buttons">
+            <div class="impression_img_button">
+                <%= image_tag 'picture.svg', class: 'select_picture', onclick:"return clickUploadButton()" %>
+                <%= f.file_field :impression_img, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf"%>
+            </div>
+            <div class="impression_submit_button">
+                <%= f.submit '感想を保存する', class: 'submit_btn_small impression_save_button' %>
+            </div>
     </div>
-        
     </div>
 
 <input type="hidden" id="byte_count" value="">
-    <%#= 'おはようございます。
-今日も一日元気に頑張りましょう。
-aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
-コロナウイルスが怖いので、あまり人混みの多いところには行かないほうがいいですね。
-通勤される方はマスクを活用し、こまめに消毒することが大切です。
-どちらもarimasenn1
-'.encode("EUC-JP").bytesize %>
 <% end %>
     <img id="impression_img_preview" class="impression_img_preview">
 
@@ -45,12 +37,39 @@ function clickUploadButton() {
     return false;
 };
 
+// 文字数カウント
 $(function(){
-    $("#impression_impression").on("keyup", function() {
-        let countNum = String($(this).val().length);
-        $("#counter").text(countNum + "文字");
-        let impression = String($(this).val());
-        $('#letters_count').val(impression);
+    $("#impression_impression").keyup(function() {
+        var count_target = $('#impression_impression').val();
+        var result = 0;
+        var tweet_content = '';
+        for(var i=0;i<count_target.length;i++){
+          var chr = count_target.charCodeAt(i);
+          if((chr >= 0x00 && chr < 0x81) ||
+             (chr === 0xf8f0) ||
+             (chr >= 0xff61 && chr < 0xffa0) ||
+             (chr >= 0xf8f1 && chr < 0xf8f4) ||
+             (chr >= 0xD800 && chr <= 0xDBFF) || // サロゲートペア上位部分
+             (chr >= 0xDC00 && chr <= 0xDFFF)    // サロゲートペア下位部分
+             ){
+            //半角文字の場合は1を加算
+            result += 1;
+          }else{
+            //それ以外の文字の場合は2を加算
+            result += 2;
+          }
+          if ((result <= 254) || (result == 255 && (chr >= 0xDC00 && chr <= 0xDFFF))) {
+            tweet_content = tweet_content + count_target[i];
+          }
+        }
+        $('#output_count').text(result);
+        // バイト数によって背景色を変える。
+        if (result > 255) {
+            $('#impression_impression').css('background-color', '#FCEAFF');
+        } else {
+            $('#impression_impression').css('background-color', '#EAF8FF');
+        }
+            $('#impression_tweet_content').val(tweet_content);
     });
 });
 

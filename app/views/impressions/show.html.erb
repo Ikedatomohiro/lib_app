@@ -122,6 +122,7 @@
 
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
+            <p id="letter_count_alart">&nbsp;</p>
         <div id="impression_edit_button" class="impression_edit">
             <div>
                 <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
@@ -136,10 +137,12 @@
             <div class="information_block">
                 <div class="impression_head">
 <%# 感想テキスト %>
-                    <div class="impression_text">
+                    <div id="impression_edit_<%= impression.id %>" class="impression_text">
                         <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
+                            <p class="letter_count_alart">&nbsp;</p>
                             <input type="hidden" id="authenticity_token_impression_<%= impression.id %>" name="authenticity_token" value="<%= form_authenticity_token %>" >
-                            <textarea id="impression_edit_<%= impression.id %>" class= "impression_write_area" onclick="textAreaHeightSet(this)"
+                            <input type="hidden" name="tweet_content" value="">
+                            <textarea class= "impression_write_area" onclick="textAreaHeightSet(this)"
                                     onfocus="colorReset(this)" 
                                     oninput="textAreaHeightSet(this)"
                                     onchange="textAreaHeightSet(this)"><%= impression.impression %></textarea>
@@ -218,12 +221,14 @@ $(document).on('turbolinks:load', function() {
     <% @impressions.each do |impression| %>
         // 感想を編集したら自動的に保存する。
         $('#impression_edit_<%= impression.id %>').change(function(){
-            var impression = $('#impression_edit_<%= impression.id %>').val();
+            var impression = $(this).find('.impression_write_area').val();
+            var tweet_content = $(this).find('input[name="tweet_content"]').val();
           $.ajax({
             url:  "<%= impression_path(impression.id) %>",
             type: 'patch',
             data: { impression: impression,
-                   authenticity_token: $("#authenticity_token_impression_<%= impression.id %>").val()
+                    tweet_content: tweet_content,
+                    authenticity_token: $("#authenticity_token_impression_<%= impression.id %>").val()
              }
           });
         });
@@ -238,12 +243,10 @@ $(document).on('turbolinks:load', function() {
               cancelButtonText: 'やめる'
             }).then((result) => {
               if (result.value) {
-                var impression = $('#impression_edit_<%= impression.id %>').val();
                 $.ajax({
                     url:  "<%= impressions_post_to_twitter_path %>",
                     type: 'post',
-                    data: { impression: impression,
-                            id: <%= impression.id %>,
+                    data: { impression_id: <%= impression.id %>,
                             authenticity_token: $("#authenticity_token_tweet_<%= impression.id %>").val()
                         }
                     });
@@ -300,8 +303,12 @@ $(document).on('turbolinks:load', function() {
             $(this).addClass('like');
             $('#like_' + impression_id).addClass('already_like');
         }
-
     });
+
+    // 文字数カウント
+    $(".impression_write_area").keyup(function() {
+    });
+
 
 });
 
@@ -325,6 +332,49 @@ function textAreaHeightSet(argObj){
   if(wSclollHeight < (wLineH * 2)){wSclollHeight=(wLineH * 2);}
   // テキストエリアの高さを設定する
   argObj.style.height = wSclollHeight + "px";
+
+    // 文字数カウント
+    var count_target = $(argObj).val();
+    var result = 0;
+    var tweet_content = '';
+    var letter_count = 0;
+    var remaining_letter = 0;
+    for(var i=0;i<count_target.length;i++){
+      var chr = count_target.charCodeAt(i);
+      if((chr >= 0x00 && chr < 0x81) ||
+         (chr === 0xf8f0) ||
+         (chr >= 0xff61 && chr < 0xffa0) ||
+         (chr >= 0xf8f1 && chr < 0xf8f4) ||
+         (chr >= 0xD800 && chr <= 0xDBFF) || // サロゲートペア上位部分
+         (chr >= 0xDC00 && chr <= 0xDFFF)    // サロゲートペア下位部分
+         ){
+        //半角文字の場合は1を加算
+        result += 1;
+      }else{
+        //それ以外の文字の場合は2を加算
+        result += 2;
+      }
+      if ((result <= 254) || (result == 255 && (chr >= 0xDC00 && chr <= 0xDFFF))) {
+        // twitter投稿可能な分だけ別途保存用
+        tweet_content = tweet_content + count_target[i];
+      }
+    }
+    // 文字数アラートを表示
+    letter_count = Math.ceil(result/2);
+    remaining_letter = 128 - letter_count;
+    // バイト数によって背景色を変える。
+    if (result <= 214) {
+        $(argObj).css('background-color', '#EAF8FF'); // 背景色水色
+        $(argObj).parent().children('.letter_count_alart').text('　');
+    } else if (result <= 255){
+        $(argObj).css('background-color', '#EAF8FF'); // 背景色水色 
+        $(argObj).parent().children('.letter_count_alart').text('あと' + remaining_letter + '文字までTwitterに投稿できるよ');
+    } else {
+        $(argObj).css('background-color', '#FCEAFF'); // 背景色ピンク色
+        $(argObj).parent().children('.letter_count_alart').text('後半の一部は、Twitter投稿時に非表示になるよ');
+    }
+    // 保存用のフィールドにセット
+    $(argObj).parent().children('input[name="tweet_content"]').val(tweet_content);
 }
 
 // thumbnailを変更するボタンをクリック
@@ -372,7 +422,6 @@ function clickThumbnailDefaultButton() {
     });
 }
 
-// 文字数カウント
 
 
 

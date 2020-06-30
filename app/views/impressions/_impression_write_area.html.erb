@@ -61,17 +61,17 @@ $(function(){
             result += 2;
           }
           if ((result <= 254) || (result == 255 && (chr >= 0xDC00 && chr <= 0xDFFF))) {
+            // twitter投稿可能な分だけ別途保存用
             tweet_content = tweet_content + count_target[i];
           }
         }
-        $('#output_count').text(result);
         // 文字数アラートを表示
         letter_count = Math.ceil(result/2);
         remaining_letter = 128 - letter_count;
         // バイト数によって背景色を変える。
         if (result <= 214) {
             $('#impression_impression').css('background-color', '#EAF8FF'); // 背景色水色
-            $('#letter_count_alart').fadeOut();
+            $('#letter_count_alart').text('　');
         } else if (result <= 255){
             $('#impression_impression').css('background-color', '#EAF8FF'); // 背景色水色 
             $('#letter_count_alart').show();
@@ -79,7 +79,7 @@ $(function(){
         } else {
             $('#impression_impression').css('background-color', '#FCEAFF'); // 背景色ピンク色
             $('#letter_count_alart').show();
-            $('#letter_count_alart').text('これ以降の分は、Twitter投稿時に非表示になるよ');
+            $('#letter_count_alart').text('後半の一部は、Twitter投稿時に非表示になるよ');
         }
             $('#impression_tweet_content').val(tweet_content);
     });

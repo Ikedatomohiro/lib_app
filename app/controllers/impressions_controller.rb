@@ -59,7 +59,7 @@ class ImpressionsController < ApplicationController
 
     def update
         @impression = Impression.find_by(id: params[:id])
-        @impression.update(impression: params[:impression])
+        @impression.update(impression: impression_edit_params[:impression], tweet_content: impression_edit_params[:tweet_content])
     end
 
     def destroy
@@ -80,7 +80,7 @@ class ImpressionsController < ApplicationController
 
     # ツイートする。画像があれば画像を付けてツイートする。
     def post_to_twitter
-        impression = Impression.find_by(id: params[:id])
+        impression = Impression.find_by(id: params[:impression_id])
         book = Book.find_by(id: impression.book_id)
         # ツイートする画像をセット
         if impression.impression_img.present?
@@ -103,6 +103,10 @@ class ImpressionsController < ApplicationController
     private
     def impression_params
         params.require(:impression).permit(:user_id, :book_id, :impression, :impression_img, :tweet_content)
+    end
+
+    def impression_edit_params
+        params.permit(:id, :impression, :impression_img, :tweet_content, :authenticity_token)
     end
 
     def reading_date_params

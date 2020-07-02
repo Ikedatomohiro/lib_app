@@ -11,15 +11,7 @@ class UsersController < ApplicationController
         # @vals = Impression.all_impressions.where(user_id: private_impression_users.ids).created_desc
         public_users = Setting.where(publish_impression: true)
         @impressions = Impression.all.order(created_at: "DESC")
-        @impressions = @impressions.where(user_id: public_users.ids)
-puts 'おはようございます。
-今日も一日元気に頑張りましょう。
-aj;dalj;lkj;lkjsd;kaj;fjkda;jf;lakjf;lkja;lkjflkajlkfjalkdj;afj
-コロナウイルスが怖いので、あまり人混みの多いところには行かないほうがいいですね。
-通勤される方はマスクを活用し、こまめに消毒することが大切です。
-どちらもarimasenn
-'.encode("EUC-JP").bytesize
-
+        @impressions = @impressions.where(user_id: public_users.ids).page(params[:page]).per(20)
     end
 
     def show

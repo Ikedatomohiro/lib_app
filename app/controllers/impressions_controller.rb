@@ -60,6 +60,7 @@ class ImpressionsController < ApplicationController
     def update
         @impression = Impression.find_by(id: params[:id])
         @impression.update(impression: impression_edit_params[:impression], tweet_content: impression_edit_params[:tweet_content])
+        render body: nil
     end
 
     def destroy

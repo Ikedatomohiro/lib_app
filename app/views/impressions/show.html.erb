@@ -1,4 +1,3 @@
-<%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
@@ -111,14 +110,14 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <% if @amazon_afi_link.present? %>
+        <div class="book_afi_link_button">
+            <a href="<%= @amazon_afi_link %>" target="_blank">
+                <button class="submit_btn_small">本の情報を見る</button>
+            </a>
         </div>
-        <% if @amazon_afi_link.present? %>
-            <div class="book_afi_link_button">
-                <a href="<%= @amazon_afi_link %>" target="_blank">
-                    <button class="submit_btn_small">本の情報を見る</button>
-                </a>
-            </div>
-        <% end %>
+    <% end %>
 
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
@@ -137,6 +136,9 @@
             <div class="information_block">
                 <div class="impression_head">
 <%# 感想テキスト %>
+                    <p class="impression_view">
+                        <%= impression.impression %>
+                    </p>
                     <div id="impression_edit_<%= impression.id %>" class="impression_text">
                         <%= form_with model:impression, url: impression_path(impression.id) do |f| %>
                             <p class="letter_count_alart">&nbsp;</p>
@@ -182,7 +184,10 @@
     <% else %>
         <% impression_count = 0%>
         <% @impressions.each do |impression| %>
-            <%= impression.impression %>
+            <p>
+                <%= impression.impression %>
+            </p>
+            
             <p>
                 <% if impression.impression_img_url%>
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>
@@ -223,15 +228,18 @@ $(document).on('turbolinks:load', function() {
         $('#impression_edit_<%= impression.id %>').change(function(){
             var impression = $(this).find('.impression_write_area').val();
             var tweet_content = $(this).find('input[name="tweet_content"]').val();
-          $.ajax({
-            url:  "<%= impression_path(impression.id) %>",
-            type: 'patch',
-            data: { impression: impression,
-                    tweet_content: tweet_content,
-                    authenticity_token: $("#authenticity_token_impression_<%= impression.id %>").val()
-             }
-          });
+            $.ajax({
+                url:  "<%= impression_path(impression.id) %>",
+                type: 'patch',
+                data: { impression: impression,
+                        tweet_content: tweet_content,
+                        authenticity_token: $("#authenticity_token_impression_<%= impression.id %>").val()
+                }
+            })
+            .then($(this).find('.letter_count_alart').text('変更を保存したよ'),);
+
         });
+
         // ツイッターに投稿する
         $('#send_tweet_<%= impression.id %>').click(function() {
             Swal.fire({
@@ -274,41 +282,6 @@ $(document).on('turbolinks:load', function() {
             });
         });
     <% end %>
-    // いいねのつけ外し
-    $('.heart').click(function(){
-        var impression_id = $(this).children('input').val();
-        var authenticity_token = $('input[name="authenticity_token').val();
-        var current_user_id = $('#user_id').val();
-        if ($(this).hasClass('like')) {
-            var delete_url = "/likes/" + impression_id;
-            $.ajax({
-                url:  delete_url,
-                type: 'delete',
-                data: { impression_id: impression_id,
-                        user_id: current_user_id,
-                        authenticity_token: authenticity_token
-                    }
-            });
-            $(this).removeClass('like');
-            $('#like_' + impression_id).removeClass('already_like');
-        } else {
-            $.ajax({
-                url:  "/likes",
-                type: 'post',
-                data: { impression_id: impression_id,
-                        user_id: current_user_id,
-                        authenticity_token: authenticity_token
-                    }
-            });
-            $(this).addClass('like');
-            $('#like_' + impression_id).addClass('already_like');
-        }
-    });
-
-    // 文字数カウント
-    $(".impression_write_area").keyup(function() {
-    });
-
 
 });
 
@@ -394,11 +367,6 @@ function clickThumbnailChangeButton() {
     });
 };
 
-// サムネイルの画像が選択されたら送信ボタンを押す
-$('#book_users_thumbnail').on('change', function () {
-    $('#send_thumbnail').click();
-    return false;
-});
 // thumbnail画像を保存する。
 
 function clickThumbnailDefaultButton() {
@@ -423,11 +391,10 @@ function clickThumbnailDefaultButton() {
 }
 
 
-
-
-
-
 </script>
 
- 
+<%= javascript_pack_tag 'impression', 'data-turbolinks-track': 'reload' %>
+<%# ratyの方が下でないとratyを呼び出せない %>
+<%= javascript_pack_tag 'raty', 'data-turbolinks-track': 'reload' %>
+
 

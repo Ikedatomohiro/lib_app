@@ -22,9 +22,11 @@ $('.heart').click(function(){
                     user_id: current_user_id,
                     authenticity_token: authenticity_token
                 }
-        });
-        $(this).removeClass('like');
-        $('#like_' + impression_id).removeClass('already_like');
+        })
+        .then(
+            $(this).removeClass('like'),
+            $('#like_' + impression_id).removeClass('already_like')
+            );
     } else {
         $.ajax({
             url:  "/likes",
@@ -33,12 +35,15 @@ $('.heart').click(function(){
                     user_id: current_user_id,
                     authenticity_token: authenticity_token
                 }
-        });
-        $(this).addClass('like');
-        $('#like_' + impression_id).addClass('already_like');
+        })
+        .then(
+            $(this).addClass('like'),
+            $('#like_' + impression_id).addClass('already_like')
+        );
     }
 });
 
+// 感想をクリックすると編集モードに切り替わる
 $('.impression_view').click(function() {
     $(this).hide();
     var impression_edit_area = $(this).next('.impression_text');

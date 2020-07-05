@@ -1,4 +1,5 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" data-turbolinks-track="reload"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js" data-turbolinks-track="reload"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <input id="user_id" type="hidden" value="<% if signed_in? %><%= current_user.id %><% end %>" >
 <div class="book_info">
@@ -56,82 +57,82 @@
                 <% end %>
             </a>
         <% end %>
-        <table>
-            <tr>
-                <th align="right">登録日：</th>
-                <td>
-                    <%= @book.created_at.strftime('%Y/%-m/%-d') %>
-                </td>
-            </tr>
-            <tr>
-                <th align="right">
-                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                        <input type="hidden" name="now_date" value=<%=@book.reading_start_date %> >
-                        <input type="hidden" name="calendar" value="reading_start_date">
-                        <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                        <% if signed_in? && @book.user_id === current_user.id %>
-                            <%= f.submit '読始め：' %>
-                        <% else %>
-                            読始め：
+        <%= form_with(model: @book, url: book_path(@book.id)) do |f| %>
+            <div class="book_info_right">
+                <table>
+                    <tr>
+                        <th align="right">登録日：</th>
+                        <td>
+                            <%= @book.created_at.strftime('%Y/%-m/%-d') %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            <span>読始め：</span>
+                        </th>
+                        <td id="reading_start_date">
+                            <span>
+                                <%= @book.reading_start_date.strftime('%Y/%-m/%-d') if @book.reading_start_date.present? %>
+                            </span>
+                            <input type="text" name="reading_start_date" class="datepicker reading_date" value="<%=@book.reading_start_date.strftime('%Y/%-m/%-d') if @book.reading_start_date.present? %>" style="display: none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">
+                            <span>読了日：</span>
+                        </th>
+                        <td id="reading_end_date">
+                            <span>
+                                <%= @book.reading_end_date.strftime('%Y/%-m/%-d') if @book.reading_end_date.present? %>
+                            </span>
+                            <input type="text" name="reading_end_date" class="datepicker reading_date" value="<%=@book.reading_end_date.strftime('%Y/%-m/%-d') if @book.reading_end_date.present? %>" style="display: none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th align="right">評価：</th>
+                        <td>
+                            <p id="evaluation">
+                                <% if @book.evaluation == nil%>
+                                まだ評価していません。
+                                <% end %>
+                            </p>
+                            <p id="evaluation_edit" style="display: none;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                        <% if @amazon_afi_link.present? %>
+                            <% if signed_in? && @book.user_id != current_user.id %>
+                                <div class="book_afi_link_button">
+                                    <a href="<%= @amazon_afi_link %>" target="_blank">
+                                        <button class="submit_btn_small">本の情報を見る</button>
+                                    </a>
+                                </div>
+                            <% end %>
                         <% end %>
-                    <% end %>
-                </th>
-                <td id="reading_start_date">
-                    <% if @book.reading_start_date %>
-                        <%= @book.reading_start_date.strftime('%Y/%-m/%-d') %>
-                    <% end %>
-                </td>
-            </tr>
-            <tr>
-                <th align="right">
-                    <%= form_with(model: @book, url:books_show_reading_date_path) do |f| %>
-                        <input type="hidden" name="now_date" value=<%=@book.reading_end_date %> >
-                        <input type="hidden" name="calendar" value="reading_end_date">
-                        <input type="hidden" name="book_id" value="<%= @book.id %> " />
-                        <% if signed_in? && @book.user_id === current_user.id %>
-                            <%= f.submit '読了日：' %>
-                        <% else %>
-                            読了日：
-                        <% end %>
-                    <% end %>
-                </th>
-                <td id="reading_end_date">
-                    <% if @book.reading_end_date %>
-                    <%= @book.reading_end_date.strftime('%Y/%-m/%-d') %>
-                    <% end %>
-                </td>
-            </tr>
-            <tr>
-                <th align="right">評価：</th>
-                <td id="evaluation">
-                    <% if @book.evaluation == nil%>
-                    まだ評価していません。
-                    <% end %>
-                </td>
-            </tr>
-        </table>
+                        </th>
+                    </tr>
+                </table>
+                <div id="impression_edit_button" class="impression_edit">
+                    <div>
+                        <div id="edit_book_info" class="submit_btn_small edit_book_info">編集</div>
+                        <%= f.submit '編集完了', id: 'finish_edit_book_info', class: 'submit_btn_small finish_edit_book_info', style: 'display: none;' %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
     </div>
-    <% if @amazon_afi_link.present? %>
-        <div class="book_afi_link_button">
-            <a href="<%= @amazon_afi_link %>" target="_blank">
-                <button class="submit_btn_small">本の情報を見る</button>
-            </a>
-        </div>
-    <% end %>
 
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
             <p id="letter_count_alart">&nbsp;</p>
-        <div id="impression_edit_button" class="impression_edit">
-            <div>
-                <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
-                <%= f.hidden_field :book_id, value: @book.id %>
-                <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
-                <% end %>
-            </div>
+        <div id="impression_write_button" class="impression_write">
+            <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
+            <%= f.hidden_field :book_id, value: @book.id %>
+            <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>
+            <% end %>
         </div>
-<%# 感想記入フィールド表示場所 %>
-        <div id="impression"></div>
+        <div id="impression"></div><%# 感想記入フィールド表示場所 %>
         <% @impressions.each do |impression| %>
             <div class="information_block">
                 <div class="impression_head">
@@ -222,10 +223,17 @@ $(document).on('turbolinks:load', function() {
             readOnly: true
         });
     <% end %>
+        $('#evaluation_edit').raty({
+            size    : 36,
+            starOff : '/assets/star-off.png',
+            starOn  : '/assets/star-on.png',
+            // starHalf: '<%#= asset_path('star-half.png') %>',
+            score   : '<%= @book.evaluation %>',
+        });
 
     <% @impressions.each do |impression| %>
         // 感想を編集したら自動的に保存する。
-        $('#impression_edit_<%= impression.id %>').change(function(){
+        $('#impression_edit_<%= impression.id %>').change(function() {
             var impression = $(this).find('.impression_write_area').val();
             var tweet_content = $(this).find('input[name="tweet_content"]').val();
             $.ajax({
@@ -389,6 +397,19 @@ function clickThumbnailDefaultButton() {
       }
     });
 }
+
+// カレンダー表示設定
+$('.datepicker').datepicker({
+    //オプション
+    dateFormat: 'yy/mm/dd',
+    todayHighlight : false,
+    autoclose : true,
+    keyboardNavigation : false,
+    changeMonth: true,
+    duration: 300,
+    showAnim: 'show'
+});
+
 
 
 </script>

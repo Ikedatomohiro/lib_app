@@ -1,0 +1,20 @@
+// 読始めの値を更新して、表示するタグの切り替え
+$('#reading_start_date').children('span').text("<%= @book.reading_start_date.strftime('%Y/%-m/%-d') if @book.reading_start_date %>");
+$('#reading_start_date').children('input[name="reading_start_date"]').hide();
+$('#reading_start_date').children('span').fadeIn();
+
+// 読始めの値を更新して、表示するタグの切り替え
+$('#reading_end_date').children('span').text("<%= @book.reading_end_date.strftime('%Y/%-m/%-d') if @book.reading_end_date %>");
+$('#reading_end_date').children('input[name="reading_end_date"]').hide();
+$('#reading_end_date').children('span').fadeIn();
+
+// 星の編集カラーを解除
+$('#evaluation_edit').css('border', 'transparent');
+<% if @book.evaluation == nil%>
+    $('#evaluation_edit').hide();
+    $('#evaluation').show();
+<% end %>
+
+// 表示ボタンの切り替え
+$('#finish_edit_book_info').hide();
+$('#edit_book_info').show();

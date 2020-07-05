@@ -97,3 +97,19 @@ $('.impression_view').click(function() {
     write_area.parent().children('input[name="tweet_content"]').val(tweet_content);
 
 });
+
+// 編集ボタンクリック時の動作
+$('#edit_book_info').click(function(){
+    $('#reading_start_date').children('span').hide();
+    $('#reading_end_date').children('span').hide();
+    $('#evaluation').hide();
+    $('#reading_start_date').children('input[name="reading_start_date"]').fadeIn();
+    $('#reading_end_date').children('input[name="reading_end_date"]').fadeIn();
+    $('#evaluation_edit').fadeIn();
+    $('#evaluation_edit').css('border', '2px solid #EAF8FF');
+    $(this).hide();
+    $('#finish_edit_book_info').show();
+
+});
+
+

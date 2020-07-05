@@ -110,10 +110,6 @@ class ImpressionsController < ApplicationController
         params.permit(:id, :impression, :impression_img, :tweet_content, :authenticity_token)
     end
 
-    def reading_date_params
-        params.permit(:reading_start_date, :reading_end_date)
-    end
-
     def twitter_client
         @client = Twitter::REST::Client.new do |config|
             config.consumer_key        = ENV['TWITTER_API_KEY']

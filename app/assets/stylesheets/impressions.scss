@@ -6,6 +6,16 @@
     cursor: pointer;
 }
 
+.reading_date {
+    background-color: #EAF8FF;
+    border-radius: 5px;
+    width: 110px;
+}
+
+#evaluation_edit {
+    border-radius: 5px;
+}
+
 .lb-nav {
     background-color: transparent;
 }
@@ -24,9 +34,36 @@
     padding-left: 15px;
 }
 
+.book_info_right {
+    display: flex;
+    position: relative;
+}
+
 .impression_edit {
+    position: absolute;
+    top: 0;
+    left: 190px;
+}
+
+.edit_book_info {
+    cursor: pointer;
+    width : 45px;
+    height: 20px;
+    text-align: center;
+    line-height: 0px;
+}
+
+.finish_edit_book_info {
+    cursor: pointer;
+    width : 66px;
+    height: 20px;
+    text-align: center;
+    line-height: 0px;
+}
+
+.impression_write {
     width: 80px;
-    margin-left: auto;
+    margin: 0 0 0 auto;
 }
 
 .impression_tweet_button {

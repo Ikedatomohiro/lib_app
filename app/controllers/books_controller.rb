@@ -69,6 +69,13 @@ puts @amazon_afi_link
         # render :template => "users/shelf" なんでこれだと表示してくれないの？
     end
 
+    def update
+        @book = Book.find_by(id: params[:id])
+        @book.update(reading_start_date: book_edit_params[:reading_start_date],
+                     reading_end_date: book_edit_params[:reading_end_date],
+                     evaluation: book_edit_params[:score])
+    end
+
     def destroy
         if params[:current_shelf_id] == '0'
             book = Book.find_by(id: params[:id])
@@ -105,25 +112,6 @@ puts @amazon_afi_link
         uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=5")
         json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
         @results = JSON.parse(json) #返り値をRubyの配列に変換
-    end
-
-    def show_reading_date
-        @now_date = params[:now_date]
-        @book = Book.find_by(id: params[:book_id])
-        respond_to do |format|
-            format.html
-            format.js
-        end
-    end
-
-    def set_reading_date
-        book = Book.find_by(id: params[:id])
-        if params[:reading_start_date]
-            book.update(reading_start_date: params[:reading_start_date])
-        elsif params[:reading_end_date]
-            book.update(reading_end_date: params[:reading_end_date])
-        end
-        redirect_to "/impressions/#{book.impression_link}"
     end
 
     def update_thumbnail
@@ -166,5 +154,9 @@ puts '..............................'
             params.require(:book).permit(:row_order_position)
         end
 
+        def book_edit_params
+            params.permit(:reading_start_date, :reading_end_date, :score)
+            
+        end
 
 end

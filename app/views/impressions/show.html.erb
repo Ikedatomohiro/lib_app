@@ -337,7 +337,7 @@ function textAreaHeightSet(argObj){
         //それ以外の文字の場合は2を加算
         result += 2;
       }
-      if ((result <= 254) || (result == 255 && (chr >= 0xDC00 && chr <= 0xDFFF))) {
+      if ((result <= 255) || (result == 255 && (chr >= 0xDC00 && chr <= 0xDFFF))) {
         // twitter投稿可能な分だけ別途保存用
         tweet_content = tweet_content + count_target[i];
       }

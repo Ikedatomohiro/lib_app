@@ -44,7 +44,7 @@ $('.heart').click(function(){
 });
 
 // 感想をクリックすると編集モードに切り替わる
-$('.impression_view').click(function() {
+$('.impression_body').click(function() {
     $(this).hide();
     var impression_edit_area = $(this).next('.impression_text');
     impression_edit_area.fadeIn();

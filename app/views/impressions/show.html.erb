@@ -185,7 +185,7 @@
     <% else %>
         <% impression_count = 0%>
         <% @impressions.each do |impression| %>
-            <p class="impression_body"><%= impression.impression %></p>
+            <p class="impression_body_view_only"><%= impression.impression %></p>
             <p>
                 <% if impression.impression_img_url%>
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url do %>

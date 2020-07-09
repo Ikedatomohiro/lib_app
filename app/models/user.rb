@@ -50,6 +50,10 @@ class User < ApplicationRecord
 
   scope :impression_private, -> {joins(:setting).select("users.*, settings.*")}
 
+  # ログインを維持する
+  def remember_me
+    true
+  end
 
   private
  

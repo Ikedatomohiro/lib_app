@@ -111,24 +111,27 @@ window.onload = function () {
                 var book_title = $book.attr("name");
                 var current_shelf_id = $('#current_shelf_id').val();
                 var message = "「" + book_title + "」を「" + shelf_name + "」に移動したよ。";
-                Swal.fire({
-                    title: '',
-                    text: message,
-                    type: 'info',
-                    timer: 2500,
-                });
-                $.ajax({
-                    url: '/shelves/add_book',
-                    type: 'post',
-                    data: {
-                        shelf_id: shelf_id,
-                        book_id: book_id,
-                        current_shelf_id: current_shelf_id,
-                        authenticity_token: $("#authenticity_token").val()
+                // 現在の本棚と移動先の本棚が異なるときだけ実行
+                if (shelf_id != current_shelf_id) {
+                    Swal.fire({
+                        title: '',
+                        text: message,
+                        type: 'info',
+                        timer: 2500,
+                    });
+                    $.ajax({
+                        url: '/shelves/add_book',
+                        type: 'post',
+                        data: {
+                            shelf_id: shelf_id,
+                            book_id: book_id,
+                            current_shelf_id: current_shelf_id,
+                            authenticity_token: $("#authenticity_token").val()
+                        }
+                    });
+                    if (current_shelf_id !== '0') {
+                      $book.fadeOut('slow');
                     }
-                });
-                if (current_shelf_id !== '0') {
-                  $book.fadeOut('slow');
                 }
             }
         });

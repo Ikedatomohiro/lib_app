@@ -1,4 +1,4 @@
-<%= render "shared/shelf_header" %>
+<%= render partial: "shelves/shelf_header" %>
     <%= form_with(model: @shelf_items, url: book_path(current_user.id)) do |form| %>
     <input type="hidden" id="authenticity_token" name="authenticity_token" value="<%= form_authenticity_token %>" >
     <% end %>
@@ -74,7 +74,7 @@
                                 </p>
                             </a>
                             <div class="shelf_side_ico destroy_book">
-                                <%= lazysizes_image_tag "batsu_button.svg", class: "batsu_button"%>
+                                <%#= 本を削除するボタンの表示位置 %>
                                 <input type="hidden" value="<%= item.book.id %>">
                             </div>
                         </div>

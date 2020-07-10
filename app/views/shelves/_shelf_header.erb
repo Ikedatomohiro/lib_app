@@ -44,7 +44,7 @@
 </div>
 <div class="shelf_area">
     <a href="/shelves/0" data-turbolinks="false">
-        <p class="shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0">すべて</p>
+        <p class="shelf_label <% if @user_setting.latest_shelf == 0 %>shelf_marker<% end %>" value="0" name="すべて">すべて</p>
     </a>
     <ul id="shelves_list" class="shelves_list">
         <% if @shelves %>
@@ -54,7 +54,7 @@
             <p class="destroy_shelf shelf_modify_buttons">
                 <input type="hidden" value="<%= shelf.id %>">
             </p>
-            <p class="handle shelf_modify_buttons">
+            <p class="shelf_handle shelf_modify_buttons">
             </p>
         </li>
         <% end %>

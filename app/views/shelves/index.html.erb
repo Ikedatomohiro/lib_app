@@ -9,6 +9,9 @@
                 <% @books.each do |book| %>
                     <% if @user_setting.shelf_type == 0 %>
                     <div class="book_img_box" id="book_id_<%= book.id %>" value="<%= book.id %>">
+                        <p class="handle">
+                            <%= lazysizes_image_tag 'dot_for_handle.svg' %>
+                        </p>
                         <a href="/books/info/<%= book.api_id %>" data-turbolinks="false">
                             <p class="thumbnail_top">
                                 <% if book.users_thumbnail.present? %>
@@ -55,11 +58,8 @@
                                     <input type="hidden" value="<%= book.id %>">
                                 </li>
                             </ul>
-                            <p class="handle">
-                                <%= lazysizes_image_tag 'dot_for_handle.svg' %>
-                            </p>
                         </div>
-                    </div>
+                  </div>
     <%# 本棚タイプがブロックのとき %>
                     <% elsif @user_setting.shelf_type == 1 %>
                     <div id="book_id_<%= book.id %>" class="block_shelf_item" value="<%= book.id %>" name="<%= book.title.truncate(12) %>">

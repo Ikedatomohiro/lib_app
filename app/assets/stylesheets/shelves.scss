@@ -21,7 +21,7 @@
 }
 
 /* 本棚並べ替え用ハンドル */
-.handle {
+.shelf_handle {
     background-image: url(dot_for_handle.svg);
     background-color: transparent;
     position: absolute;
@@ -112,6 +112,7 @@
     padding: 5px;
     margin: 10px 0;
     border-bottom: 1px solid #E8F7B6;
+    position: relative;
 }
 
 .book_img {

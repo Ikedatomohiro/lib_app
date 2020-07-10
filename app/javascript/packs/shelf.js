@@ -3,11 +3,10 @@ $(document).on('turbolinks:load', function() {
     var shelf_position = $('.shelf_marker').offset();
     $('.shelves_list').scrollLeft(shelf_position);
     // console.log(shelf_position.left);
-window.onload = function () {
-    var shelf_position = $('.shelf_marker').offset();
-    $('.shelves_list').scrollLeft(shelf_position);
-    // console.log(shelf_position.left);
-};
+    window.onload = function () {
+        var shelf_position = $('.shelf_marker').offset();
+        $('.shelves_list').scrollLeft(shelf_position);
+    };
     // 本を探すボタンの動作
     $('#search_book_button').click(function() {
         $('#shelf_buttons').hide();
@@ -19,6 +18,8 @@ window.onload = function () {
     $('#hide_shelf_arrange_ico').hide();
     $('#add_shelf').hide();
     $('.shelf_modify_buttons').hide();
+    $('.handle').hide();
+    // 本棚を整理ボタンをクリック
     $('#show_shelf_arrange_ico').click(function() {
         $('#show_shelf_arrange_ico').hide();
         $('#search_book_button').hide();
@@ -29,6 +30,7 @@ window.onload = function () {
         $('div.block_shelf_book_and_icon').addClass('book_handle'); // 本棚を整理ボタンをクリックしたときに本の画像をハンドルにする
         $('div.block_shelf_book_and_icon').addClass('flow_horizontal'); // 本棚を整理ボタンをクリックしたときに水平に揺れる
         $('p.thumbnail_block_shelf').addClass('flow_virtical'); // 本棚を整理ボタンをクリックしたときに水平に揺れる
+        $('.handle').show();
 
     });
     $('#hide_shelf_arrange_ico').click(function() {
@@ -41,6 +43,7 @@ window.onload = function () {
         $('div.block_shelf_book_and_icon').removeClass('book_handle'); // 本棚を整理ボタンをクリックしたときに本の画像をハンドルにする
         $('div.block_shelf_book_and_icon').removeClass('flow_horizontal'); // 本棚を整理ボタンをクリックしたときに水平に揺れる
         $('p.thumbnail_block_shelf').removeClass('flow_virtical'); // 本棚を整理ボタンをクリックしたときに水平に揺れる
+        $('.handle').hide();
     });
 
     // 本棚を追加する
@@ -99,7 +102,7 @@ window.onload = function () {
     // 本を違う本棚に移動する（ハンドルをドラッグアンドドロップ）
       var shelf_item = $(".shelf_label").droppable({
             hoverClass: "shelf_label_hover",
-            accept: ".block_shelf_item",
+            accept: ".book_img_box, .block_shelf_item",
             tolerance: "pointer",
             drop: function(event, ui) {
               // $('#books_in_shelf').sortable("cancel");
@@ -112,7 +115,7 @@ window.onload = function () {
                 var current_shelf_id = $('#current_shelf_id').val();
                 var message = "「" + book_title + "」を「" + shelf_name + "」に移動したよ。";
                 // 現在の本棚と移動先の本棚が異なるときだけ実行
-                if (shelf_id != current_shelf_id) {
+                if (shelf_id != current_shelf_id ) {
                     Swal.fire({
                         title: '',
                         text: message,
@@ -236,7 +239,7 @@ window.onload = function () {
         axis: 'x',
         opacity: 0.8,
         tolerance: "pointer",
-        handle: ".handle, .handle2",
+        handle: ".shelf_handle, .handle2",
         update: function(event, ui) {
             var item = ui.item;
             var shelf_id = item.attr("value");

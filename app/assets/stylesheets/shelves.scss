@@ -6,6 +6,29 @@
     display: flex;
     overflow: hidden;
     min-width: 300px;
+    position: relative;
+}
+
+/* 本棚削除ボタン */
+.destroy_shelf {
+    background-image: url(batsu_button.svg);
+    background-color: transparent;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 本棚並べ替え用ハンドル */
+.handle {
+    background-image: url(dot_for_handle.svg);
+    background-color: transparent;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 10px;
+    height: 10px;
 }
 
 .shelves_list li {
@@ -24,7 +47,6 @@
 
 .shelf_label {
     /*background: LightGray;*/
-    max-width: 80px;
     margin: 5px 5px 10px 5px;
     font-weight: bold;
     white-space: nowrap;
@@ -217,12 +239,13 @@ select[name="shelf_id"] {
     position: relative;
 }
 
-/* 本の移動先の本棚 */
+/* 本の移動先の本棚へ本を移動させるとき */
 .shelf_label_hover {
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
-    transform: scale(1.5);
-    max-width: 300px;
+    padding: 1em 1em;
+    margin: 2em 0;
+    background: #f0f7ff;
+    border: dashed 2px #5b8bd0;/*点線*/
+    border-radius: 10px;
 }
 
 /* ゆらゆら動く */

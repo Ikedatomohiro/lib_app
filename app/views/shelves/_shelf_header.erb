@@ -48,18 +48,14 @@
     </a>
     <ul id="shelves_list" class="shelves_list">
         <% if @shelves %>
-        <% @shelves.each do |shelf|%>
+        <% @shelves.each do |shelf| %>
         <li class="shelf_label <% if @user_setting.latest_shelf == shelf.id %>shelf_marker<% end %>" value="<%= shelf.id %>" name="<%= shelf.shelf_name.truncate(12) %>">
             <a href="/shelves/<%= shelf.id %>" data-turbolinks="false"><%= shelf.shelf_name %></a>
-            <div class="shelf_modify_buttons">
-                <p class="destroy_shelf">
-                    <%= lazysizes_image_tag "batsu_button.svg", class: "fire_work"%>
-                    <input type="hidden" value="<%= shelf.id %>">
-                </p>
-                <p class="handle">
-                    <%= lazysizes_image_tag 'dot_for_handle.svg' %>
-                </p>
-            </div>
+            <p class="destroy_shelf shelf_modify_buttons">
+                <input type="hidden" value="<%= shelf.id %>">
+            </p>
+            <p class="handle shelf_modify_buttons">
+            </p>
         </li>
         <% end %>
         <% end %>

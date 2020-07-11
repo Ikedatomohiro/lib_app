@@ -21,7 +21,7 @@ class ShelvesController < ApplicationController
         @shelves = Shelf.where(user_id: current_user.id).rank(:row_shelves_order)
         shelf_id = params[:id]
         shelf = Shelf.find_by(id: shelf_id, user_id: current_user.id)
-        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s
+        if /^[+-]?[0-9]+$/ =~ shelf_id.to_s # バーコードリーダーにJOBを使っていたときの名残
             if shelf_id == "0"
                 @user_setting.update(latest_shelf: shelf_id)
                 redirect_to shelves_path

@@ -18,10 +18,16 @@ $(document).on('turbolinks:load', function() {
         $('#book_isbn_area').click();
         return false;
     })
-    // サムネイルの画像が選択されたら送信ボタンを押す
+    // バーコード(ISBN)の画像が選択されたら送信ボタンを押す
     $('#book_isbn_area').on('change', function () {
-        console.log('change!!!')
         $('#send_isbn_picture').click();
+        // 検索していることをアラートする
+        Swal.fire({
+            title: '',
+            text: "本を探しているよ！",
+            type: 'info',
+            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+        })
         return false;
     });
 

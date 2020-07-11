@@ -126,6 +126,53 @@ puts '..............................'
         redirect_to impression_path(book.impression_link)
     end
 
+
+    def search_by_isbn
+        api_key = ENV['GOOGLE_VISION_API_KEY']
+        api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{api_key}"
+
+        # 画像をbase64にエンコード
+        base64_image = Base64.strict_encode64(File.new(params[:book_isbn_area], 'rb').read)
+
+        # APIリクエスト用のJSONパラメータの組み立て
+        body = {
+          requests: [{
+            image: {
+              content: base64_image
+            },
+            features: [
+              {
+                type: 'TEXT_DETECTION',
+                maxResults: 5
+              }
+            ]
+          }]
+        }.to_json
+
+        # Google Cloud Vision APIにリクエスト投げる
+        uri = URI.parse(api_url)
+        https = Net::HTTP.new(uri.host, uri.port)
+        https.use_ssl = true
+        request = Net::HTTP::Post.new(uri.request_uri)
+        request["Content-Type"] = "application/json"
+        response = https.request(request, body)
+        # puts response.body レスポンスのJSONは「response.body」に入っている
+        # レスポンスを配列に変換
+        results = JSON.parse(response.body)
+        # descriptionの中のISBN番号を取り出す
+        results['responses'][0]['textAnnotations'].each  do |text|
+            isbn = text['description'].match(/978\d{10}/)
+            if isbn[0].present?
+                # 取得したISBN番号で本の検索をする
+                uri_book = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{isbn[0]}&maxResults=5")
+                json = Net::HTTP.get(URI.parse(uri_book)) #NET::HTTPを利用してAPIを叩く
+                @results = JSON.parse(json) #返り値をRubyの配列に変換
+                # 検索が終わったら処理を終わる
+                break
+            end
+        end
+    end
+
     # 本の並び替え
     def sort
         if params[:current_shelf_id] == '0'
@@ -140,7 +187,6 @@ puts '..............................'
         # book.update(book_sort_params)
         render body: nil
         # render nothing: true この書き方はrails 4までしか使えない
-
     end
 
     private

@@ -23,11 +23,11 @@
         <% if signed_in? && @book.user_id === current_user.id %>
             <p onclick="clickThumbnailChangeButton()" >
                 <% if @book.users_thumbnail.present? %>
-                <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
+                    <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
                 <% elsif @book.thumbnail %>
-                <%= image_tag @book.thumbnail, class:'book_img' %>
+                    <%= image_tag @book.thumbnail, class:'book_img' %>
                 <% else %>
-                <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
+                    <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
                 <% end %>
     <%# サムネイルを変更する %>
                 <%= form_with model:@book, url:"/books/update_thumbnail/#{@book.id}" do |f| %>
@@ -49,11 +49,11 @@
         <% else %>
             <a href="/books/info/<%= @book.api_id %>">
                 <% if @book.users_thumbnail.present? %>
-                <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
+                    <%= image_tag @book.users_thumbnail_url, class:'book_img' %>
                 <% elsif @book.thumbnail %>
-                <%= image_tag @book.thumbnail, class:'book_img' %>
+                    <%= image_tag @book.thumbnail, class:'book_img' %>
                 <% else %>
-                <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
+                    <%= image_tag('book_img.svg', alt:'本の画像', class:'book_img') %>
                 <% end %>
             </a>
         <% end %>

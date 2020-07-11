@@ -31,13 +31,12 @@
     <% end %>
 </div>
 <div class="scan_book_button">
-    <div style="display: none;">
-        <canvas id="picture"></canvas>
-        <input id="Take-Picture" type="file" accept="image/*;capture=camera" />
-        <input type="hidden" name="" id="textbit" value="">
-        <input type="hidden" id="barcode" value="">
-    </div>
-    <button class="submit_btn_small" onclick="clickBarcodeScanButton()">本のバーコードをスキャン</button>
+    <button id="search_by_isbn" class="submit_btn_small">本のバーコードをスキャン</button>
+    <%= form_with url:"/books/search_by_isbn/" do |f| %>
+        <%= f.file_field :book_isbn_area, accept: ".jpg,.gif,.png,image/gif,image/jpeg,image/png,pgf", style: "display:none;" %>
+        <%# 送信用ボタン（ajaxでクリックさせる） %>
+        <button id="send_isbn_picture"></button>
+    <% end %>
 </div>
 <div id="search_book_form">
     <%# 検索結果表示場所 %>

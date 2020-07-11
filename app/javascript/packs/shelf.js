@@ -13,6 +13,18 @@ $(document).on('turbolinks:load', function() {
         $('.search_button, .scan_book_button').fadeIn(500);
     });
 
+    // バーコードで探すボタンクリック（実際はISBN番号で探すので要素はこの名前）
+    $('#search_by_isbn').click(function() {
+        $('#book_isbn_area').click();
+        return false;
+    })
+    // サムネイルの画像が選択されたら送信ボタンを押す
+    $('#book_isbn_area').on('change', function () {
+        console.log('change!!!')
+        $('#send_isbn_picture').click();
+        return false;
+    });
+
     // 本棚を整理ボタンの操作
     // 本棚タイプの変更アイコンと本の削除や移動用のボタンを隠しておく
     $('#hide_shelf_arrange_ico').hide();

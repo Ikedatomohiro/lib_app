@@ -24,9 +24,9 @@ $(document).on('turbolinks:load', function() {
         // 検索していることをアラートする
         Swal.fire({
             title: '',
-            text: "本を探しているよ！",
+            text: "本を探しています。少しお待ち下さい。",
             type: 'info',
-            timer: 1500, // 1.5秒後に自動的にアラートを閉じる
+            timer: 3000, // 3秒後に自動的にアラートを閉じる
         })
         return false;
     });

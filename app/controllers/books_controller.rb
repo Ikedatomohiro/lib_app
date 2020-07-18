@@ -103,17 +103,6 @@ puts @amazon_afi_link
         @results = JSON.parse(json) #返り値をRubyの配列に変換
     end
 
-    def search_from_barcode
-        if params[:barcode][0].match(/978.*/)
-            @keyword = params[:barcode][0]
-        elsif params[:barcode][1].match(/978.*/)
-            @keyword = params[:barcode][1]
-        end
-        uri = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{@keyword}&maxResults=5")
-        json = Net::HTTP.get(URI.parse(uri)) #NET::HTTPを利用してAPIを叩く
-        @results = JSON.parse(json) #返り値をRubyの配列に変換
-    end
-
     def update_thumbnail
         book = Book.find_by(id: params[:book_id])
         if params[:thumbnail] != ''

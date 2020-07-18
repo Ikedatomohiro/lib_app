@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function() {
             title: '',
             text: "本を探しています。少しお待ち下さい。",
             type: 'info',
-            timer: 3000, // 3秒後に自動的にアラートを閉じる
+            timer: 4000, // 4秒後に自動的にアラートを閉じる
         })
         return false;
     });

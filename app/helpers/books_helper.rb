@@ -56,7 +56,7 @@ module BooksHelper
             'SZhJOgAACAAJ' => 'https://amzn.to/3fmcP2C', # 図書館危機図書館戦争シリーズ(６) 有川浩
             'hjzmDwAAQBAJ' => 'https://amzn.to/2zMLzeC', # キングダム58巻
             'Neh_DQAAQBAJ' => 'https://amzn.to/2ZSttlB', # 銀翼のイカロス
-            # '' => '', # 
+            'UL1StAEACAAJ' => 'https://amzn.to/3hxtguj', # AX 伊坂幸太郎
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

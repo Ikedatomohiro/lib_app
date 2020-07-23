@@ -12,6 +12,13 @@
             </p>
         </div>
         <div class="attention">
-            <%#= link_to(image_tag('bell.svg', alt:'お知らせ'),notice_path) %>
+            <a href="<%= setting_path %>" class="setting_icon">
+                <% if @setting_flg.present? && @setting_flg === true %>
+                    <img src="/assets/setting.svg" alt="設定アイコン選択時">
+                <% else %>
+                    <img src="/assets/setting_gray.svg" alt="設定アイコン非選択時">
+                <% end %>
+                <%#= link_to(image_tag('bell.svg', alt:'お知らせ'),notice_path) %>
+            </a>
         </div>
     </div>

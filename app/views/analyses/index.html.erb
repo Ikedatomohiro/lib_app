@@ -1,0 +1,57 @@
+<!-- <script src="https://www.amcharts.com/lib/4/core.js"></script> -->
+<!-- <script src="https://www.amcharts.com/lib/4/charts.js"></script> -->
+<!-- amCharts javascript sources -->
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+<%= javascript_pack_tag 'analysis', 'data-turbolinks-track': 'reload' %>
+
+<%= @user.created_at.strftime('%Y年%-m月') %> から読書のわを利用しています。
+
+<table class="analysis_table">
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th">登録</th>
+        <td class="analysis_table_td"><%= @user.books.count %> 冊</td>
+        <th class="analysis_table_th">読始め</th>
+        <td class="analysis_table_td"><%= start_reading_count(@user.id) %> 冊</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th">読了</th>
+        <td class="analysis_table_td"><%= finish_reading_count(@user.id) %> 冊</td>
+        <th class="analysis_table_th">感想登録</th>
+        <td class="analysis_table_td"><%= impression_count(@user.id) %> 回</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th">感想文字数</th>
+        <td class="analysis_table_td"><%= impression_letters(@user.id) %> 文字</td>
+        <th class="analysis_table_th">ツイート</th>
+        <td class="analysis_table_td"><%= tweet_count(@user.id) %> 回</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th">いいねされた</th>
+        <td class="analysis_table_td"><%= liked_count(@user.id) %> 回</td>
+        <th class="analysis_table_th"></th>
+        <td class="analysis_table_td"></td>
+    </tr>
+</table>
+
+
+
+<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

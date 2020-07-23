@@ -50,4 +50,8 @@ end
 
 delete 'likes/:impression_id'           => 'likes#destroy'
 resources :likes, only: [:create]
+
+resources :analyses, only: [:index, :show]
+
+
 end

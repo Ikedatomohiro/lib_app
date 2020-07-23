@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-      before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
+    before_action :authenticate_user!, except: [:show_book_info] # ログインしていないときはログインページに移動
     include BooksHelper
     include ApplicationHelper
     before_action :set_bookshelf_flg, only: [:search_books_result, :show_book_info]

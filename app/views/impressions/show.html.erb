@@ -157,7 +157,6 @@
                         <%= image_tag "fire_work.svg", class: "fire_work", id: "destroy_impression_#{impression.id}" %>
                     <% end %>
                 </div>
-
                 <% if impression.impression_img_url%>
                     <%= link_to impression.impression_img_url,'data-lightbox': impression.impression_img_url, target: "_blank" do %>
                         <%= image_tag impression.impression_img_url , width: 200 %>
@@ -244,7 +243,6 @@ $(document).on('turbolinks:load', function() {
             .then($(this).find('.letter_count_alart').text('変更を保存したよ'),
                   $(this).parent().nextAll('.tweeted_flg').fadeIn(),
                 );
-
         });
 
         // ツイッターに投稿する

@@ -195,7 +195,9 @@
     display: flex;
 }
 
+/* 感想編集画面は初期は非表示にする*/
 .impression_text {
+    display: none;
     margin-right: 15px;
     width: 95%;
 }

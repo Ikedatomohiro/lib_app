@@ -1,12 +1,8 @@
-
 // サムネイルの画像が選択されたら送信ボタンを押す
 $('#book_users_thumbnail').on('change', function () {
     $('#send_thumbnail').click();
     return false;
 });
-
-// 感想編集画面は非表示にする
-$('.impression_text').hide();
 
 // いいねのつけ外し
 $('.heart').click(function(){

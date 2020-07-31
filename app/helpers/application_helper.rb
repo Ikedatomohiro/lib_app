@@ -22,4 +22,8 @@ module ApplicationHelper
     def set_setting_flg
         @setting_flg = true
     end
+
+    def set_analysis_flg
+        @analysis_flg = true
+    end
 end

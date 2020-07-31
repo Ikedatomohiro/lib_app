@@ -96,6 +96,7 @@ module BooksHelper
         return unique_id
     end
 
+private
     def check_id(id)
         book = Book.find_by(impression_link: id)
         if book

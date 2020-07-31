@@ -1,4 +1,7 @@
 <div class="item_block">
+    ●<%= @user.created_at.strftime('%Y年%-m月') %> から読書のわを利用しています。
+</div>
+<div class="item_block">
     <%= link_to '●プロフィールの編集', "/users/#{current_user.id}/edit" %>
 </div>
 <div class="item_block">
@@ -26,6 +29,7 @@
 <!-- <div class="item_block">
     <p class="sub_title">読書履歴</p>
 </div> -->
+
 <div class="item_block">
     <p class="sub_title">
         <%= link_to('●ご意見・ご要望はこちら', contacts_path) %>

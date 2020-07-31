@@ -1,104 +1,57 @@
-            AmCharts.makeChart("chartdiv",
-                {
-                    "type": "serial",
-                    "categoryField": "category",
-                    "startDuration": 1,
-                    "categoryAxis": {
-                        "gridPosition": "start"
-                    },
-                    "chartCursor": {
-                        "enabled": true
-                    },
-                    "chartScrollbar": {
-                        "enabled": true
-                    },
-                    "trendLines": [],
-                    "graphs": [
-                        {
-                            "fillAlphas": 1,
-                            "id": "AmGraph-1",
-                            "title": "graph 1",
-                            "type": "column",
-                            "valueField": "column-1"
-                        }
-                    ],
-                    "guides": [],
-                    "valueAxes": [
-                        {
-                            "id": "ValueAxis-1",
-                            "title": "Axis title"
-                        }
-                    ],
-                    "allLabels": [],
-                    "balloon": {},
-                    "titles": [
-                        {
-                            "id": "Title-1",
-                            "size": 15,
-                            "text": "読書履歴"
-                        }
-                    ],
-                    "dataProvider": [
-                        {
-                            "category": "category 1",
-                            "column-1": 8
-                        },
-                        {
-                            "category": "category 2",
-                            "column-1": 16
-                        },
-                        {
-                            "category": "category 3",
-                            "column-1": 2
-                        },
-                        {
-                            "category": "category 4",
-                            "column-1": 7
-                        },
-                        {
-                            "category": "category 5",
-                            "column-1": 5
-                        },
-                        {
-                            "category": "category 6",
-                            "column-1": 9
-                        },
-                        {
-                            "category": "category 7",
-                            "column-1": 4
-                        },
-                        {
-                            "category": "category 8",
-                            "column-1": 15
-                        },
-                        {
-                            "category": "category 9",
-                            "column-1": 12
-                        },
-                        {
-                            "category": "category 10",
-                            "column-1": 17
-                        },
-                        {
-                            "category": "category 11",
-                            "column-1": 18
-                        },
-                        {
-                            "category": "category 12",
-                            "column-1": 21
-                        },
-                        {
-                            "category": "category 13",
-                            "column-1": 24
-                        },
-                        {
-                            "category": "category 14",
-                            "column-1": 23
-                        },
-                        {
-                            "category": "category 15",
-                            "column-1": 24
-                        }
-                    ]
-                }
-            );
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+// chart.scrollbarX = new am4core.Scrollbar();
+
+chart.data = $('#chart_data').data('json');
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "date";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 30;
+categoryAxis.renderer.labels.template.horizontalCenter = "right";
+categoryAxis.renderer.labels.template.verticalCenter = "middle";
+categoryAxis.renderer.labels.template.rotation = 270;
+categoryAxis.tooltip.disabled = true;
+categoryAxis.renderer.minHeight = 110;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.minWidth = 50;
+
+// Create series
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.sequencedInterpolation = true;
+series.dataFields.valueY = "count";
+series.dataFields.categoryX = "date";
+series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+series.columns.template.strokeWidth = 0;
+
+// series.tooltip.pointerOrientation = "vertical";
+
+// 棒グラフのトップの形状と透明度を調整
+series.columns.template.column.cornerRadiusTopLeft = 10;
+series.columns.template.column.cornerRadiusTopRight = 10;
+series.columns.template.column.fillOpacity = 0.8;
+
+// on hover, make corner radiuses bigger
+var hoverState = series.columns.template.column.states.create("hover");
+hoverState.properties.cornerRadiusTopLeft = 0;
+hoverState.properties.cornerRadiusTopRight = 0;
+hoverState.properties.fillOpacity = 1;
+
+series.columns.template.adapter.add("fill", function(fill, target) {
+  return chart.colors.getIndex(target.dataItem.index);
+});
+
+// Cursor
+chart.cursor = new am4charts.XYCursor();
+// chart.cursor.lineX.disabled = true;
+// chart.cursor.lineY.disabled = true;
+
+}); // end am4core.ready()

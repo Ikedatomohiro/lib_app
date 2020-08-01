@@ -115,7 +115,6 @@ puts '..............................'
         redirect_to impression_path(book.impression_link)
     end
 
-
     def search_by_isbn
         api_key = ENV['GOOGLE_VISION_API_KEY']
         api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{api_key}"
@@ -162,6 +161,16 @@ puts '..............................'
         end
     end
 
+    def set_reading_date
+        book = Book.find_by(id: book_edit_params[:book_id])
+        if book_edit_params[:edit_field] == "reading_start_date"
+            book.update(reading_start_date: Date.today)
+        elsif book_edit_params[:edit_field]  == "reading_end_date"
+            book.update(reading_end_date: Date.today)
+        end
+        redirect_to impression_path(book.impression_link)
+    end
+
     # 本の並び替え
     def sort
         if params[:current_shelf_id] == '0'
@@ -190,8 +199,7 @@ puts '..............................'
         end
 
         def book_edit_params
-            params.permit(:reading_start_date, :reading_end_date, :score)
-            
+            params.permit(:book_id, :reading_start_date, :reading_end_date, :score, :edit_field)
         end
 
 end

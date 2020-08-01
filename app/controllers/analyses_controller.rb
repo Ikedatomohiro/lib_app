@@ -6,14 +6,27 @@ class AnalysesController < ApplicationController
     def index
         @user = User.find(current_user.id)
 
+        search_field = 'created_at'
+        # search_field = 'reading_end_date'
+
+        @data = search_data(search_field)
+        @chart_title = '本の登録数'
+
+        @data_dokuryo = search_data('reading_end_date')
+        @chart_title2 = '読了数'
+    end
+
+
+    def search_data(search_field)
         # チャートデータ作成
         books = Book.where(user_id: current_user.id)
-        row_data = books.group("strftime('%Y年%m月', created_at)").count # ハッシュの作成
+        row_data = books.group("strftime('%Y年%m月', #{search_field})").count # 本の読了数
+
         # 空の年月ハッシュを作る
         data = {}
-        11.times do |num|
+        13.times do |num|
             date = Date.today
-            x = 11 - num
+            x = 12 - num
             ym = date - x.months
             ym = ym.strftime("%Y年%m月")
             data[ym] = 0
@@ -35,23 +48,23 @@ class AnalysesController < ApplicationController
             ruikei.push(item)
         end
 
-        @data = rireki.to_json
+        data = rireki.to_json
         # @data = ruikei.to_json
+    end
 
-        @chart_title = '本の登録数'
+    def show_data
+        @user = User.find(current_user.id)
+        @data = ''
+        search_data(get_data_param[:search_field])
+        @chart_title = '読了数'
+    end
+
+    private
+    def get_data_param
+        params.permit(:search_field, :authenticity_token)
 
     end
 
-
-    def show
-        
-    end
-
-    def get_data
-        
-puts RUIKEI
-
-    end
 
 
 end

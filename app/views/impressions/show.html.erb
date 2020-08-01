@@ -129,18 +129,18 @@
     <% if signed_in? && @book.user_id === current_user.id %>
         <p id="letter_count_alart">&nbsp;</p>
         <div class="reading_action_button">
-            <% if @book.reading_start_date.blank? %>
-                <%= form_with(url:books_set_reading_date_path, class: "set_reading_start_date_button") do |f| %>
-                <%= f.hidden_field :book_id, value: @book.id %>
-                <%= f.hidden_field :edit_field, value: "reading_start_date" %>
-                <%= f.submit '今日読み始める', id: 'submit_btn_small', class: 'submit_btn_small' %>
-                <% end %>
-            <% end %>
             <% if @book.reading_end_date.blank? %>
-                <%= form_with(url:books_set_reading_date_path) do |f| %>
+                <%= form_with(url:books_set_reading_date_path, class: "set_reading_end_date_button") do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
                 <%= f.hidden_field :edit_field, value: "reading_end_date" %>
                 <%= f.submit '今日読み終えた', id: 'submit_btn_small', class: 'submit_btn_small' %>
+                <% end %>
+            <% end %>
+            <% if @book.reading_start_date.blank? %>
+                <%= form_with(url:books_set_reading_date_path) do |f| %>
+                <%= f.hidden_field :book_id, value: @book.id %>
+                <%= f.hidden_field :edit_field, value: "reading_start_date" %>
+                <%= f.submit '今日読み始める', id: 'submit_btn_small', class: 'submit_btn_small' %>
                 <% end %>
             <% end %>
             <div id="impression_write_button" class="impression_write">

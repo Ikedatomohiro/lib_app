@@ -31,10 +31,15 @@
     </tr>
 </table>
 
-<p class="chart_title"><%= @chart_title %></p>
+<p id="chart_title" class="chart_title"><%= @chart_title %></p>
 <div id="chartdiv" class="history_chart"></div>
 <div id="chart_data" data-json="<%= @data %>"></div>
 
+<p id="chart_title" class="chart_title"><%= @chart_title2 %></p>
+<div id="chartdiv_dokuryo" class="history_chart"></div>
+<div id="chart_data_dokuryo" data-json="<%= @data_dokuryo %>"></div>
+
 <%#= form_with(url: analyses_path ) do |f| %>
-    <%#= f.submit "累計"%>
+    <%#= f.hidden_field :search_field, :value => 'reading_end_date' %>
+    <%#= f.submit "読了"%>
 <%# end %>

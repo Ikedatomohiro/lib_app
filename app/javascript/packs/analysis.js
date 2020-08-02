@@ -26,6 +26,7 @@ $(function(){
 
     var valueAxis = chart_dokuryo.yAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.minWidth = 50;
+    valueAxis.title.text = '読了（冊）'
 
     // Create series
     var series = chart_dokuryo.series.push(new am4charts.ColumnSeries());
@@ -87,6 +88,7 @@ categoryAxis.renderer.minHeight = 110;
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 valueAxis.renderer.minWidth = 50;
+valueAxis.title.text = '本の登録（冊）'
 
 // Create series
 var series = chart.series.push(new am4charts.ColumnSeries());

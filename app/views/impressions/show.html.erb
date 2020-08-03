@@ -128,7 +128,7 @@
 <%# ユーザーが感想を書いたユーザーか閲覧のユーザーかで表示を分ける。編集、ツイートをする。 %>
     <% if signed_in? && @book.user_id === current_user.id %>
         <p id="letter_count_alart">&nbsp;</p>
-        <div class="reading_action_button">
+        <div id="reading_action_button" class="reading_action_button">
             <% if @book.reading_end_date.blank? %>
                 <%= form_with(url:books_set_reading_date_path, class: "set_reading_end_date_button") do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
@@ -143,7 +143,7 @@
                 <%= f.submit '今日読み始める', id: 'submit_btn_small', class: 'submit_btn_small' %>
                 <% end %>
             <% end %>
-            <div id="impression_write_button" class="impression_write">
+            <div class="impression_write">
                 <%= form_with(model: @impression, url:impressions_add_impression_field_path) do |f| %>
                 <%= f.hidden_field :book_id, value: @book.id %>
                 <%= f.submit '感想を書く', id: 'submit_btn_small', class: 'submit_btn_small' %>

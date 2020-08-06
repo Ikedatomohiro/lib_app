@@ -27,7 +27,7 @@ module AnalysisHelper
     end
 
     def tweet_count(id)
-        count  = Impression.where(user_id: id, tweeted_flg: true).count
+        count  = Impression.where(user_id: id).where.not(tweeted_time: nil).count
         count.to_s(:delimited)
     end
 

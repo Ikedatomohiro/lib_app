@@ -12,7 +12,7 @@
 }
 
 .analysis_table_th, .analysis_table_td {
-    padding: 0 5px;
+    padding: 0;
     border-bottom: 1px solid #E8F7B6;
 }
 
@@ -25,7 +25,15 @@
     height: 300px;
 }
 
+.analysis_table_th a {
+    text-decoration: none;
+    padding: 5px;
+}
 
+.analysis_btn {
+    border: 3px solid #9ec34b;
+    border-radius: 5px;
+}
 
 
 

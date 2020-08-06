@@ -99,7 +99,7 @@ class AnalysesController < ApplicationController
         @key         = 'cN4QZYGW'
         model        = Book
         search_field = 'created_at'
-        @yaxis       = '本の登録数'
+        @yaxis       = '本の登録数（冊）'
         row_data     = search_count_data(model, search_field)
         @data        = create_json(row_data)
     end

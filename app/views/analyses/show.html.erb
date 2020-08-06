@@ -1,1 +1,11 @@
-分析詳細ね。
+<%= render partial: "analyses/summary" %>
+
+<%# 選択したパラメータ %>
+<div id="chartdiv_second" class="history_chart"></div>
+<div id="chart_data_second" data-json="<%= @data_second %>"></div>
+<input type="hidden" id="y_axis_second" value="<%= @yaxis_second %>">
+
+<%# 登録した本の数 %>
+<div id="chartdiv" class="history_chart"></div>
+<div id="chart_data" data-json="<%= @data %>"></div>
+<input type="hidden" id="y_axis" value="<%= @yaxis %>">

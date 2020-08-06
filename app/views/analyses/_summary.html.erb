@@ -1,0 +1,35 @@
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<%= javascript_pack_tag 'analysis', 'data-turbolinks-track': 'reload' %>
+
+
+<table class="analysis_table">
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th"><a href="/analyses" class="<% if @key == 'cN4QZYGW' %>analysis_btn <% end %>">登録</a></th>
+        <td class="analysis_table_td"><%= @user.books.count %> 冊</td>
+        <th class="analysis_table_th"><a href="/analyses/L8cGeK6B" class="<% if @key == 'L8cGeK6B' %>analysis_btn <% end %>">読始め</a></th>
+        <td class="analysis_table_td"><%= start_reading_count(@user.id) %> 冊</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th"><a href="/analyses/fB6gaHRN" class="<% if @key == 'fB6gaHRN' %>analysis_btn <% end %>">読了</a></th>
+        <td class="analysis_table_td"><%= finish_reading_count(@user.id) %> 冊</td>
+        <th class="analysis_table_th"><a href="/analyses/dJ4frtbZ" class="<% if @key == 'dJ4frtbZ' %>analysis_btn <% end %>">感想登録</a></th>
+        <td class="analysis_table_td"><%= impression_count(@user.id) %> 回</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th"><a href="/analyses/r5J4WVBw" class="<% if @key == 'r5J4WVBw' %>analysis_btn <% end %>">感想文字</a></th>
+        <td class="analysis_table_td"><%= impression_letters(@user.id) %> 文字</td>
+        <th class="analysis_table_th"><a href="/analyses/Ux5CP2kc" class="<% if @key == 'Ux5CP2kc' %>analysis_btn <% end %>">ツイート</a></th>
+        <td class="analysis_table_td"><%= tweet_count(@user.id) %> 回</td>
+    </tr>
+    <tr class="analysis_table_tr">
+        <th class="analysis_table_th"><a href="/analyses/Kv9LYjn3" class="<% if @key == 'Kv9LYjn3' %>analysis_btn <% end %>">いいねされた</a></th>
+        <td class="analysis_table_td"><%= liked_count(@user.id) %> 回</td>
+        <th class="analysis_table_th"></th>
+        <td class="analysis_table_td"></td>
+    </tr>
+</table>
+
+<%# ●感想履歴 %>
+

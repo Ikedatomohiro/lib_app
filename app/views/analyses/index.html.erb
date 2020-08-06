@@ -1,43 +1,5 @@
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<%= javascript_pack_tag 'analysis', 'data-turbolinks-track': 'reload' %>
-
-
-<table class="analysis_table">
-    <tr class="analysis_table_tr">
-        <th class="analysis_table_th">登録</th>
-        <td class="analysis_table_td"><%= @user.books.count %> 冊</td>
-        <th class="analysis_table_th">読始め</th>
-        <td class="analysis_table_td"><%= start_reading_count(@user.id) %> 冊</td>
-    </tr>
-    <tr class="analysis_table_tr">
-        <th class="analysis_table_th">読了</th>
-        <td class="analysis_table_td"><%= finish_reading_count(@user.id) %> 冊</td>
-        <th class="analysis_table_th">感想登録</th>
-        <td class="analysis_table_td"><%= impression_count(@user.id) %> 回</td>
-    </tr>
-    <tr class="analysis_table_tr">
-        <th class="analysis_table_th">感想文字</th>
-        <td class="analysis_table_td"><%= impression_letters(@user.id) %> 文字</td>
-        <th class="analysis_table_th">ツイート</th>
-        <td class="analysis_table_td"><%= tweet_count(@user.id) %> 回</td>
-    </tr>
-    <tr class="analysis_table_tr">
-        <th class="analysis_table_th">いいねされた</th>
-        <td class="analysis_table_td"><%= liked_count(@user.id) %> 回</td>
-        <th class="analysis_table_th"></th>
-        <td class="analysis_table_td"></td>
-    </tr>
-</table>
-
+<%= render partial: "analyses/summary" %>
 <div id="chartdiv" class="history_chart"></div>
 <div id="chart_data" data-json="<%= @data %>"></div>
+<input type="hidden" id="y_axis" value="<%= @yaxis %>">
 
-<div id="chartdiv_dokuryo" class="history_chart"></div>
-<div id="chart_data_dokuryo" data-json="<%= @data_dokuryo %>"></div>
-
-<%#= form_with(url: analyses_path ) do |f| %>
-    <%#= f.hidden_field :search_field, :value => 'reading_end_date' %>
-    <%#= f.submit "読了"%>
-<%# end %>

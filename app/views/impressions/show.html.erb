@@ -101,15 +101,15 @@
                     </tr>
                     <tr>
                         <th colspan="2">
-                        <% if @amazon_afi_link.present? %>
-                            <% if signed_in? && @book.user_id != current_user.id %>
+                            <% if (signed_in? && @book.user_id != current_user.id) || !signed_in? %>
+                                <% if @amazon_afi_link.present? %>
                                 <div class="book_afi_link_button">
                                     <a href="<%= @amazon_afi_link %>" target="_blank">
                                         <button class="submit_btn_small">本の情報を見る</button>
                                     </a>
                                 </div>
+                                <% end %>
                             <% end %>
-                        <% end %>
                         </th>
                     </tr>
                 </table>
@@ -120,7 +120,7 @@
                             <%= f.submit '編集完了', id: 'finish_edit_book_info', class: 'submit_btn_small finish_edit_book_info', style: 'display: none;' %>
                         </div>
                     </div>
-                <% end %>
+               <% end %>
             </div>
         <% end %>
     </div>

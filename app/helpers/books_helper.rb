@@ -57,7 +57,7 @@ module BooksHelper
             'hjzmDwAAQBAJ' => 'https://amzn.to/2zMLzeC', # キングダム58巻
             'Neh_DQAAQBAJ' => 'https://amzn.to/2ZSttlB', # 銀翼のイカロス
             'UL1StAEACAAJ' => 'https://amzn.to/3hxtguj', # AX 伊坂幸太郎
-            # '' => '', # 
+            'kdbwDwAAQBAJ' => 'https://amzn.to/31B5OWH', # アルルカンと道化師
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

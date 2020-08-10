@@ -55,10 +55,10 @@ module BooksHelper
             'CsZZXwAACAAJ' => 'https://amzn.to/30FymQ2', # 図書館危機図書館戦争シリーズ(５) 有川浩
             'SZhJOgAACAAJ' => 'https://amzn.to/3fmcP2C', # 図書館危機図書館戦争シリーズ(６) 有川浩
             'hjzmDwAAQBAJ' => 'https://amzn.to/2zMLzeC', # キングダム58巻
-            'Neh_DQAAQBAJ' => 'https://amzn.to/2ZSttlB', # 銀翼のイカロス
+            'Neh_DQAAQBAJ' => 'https://amzn.to/3iowBfx', # 銀翼のイカロス
             'UL1StAEACAAJ' => 'https://amzn.to/3hxtguj', # AX 伊坂幸太郎
             'kdbwDwAAQBAJ' => 'https://amzn.to/31B5OWH', # アルルカンと道化師
-            # '' => '', # 
+            'dRp7AAAAQBAJ' => 'https://amzn.to/33WY7gn', # ロスジェネの逆襲
             # '' => '', # 
             # '' => '', # 
             # '' => '', # 

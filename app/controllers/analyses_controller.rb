@@ -1,8 +1,8 @@
 class AnalysesController < ApplicationController
+    before_action :authenticate_user!, only: [:index, :show] # ログインしていないときはログインページに移動
     include ApplicationHelper
     before_action :set_analysis_flg, only: [:index, :show]
     before_action :set_default_data, only: [:index, :show]
-    before_action :authenticate_user! # ログインしていないときはログインページに移動
 
     def index
     end

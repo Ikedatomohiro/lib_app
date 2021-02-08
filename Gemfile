@@ -42,7 +42,7 @@ gem 'dotenv-rails'
 gem 'amazon-ecs'
 
 # 画像アップロード
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'mini_magick'
 
 # 本棚の並び替えを保存するgem

@@ -2,11 +2,11 @@
     <div class="faceicon">
         <%= image_tag "administrator.png", class: "user_icon" %>
     </div>
-    <a href="/users/auth/twitter" class="sign_in_link">
+    <%= link_to user_twitter_omniauth_authorize_path, method: :post do %>
         <div class="chatting">
             <div class="says">
                 この吹き出しをクリックして読書の感想を書いてみよう!
             </div>
         </div>
-    </a>
+    <% end %>
 </div>

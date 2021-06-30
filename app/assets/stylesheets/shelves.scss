@@ -52,18 +52,25 @@
     overflow: auto;
 }
 
+.shelves_list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .shelf_label {
+    white-space: nowrap;
     /*background: LightGray;*/
     margin: 5px 5px 10px 5px;
     font-weight: bold;
-    white-space: nowrap;
-    padding: 10px .5em;
     order: -1;
     position: relative;
     z-index: 1;
     cursor: pointer;
     flex: 1;
     text-align: center;
+    /* 横スクロール用 */
+    display: inline-block;
+
 }
 
 .shelf_area a {

@@ -58,7 +58,7 @@ class AnalysesController < ApplicationController
 
     def search_count_data(model, search_field)
         # チャートデータ作成
-        target = model.where(user_id: current_user.id)
+        target = model.where(user_id: current_user.id, created_at: 12.months.ago..Time.now)
         row_data = target.group("strftime('%Y年%m月', #{search_field})").count
     end
 

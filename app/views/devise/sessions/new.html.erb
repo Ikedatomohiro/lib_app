@@ -11,11 +11,11 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="logo_top"></div>
     <div class="sns_login_button">
-    <%#= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
+        <%#= link_to "Twitterアカウントでログイン", user_twitter_omniauth_authorize_path, class: 'twitter_button' %>
     </div>
-    <a href="/users/auth/twitter">
+    <%= link_to user_twitter_omniauth_authorize_path, method: :post do %>
         <%= image_tag "sign_in_button.png", class: "sign_in" %>
-    </a>
+    <% end %>
 <% end %>
 <div class="important_info">
     <%= link_to "利用規約", users_terms_of_service_path %>&nbsp;&nbsp;
@@ -23,8 +23,3 @@
     <%= link_to "投稿を見てみる", root_path %>&nbsp;&nbsp;
 
 </div>
-<!-- 
-<div class="sign_in_button">
-    <%#= image_tag "Twitter_Social_Icon_Rounded.png" %>
-    <p>Twitterアカウントでログイン</p>
-</div> -->

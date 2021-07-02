@@ -29,7 +29,7 @@ class AnalysesController < ApplicationController
             model         = Impression
             search_field  = 'updated_at'
             @yaxis_second = '感想文字（文字）'
-            target        = model.where(user_id: current_user.id, updated_at: 12.months.ago..Time.now)
+            target        = model.where(user_id: current_user.id, "#{search_field}": 12.months.ago..Time.now)
             row_data = {}
             target.each do |impression|
                 length = impression.impression.length
@@ -49,7 +49,7 @@ class AnalysesController < ApplicationController
             search_field  = 'created_at'
             @yaxis_second = 'いいねされた（回）'
             # チャートデー タ作成
-            target = model.where(user_id: current_user.id, created_at: 12.months.ago..Time.now)
+            target = model.where(user_id: current_user.id, "#{search_field}": 12.months.ago..Time.now)
             row_data = target.group("strftime('%Y年%m月', #{search_field})").sum(:like_count)
         end
 

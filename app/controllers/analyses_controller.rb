@@ -49,7 +49,7 @@ class AnalysesController < ApplicationController
             search_field  = 'created_at'
             @yaxis_second = 'いいねされた（回）'
             # チャートデー タ作成
-            target = model.where(user_id: current_user.id)
+            target = model.where(user_id: current_user.id, updated_at: 12.months.ago..Time.now)
             row_data = target.group("strftime('%Y年%m月', #{search_field})").sum(:like_count)
         end
 

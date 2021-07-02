@@ -29,7 +29,7 @@ class AnalysesController < ApplicationController
             model         = Impression
             search_field  = 'updated_at'
             @yaxis_second = '感想文字（文字）'
-            target        = model.where(user_id: current_user.id)
+            target        = model.where(user_id: current_user.id, created_at: 12.months.ago..Time.now)
             row_data = {}
             target.each do |impression|
                 length = impression.impression.length

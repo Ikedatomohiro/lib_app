@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_103949) do
+ActiveRecord::Schema.define(version: 2021_07_23_143555) do
 
   create_table "books", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_103949) do
 
   create_table "users", force: :cascade do |t|
     t.string "uid"
+    t.string "random_id"
     t.string "provider"
     t.string "name"
     t.string "nickname"

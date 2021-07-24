@@ -15,7 +15,7 @@
             <div class="top_impression_items">
                 <% impression.id %>
                 <a href="/users/<%= impression.user_id %>">
-                    <%= lazysizes_image_tag impression.user.image, class: 'user_icon' %>
+                    <%= lazysizes_image_tag impression.user.random_id, class: 'user_icon' %>
                 </a>
                 <div class="top_impression_and_book">
                     <a href="/impressions/<%= impression.book.impression_link %>" data-turbolinks="false" class="link_to_impression">

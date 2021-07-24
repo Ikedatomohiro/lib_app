@@ -13,10 +13,11 @@ class User < ApplicationRecord
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
     if user
-      random_id = user.random_id
-      # アイコンが変わっていればランダムIDを変更する
-      if user.image != auth.info.image || user.random_id.nil?
+      # ランダムIDを付与する
+      if user.random_id.nil? || user.random_id.blank?
         random_id = createRamdomId
+      else
+        random_id = user.random_id
       end
 
       user.update(
@@ -49,6 +50,7 @@ class User < ApplicationRecord
       setting = Setting.create(
         user_id: user.id
       )
+      puts 'Create New User!'
     end
     # Twitterアイコンをダウンロードする
     download_image_icon(user.random_id, auth)

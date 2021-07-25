@@ -6,13 +6,13 @@
     <% if !signed_in? %>
         <%= render "shared/message_to_top_page" %>
             <a href="/users/<%= @book_owner.id %>">
-                <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+                <%= image_tag_if_null @book_owner.random_id, class: 'user_icon'%>
             </a>
-            <%= @book_owner.name %>&nbsp;さんの感想
+            <%= @book_owner.name %>さんの感想
     <% end %>
     <% if signed_in? && @book.user_id != current_user.id %>
         <a href="/users/<%= @book_owner.id %>">
-            <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            <%= image_tag_if_null @book_owner.random_id, class: 'user_icon'%>
         </a>
         <%= @book_owner.name %>&nbsp;さんの感想
     <% end %>

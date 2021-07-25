@@ -19,6 +19,17 @@ module ApplicationHelper
       image_tag("", options) + ("<noscript>#{image_tag(source, options)}</noscript>").html_safe
     end
 
+    # ユーザーのランダムIDがセットされていないとき用のイメージタグ
+    def image_tag_if_null(source, options={})
+      if source.blank?
+        source = "default_icon.svg"
+      else
+        source = "/downloads/images/user/user_icon_#{source}.jpg"
+      end
+      options[:class] = "#{options[:class]}"
+      image_tag(source, options)
+    end
+
     # フッターアイコンの色制御
     def set_home_flg
         @home_flg = true

@@ -4,7 +4,7 @@
 <% if !signed_in? || @book_owner.id != current_user.id %>
     <div class="book_owner_info">
         <p class="book_owner_name">
-            <%= image_tag @book_owner.image, class: 'user_icon', alt:'ユーザーアイコン' %>
+            <%= image_tag_if_null @book_owner.random_id, class: 'user_icon'%>
             <p><%= @book_owner.name %></p>
         </p>
         <div class="twitter_account_link">

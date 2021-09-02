@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_07_23_143555) do
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "impression_link", null: false
     t.string "api_id", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "contact_type", null: false
     t.string "contact_title", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "impressions", force: :cascade do |t|
+  create_table "impressions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
     t.string "impression"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.datetime "tweeted_time"
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "impression_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.index ["impression_id"], name: "index_likes_on_impression_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "publish_impression", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.index ["user_id"], name: "index_settings_on_user_id", unique: true
   end
 
-  create_table "shelf_items", force: :cascade do |t|
+  create_table "shelf_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "shelf_id", null: false
     t.integer "user_id", null: false
     t.integer "book_id", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.index ["user_id"], name: "index_shelf_items_on_user_id"
   end
 
-  create_table "shelves", force: :cascade do |t|
+  create_table "shelves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "shelf_name", null: false
     t.string "shelf_tab_color"
@@ -93,9 +93,8 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.index ["user_id"], name: "index_shelves_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "uid"
-    t.string "random_id"
     t.string "provider"
     t.string "name"
     t.string "nickname"
@@ -121,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_143555) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "random_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

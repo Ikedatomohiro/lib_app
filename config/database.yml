@@ -28,5 +28,5 @@ test:
 production:
   <<: *default
   database: [lib_app]
-  username: [lib_app_user]
+  username: [dbtomohiro]
   password: <%= ENV['GAMBARASE_DATABASE_PASSWORD'] %>

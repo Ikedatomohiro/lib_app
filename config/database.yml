@@ -30,3 +30,4 @@ production:
   database: [lib_app]
   username: [dbtomohiro]
   password: <%= ENV['GAMBARASE_DATABASE_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock

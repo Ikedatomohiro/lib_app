@@ -41,3 +41,5 @@ yarn-debug.log*
 # 画像ファイル
 public/uploads/
 
+# 調査ファイル
+output.html

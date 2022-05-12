@@ -1,24 +1,47 @@
-# README
+# 読書のわ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### 読書記録アプリ
 
-Things you may want to cover:
+https://dokusyo-no-wa.com/
 
-* Ruby version
+* Ruby2.7
 
-* System dependencies
+* Ruby on Rails6.0
 
-* Configuration
+# 機能紹介
 
-* Database creation
+* 読書記録タイムライン
+読書記録記録表示設定をしているユーザーの読書記録がタイムラインに投稿日降順で表示
 
-* Database initialization
+* Twitterアカウントでログイン
 
-* How to run the test suite
+* 読書している本をアプリに登録  
+本検索APIによる候補表示
 
-* Services (job queues, cache servers, search engines, etc.)
+* 読書開始日、読了日を保存
 
-* Deployment instructions
+* 読書記録を保存、その際Twitter投稿可能残り文字数をリアルタイム表示
 
-* ...
+* 読書記録を保存するとタイムラインに表示される
+
+* 読書記録をTwitterに投稿し、Twitterには読書記録と本のサムネイルが画像表示される
+
+* 本棚機能
+本を検索して保存したリストを表示  
+カテゴリーを作成可能  
+カテゴリーおよび本の並べ替え機能  
+本の表示を縦一列またはブロック表示に切り替え可能
+読書記録の数、いいねの数、Twitter投稿数が各本に対して表示
+
+* いいね機能
+読書記録のタイムラインでいいねができる
+いいねのカウントを保持
+ログインしていなくてもいいねは可能
+ログインした状態でいいねするといいねのマークが色付けされ、どの読書記録にいいねしたかわかる  
+仕様上いいねの無限増幅は可能
+ログインしていなくても気軽にアプリにアクセスできるようにするという思想
+
+* 管理者への連絡機能
+
+* 読書記録ページ
+登録した本の数、読書記録の登録数、読書記録文字数、Twitter投稿数、いいねされた数を過去一年分をグラフ表示
